@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Button } from "../../../../uikit/form/Button/Button";
 import styles from "./ProfileBanner.module.scss";
-import { FaMapMarkerAlt, FaPaw } from "react-icons/fa";
+import { FaMapMarkerAlt, FaPaw, FaTree } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa6";
 import { ROUTES } from "@/routes/routes";
 import { Link } from "../../../../uikit/navigation/Link/Link";
@@ -103,6 +103,17 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
               <span className={styles.statValue}>{photosCount}</span>
               <span className={styles.statLabel}>
                 {t("profileBanner.photos")}
+              </span>
+            </Link>
+          </div>
+          <div className={styles.stat}>
+            <Link
+              href={ROUTES.familyTree(bannerInfo.username)}
+              appearance="secondary"
+            >
+              <FaTree size={18} />
+              <span className={styles.statLabel}>
+                {t("profileBanner.familyTree")}
               </span>
             </Link>
           </div>

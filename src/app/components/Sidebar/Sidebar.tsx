@@ -4,11 +4,12 @@ import { FaMapMarkerAlt, FaPaw, FaBone, FaDog } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa6";
 import styles from "./Sidebar.module.scss";
 import { ROUTES } from "@/routes/routes";
-import { DailyTip } from "@/app/uikit/feedback/DailyTip/DailyTip";
 import { NavLink } from "@/app/uikit/navigation/NavLink/NavLink";
 
 export const Sidebar = ({ username }: { username: string }) => {
   const t = useTranslations();
+  const tips = t.raw("dailyTip.tips") as string[];
+  const tip = tips[new Date().getDay()];
 
   return (
     <nav className={styles.container}>
@@ -38,7 +39,7 @@ export const Sidebar = ({ username }: { username: string }) => {
           {t("sidebar.places")}
         </NavLink>
       </div>
-      <DailyTip />
+      <Tip title={t("dailyTip.title")} text={tip} appearance="primary" />
     </nav>
   );
 };

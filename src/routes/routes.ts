@@ -14,4 +14,5 @@ export const ROUTES = {
   places: "/places",
   notifications: "/notifications",
   messages: (username: string) => `/${username}/messages`,
+  familyTree: (username: string) => `/${username}/family`
 } as const;

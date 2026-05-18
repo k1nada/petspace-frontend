@@ -8,7 +8,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.titleWrapper {
+.header {
   display: flex;
   align-items: center;
   gap: var(--gap-xs);
@@ -29,72 +29,8 @@
 
 .list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: var(--gap-m);
-}
-
-.friend {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--radius-m);
-  overflow: hidden;
-  background: var(--bg-card);
-  border: 0.5px solid var(--border-divider);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.photo {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  overflow: hidden;
-}
-
-.overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: var(--padding-m);
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.name {
-  font-weight: 600;
-  font-size: var(--font-base);
-  color: var(--text-on-primary);
-}
-
-.info {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  font-size: var(--font-m);
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.city {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.actions {
-  display: flex;
-  gap: var(--gap-s);
-
-  button {
-    flex: 1;
-  }
 }
 
 .emptyFriends {
@@ -103,13 +39,6 @@
   gap: var(--gap-l);
   text-align: center;
   padding: 70px 0;
-}
-
-.title {
-  margin: 0;
-  font-weight: 600;
-  color: var(--text-primary);
-  font-size: var(--font-l);
 }
 
 .text {
