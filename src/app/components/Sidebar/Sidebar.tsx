@@ -5,6 +5,7 @@ import { FaCamera } from "react-icons/fa6";
 import styles from "./Sidebar.module.scss";
 import { ROUTES } from "@/routes/routes";
 import { NavLink } from "@/app/uikit/navigation/NavLink/NavLink";
+import { Tip } from "@/app/uikit/feedback/Tip/Tip";
 
 export const Sidebar = ({ username }: { username: string }) => {
   const t = useTranslations();
@@ -39,7 +40,11 @@ export const Sidebar = ({ username }: { username: string }) => {
           {t("sidebar.places")}
         </NavLink>
       </div>
-      <Tip title={t("dailyTip.title")} text={tip} appearance="primary" />
+      <Tip
+        title={t("dailyTip.title")}
+        text={t("dailyTip.text")}
+        appearance="primary"
+      />
     </nav>
   );
 };

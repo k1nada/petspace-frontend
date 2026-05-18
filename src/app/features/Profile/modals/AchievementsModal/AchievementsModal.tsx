@@ -1,10 +1,10 @@
-import { Modal } from "@/app/uikit/Modal/Modal";
 import styles from "./AchievementsModal.module.scss";
 import { useTranslations } from "next-intl";
 import { Achievements } from "@/types";
 import { FaDog, FaLock } from "react-icons/fa";
 import { BiSolidBone } from "react-icons/bi";
 import { ACHIEVEMENT_KEYS } from "@/app/uikit/constants/achievements";
+import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 
 interface Props {
   isOpen: boolean;

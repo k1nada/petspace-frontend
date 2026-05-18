@@ -78,7 +78,15 @@
   },
   "dailyTip": {
     "title": "Tip of the day",
-    "text": "Regular walks are essential for your pet's physical and mental health. Aim for at least 30 minutes of activity daily to keep them happy, healthy, and well-behaved. Don't forget to bring water and treats!"
+    "tips": [
+    "Regular walks are essential for your pet's health. Aim for at least 30 minutes daily!",
+    "Fresh water should always be available for your dog.",
+    "Dogs love routine, try to feed them at the same time every day.",
+    "Mental stimulation is as important as physical exercise. Try puzzle toys!",
+    "Regular grooming keeps your dog healthy and strengthens your bond.",
+    "Socialization is key, let your dog meet new friends regularly.",
+    "Don't forget annual vet checkups to keep your pup in top shape!"
+    ]
   },
   "toasts": {
     "saved": "Changes saved successfully",
@@ -97,11 +105,14 @@
     "achievements": "Achievements",
     "editProfile": "Edit profile",
     "modalTitle": "My info",
-    "modalInterests": "Interests"
+    "modalInterests": "Interests",
+    "familyTree": "Family Tree"
   },
+  
   "profileEditor": {
     "title": "Edit profile",
     "bio": "About:",
+    "name": "Name:",
     "birthday": "Birthday:",
     "gender": "Gender:",
     "country": "Country:",
@@ -193,6 +204,10 @@
     "decline": "Decline",
     "mutualFriends": "{count} mutual friends",
     "empty": "No new requests yet"
+  },
+  "friendTip": {
+    "title": "Did you know?",
+    "text": "Dogs the same age and breed make the best friends. Fill in your pet's profile and we'll find great matches nearby!"
   },
   "messages": {
     "title": "Messages",
