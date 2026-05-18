@@ -1,7 +1,7 @@
 :root {
   --bg-surface: #ffffff;
   --bg-page: #f2f2f2;
-  --bg-input: #f5f5f5;
+  --bg-input: #f5f4f3;
   --bg-card: #ffffff;
   --bg-primary: #f2ece6;
   --bg-error: #ffdddd;
@@ -11,29 +11,30 @@
   --primary-light: #b07d58;
   --primary-dark: #5a3820;
 
-  --border-field: #d0d0d0;
-  --border-field-hover: #a0a0a0;
+  --border-field: #d2ceca;
+  --border-field-hover: #a09890;
   --border-field-focus: #7b4f2e;
-  --border-divider: #e0e0e0;
-  --border-button-secondary: #c0c0c0;
+  --border-divider: #e2dfdc;
+  --border-button-secondary: #c4beb8;
   --border-error: #ff4444;
 
   --text-primary: #1a1a1a;
-  --text-secondary: #666666;
-  --text-tertiary: #8a8a8a;
-  --text-placeholder: #777777;
+  --text-secondary: #686460;
+  --text-tertiary: #8a8680;
+  --text-placeholder: #787470;
   --text-error: #c62828;
   --text-on-primary: #ffffff;
+  --text-tip: #8a4a1a;
 
   --link: #7b4f2e;
   --link-hover: #9a6540;
 
   --color-online: #4caf50;
 
-  --button-secondary-bg: #f5f5f5;
-  --button-secondary-hover: #e8e8e8;
-  --button-tertiary-hover: #e2e2e2;
-  --button-ghost-hover: #ececec;
+  --button-secondary-bg: #f5f4f3;
+  --button-secondary-hover: #eae8e6;
+  --button-tertiary-hover: #e4e2e0;
+  --button-ghost-hover: #eceae8;
 
   --z-dropdown: 10;
   --z-modal: 100;
@@ -76,9 +77,9 @@
 
 [data-theme="dark"] {
   --bg-surface: #242424;
-  --bg-page: #181818;
-  --bg-input: #2e2e2e;
-  --bg-card: #242424;
+  --bg-page: #1a1a1c;
+  --bg-input: #2e2e30;
+  --bg-card: #242426;
   --bg-primary: #2a1c12;
   --bg-error: #3a1818;
 
@@ -87,29 +88,30 @@
   --primary-light: #c49070;
   --primary-dark: #8a5e38;
 
-  --border-field: #444444;
-  --border-field-hover: #666666;
+  --border-field: #444448;
+  --border-field-hover: #666668;
   --border-field-focus: #b07d58;
-  --border-divider: #333333;
-  --border-button-secondary: #484848;
+  --border-divider: #333336;
+  --border-button-secondary: #484850;
   --border-error: #ff5555;
 
   --text-primary: #f5f5f5;
-  --text-secondary: #c0c0c0;
+  --text-secondary: #c0bebb;
   --text-tertiary: #909090;
   --text-placeholder: #787878;
   --text-error: #ff6b6b;
   --text-on-primary: #ffffff;
+  --text-tip: #d4905a;
 
   --link: #b07d58;
   --link-hover: #c49070;
 
   --color-online: #66bb6a;
 
-  --button-secondary-bg: #2e2e2e;
+  --button-secondary-bg: #2e2e30;
   --button-secondary-hover: #383838;
-  --button-tertiary-hover: #323232;
-  --button-ghost-hover: #2c2c2c;
+  --button-tertiary-hover: #323235;
+  --button-ghost-hover: #2c2c2e;
 }
 
 *,
