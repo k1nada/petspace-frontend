@@ -1,14 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 import styles from "./Friends.module.scss";
-import { Button } from "@/app/uikit/form/Button/Button";
-import { MdPlace } from "react-icons/md";
-import Image from "next/image";
-import Link from "next/link";
-import { ROUTES } from "@/routes/routes";
 import { Friend } from "@/types";
-import defaultAvatar from "@/public/avatars/default.png";
+import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
+import { FriendCard } from "../FriendCard/FriendCard";
+import { Button } from "@/app/uikit/form/Button/Button";
 
 interface FriendsProps {
   friends?: Friend[];
@@ -16,50 +14,23 @@ interface FriendsProps {
 
 export const Friends = ({ friends = [] }: FriendsProps) => {
   const t = useTranslations();
+  const [search, setSearch] = useState("");
+
+  const filtered = friends.filter((f) =>
+    f.name.toLowerCase().includes(search.toLowerCase()),
+  );
 
   return (
     <section className={styles.container}>
-      <div className={styles.titleWrapper}>
+      <div className={styles.header}>
         <h1 className={styles.title}>{t("friends.title")}</h1>
         <span className={styles.count}>{friends.length}</span>
       </div>
-      {friends.length > 0 ? (
+      <SearchBar onChange={setSearch} />
+      {filtered.length > 0 ? (
         <ul className={styles.list}>
-          {friends.map((friend) => (
-            <li key={friend.username} className={styles.friend}>
-              <Link
-                href={ROUTES.profile(friend.username)}
-                className={styles.link}
-              >
-                <div className={styles.photo}>
-                  <Image
-                    src={friend.avatar || defaultAvatar}
-                    alt={friend.name}
-                    fill
-                    sizes="33vw"
-                    style={{ objectFit: "cover" }}
-                  />
-                  <div className={styles.overlay}>
-                    <div className={styles.name}>{friend.name}</div>
-                    {(friend.breed || friend.city) && (
-                      <div className={styles.info}>
-                        {friend.breed && <div>{friend.breed}</div>}
-                        {friend.city && (
-                          <div className={styles.city}>
-                            <MdPlace size={14} />
-                            {friend.city}
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </Link>
-              <div className={styles.actions}>
-                <Button appearance="tertiary">{t("friends.message")}</Button>
-                <Button appearance="primary">{t("friends.remove")}</Button>
-              </div>
-            </li>
+          {filtered.map((friend) => (
+            <FriendCard key={friend.username} friend={friend} />
           ))}
         </ul>
       ) : (

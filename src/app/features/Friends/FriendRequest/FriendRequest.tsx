@@ -5,8 +5,8 @@ import styles from "./FriendRequest.module.scss";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { ROUTES } from "@/app/uikit/constants/routes";
 import { Friend } from "@/types";
+import { ROUTES } from "@/routes/routes";
 
 interface FriendRequestProps {
   friends?: Friend[];
@@ -24,18 +24,17 @@ export const FriendRequest = ({ friends = [] }: FriendRequestProps) => {
         <ul className={styles.list}>
           {friends.map((friend) => (
             <li key={friend.username} className={styles.friendRequest}>
-              <div className={styles.avatar}>
-                <Link
-                  href={ROUTES.profile(friend.username)}
-                  className={styles.link}
-                >
-                  <Avatar src={friend.avatar} size={50} />
-                </Link>
-              </div>
-              <div className={styles.content}>
-                <div className={styles.info}>
+              <div className={styles.top}>
+                <div className={styles.avatar}>
+                  <Link
+                    href={ROUTES.profile(friend.username)}
+                    className={styles.link}
+                  >
+                    <Avatar src={friend.avatar} size={50} />
+                  </Link>
+                </div>
+                <div className={styles.content}>
                   <div className={styles.name}>{friend.name}</div>
-                  <div className={styles.breed}>{friend.breed}</div>
                   <div className={styles.mutualFriends}>
                     {t("friendRequest.mutualFriends", { count: 5 })}
                   </div>

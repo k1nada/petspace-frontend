@@ -29,7 +29,7 @@ export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
               <li key={friend.username} className={styles.friend}>
                 <Avatar
                   src={friend.avatar}
-                  size={40}
+                  size={45}
                   isOnline={friend.isOnline}
                 />
                 <div className={styles.info}>

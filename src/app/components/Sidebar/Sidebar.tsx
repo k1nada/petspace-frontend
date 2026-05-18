@@ -9,6 +9,8 @@ import { Tip } from "@/app/uikit/feedback/Tip/Tip";
 
 export const Sidebar = ({ username }: { username: string }) => {
   const t = useTranslations();
+  const tips = t.raw("dailyTip.tips") as string[];
+  const tip = tips[new Date().getDay()];
 
   return (
     <nav className={styles.container}>

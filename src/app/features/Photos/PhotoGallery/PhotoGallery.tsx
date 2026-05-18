@@ -66,10 +66,10 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
   return (
     <section className={styles.container}>
       <div className={styles.header}>
-        <h3 className={styles.title}>
+        <h1 className={styles.title}>
           {t("photoGallery.title")}
           <span className={styles.count}>{localPhotos.length}</span>
-        </h3>
+        </h1>
         <Button appearance="primary" onClick={() => setIsOpen(true)}>
           {t("photoGallery.addPhoto")}
         </Button>
