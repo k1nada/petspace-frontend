@@ -20,7 +20,7 @@ const ProfilePage = async ({ params }: ProfilePageProps) => {
 
   return (
     <>
-      <Header username={userData.username} />
+      <Header/>
       <main>
         <ProfileLayout
           bannerInfo={{

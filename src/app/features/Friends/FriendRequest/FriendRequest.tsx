@@ -12,6 +12,8 @@ interface FriendRequestProps {
   friends?: Friend[];
 }
 
+const MAX_VISIBLE_REQUERSTS = 3;
+
 export const FriendRequest = ({ friends = [] }: FriendRequestProps) => {
   const t = useTranslations();
 
@@ -22,31 +24,21 @@ export const FriendRequest = ({ friends = [] }: FriendRequestProps) => {
         <p className={styles.empty}>{t("friendRequest.empty")}</p>
       ) : (
         <ul className={styles.list}>
-          {friends.map((friend) => (
+          {friends.slice(0, MAX_VISIBLE_REQUERSTS).map((friend) => (
             <li key={friend.username} className={styles.friendRequest}>
-              <div className={styles.top}>
-                <div className={styles.avatar}>
-                  <Link
-                    href={ROUTES.profile(friend.username)}
-                    className={styles.link}
-                  >
-                    <Avatar src={friend.avatar} size={50} />
-                  </Link>
+              <Link href={ROUTES.profile(friend.username)}>
+                <Avatar src={friend.avatar} size={70} />
+              </Link>
+              <div className={styles.info}>
+                <div className={styles.name}>{friend.name}</div>
+                <div className={styles.actions}>
+                  <Button appearance="primary">
+                    {t("friendRequest.accept")}
+                  </Button>
+                  <Button appearance="secondary">
+                    {t("friendRequest.decline")}
+                  </Button>
                 </div>
-                <div className={styles.content}>
-                  <div className={styles.name}>{friend.name}</div>
-                  <div className={styles.mutualFriends}>
-                    {t("friendRequest.mutualFriends", { count: 5 })}
-                  </div>
-                </div>
-              </div>
-              <div className={styles.actions}>
-                <Button appearance="primary">
-                  {t("friendRequest.accept")}
-                </Button>
-                <Button appearance="tertiary">
-                  {t("friendRequest.decline")}
-                </Button>
               </div>
             </li>
           ))}

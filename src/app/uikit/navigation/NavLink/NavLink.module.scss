@@ -3,15 +3,16 @@
   align-items: center;
   gap: var(--gap-m);
   justify-content: flex-start;
-  padding: var(--padding-s) var(--padding-m);
+  padding: var(--padding-m);
   border-radius: var(--radius-m);
   font-size: var(--font-m);
   color: var(--text-secondary);
-  transition: background 0.2s ease;
-    transition: color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 
   &:hover {
     background: var(--button-secondary-bg);
-  color: var(--text-primary);
+    color: var(--text-primary);
   }
 }

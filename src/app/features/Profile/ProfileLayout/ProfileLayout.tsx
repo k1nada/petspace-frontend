@@ -10,6 +10,7 @@ import { BannerInfo, Post } from "@/types";
 import { ProfilePhotos } from "../photos/ProfilePhotos/ProfilePhotos";
 import { useState, useEffect } from "react";
 import { getPosts } from "@/app/api/post";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
 interface ProfileLayoutProps {
   bannerInfo: BannerInfo;
@@ -19,6 +20,8 @@ export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(0);
+  const currentUser = useUserStore((state) => state.currentUser);
+  const isOwner = currentUser?.username === bannerInfo.username;
 
   useEffect(() => {
     getPosts(bannerInfo.postwallId!).then((data) => {
@@ -34,19 +37,21 @@ export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
   return (
     <div className={styles.layout}>
       <div className={styles.sidebar}>
-        <Sidebar username={bannerInfo.username} />
+        <Sidebar />
       </div>
       <div className={styles.profileBanner}>
         <ProfileBanner bannerInfo={bannerInfo} />
       </div>
       <div className={styles.feedContainer}>
-        <PostCreator
-          username={bannerInfo.username}
-          name={bannerInfo.name}
-          avatar={bannerInfo.avatar}
-          postwallId={bannerInfo.postwallId ?? ""}
-          onSuccess={triggerRefresh}
-        />
+        {isOwner && (
+          <PostCreator
+            username={currentUser.username}
+            name={currentUser.name}
+            avatar={currentUser.avatar}
+            postwallId={bannerInfo.postwallId ?? ""}
+            onSuccess={triggerRefresh}
+          />
+        )}
         <Postwall posts={posts} loading={loading} onRefresh={triggerRefresh} />
       </div>
       <div className={styles.rightColumn}>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "../../../hooks/useTheme";
+import { useThemeStore } from "../../../hooks/useThemeStore";
 import { Button } from "../../form/Button/Button";
 import { FaMoon } from "react-icons/fa";
 import { FaSun } from "react-icons/fa6";
@@ -10,7 +10,7 @@ interface ThemeToggleProps {
 }
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
-  const { theme, toggle } = useTheme();
+  const { theme, toggle } = useThemeStore();
 
   return (
     <Button appearance="ghost" onClick={toggle} className={className}>

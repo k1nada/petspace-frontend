@@ -1,16 +1,24 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { BiSolidMessage } from "react-icons/bi";
-import { FaMapMarkerAlt, FaPaw, FaBone, FaDog } from "react-icons/fa";
+import { FaMapMarkerAlt, FaPaw, FaBone, FaDog, FaTree } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa6";
 import styles from "./Sidebar.module.scss";
 import { ROUTES } from "@/routes/routes";
 import { NavLink } from "@/app/uikit/navigation/NavLink/NavLink";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
-export const Sidebar = ({ username }: { username: string }) => {
+export const Sidebar = () => {
   const t = useTranslations();
+  const currentUser = useUserStore((state) => state.currentUser);
   const tips = t.raw("dailyTip.tips") as string[];
   const tip = tips[new Date().getDay()];
+
+  if (!currentUser) return null;
+
+  const username = currentUser.username;
 
   return (
     <nav className={styles.container}>
@@ -35,16 +43,16 @@ export const Sidebar = ({ username }: { username: string }) => {
           <FaCamera size={20} />
           {t("sidebar.photos")}
         </NavLink>
+        <NavLink href={ROUTES.familyTree(username)}>
+          <FaTree size={20} />
+          {t("sidebar.familyTree")}
+        </NavLink>
         <NavLink href={ROUTES.places}>
           <FaMapMarkerAlt size={20} />
           {t("sidebar.places")}
         </NavLink>
       </div>
-      <Tip
-        title={t("dailyTip.title")}
-        text={t("dailyTip.text")}
-        appearance="primary"
-      />
+      <Tip title={t("dailyTip.title")} text={tip} appearance="primary" />
     </nav>
   );
 };

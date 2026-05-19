@@ -3,6 +3,9 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { Friend } from "@/types";
 import { useTranslations } from "next-intl";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
+import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
+import { FaTrash } from "react-icons/fa";
+import { MdDeleteSweep } from "react-icons/md";
 
 interface FriendCardProps {
   friend: Friend;
@@ -11,15 +14,28 @@ interface FriendCardProps {
 export const FriendCard = ({ friend }: FriendCardProps) => {
   const t = useTranslations();
 
+  const deleteFriend = (username: string) => {
+    console.log("delete", username);
+  };
+
   return (
     <li className={styles.card}>
-      <Avatar src={friend.avatar} size={70} />
+      <Avatar src={friend.avatar} size={90} />
       <div className={styles.right}>
         <div className={styles.name}>{friend.name}</div>
         <Button appearance="tertiary" className={styles.button}>
           {t("friends.message")}
         </Button>
       </div>
+      <DropdownMenu
+        items={[
+          {
+            label: t("friends.delete"),
+            onClick: () => deleteFriend(friend.username),
+            icon: <MdDeleteSweep size={20} />,
+          },
+        ]}
+      />
     </li>
   );
 };

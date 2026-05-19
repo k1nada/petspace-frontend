@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Button } from "../../../../uikit/form/Button/Button";
 import styles from "./ProfileBanner.module.scss";
-import { FaMapMarkerAlt, FaPaw, FaTree } from "react-icons/fa";
+import { FaMapMarkerAlt, FaPaw, FaTree, FaTrophy } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa6";
 import { ROUTES } from "@/routes/routes";
 import { Link } from "../../../../uikit/navigation/Link/Link";
@@ -13,6 +13,7 @@ import { useState } from "react";
 import { ProfileInfoModal } from "../../modals/ProfileInfoModal/ProfileInfoModal";
 import { BannerInfo } from "@/types";
 import { AchievementsModal } from "../../modals/AchievementsModal/AchievementsModal";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
 interface ProfileBannerProps {
   bannerInfo: BannerInfo;
@@ -42,6 +43,9 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
   const editProfile = () => {
     router.push(ROUTES.editProfile(bannerInfo.username));
   };
+
+  const currentUser = useUserStore((state) => state.currentUser);
+  const isOwner = currentUser?.username === bannerInfo.username;
 
   return (
     <div className={styles.banner}>
@@ -121,15 +125,20 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
       </div>
       <div className={styles.actions}>
         <Button
-          appearance="primary"
-          className={styles.achievementsBtn}
+          appearance="secondary"
           onClick={() => setIsAchievementsOpen(true)}
         >
-          {t("profileBanner.achievements")}
+          <FaTrophy size={16} />
         </Button>
-        <Button appearance="secondary" onClick={editProfile}>
-          {t("profileBanner.editProfile")}
-        </Button>
+        {isOwner ? (
+          <Button appearance="primary" onClick={editProfile}>
+            {t("profileBanner.editProfile")}
+          </Button>
+        ) : (
+          <div>
+            <Button appearance="primary">{t("profileBanner.addFriend")}</Button>
+          </div>
+        )}
       </div>
 
       <AchievementsModal
