@@ -14,7 +14,7 @@ const FriendsPage = async ({ params }: FriendsPageProps) => {
 
   return (
     <>
-      <Header username={userData.username} />
+      <Header/>
       <main>
         <FriendsLayout username={userData.username} friends={friends} />
       </main>

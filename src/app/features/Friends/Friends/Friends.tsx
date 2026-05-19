@@ -6,7 +6,6 @@ import styles from "./Friends.module.scss";
 import { Friend } from "@/types";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { FriendCard } from "../FriendCard/FriendCard";
-import { Button } from "@/app/uikit/form/Button/Button";
 
 interface FriendsProps {
   friends?: Friend[];

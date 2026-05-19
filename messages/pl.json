@@ -71,7 +71,8 @@
     "friends": "Znajomi",
     "photos": "Zdjęcia",
     "favorites": "Ulubione",
-    "places": "Miejsca"
+    "places": "Miejsca",
+    "familyTree": "Drzewo rodzinne"
   },
   "searchBar": {
     "search": "Szukaj"
@@ -79,14 +80,14 @@
   "dailyTip": {
   "title": "Porada dnia",
   "tips": [
-    "Regularne spacery są niezbędne dla zdrowia pupila. Staraj się o co najmniej 30 minut dziennie!",
-    "Świeża woda powinna być zawsze dostępna dla Twojego psa.",
-    "Psy kochają rutynę, staraj się karmić je o tej samej porze każdego dnia.",
-    "Stymulacja umysłowa jest równie ważna jak fizyczna. Wypróbuj zabawki edukacyjne!",
-    "Regularne pielęgnowanie psa jest kluczem dla jego zdrowia i wzmacnia waszą więź.",
-    "Socjalizacja jest kluczowa, pozwól swojemu psu regularnie poznawać nowych przyjaciół.",
-    "Nie zapomnij o corocznych wizytach u weterynarza!"
-    ]
+    "Potrzebuję co najmniej 30 minut spaceru dzisiaj. Bez wymówek, człowieku!",
+    "Miska znowu pusta. Świeża woda, proszę, jestem bardzo spragniony.",
+    "Karm mnie o tej samej porze każdego dnia. Mój brzuszek ma swój harmonogram.",
+    "Znudzone łapy = pogryziane buty. Kup mi zabawkę logiczną, już!",
+    "Wyczesz mnie! To cudowne uczucie, a ja pokocham cię jeszcze bardziej.",
+    "Potrzebuję przyjaciół! Zabierz mnie do parku poznać nowych znajomych.",
+    "Czas na coroczną wizytę u weterynarza. Obiecuję, że nie ugryzę... za bardzo."
+  ]
   },
   "toasts": {
     "saved": "Zmiany zostały zapisane pomyślnie",
@@ -106,7 +107,8 @@
     "editProfile": "Edytuj profil",
     "modalTitle": "Moje info",
     "modalInterests": "Zainteresowania",
-    "familyTree": "Drzewo genealogiczne"
+    "addFriend": "Dodaj znajomego",
+    "familyTree": "Drzewo rodzinne"
   },
   "profileEditor": {
     "title": "Edytuj profil",
@@ -195,7 +197,8 @@
     "friends": "znajomych",
     "remove": "Usuń",
     "emptyFriendsTitle": "Brak znajomych",
-    "emptyFriendsText": "Ale każda legenda zaczyna w pojedynkę. Idź i znajdź swoją sforę!"
+    "emptyFriendsText": "Ale każda legenda zaczyna w pojedynkę. Idź i znajdź swoją sforę!",
+    "delete": "Usuń"
   },
   "friendRequest": {
     "title": "Zaproszenia do znajomych",
@@ -206,7 +209,7 @@
   },
   "friendTip": {
     "title": "Czy wiesz, że...?",
-    "text": "Psy w tym samym wieku i rasy najlepiej się dogadują. Uzupełnij profil swojego pupila, a znajdziemy świetnych towarzyszy w pobliżu!"
+    "text": "Psy w tym samym wieku i rasie najlepiej się dogadują. Uzupełnij swój profil, a znajdziemy świetnych znajomych w pobliżu!"
   },
   "messages": {
     "title": "Wiadomości",

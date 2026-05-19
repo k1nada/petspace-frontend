@@ -12,9 +12,9 @@ const MessagesPage = async ({ params }: Props) => {
 
   return (
     <>
-      <Header username={userData.username}/>
+      <Header/>
       <main>
-        <MessagesLayout username={userData.username} />
+        <MessagesLayout/>
       </main>
     </>
   );

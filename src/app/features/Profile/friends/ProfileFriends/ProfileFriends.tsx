@@ -10,7 +10,7 @@ interface ProfileFriendsProps {
   friends: Friend[];
 }
 
-const MAX_VISIBLE_FRIENDS = 3;
+const MAX_VISIBLE_FRIENDS = 5;
 
 export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
   const t = useTranslations();
@@ -26,27 +26,24 @@ export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
         <>
           <ul className={styles.friends}>
             {friends.slice(0, MAX_VISIBLE_FRIENDS).map((friend) => (
-              <li key={friend.username} className={styles.friend}>
-                <Avatar
-                  src={friend.avatar}
-                  size={45}
-                  isOnline={friend.isOnline}
-                />
-                <div className={styles.info}>
-                  <div className={styles.name}>{friend.name}</div>
-                  <div className={styles.breed}>{friend.breed}</div>
-                </div>
+              <li key={friend.username}>
+                <Link
+                  href={ROUTES.profile(friend.username)}
+                  className={styles.friend}
+                >
+                  <Avatar
+                    src={friend.avatar}
+                    size={50}
+                    isOnline={friend.isOnline}
+                  />
+                  <div className={styles.info}>
+                    <div className={styles.name}>{friend.name}</div>
+                    <div className={styles.breed}>{friend.breed}</div>
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>
-          <div className={styles.action}>
-            <Link
-              href={ROUTES.friends(username)}
-              className={styles.showFriends}
-            >
-              {t("profileFriends.showFriends")}
-            </Link>
-          </div>
         </>
       )}
     </section>

@@ -14,7 +14,7 @@ export const ProfileInterestsLayout = ({ user }: ProfileInterestLayout) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.sidebar}>
-        <Sidebar username={user.username} />
+        <Sidebar/>
       </div>
       <div className={styles.content}>
         <ProfileInterests user={user} />

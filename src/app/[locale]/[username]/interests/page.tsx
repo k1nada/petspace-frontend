@@ -12,7 +12,7 @@ const ProfileInterestsPage = async ({ params }: ProfileInterestsPageProps) => {
 
   return (
     <>
-      <Header username={userData.username} />
+      <Header/>
       <main>
         <ProfileInterestsLayout user={userData} />
       </main>

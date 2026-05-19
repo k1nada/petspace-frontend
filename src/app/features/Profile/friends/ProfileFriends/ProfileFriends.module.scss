@@ -1,9 +1,9 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-m);
+  gap: var(--gap-s);
   background: var(--bg-card);
-  padding: var(--padding-xl);
+  padding: var(--padding-l);
   border-radius: var(--radius-m);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
@@ -30,7 +30,6 @@
 .friends {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-s);
 }
 
 .friend {
@@ -38,6 +37,13 @@
   align-items: center;
   gap: var(--gap-s);
   cursor: pointer;
+  padding: var(--gap-xs);
+  border-radius: var(--radius-m);
+  transition: background 0.2s;
+
+  &:hover {
+    background: var(--color-hover, rgba(0, 0, 0, 0.06));
+  }
 }
 
 .info {
@@ -55,25 +61,4 @@
 .breed {
   color: var(--text-secondary);
   font-size: var(--font-s);
-}
-
-.action {
-  padding-top: var(--gap-s);
-}
-
-.showFriends {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background: transparent;
-  border: none;
-  font-size: var(--font-m);
-  color: var(--text-secondary);
-  cursor: pointer;
-  padding: 0;
-  transition: color 0.2s;
-
-  &:hover {
-    color: var(--color-primary);
-  }
 }

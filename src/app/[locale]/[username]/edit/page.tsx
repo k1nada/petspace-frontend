@@ -12,7 +12,7 @@ const EditPage = async ({ params }: EditPageProps) => {
 
   return (
     <>
-      <Header username={userData.username} />
+      <Header/>
       <main>
         <ProfileEditorLayout user={userData} />
       </main>

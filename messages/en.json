@@ -71,22 +71,23 @@
     "friends": "Friends",
     "photos": "Photos",
     "favorites": "Favorites",
-    "places": "Places"
+    "places": "Places",
+    "familyTree": "Family tree"
   },
   "searchBar": {
     "search": "Search"
   },
   "dailyTip": {
     "title": "Tip of the day",
-    "tips": [
-    "Regular walks are essential for your pet's health. Aim for at least 30 minutes daily!",
-    "Fresh water should always be available for your dog.",
-    "Dogs love routine, try to feed them at the same time every day.",
-    "Mental stimulation is as important as physical exercise. Try puzzle toys!",
-    "Regular grooming keeps your dog healthy and strengthens your bond.",
-    "Socialization is key, let your dog meet new friends regularly.",
-    "Don't forget annual vet checkups to keep your pup in top shape!"
-    ]
+  "tips": [
+    "I need at least 30 minutes of walkies today. No excuses, hooman!",
+    "My bowl is empty again. Fresh water, please, I'm very thirsty.",
+    "Feed me at the same time every day. My tummy has a schedule.",
+    "Bored paws = chewed shoes. Get me a puzzle toy, stat!",
+    "Brush me! It feels amazing and I'll love you even more.",
+    "I need friends! Take me to the park to meet new pals.",
+    "Time for my annual vet visit. I promise I won't bite... much."
+  ]
   },
   "toasts": {
     "saved": "Changes saved successfully",
@@ -106,7 +107,8 @@
     "editProfile": "Edit profile",
     "modalTitle": "My info",
     "modalInterests": "Interests",
-    "familyTree": "Family Tree"
+    "addFriend": "Add friend",
+    "familyTree": "Family tree"
   },
   
   "profileEditor": {
@@ -196,7 +198,8 @@
     "friends": "friends",
     "remove": "Remove",
     "emptyFriendsTitle": "No friends yet",
-    "emptyFriendsText": "But every legend starts alone. Go find your crew!"
+    "emptyFriendsText": "But every legend starts alone. Go find your crew!", 
+    "delete": "Delete"
   },
   "friendRequest": {
     "title": "Friend Requests",
@@ -207,11 +210,12 @@
   },
   "friendTip": {
     "title": "Did you know?",
-    "text": "Dogs the same age and breed make the best friends. Fill in your pet's profile and we'll find great matches nearby!"
+    "text": "Dogs the same age and breed make the best friends. Fill in your profile and we'll find great matches nearby!"
   },
   "messages": {
     "title": "Messages",
-    "placeholder": "Write a message..."
+    "placeholder": "Write a message...",
+    "offline": "Offline"
   },
   "achievements": {
     "title": "Achievements",
