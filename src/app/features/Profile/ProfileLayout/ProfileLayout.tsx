@@ -6,11 +6,12 @@ import { PostCreator } from "../feed/PostCreator/PostCreator";
 import { ProfileBanner } from "../info/ProfileBanner/ProfileBanner";
 import styles from "./ProfileLayout.module.scss";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
-import { BannerInfo, Post } from "@/types";
 import { ProfilePhotos } from "../photos/ProfilePhotos/ProfilePhotos";
 import { useState, useEffect } from "react";
 import { getPosts } from "@/app/api/post";
 import { useUserStore } from "@/app/hooks/useUserStore";
+import { BannerInfo } from "@/types";
+import { Post } from "@/types";
 
 interface ProfileLayoutProps {
   bannerInfo: BannerInfo;

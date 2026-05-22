@@ -18,17 +18,11 @@ import {
 import { useTranslations } from "next-intl";
 import { Input } from "@/app/uikit/form/Input/Input";
 import { Button } from "@/app/uikit/form/Button/Button";
-import axios from "axios";
+import { isAxiosError } from "axios";
 import { toast } from "react-toastify";
-import { API_URL } from "@/config/env";
-import { FormField } from "@/app/uikit/FormField/FormField";
-
-interface FormInputs {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-}
+import { FormField } from "@/app/uikit/form/FormField/FormField";
+import api from "@/config/axios";
+import { SignUpData } from "@/types";
 
 export const SignUp = () => {
   const t = useTranslations();
@@ -38,29 +32,36 @@ export const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputs>();
+  } = useForm<SignUpData>();
 
-  const onSubmit = async (data: FormInputs) => {
+  const handleError = (e: unknown) => {
+    if (!isAxiosError(e)) return;
+    const type = e.response?.data?.type;
+    if (type === "EMAIL_ALREADY_EXISTS")
+      toast.error(t("errors.EMAIL_ALREADY_EXISTS"));
+    if (type === "USERNAME_ALREADY_EXISTS")
+      toast.error(t("errors.USERNAME_ALREADY_EXISTS"));
+  };
+
+  const onSubmit = async (data: SignUpData) => {
     try {
-      const response = await axios.post(`${API_URL}/signup`, data);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("username", response.data.user.username);
+      const {
+        data: { token, user },
+      } = await api.post("/signup", data);
+
+      if (!user?.username) {
+        toast.error(t("toast.error"));
+        return;
+      }
+
+      localStorage.setItem("token", token);
       router.push(ROUTES.registrationSteps);
     } catch (e) {
-      if (axios.isAxiosError(e)) {
-        const type = e.response?.data?.type;
-        if (type === "EMAIL_ALREADY_EXISTS") {
-          toast.error(t("errors.EMAIL_ALREADY_EXISTS"));
-        } else if (type === "USERNAME_ALREADY_EXISTS") {
-          toast.error(t("errors.USERNAME_ALREADY_EXISTS"));
-        }
-      }
+      handleError(e);
     }
   };
 
-  const returnToSignIn = () => {
-    router.push(ROUTES.signin);
-  };
+  const onSignIn = () => router.push(ROUTES.signin);
 
   return (
     <form className={styles.signUpForm} onSubmit={handleSubmit(onSubmit)}>
@@ -146,7 +147,7 @@ export const SignUp = () => {
           <Button type="submit" appearance="primary">
             {t("signUp.createAccount")}
           </Button>
-          <Button type="button" appearance="secondary" onClick={returnToSignIn}>
+          <Button type="button" appearance="secondary" onClick={onSignIn}>
             {t("signUp.haveAccount")}
           </Button>
         </div>

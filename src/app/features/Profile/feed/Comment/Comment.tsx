@@ -3,13 +3,13 @@ import styles from "./Comment.module.scss";
 import { FaHeart } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import { Button } from "@/app/uikit/form/Button/Button";
-import { Comment as CommentType } from "@/types";
 import { useLocale, useTranslations } from "next-intl";
 import dayjs from "dayjs";
 import "dayjs/locale/pl";
 import "dayjs/locale/en";
 import { likeComment } from "@/app/api/likes";
 import { useLike } from "@/app/hooks/useLike";
+import { Comment as CommentType} from "@/types";
 
 interface CommentProps {
   comment: CommentType;

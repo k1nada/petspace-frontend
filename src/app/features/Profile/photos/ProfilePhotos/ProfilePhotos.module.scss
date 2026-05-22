@@ -9,8 +9,11 @@
 }
 
 .titleLink {
+  display: flex;
+  align-items: center;
   color: var(--text-primary);
   width: fit-content;
+  gap: var(--gap-xs);
 }
 
 .title {
@@ -18,6 +21,11 @@
   font-weight: 600;
   color: var(--text-primary);
   font-size: var(--font-l);
+}
+
+.count {
+  color: var(--text-secondary);
+  font-size: var(--font-base);
 }
 
 .empty {

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import styles from "./SignIn.module.scss";
-import { useForm } from "react-hook-form";
+import { SignInData } from "@/types";
 import {
   emailValidationPattern,
   signInValidationMax,
@@ -17,36 +17,36 @@ import { ErrorMessage } from "@/app/uikit/form/ErrorMessage/ErrorMessage";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { Input } from "@/app/uikit/form/Input/Input";
 import { Button } from "@/app/uikit/form/Button/Button";
-import axios from "axios";
 import { toast } from "react-toastify";
-import { API_URL } from "@/config/env";
-
-interface FormInputs {
-  email: string;
-  password: string;
-}
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import api from "@/config/axios";
 
 export const SignIn = () => {
   const t = useTranslations();
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<FormInputs>();
+  } = useForm<SignInData>();
 
-  const createAccountLink = () => router.push(ROUTES.signup);
+  const goToSignUp = () => router.push(ROUTES.signup);
 
-  const onSubmit = async (data: FormInputs) => {
+  const onSubmit = async (data: SignInData) => {
     try {
-      const response = await axios.post(`${API_URL}/signin`, data);
-      localStorage.setItem("token", response.data.token);
-      const username = response.data.user.username;
-      if (!username) {
+      const response = await api.post("/signin", data);
+      const { token, user } = response.data;
+
+      if (!user?.username) {
         toast.error(t("toast.error"));
         return;
       }
-      router.push(ROUTES.profile(username));
+
+      localStorage.setItem("token", token);
+      router.push(ROUTES.profile(user.username));
     } catch {
       toast.error(t("errors.INVALID_CREDENTIALS"));
     }
@@ -69,24 +69,37 @@ export const SignIn = () => {
           type="text"
           appearance="primary"
           placeholder={t("signin.email")}
-          autoComplete="signin"
+          autoComplete="email"
         />
 
         {errors.email?.message && (
           <ErrorMessage message={errors.email?.message} />
         )}
 
-        <Input
-          {...register("password", {
-            required: t(requiredValidation),
-            minLength: passwordValidationMin(t),
-            maxLength: passwordValidationMax(t),
-          })}
-          type="password"
-          appearance="primary"
-          placeholder={t("signin.password")}
-          autoComplete="current-password"
-        />
+        <div className={styles.password}>
+          <Input
+            {...register("password", {
+              required: t(requiredValidation),
+              minLength: passwordValidationMin(t),
+              maxLength: passwordValidationMax(t),
+            })}
+            type={showPassword ? "text" : "password"}
+            appearance="primary"
+            className={styles.passwordInput}
+            placeholder={t("signin.password")}
+            autoComplete="current-password"
+          />
+          <Button
+            appearance="ghost"
+            className={styles.passwordButton}
+            onClick={() => setShowPassword((p) => !p)}
+          >
+            <div className={styles.icon}>
+              {showPassword ? <FaEye size={16} /> : <FaEyeSlash size={16} />}
+            </div>
+          </Button>
+        </div>
+
         {errors.password?.message && (
           <ErrorMessage message={errors.password?.message} />
         )}
@@ -104,7 +117,7 @@ export const SignIn = () => {
       <div className={styles.formDivider}>
         <span>{t("common.or")}</span>
       </div>
-      <Button type="button" appearance="secondary" onClick={createAccountLink}>
+      <Button type="button" appearance="secondary" onClick={goToSignUp}>
         {t("signin.createAccount")}
       </Button>
     </form>

@@ -11,9 +11,9 @@ import { useRouter } from "next/navigation";
 import { AvatarEdit } from "@/app/uikit/user/AvatarEdit/AvatarEdit";
 import { useState } from "react";
 import { ProfileInfoModal } from "../../modals/ProfileInfoModal/ProfileInfoModal";
-import { BannerInfo } from "@/types";
 import { AchievementsModal } from "../../modals/AchievementsModal/AchievementsModal";
 import { useUserStore } from "@/app/hooks/useUserStore";
+import { BannerInfo } from "@/types";
 
 interface ProfileBannerProps {
   bannerInfo: BannerInfo;

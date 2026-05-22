@@ -2,7 +2,7 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import styles from "./Post.module.scss";
 import Image from "next/image";
 import { FaComment, FaHeart, FaReply } from "react-icons/fa";
-import { Post as PostType } from "@/types";
+import { Post as PostType} from "@/types";
 import dayjs from "dayjs";
 import { Comment } from "@/app/features/profile/feed/Comment/Comment";
 import { MdDeleteSweep, MdModeEdit } from "react-icons/md";

@@ -1,11 +1,10 @@
 import styles from "./FriendCard.module.scss";
 import { Button } from "@/app/uikit/form/Button/Button";
-import { Friend } from "@/types";
 import { useTranslations } from "next-intl";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
-import { FaTrash } from "react-icons/fa";
 import { MdDeleteSweep } from "react-icons/md";
+import { Friend } from "@/types";
 
 interface FriendCardProps {
   friend: Friend;

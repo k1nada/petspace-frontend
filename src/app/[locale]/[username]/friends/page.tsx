@@ -8,13 +8,16 @@ interface FriendsPageProps {
 }
 
 const FriendsPage = async ({ params }: FriendsPageProps) => {
-  const awaitedParams = await params;
-  const userData = await getUser(awaitedParams.username);
-  const friends = await getFriends(awaitedParams.username);
+  const { username } = await params;
+
+  const [userData, friends] = await Promise.all([
+    getUser(username),
+    getFriends(username),
+  ]);
 
   return (
     <>
-      <Header/>
+      <Header />
       <main>
         <FriendsLayout username={userData.username} friends={friends} />
       </main>

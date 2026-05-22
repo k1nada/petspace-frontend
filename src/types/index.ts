@@ -34,6 +34,11 @@ export interface Achievements {
   firstPost?: boolean;
 }
 
+export interface BannerInfo extends User {
+  postwallId?: string;
+  posts?: Post[];
+}
+
 export interface Photo {
   id: string;
   publicId: string;
@@ -66,7 +71,14 @@ export interface Comment {
   createdAt: Date;
 }
 
-export interface BannerInfo extends User {
-  postwallId?: string;
-  posts?: Post[];
+export interface SignUpData {
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface SignInData {
+  email: string;
+  password: string;
 }

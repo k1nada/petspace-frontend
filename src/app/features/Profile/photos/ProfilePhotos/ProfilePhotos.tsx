@@ -3,10 +3,10 @@ import styles from "./ProfilePhotos.module.scss";
 import Image from "next/image";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { useTranslations } from "next-intl";
-import { Photo } from "@/types";
 import { CLOUD_NAME } from "@/config/env";
 import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
+import { Photo } from "@/types";
 
 interface ProfilePhotosProps {
   photos: Photo[];
@@ -31,6 +31,7 @@ export const ProfilePhotos = ({
     <section className={styles.container}>
       <Link href={ROUTES.photos(username)} className={styles.titleLink}>
         <h3 className={styles.title}>{t("profilePhotos.title")}</h3>
+        <span className={styles.count}>{photos.length}</span>
       </Link>
       {photos.length === 0 ? (
         <div className={styles.empty}>{t("profilePhotos.empty")}</div>
