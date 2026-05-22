@@ -4,14 +4,12 @@ import { PhotoGallery } from "../PhotoGallery/PhotoGallery";
 import { Photo } from "@/types";
 
 interface PhotoGalleryLayoutProps {
-  username: string;
   photos: Photo[];
   avatar?: string;
   name: string;
 }
 
 export const PhotoGalleryLayout = ({
-  username,
   photos,
   avatar,
   name,
@@ -19,7 +17,7 @@ export const PhotoGalleryLayout = ({
   return (
     <div className={styles.layout}>
       <div className={styles.sidebar}>
-        <Sidebar username={username} />
+        <Sidebar/>
       </div>
       <div className={styles.content}>
         <PhotoGallery photos={photos} avatar={avatar} name={name} />

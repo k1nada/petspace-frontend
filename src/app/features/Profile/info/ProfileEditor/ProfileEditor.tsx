@@ -11,12 +11,12 @@ import { useForm, Controller, useWatch } from "react-hook-form";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
-import { BannerInfo } from "@/types";
 import { updateProfile } from "@/app/api/profile";
 import { getBreeds } from "@/app/api/breeds";
 import { getCities, getCountries } from "@/app/api/locations";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Select } from "@/app/uikit/form/Select/Select";
+import { BannerInfo } from "@/types";
 
 interface ProfileEditorProps {
   user: BannerInfo;

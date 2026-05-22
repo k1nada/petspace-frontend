@@ -30,6 +30,33 @@
   color: var(--text-secondary);
 }
 
+.password {
+  position: relative;
+  width: 100%;
+}
+
+.passwordInput {
+  padding-right: 2.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.passwordButton {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-placeholder);
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  color: var(--text-placeholder);
+  display: flex;
+  align-items: center;
+}
+
 .forgotPassword {
   text-align: center;
 }

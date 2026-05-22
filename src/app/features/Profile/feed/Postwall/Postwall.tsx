@@ -2,8 +2,8 @@
 
 import { Post } from "@/app/features/profile/feed/Post/Post";
 import styles from "./Postwall.module.scss";
-import { Post as PostType } from "@/types";
 import { useTranslations } from "next-intl";
+import { Post as PostType} from "@/types";
 
 const SKELETON_ITEMS = [1, 2, 3];
 
@@ -40,8 +40,8 @@ export const Postwall = ({ posts, loading, onRefresh }: PostwallProps) => {
         </ul>
       ) : (
         <div className={styles.emptyFeed}>
-          <p className={styles.title}>{t("feed.title")}</p>
-          <p className={styles.text}>{t("feed.text")}</p>
+          <p className={styles.emptyTitle}>{t("feed.title")}</p>
+          <p className={styles.emptyText}>{t("feed.text")}</p>
         </div>
       )}
     </div>

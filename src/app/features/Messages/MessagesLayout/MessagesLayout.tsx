@@ -4,17 +4,22 @@ import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import styles from "./MessagesLayout.module.scss";
 import { MessagesList } from "../MessagesList/MessagesList";
 import { Messages } from "../Messages/Messages";
+import { Friend, User } from "@/types";
 
+interface MessagesLayoutProps {
+  friends: Friend[];
+  user: User;
+}
 
-export const MessagesLayout = () => {
+export const MessagesLayout = ({ user, friends = []}: MessagesLayoutProps) => {
   return (
     <div className={styles.layout}>
       <div className={styles.sidebar}>
-        <Sidebar/>
+        <Sidebar />
       </div>
       <div className={styles.chat}>
-        <MessagesList />
-        <Messages />
+        <MessagesList user={user} friends={friends} />
+        <Messages user={user} friends={friends}/>
       </div>
     </div>
   );

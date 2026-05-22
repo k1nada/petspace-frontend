@@ -1,5 +1,5 @@
-import { API_URL } from "@/config/env";
 import axios from "axios";
+import { API_URL } from "@/config/env";
 
 export const getUser = async (username: string) => {
   try {

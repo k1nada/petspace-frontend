@@ -2,8 +2,8 @@ import Link from "next/link";
 import styles from "./ProfileFriends.module.scss";
 import { ROUTES } from "@/routes/routes";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { Friend } from "@/types";
 import { useTranslations } from "next-intl";
+import { Friend } from "@/types";
 
 interface ProfileFriendsProps {
   username: string;
@@ -19,6 +19,7 @@ export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
     <section className={styles.container}>
       <Link href={ROUTES.friends(username)} className={styles.titleLink}>
         <h3 className={styles.title}>{t("profileFriends.title")}</h3>
+        <span className={styles.count}>{friends.length}</span>
       </Link>
       {friends.length === 0 ? (
         <p className={styles.empty}>{t("profileFriends.empty")}</p>

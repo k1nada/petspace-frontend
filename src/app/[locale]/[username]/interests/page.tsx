@@ -7,12 +7,12 @@ interface ProfileInterestsPageProps {
 }
 
 const ProfileInterestsPage = async ({ params }: ProfileInterestsPageProps) => {
-  const awaitedParams = await params;
-  const userData = await getUser(awaitedParams.username);
+  const { username } = await params;
+  const userData = await getUser(username);
 
   return (
     <>
-      <Header/>
+      <Header />
       <main>
         <ProfileInterestsLayout user={userData} />
       </main>

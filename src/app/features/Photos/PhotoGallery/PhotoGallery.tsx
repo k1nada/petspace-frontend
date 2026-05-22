@@ -4,7 +4,6 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import styles from "./PhotoGallery.module.scss";
 import Image from "next/image";
 import { useState } from "react";
-import { Photo } from "@/types";
 import { useTranslations } from "next-intl";
 import { PhotoModal } from "../PhotoModal/PhotoModal";
 import { CLOUD_NAME } from "@/config/env";
@@ -12,6 +11,7 @@ import { toast } from "react-toastify";
 import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
 import { PhotoUploadModal } from "../PhotoUploadModal/PhotoUploadModal";
 import api from "@/config/axios";
+import { Photo } from "@/types";
 
 interface PhotoGalleryProps {
   photos: Photo[];

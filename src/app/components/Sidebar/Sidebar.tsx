@@ -9,13 +9,16 @@ import { ROUTES } from "@/routes/routes";
 import { NavLink } from "@/app/uikit/navigation/NavLink/NavLink";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
 import { useUserStore } from "@/app/hooks/useUserStore";
+import { SidebarSkeleton } from "./SidebarSkeleton";
 
 export const Sidebar = () => {
   const t = useTranslations();
   const currentUser = useUserStore((state) => state.currentUser);
+  const isLoading = useUserStore((state) => state.isLoading);
   const tips = t.raw("dailyTip.tips") as string[];
   const tip = tips[new Date().getDay()];
 
+  if (isLoading) return <SidebarSkeleton />;
   if (!currentUser) return null;
 
   const username = currentUser.username;
@@ -52,7 +55,7 @@ export const Sidebar = () => {
           {t("sidebar.places")}
         </NavLink>
       </div>
-      <Tip title={t("dailyTip.title")} text={tip} appearance="primary" />
+      <Tip title={t("dailyTip.title")} text={tip} appearance="secondary" />
     </nav>
   );
 };
