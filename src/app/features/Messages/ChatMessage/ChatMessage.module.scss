@@ -1,0 +1,27 @@
+.message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-m);
+  margin-bottom: var(--gap-m);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.text {
+  background: var(--bg-input);
+  padding: var(--padding-s);
+  border-radius: var(--radius-m);
+  color: var(--text-primary);
+  font-size: var(--font-m);
+  max-width: 400px;
+  word-break: break-word;
+}
+
+.time {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}

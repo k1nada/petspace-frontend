@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import styles from "./Friends.module.scss";
-import { Friend } from "@/types";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { FriendCard } from "../FriendCard/FriendCard";
+import { Friend } from "@/types";
 
 interface FriendsProps {
   friends?: Friend[];

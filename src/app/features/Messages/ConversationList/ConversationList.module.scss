@@ -16,14 +16,15 @@
 
 .header {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: var(--gap-xs);
 }
 
 .title {
-  margin: 0;
   font-size: var(--font-l);
   color: var(--text-primary);
+  margin: 0;
+  font-weight: 700;
 }
 
 .count {
@@ -32,43 +33,32 @@
   font-weight: 600;
 }
 
+.dropdown {
+  display: flex;
+  margin-left: auto;
+}
+
 .list {
-  flex: 1;
   overflow-y: auto;
   padding: 0 var(--padding-xs);
-}
-
-.card {
-  display: flex;
-  padding: var(--padding-s);
-
-  &:hover {
-    background: var(--bg-page);
-  }
-}
-
-.info {
   display: flex;
   flex-direction: column;
-}
-
-.name {
-  color: var(--text-primary);
+  flex: 1;
 }
 
 .emptyMessages {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: var(--gap-l);
   text-align: center;
-  //todo padding
-  padding: 100px 0;
+  flex: 1;
+  padding: var(--padding-xl);
 }
 
 .emptyText {
-  font-size: var(--font-m);
+  margin: 0;
   color: var(--text-secondary);
-}
-
-.message {
+  font-size: var(--font-m);
 }
