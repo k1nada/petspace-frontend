@@ -24,7 +24,6 @@ const PhotosPage = async ({ params }: PhotosPageProps) => {
       <Header/>
       <main>
         <PhotoGalleryLayout
-          username={userData.username}
           name={userData.name}
           photos={photosWithComments}
           avatar={userData.avatar}

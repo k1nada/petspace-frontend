@@ -28,11 +28,6 @@
   color: var(--text-primary);
 }
 
-.status {
-  font-size: var(--font-s);
-  color: var(--color-online);
-}
-
 .list {
   flex: 1;
   overflow-y: auto;
@@ -44,7 +39,6 @@
   align-items: center;
   padding: var(--padding-m);
   border-top: 1px solid var(--border-divider);
-  flex-shrink: 0;
 }
 
 .emptyMessages {

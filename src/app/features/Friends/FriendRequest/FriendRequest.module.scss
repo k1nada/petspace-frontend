@@ -8,11 +8,23 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+}
+
 .title {
   margin: 0;
   font-weight: 600;
   color: var(--text-primary);
   font-size: var(--font-l);
+}
+
+.count {
+  color: var(--text-secondary);
+  font-size: var(--font-base);
+  font-weight: 600;
 }
 
 .empty {

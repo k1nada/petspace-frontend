@@ -7,6 +7,7 @@ export interface User {
   city?: string;
   breed?: string;
   isOnline?: boolean;
+  lastSeen?: string;
   friendsCount?: number;
   bio?: string;
   gender?: string;
@@ -69,6 +70,11 @@ export interface Comment {
   likesCount: number;
   liked: boolean;
   createdAt: Date;
+}
+
+export interface Message {
+  text: string;
+  time: string;
 }
 
 export interface SignUpData {

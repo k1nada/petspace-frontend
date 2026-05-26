@@ -5,8 +5,8 @@ import styles from "./FriendRequest.module.scss";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { Friend } from "@/types";
 import { ROUTES } from "@/routes/routes";
+import { Friend } from "@/types";
 
 interface FriendRequestProps {
   friends?: Friend[];
@@ -19,7 +19,10 @@ export const FriendRequest = ({ friends = [] }: FriendRequestProps) => {
 
   return (
     <section className={styles.wrapper}>
-      <h2 className={styles.title}>{t("friendRequest.title")}</h2>
+      <div className={styles.header}>
+        <h2 className={styles.title}>{t("friendRequest.title")}</h2>
+        <span className={styles.count}>{friends.length}</span>
+      </div>
       {friends.length === 0 ? (
         <p className={styles.empty}>{t("friendRequest.empty")}</p>
       ) : (

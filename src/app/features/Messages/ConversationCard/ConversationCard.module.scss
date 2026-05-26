@@ -1,0 +1,58 @@
+.card {
+  list-style: none;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
+  padding: var(--padding-xs);
+  border-radius: var(--radius-s);
+  width: 100%;
+
+  &:hover {
+    background: var(--bg-page);
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: left;
+}
+
+.name {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: var(--font-base);
+}
+
+.text {
+  color: var(--text-secondary);
+  font-size: var(--font-base);
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--gap-xs);
+}
+
+.time {
+  color: var(--text-secondary);
+  font-size: var(--font-s);
+}
+
+.count {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border-radius: var(--radius-full);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-s);
+}
