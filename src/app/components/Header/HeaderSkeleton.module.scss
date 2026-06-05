@@ -27,33 +27,32 @@
   display: flex;
   align-items: center;
   gap: var(--gap-m);
-  text-decoration: none;
 }
 
 .logoTitle {
-  margin: 0;
   font-size: var(--font-2xl);
   font-weight: 700;
   color: var(--text-primary);
 }
 
-.actions {
+.search {
+  width: 300px;
+  height: 40px;
+  border-radius: var(--radius-m);
+  background: var(--bg-input);
+}
+
+.list {
   justify-self: end;
   display: flex;
   align-items: center;
   gap: var(--gap-m);
 }
 
-.icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  color: var(--text-secondary);
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: var(--text-primary);
-  }
+.item {
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  border-radius: var(--radius-full);
+  background: var(--bg-input);
 }

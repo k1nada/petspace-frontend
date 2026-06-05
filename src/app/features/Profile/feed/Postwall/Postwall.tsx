@@ -3,9 +3,8 @@
 import { Post } from "@/app/features/profile/feed/Post/Post";
 import styles from "./Postwall.module.scss";
 import { useTranslations } from "next-intl";
-import { Post as PostType} from "@/types";
-
-const SKELETON_ITEMS = [1, 2, 3];
+import { Post as PostType } from "@/types";
+import { PostwallSkeleton } from "./PostwallSkeleton";
 
 interface PostwallProps {
   posts: PostType[];
@@ -16,17 +15,7 @@ interface PostwallProps {
 export const Postwall = ({ posts, loading, onRefresh }: PostwallProps) => {
   const t = useTranslations();
 
-  if (loading) {
-    return (
-      <div className={styles.container}>
-        <div className={styles.skeleton}>
-          {SKELETON_ITEMS.map((i) => (
-            <div key={i} className={styles.skeletonPost} />
-          ))}
-        </div>
-      </div>
-    );
-  }
+  if (loading) return <PostwallSkeleton />;
 
   return (
     <div className={styles.container}>

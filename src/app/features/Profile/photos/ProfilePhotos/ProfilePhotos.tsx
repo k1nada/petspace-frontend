@@ -7,6 +7,8 @@ import { CLOUD_NAME } from "@/config/env";
 import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Photo } from "@/types";
+import { ProfilePhotosSkeleton } from "./ProfilePhotosSkeleton";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
 interface ProfilePhotosProps {
   photos: Photo[];
@@ -26,6 +28,11 @@ export const ProfilePhotos = ({
   const t = useTranslations();
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
     usePhotoNavigation(photos);
+
+  const currentUser = useUserStore((state) => state.currentUser);
+  
+  const isLoading = useUserStore((state) => state.isLoading);
+  if (isLoading && !currentUser) return <ProfilePhotosSkeleton />;
 
   return (
     <section className={styles.container}>

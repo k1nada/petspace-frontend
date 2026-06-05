@@ -14,6 +14,7 @@ import { ProfileInfoModal } from "../../modals/ProfileInfoModal/ProfileInfoModal
 import { AchievementsModal } from "../../modals/AchievementsModal/AchievementsModal";
 import { useUserStore } from "@/app/hooks/useUserStore";
 import { BannerInfo } from "@/types";
+import { ProfileBannerSkeleton } from "./ProfileBannerSkeleton";
 
 interface ProfileBannerProps {
   bannerInfo: BannerInfo;
@@ -46,6 +47,9 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
 
   const currentUser = useUserStore((state) => state.currentUser);
   const isOwner = currentUser?.username === bannerInfo.username;
+
+  const isLoading = useUserStore((state) => state.isLoading);
+  if (isLoading && !currentUser) return <ProfileBannerSkeleton />;
 
   return (
     <div className={styles.banner}>

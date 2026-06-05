@@ -29,15 +29,8 @@
   font-size: var(--font-m);
 }
 
-.skeleton {
+.list {
   display: flex;
   flex-direction: column;
   gap: var(--gap-m);
-}
-
-.skeletonPost {
-  height: 100px;
-  border-radius: var(--radius-m);
-  background: var(--bg-page);
-  opacity: 0.5;
 }
