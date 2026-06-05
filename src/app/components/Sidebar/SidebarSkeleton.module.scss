@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xl);
+  height: 100vh;
+  padding: var(--padding-l);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-m);
+  padding: var(--padding-m);
+  border-radius: var(--radius-m);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  flex-shrink: 0;
+}
+
+.label {
+  height: 20px;
+  width: 60%;
+  border-radius: var(--radius-m);
+  background: var(--bg-surface);
+}
+
+.tip {
+  height: 80px;
+  border-radius: var(--radius-m);
+  background: var(--bg-surface);
+}

@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-s);
+  background: var(--bg-card);
+  padding: var(--padding-l);
+  border-radius: var(--radius-m);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.title {
+  height: 20px;
+  width: 100px;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+}
+
+.friends {
+  display: flex;
+  flex-direction: column;
+}
+
+.friend {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
+  padding: var(--gap-xs);
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  background: var(--bg-input);
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  flex: 1;
+}
+
+.name {
+  height: 14px;
+  width: 50%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+}
+
+.breed {
+  height: 12px;
+  width: 40%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+}

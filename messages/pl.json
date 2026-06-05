@@ -108,6 +108,7 @@
     "modalTitle": "Moje info",
     "modalInterests": "Zainteresowania",
     "addFriend": "Dodaj znajomego",
+    "message": "Wiadomość",
     "familyTree": "Drzewo rodzinne"
   },
   "profileEditor": {
@@ -211,9 +212,19 @@
     "title": "Czy wiesz, że...?",
     "text": "Psy w tym samym wieku i rasie najlepiej się dogadują. Uzupełnij swój profil, a znajdziemy świetnych znajomych w pobliżu!"
   },
-  "messages": {
+  "conversationList": {
     "title": "Wiadomości",
-    "placeholder": "Napisz wiadomość..."
+    "emptyTitle": "Nie masz jeszcze żadnych znajomych.",
+    "emptyText": "Znajdź inne psy i zacznij rozmawiać!",
+    "findFriends": "Znajdź znajomych"
+  },
+  "chat": {
+    "placeholder": "Napisz wiadomość...",
+    "offline": "Offline",
+    "selectFriend": "Wybierz znajomego, aby zacząć rozmawiać",
+    "noBarks": "Brak szczekania",
+    "emptyInbox": "Twoja skrzynka jest cichsza niż śpiący szczeniak.",
+    "findDog": "Znajdź psa"
   },
   "achievements": {
     "title": "Osiągnięcia",
