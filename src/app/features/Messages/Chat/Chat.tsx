@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { io } from "socket.io-client";
 import styles from "./Chat.module.scss";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SumbitTextarea";
@@ -8,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/routes/routes";
+import { API_URL } from "@/config/env";
 import { Friend, Message, User } from "@/types";
 import { ChatMessage } from "../ChatMessage/ChatMessage";
 import { Link } from "@/app/uikit/navigation/Link/Link";
@@ -18,24 +20,55 @@ interface ChatProps {
   selectedFriend: Friend | null;
 }
 
+const socket = io(process.env.NEXT_PUBLIC_API_URL);
+
 export const Chat = ({ user, friends, selectedFriend }: ChatProps) => {
   const t = useTranslations();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [online, setOnline] = useState(selectedFriend?.isOnline ?? false);
   const router = useRouter();
 
+  const roomId = selectedFriend
+    ? [user.id, selectedFriend.id].sort().join("_")
+    : null;
+
+  useEffect(() => {
+    socket.emit("online", user.id);
+  }, [user.id]);
+
+  useEffect(() => {
+    if (!roomId) return;
+
+    fetch(`${API_URL}/chat/${roomId}`)
+      .then((res) => res.json())
+      .then(setMessages);
+
+    socket.emit("join", roomId);
+
+    const onMessage = (msg: Message) => setMessages((prev) => [...prev, msg]);
+    const onStatus = ({
+      userId,
+      isOnline,
+    }: {
+      userId: string;
+      isOnline: boolean;
+    }) => {
+      if (userId === selectedFriend?.id) setOnline(isOnline);
+    };
+
+    socket.on("message", onMessage);
+    socket.on("statusChange", onStatus);
+
+    return () => {
+      socket.off("message", onMessage);
+      socket.off("statusChange", onStatus);
+    };
+  }, [roomId]);
+
   const handleSend = () => {
-    if (!message.trim()) return;
-    setMessages((prev) => [
-      ...prev,
-      {
-        text: message,
-        time: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-      },
-    ]);
+    if (!message.trim() || !roomId) return;
+    socket.emit("message", { roomId, senderId: user.id, text: message });
     setMessage("");
   };
 
@@ -52,20 +85,22 @@ export const Chat = ({ user, friends, selectedFriend }: ChatProps) => {
               <Link href={ROUTES.profile(selectedFriend.username)}>
                 <Avatar src={selectedFriend.avatar} size={45} />
               </Link>
-
               <div className={styles.info}>
-                <strong className={styles.name}>{selectedFriend.name}</strong>
+                <span className={styles.name}>{selectedFriend.name}</span>
+                {online && <span className={styles.online}>online</span>}
               </div>
             </div>
           </div>
           <ul className={styles.list}>
-            {messages.map((msg, index) => (
+            {messages.map((msg) => (
               <ChatMessage
-                key={index}
+                key={msg.id}
                 text={msg.text}
-                time={msg.time}
-                avatar={user.avatar}
-                username={user.username}
+                time={new Date(msg.createdAt).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+                isOwn={msg.sender?.id === user.id}
               />
             ))}
           </ul>

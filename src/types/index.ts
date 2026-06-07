@@ -73,8 +73,10 @@ export interface Comment {
 }
 
 export interface Message {
+  id: string;
   text: string;
-  time: string;
+  createdAt: string;
+  sender: User;
 }
 
 export interface SignUpData {

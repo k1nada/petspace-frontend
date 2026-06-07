@@ -19,7 +19,7 @@ export const FriendCard = ({ friend }: FriendCardProps) => {
 
   return (
     <li className={styles.card}>
-      <Avatar src={friend.avatar} size={90} />
+      <Avatar src={friend.avatar} size={90} isOnline={friend.isOnline}/>
       <div className={styles.right}>
         <div className={styles.name}>{friend.name}</div>
         <Button appearance="tertiary" className={styles.button}>

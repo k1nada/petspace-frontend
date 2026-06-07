@@ -30,7 +30,7 @@ export const FriendRequest = ({ friends = [] }: FriendRequestProps) => {
           {friends.slice(0, MAX_VISIBLE_REQUERSTS).map((friend) => (
             <li key={friend.username} className={styles.friendRequest}>
               <Link href={ROUTES.profile(friend.username)}>
-                <Avatar src={friend.avatar} size={70} />
+                <Avatar src={friend.avatar} size={70} isOnline={friend.isOnline}/>
               </Link>
               <div className={styles.info}>
                 <div className={styles.name}>{friend.name}</div>
