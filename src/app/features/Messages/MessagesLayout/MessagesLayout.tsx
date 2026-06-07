@@ -27,6 +27,7 @@ export const MessagesLayout = ({ user, friends = [] }: MessagesLayoutProps) => {
           onSelectFriend={setSelectedFriend}
         />
         <Chat
+          key={selectedFriend?.id}
           user={user}
           friends={friends}
           selectedFriend={selectedFriend}

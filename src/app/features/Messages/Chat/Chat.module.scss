@@ -28,6 +28,11 @@
   color: var(--text-primary);
 }
 
+.online {
+  font-size: var(--font-m);
+  color: var(--color-online);
+}
+
 .list {
   flex: 1;
   overflow-y: auto;

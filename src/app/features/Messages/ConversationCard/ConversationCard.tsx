@@ -14,7 +14,7 @@ export const ConversationCard = ({
 }: ConversationCardProps) => (
   <li className={styles.card}>
     <Button appearance="ghost" className={styles.button} onClick={onClick}>
-      <Avatar src={friend.avatar} />
+      <Avatar src={friend.avatar} isOnline={friend.isOnline}/>
       <div className={styles.info}>
         <span className={styles.name}>{friend.name}</span>
         <span className={styles.text}>hi</span>
