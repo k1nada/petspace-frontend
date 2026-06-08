@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "../../../../uikit/form/Button/Button";
 import styles from "./ProfileBanner.module.scss";
 import { FaMapMarkerAlt, FaPaw, FaTree, FaTrophy } from "react-icons/fa";
-import { FaCamera } from "react-icons/fa6";
+import { FaCamera, FaMessage } from "react-icons/fa6";
 import { ROUTES } from "@/routes/routes";
 import { Link } from "../../../../uikit/navigation/Link/Link";
 import { useRouter } from "next/navigation";
@@ -41,12 +41,22 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     (bannerInfo.interests && Object.values(bannerInfo.interests).some(Boolean))
   );
 
+  const currentUser = useUserStore((state) => state.currentUser);
+  const isOwner = currentUser?.username === bannerInfo.username;
+  const isFriend = !!currentUser?.friends?.find((f) => f === bannerInfo.id);
+
   const editProfile = () => {
     router.push(ROUTES.editProfile(bannerInfo.username));
   };
 
-  const currentUser = useUserStore((state) => state.currentUser);
-  const isOwner = currentUser?.username === bannerInfo.username;
+  const goToMessages = () => {
+    router.push(ROUTES.messages(bannerInfo.username));
+  };
+
+  const addFriend = () => {
+    console.log("Add friend:", bannerInfo.id);
+    // TODO implement friend request
+  };
 
   const isLoading = useUserStore((state) => state.isLoading);
   if (isLoading && !currentUser) return <ProfileBannerSkeleton />;
@@ -138,10 +148,24 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
           <Button appearance="primary" onClick={editProfile}>
             {t("profileBanner.editProfile")}
           </Button>
+        ) : isFriend ? (
+          <>
+            <Button appearance="secondary">
+              <FaPaw size={16} />
+            </Button>
+            <Button appearance="primary" onClick={goToMessages}>
+              {t("profileBanner.message")}
+            </Button>
+          </>
         ) : (
-          <div>
-            <Button appearance="primary">{t("profileBanner.addFriend")}</Button>
-          </div>
+          <>
+            <Button appearance="secondary" onClick={goToMessages}>
+              <FaMessage size={16} />
+            </Button>
+            <Button appearance="primary" onClick={addFriend}>
+              {t("profileBanner.addFriend")}
+            </Button>
+          </>
         )}
       </div>
 
