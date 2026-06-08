@@ -8,7 +8,7 @@ export default function SignInPage() {
   return (
     <main className={styles.page}>
       <Header />
-        <SignIn />
+      <SignIn />
     </main>
   );
 }

@@ -28,7 +28,7 @@ export interface Interests {
   humans?: string;
 }
 
-export type Friend = User;
+export type Friend = string;
 
 export interface Achievements {
   firstFriend?: boolean;

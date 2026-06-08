@@ -24,6 +24,7 @@ const ProfilePage = async ({ params }: ProfilePageProps) => {
       <main>
         <ProfileLayout
           bannerInfo={{
+            id: userData.id,
             name: userData.name,
             username: userData.username,
             avatar: userData.avatar,
