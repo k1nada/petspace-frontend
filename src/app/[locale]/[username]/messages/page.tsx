@@ -1,4 +1,4 @@
-import { getFriends } from "@/app/api/friends";
+import { getConversations } from "@/app/api/conversations";
 import { getUser } from "@/app/api/user";
 import { Header } from "@/app/components/Header/Header";
 import { MessagesLayout } from "@/app/features/messages/MessagesLayout/MessagesLayout";
@@ -10,16 +10,16 @@ interface MessagesPageProps {
 const MessagesPage = async ({ params }: MessagesPageProps) => {
   const { username } = await params;
 
-  const [userData, friends] = await Promise.all([
+  const [userData, conversations] = await Promise.all([
     getUser(username),
-    getFriends(username),
+    getConversations(username),
   ]);
 
   return (
     <>
       <Header />
       <main>
-        <MessagesLayout user={userData} friends={friends} />
+        <MessagesLayout user={userData} conversations={conversations} />
       </main>
     </>
   );

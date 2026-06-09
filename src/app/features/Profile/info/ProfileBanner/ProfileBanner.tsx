@@ -43,14 +43,14 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
 
   const currentUser = useUserStore((state) => state.currentUser);
   const isOwner = currentUser?.username === bannerInfo.username;
-  const isFriend = !!currentUser?.friends?.find((f) => f === bannerInfo.id);
+  const isFriend = !!currentUser?.friends?.find((f) => f.id === bannerInfo.id);
 
   const editProfile = () => {
     router.push(ROUTES.editProfile(bannerInfo.username));
   };
 
   const goToMessages = () => {
-    router.push(ROUTES.messages(bannerInfo.username));
+    router.push(ROUTES.messages(currentUser?.username || ""));
   };
 
   const addFriend = () => {

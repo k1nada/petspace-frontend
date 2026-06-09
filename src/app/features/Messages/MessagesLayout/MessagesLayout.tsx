@@ -3,17 +3,30 @@
 import { useState } from "react";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import styles from "./MessagesLayout.module.scss";
-import { ConversationList } from "../ConversationList/ConversationList";
 import { Chat } from "../Chat/Chat";
-import { Friend, User } from "@/types";
+import { ChatContact, Message, User } from "@/types";
+import { ContactList } from "../ConversationList/ContactList";
 
 interface MessagesLayoutProps {
-  friends: Friend[];
+  conversations: ChatContact[];
   user: User;
 }
 
-export const MessagesLayout = ({ user, friends = [] }: MessagesLayoutProps) => {
-  const [selectedFriend, setSelectedFriend] = useState<Friend | null>(null);
+export const MessagesLayout = ({
+  user,
+  conversations: initialConversations = [],
+}: MessagesLayoutProps) => {
+  const [selectedChat, setSelectedChat] = useState<ChatContact | undefined>();
+  const [conversations, setConversations] =
+    useState<ChatContact[]>(initialConversations);
+
+  const updateLastMessage = (contactId: string, lastMessage: Message) => {
+    setConversations(prev =>
+      prev.map(conv =>
+        conv.id === contactId ? { ...conv, lastMessage } : conv
+      )
+    );
+  };
 
   return (
     <div className={styles.layout}>
@@ -21,16 +34,17 @@ export const MessagesLayout = ({ user, friends = [] }: MessagesLayoutProps) => {
         <Sidebar />
       </div>
       <div className={styles.chat}>
-        <ConversationList
+        <ContactList
           user={user}
-          friends={friends}
-          onSelectFriend={setSelectedFriend}
+          conversations={conversations}
+          onSelectContact={setSelectedChat}
         />
         <Chat
-          key={selectedFriend?.id}
+          key={selectedChat?.id}
           user={user}
-          friends={friends}
-          selectedFriend={selectedFriend}
+          conversations={conversations}
+          selectedChat={selectedChat}
+          onMessageUpdate={updateLastMessage}
         />
       </div>
     </div>

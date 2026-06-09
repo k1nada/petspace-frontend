@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import styles from "./Chat.module.scss";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
@@ -10,27 +10,40 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/routes/routes";
 import { API_URL } from "@/config/env";
-import { Friend, Message, User } from "@/types";
+import { ChatContact, Message, User } from "@/types";
 import { ChatMessage } from "../ChatMessage/ChatMessage";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 
 interface ChatProps {
-  friends: Friend[];
+  conversations: ChatContact[];
   user: User;
-  selectedFriend: Friend | null;
+  selectedChat?: ChatContact;
+  onMessageUpdate?: (contactId: string, lastMessage: Message) => void;
 }
 
 const socket = io(process.env.NEXT_PUBLIC_API_URL);
 
-export const Chat = ({ user, friends, selectedFriend }: ChatProps) => {
+const formatTime = (createdAt: string) =>
+  new Date(createdAt).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+export const Chat = ({
+  user,
+  conversations,
+  selectedChat,
+  onMessageUpdate,
+}: ChatProps) => {
   const t = useTranslations();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [online, setOnline] = useState(selectedFriend?.isOnline ?? false);
+  const [online, setOnline] = useState(selectedChat?.isOnline ?? false);
   const router = useRouter();
+  const listRef = useRef<HTMLUListElement>(null);
 
-  const roomId = selectedFriend
-    ? [user.id, selectedFriend.id].sort().join("_")
+  const roomId = selectedChat
+    ? [user.id, selectedChat.id].sort().join("_")
     : null;
 
   useEffect(() => {
@@ -38,36 +51,46 @@ export const Chat = ({ user, friends, selectedFriend }: ChatProps) => {
   }, [user.id]);
 
   useEffect(() => {
+    if (listRef.current) {
+      listRef.current.scrollTop = listRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  useEffect(() => {
     if (!roomId) return;
 
     fetch(`${API_URL}/chat/${roomId}`)
       .then((res) => res.json())
-      .then(setMessages);
+      .then((msgs) => {
+        setMessages(msgs);
+        if (msgs.length > 0 && selectedChat && onMessageUpdate) {
+          onMessageUpdate(selectedChat.id, msgs[msgs.length - 1]);
+        }
+      });
 
     socket.emit("join", roomId);
 
-    const onMessage = (msg: Message) => setMessages((prev) => [...prev, msg]);
-    const onStatus = ({
-      userId,
-      isOnline,
-    }: {
-      userId: string;
-      isOnline: boolean;
-    }) => {
-      if (userId === selectedFriend?.id) setOnline(isOnline);
+    const handleMessage = (msg: Message) => {
+      setMessages((prev) => [...prev, msg]);
+      if (selectedChat && onMessageUpdate) {
+        onMessageUpdate(selectedChat.id, msg);
+      }
     };
 
-    socket.on("message", onMessage);
-    socket.on("statusChange", onStatus);
+    const handleStatus = ({ userId, isOnline }: any) => {
+      if (userId === selectedChat?.id) setOnline(isOnline);
+    };
+
+    socket.on("message", handleMessage);
+    socket.on("statusChange", handleStatus);
 
     return () => {
-      socket.off("message", onMessage);
-      socket.off("statusChange", onStatus);
+      socket.off("message", handleMessage);
+      socket.off("statusChange", handleStatus);
     };
-  }, [roomId]);
+  }, [roomId, selectedChat?.id, onMessageUpdate]);
 
   const handleSend = () => {
-    if (!message.trim() || !roomId) return;
     socket.emit("message", { roomId, senderId: user.id, text: message });
     setMessage("");
   };
@@ -78,28 +101,25 @@ export const Chat = ({ user, friends, selectedFriend }: ChatProps) => {
 
   return (
     <section className={styles.container}>
-      {selectedFriend ? (
+      {selectedChat ? (
         <>
           <div className={styles.userInfo}>
             <div className={styles.user}>
-              <Link href={ROUTES.profile(selectedFriend.username)}>
-                <Avatar src={selectedFriend.avatar} size={45} />
+              <Link href={ROUTES.profile(selectedChat.username)}>
+                <Avatar src={selectedChat.avatar} size={45} />
               </Link>
               <div className={styles.info}>
-                <span className={styles.name}>{selectedFriend.name}</span>
+                <span className={styles.name}>{selectedChat.name}</span>
                 {online && <span className={styles.online}>online</span>}
               </div>
             </div>
           </div>
-          <ul className={styles.list}>
+          <ul className={styles.list} ref={listRef}>
             {messages.map((msg) => (
               <ChatMessage
                 key={msg.id}
                 text={msg.text}
-                time={new Date(msg.createdAt).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+                time={formatTime(msg.createdAt)}
                 isOwn={msg.sender?.id === user.id}
               />
             ))}
@@ -113,7 +133,7 @@ export const Chat = ({ user, friends, selectedFriend }: ChatProps) => {
             />
           </div>
         </>
-      ) : friends.length > 0 ? (
+      ) : conversations.length > 0 ? (
         <div className={styles.emptyMessages}>
           <p className={styles.emptyTitle}>{t("chat.selectFriend")}</p>
         </div>

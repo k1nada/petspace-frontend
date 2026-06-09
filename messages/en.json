@@ -212,7 +212,7 @@
     "title": "Did you know?",
     "text": "Dogs the same age and breed make the best friends. Fill in your profile and we'll find great matches nearby!"
   },
-  "conversationList": {
+  "contactList": {
     "title": "Messages",
     "emptyTitle": "You don't have any friends yet.",
     "emptyText": "Find other dogs to start chatting!",

@@ -2,13 +2,16 @@
   list-style: none;
 }
 
-.button {
+.card button {
   display: flex;
   align-items: center;
   gap: var(--gap-s);
   padding: var(--padding-xs);
   border-radius: var(--radius-s);
   width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 
   &:hover {
     background: var(--bg-page);

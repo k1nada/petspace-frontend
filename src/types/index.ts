@@ -8,7 +8,6 @@ export interface User {
   breed?: string;
   isOnline?: boolean;
   lastSeen?: string;
-  friendsCount?: number;
   bio?: string;
   gender?: string;
   birthDate?: string;
@@ -28,7 +27,15 @@ export interface Interests {
   humans?: string;
 }
 
-export type Friend = string;
+export interface Friend {
+  id: string;
+  username: string;
+  name: string;
+  avatar?: string;
+  isOnline?: boolean;
+  lastSeen?: string;
+  friendsCount?: number;
+}
 
 export interface Achievements {
   firstFriend?: boolean;
@@ -77,6 +84,23 @@ export interface Message {
   text: string;
   createdAt: string;
   sender: User;
+}
+
+export interface ConversationMessage {
+  id: string;
+  text: string;
+  createdAt: string;
+}
+
+export interface ChatContact {
+  id: string;
+  username: string;
+  name: string;
+  avatar?: string;
+  isOnline?: boolean;
+  lastSeen?: string;
+  lastMessage?: ConversationMessage;
+  unreadCount?: number;
 }
 
 export interface SignUpData {

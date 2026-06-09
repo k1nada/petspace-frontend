@@ -34,9 +34,12 @@
 }
 
 .list {
+  display: flex;
+  flex-direction: column;
   flex: 1;
   overflow-y: auto;
-  padding: var(--padding-m);
+  padding: var(--padding-s);
+  list-style: none;
 }
 
 .input {
