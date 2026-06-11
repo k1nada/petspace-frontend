@@ -5,6 +5,11 @@
   gap: var(--gap-m);
   padding: var(--padding-xs);
   border-radius: var(--radius-m);
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: var(--button-ghost-hover);
+  }
 }
 
 .link {

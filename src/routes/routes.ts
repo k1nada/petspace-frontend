@@ -10,9 +10,13 @@ export const ROUTES = {
   about: "/about",
   feed: "/feed",
   friends: (username: string) => `/${username}/friends`,
+  friendRequests: (username: string) => `/${username}/requests`,
   photos: (username: string) => `/${username}/photos`,
   places: "/places",
   notifications: "/notifications",
-  messages: (username: string) => `/${username}/messages`,
-  familyTree: (username: string) => `/${username}/family`
+  messages: (currentUsername: string, targetUsername?: string) =>
+    targetUsername
+      ? `/${currentUsername}/messages?user=${targetUsername}`
+      : `/${currentUsername}/messages`,
+  familyTree: (username: string) => `/${username}/family`,
 } as const;

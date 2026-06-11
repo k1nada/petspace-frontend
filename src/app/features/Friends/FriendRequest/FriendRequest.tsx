@@ -9,31 +9,36 @@ import { ROUTES } from "@/routes/routes";
 import { Friend } from "@/types";
 
 interface FriendRequestProps {
-  friends?: Friend[];
+  requests?: Friend[];
+  currentUser: string;
 }
 
-const MAX_VISIBLE_REQUERSTS = 3;
+const MAX_VISIBLE_REQUESTS = 3;
 
-export const FriendRequest = ({ friends = [] }: FriendRequestProps) => {
+export const FriendRequest = ({ requests = [], currentUser }: FriendRequestProps) => {
   const t = useTranslations();
 
   return (
     <section className={styles.wrapper}>
       <div className={styles.header}>
         <h2 className={styles.title}>{t("friendRequest.title")}</h2>
-        <span className={styles.count}>{friends.length}</span>
+        <span className={styles.count}>{requests.length}</span>
       </div>
-      {friends.length === 0 ? (
+      {requests.length === 0 ? (
         <p className={styles.empty}>{t("friendRequest.empty")}</p>
       ) : (
         <ul className={styles.list}>
-          {friends.slice(0, MAX_VISIBLE_REQUERSTS).map((friend) => (
-            <li key={friend.username} className={styles.friendRequest}>
-              <Link href={ROUTES.profile(friend.username)}>
-                <Avatar src={friend.avatar} size={70} isOnline={friend.isOnline}/>
+          {requests.slice(0, MAX_VISIBLE_REQUESTS).map((request) => (
+            <li key={request.username} className={styles.friendRequest}>
+              <Link href={ROUTES.profile(request.username)}>
+                <Avatar
+                  src={request.avatar}
+                  size={70}
+                  isOnline={request.isOnline}
+                />
               </Link>
               <div className={styles.info}>
-                <div className={styles.name}>{friend.name}</div>
+                <div className={styles.name}>{request.name}</div>
                 <div className={styles.actions}>
                   <Button appearance="primary">
                     {t("friendRequest.accept")}
@@ -46,6 +51,11 @@ export const FriendRequest = ({ friends = [] }: FriendRequestProps) => {
             </li>
           ))}
         </ul>
+      )}
+      {requests.length > MAX_VISIBLE_REQUESTS && (
+        <Link href={ROUTES.friendRequests(currentUser)} className={styles.viewAll}>
+          {t("friendRequest.viewAll")}
+        </Link>
       )}
     </section>
   );

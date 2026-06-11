@@ -10,6 +10,8 @@ import "dayjs/locale/en";
 import { likeComment } from "@/app/api/likes";
 import { useLike } from "@/app/hooks/useLike";
 import { Comment as CommentType} from "@/types";
+import { ROUTES } from "@/routes/routes";
+import { Link } from "@/app/uikit/navigation/Link/Link";
 
 interface CommentProps {
   comment: CommentType;
@@ -29,7 +31,9 @@ export const Comment = ({ comment, onDelete }: CommentProps) => {
 
   return (
     <article className={styles.container}>
+      <Link href={ROUTES.profile(comment.user.username)}>
       <Avatar size={38} src={comment.user.avatar} />
+      </Link>
       <div className={styles.info}>
         <div className={styles.header}>
           <div className={styles.name}>{comment.user.name}</div>

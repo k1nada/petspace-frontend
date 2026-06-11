@@ -16,6 +16,8 @@ import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
 import { likePost } from "@/app/api/likes";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useLike } from "@/app/hooks/useLike";
+import { ROUTES } from "@/routes/routes";
+import { Link } from "@/app/uikit/navigation/Link/Link";
 
 export interface PostProps {
   post: PostType;
@@ -48,9 +50,13 @@ export const Post = ({ post, onRefresh }: PostProps) => {
   return (
     <article>
       <div className={styles.wrapper}>
+        <Link href={ROUTES.profile(post.user.username)}>
         <Avatar src={post.user.avatar} />
+        </Link>
         <div className={styles.info}>
+          <Link href={ROUTES.profile(post.user.username)}>
           <div className={styles.name}>{post.user.name}</div>
+          </Link>
           <time className={styles.time}>
             {dayjs(post.createdAt).locale(locale).format("D MMM YYYY")}
           </time>

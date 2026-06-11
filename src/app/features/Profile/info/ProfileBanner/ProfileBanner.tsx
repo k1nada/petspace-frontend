@@ -49,8 +49,8 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     router.push(ROUTES.editProfile(bannerInfo.username));
   };
 
-  const goToMessages = () => {
-    router.push(ROUTES.messages(currentUser?.username || ""));
+  const goToMessages = (targetUsername: string) => {
+    router.push(ROUTES.messages(currentUser?.username || "", targetUsername));
   };
 
   const addFriend = () => {
@@ -153,13 +153,13 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
             <Button appearance="secondary">
               <FaPaw size={16} />
             </Button>
-            <Button appearance="primary" onClick={goToMessages}>
+            <Button appearance="primary" onClick={() => goToMessages(bannerInfo.username)}>
               {t("profileBanner.message")}
             </Button>
           </>
         ) : (
           <>
-            <Button appearance="secondary" onClick={goToMessages}>
+            <Button appearance="secondary" onClick={() => goToMessages(bannerInfo.username)}>
               <FaMessage size={16} />
             </Button>
             <Button appearance="primary" onClick={addFriend}>
