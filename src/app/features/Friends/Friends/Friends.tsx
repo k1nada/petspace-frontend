@@ -9,9 +9,10 @@ import { Friend } from "@/types";
 
 interface FriendsProps {
   friends?: Friend[];
+  currentUser: string; // Добавь это
 }
 
-export const Friends = ({ friends = [] }: FriendsProps) => {
+export const Friends = ({ friends = [], currentUser }: FriendsProps) => {
   const t = useTranslations();
   const [search, setSearch] = useState("");
 
@@ -24,12 +25,20 @@ export const Friends = ({ friends = [] }: FriendsProps) => {
       <div className={styles.header}>
         <h1 className={styles.title}>{t("friends.title")}</h1>
         <span className={styles.count}>{friends.length}</span>
+        <div className={styles.actions}>
+          {/* <Button appearance="ghost">Friends online</Button>
+          <Button appearance="primary">Find friends</Button> */}
+        </div>
       </div>
       <SearchBar onChange={setSearch} />
       {filtered.length > 0 ? (
         <ul className={styles.list}>
           {filtered.map((friend) => (
-            <FriendCard key={friend.username} friend={friend} />
+            <FriendCard
+              key={friend.username}
+              friend={friend}
+              currentUser={currentUser}
+            />
           ))}
         </ul>
       ) : (
