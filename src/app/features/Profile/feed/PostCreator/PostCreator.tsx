@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { createPost } from "@/app/api/post";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
+import { useTextareaSubmit } from "@/app/hooks/useTextareaSubmit";
 
 interface PostCreatorProps {
   avatar?: string;
@@ -34,12 +35,7 @@ export const PostCreator = ({
     onSuccess?.();
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      publishPost();
-    }
-  };
+  const { handleKeyDown } = useTextareaSubmit({ onSubmit: publishPost });
 
   return (
     <div className={styles.container}>

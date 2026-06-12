@@ -114,14 +114,14 @@ export const AvatarEdit = ({
       />
 
       <Modal isOpen={isChangeOpen} onClose={() => setIsChangeOpen(false)}>
-        <h2 className={styles.title}>{t("avatarEdit.modalTitle")}</h2>
+        <h2 className={styles.modalTitle}>{t("avatarEdit.modalTitle")}</h2>
         <p className={styles.description}>{t("avatarEdit.modalDescription")}</p>
         <p className={styles.hint}>{t("avatarEdit.modalFormats")}</p>
         <div className={styles.upload}>
           <AvatarUploadModal onChange={setFile} profileAvatar={src} />
         </div>
         <p className={styles.hint}>{t("avatarEdit.choosePhoto")}</p>
-        <div className={styles.action}>
+        <div className={styles.actions}>
           <Button appearance="primary" onClick={savePhoto}>
             {t("common.saveAndContinue")}
           </Button>
@@ -129,11 +129,11 @@ export const AvatarEdit = ({
       </Modal>
 
       <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
-        <h2 className={styles.title}>{t("avatarEdit.deleteModalTitle")}</h2>
+        <h2 className={styles.modalTitle}>{t("avatarEdit.deleteModalTitle")}</h2>
         <p className={styles.deleteDescription}>
           {t("avatarEdit.deleteModalDescription")}
         </p>
-        <div className={styles.action}>
+        <div className={styles.actions}>
           <Button appearance="secondary" onClick={() => setIsDeleteOpen(false)}>
             {t("common.cancel")}
           </Button>

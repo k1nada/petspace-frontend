@@ -9,26 +9,32 @@ import { Friend } from "@/types";
 
 interface FriendsProps {
   friends?: Friend[];
-  currentUser: string; // Добавь это
+  currentUser: string;
 }
 
-export const Friends = ({ friends = [], currentUser }: FriendsProps) => {
+export const Friends = ({
+  friends: initialFriends = [],
+  currentUser,
+}: FriendsProps) => {
   const t = useTranslations();
   const [search, setSearch] = useState("");
+  const [friends, setFriends] = useState<Friend[]>(initialFriends);
 
   const filtered = friends.filter((f) =>
     f.name.toLowerCase().includes(search.toLowerCase()),
   );
+
+  const deleteFriend = (friendUsername: string) => {
+    setFriends((prev) =>
+      prev.filter((friend) => friend.username !== friendUsername),
+    );
+  };
 
   return (
     <section className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>{t("friends.title")}</h1>
         <span className={styles.count}>{friends.length}</span>
-        <div className={styles.actions}>
-          {/* <Button appearance="ghost">Friends online</Button>
-          <Button appearance="primary">Find friends</Button> */}
-        </div>
       </div>
       <SearchBar onChange={setSearch} />
       {filtered.length > 0 ? (
@@ -38,6 +44,7 @@ export const Friends = ({ friends = [], currentUser }: FriendsProps) => {
               key={friend.username}
               friend={friend}
               currentUser={currentUser}
+              onFriendDeleted={deleteFriend}
             />
           ))}
         </ul>
