@@ -48,8 +48,9 @@
   }
 }
 
-.title {
+.modalTitle {
   margin: 0 0 var(--gap-s) 0;
+  font-size: var(--font-xl);
 }
 
 .description {
@@ -77,7 +78,7 @@
   text-align: center;
 }
 
-.action {
+.actions {
   display: flex;
   justify-content: center;
   margin-top: var(--gap-m);

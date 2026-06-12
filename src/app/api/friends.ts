@@ -13,9 +13,9 @@ export const addFriend = async (username: string, friendUsername: string) => {
   return data;
 };
 
-export const removeFriend = async (
+export const deleteFriend = async (
   username: string,
   friendUsername: string,
 ) => {
-  await api.delete(`/friends/${username}/remove/${friendUsername}`);
+  await api.delete(`/friends/${username}/delete/${friendUsername}`);
 };

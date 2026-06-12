@@ -1,6 +1,7 @@
 import { FaAngleRight } from "react-icons/fa";
 import { Textarea } from "../Textarea/Textarea";
 import styles from "./SubmitTextarea.module.scss";
+import { useTextareaSubmit } from "@/app/hooks/useTextareaSubmit";
 
 interface SubmitTextareaProps {
   value: string;
@@ -15,12 +16,8 @@ export const SubmitTextarea = ({
   onSubmit,
   placeholder,
 }: SubmitTextareaProps) => {
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      onSubmit();
-    }
-  };
+  const { handleKeyDown } = useTextareaSubmit({ onSubmit });
+
   return (
     <div className={styles.textareaWrapper}>
       <Textarea

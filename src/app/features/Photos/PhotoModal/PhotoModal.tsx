@@ -16,6 +16,8 @@ import api from "@/config/axios";
 import { MdDeleteSweep, MdModeEdit } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { getPhotoComments } from "@/app/api/comment";
+import { toast } from "react-toastify";
+import { usePhotoKeyNavigation } from "@/app/hooks/usePhotoKeyNavigation";
 
 interface PhotoModalProps {
   photo: Photo | null;
@@ -48,6 +50,12 @@ export const PhotoModal = ({
     photo?.comments ?? [],
   );
   const [commentRefresh, setCommentRefresh] = useState(0);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  const { handleKeyDown } = usePhotoKeyNavigation({
+    onPrev,
+    onNext,
+  });
 
   useEffect(() => {
     if (!photo) return;
@@ -58,14 +66,18 @@ export const PhotoModal = ({
 
   const refreshComments = () => setCommentRefresh((r) => r + 1);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowLeft") onPrev?.();
-    if (e.key === "ArrowRight") onNext?.();
-  };
-
   const deleteComment = async (commentId: string) => {
     await api.delete(`/comments/${commentId}`);
     refreshComments();
+  };
+
+  const handleDeletePhoto = async () => {
+    try {
+      onDelete?.();
+      setIsDeleteOpen(false);
+    } catch {
+      toast.error(t("toasts.error"));
+    }
   };
 
   return (
@@ -124,14 +136,16 @@ export const PhotoModal = ({
                   <DropdownMenu
                     items={[
                       {
-                        label: "Edit",
+                        label: t("common.edit"),
                         icon: <MdModeEdit size={20} />,
                         onClick: () => {},
                       },
                       {
-                        label: "Delete",
+                        label: t("common.delete"),
                         icon: <MdDeleteSweep size={20} />,
-                        onClick: onDelete ?? (() => {}),
+                        onClick: () => {
+                          setIsDeleteOpen(true);
+                        },
                       },
                     ]}
                   />
@@ -165,6 +179,25 @@ export const PhotoModal = ({
               />
             </div>
           </div>
+
+          <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
+            <h2 className={styles.modalTitle}>{t("photoModal.modalTitle")}</h2>
+            <p className={styles.modalDescription}>
+              {t("photoModal.modalDescription")}
+            </p>
+            <div className={styles.actions}>
+              <Button
+                appearance="secondary"
+                onClick={() => setIsDeleteOpen(false)}
+              >
+                {t("common.cancel")}
+              </Button>
+
+              <Button appearance="primary" onClick={() => handleDeletePhoto()}>
+                {t("common.delete")}
+              </Button>
+            </div>
+          </Modal>
         </div>
       )}
     </Modal>

@@ -1,10 +1,12 @@
 {
   "common": {
+    "delete": "Usuń",
     "save": "Zapisz",
     "continue": "Kontynuuj",
     "saveAndContinue": "Zapisz i kontynuuj",
     "skip": "Pomiń",
     "back": "Wróć",
+    "edit": "Edytuj",
     "upload": "Prześlij",
     "cancel": "Anuluj",
     "close": "Zamknij",
@@ -164,6 +166,10 @@
     "publish": "Opublikuj post",
     "placeholder": "Co nowego, "
   },
+  "post": {
+    "modalTitle": "Usunąć post?",
+    "modalDescription": "Czy na pewno chcesz usunąć ten post?"
+  },
   "comment": {
     "reply": "Odpowiedz"
   },
@@ -181,11 +187,12 @@
     "empty": "Brak zdjęć"
   },
   "photoModal": {
-    "delete": "Usuń",
     "makeProfilePhoto": "Ustaw jako zdjęcie profilowe",
     "counter": "Zdjęcia {current} z {total}",
     "commentsTitle": "Jeszcze żadnych merdań ogonem...",
-    "commentsText": "Bądź pierwszy!"
+    "commentsText": "Bądź pierwszy!",
+    "modalTitle": "Usunąć zdjęcie",
+    "modalDescription": "Czy na pewno chcesz usunąć to zdjęcie?"
   },
   "photoUploadModal": {
     "addPhoto": "Dodaj nowe zdjęcie",
@@ -207,6 +214,10 @@
     "decline": "Odrzuć",
     "mutualFriends": "{count} wspólnych znajomych",
     "empty": "Brak nowych zaproszeń"
+  },
+  "friendCard": {
+    "modalTitle": "Usunąć znajomego",
+    "modalDescription": "Czy na pewno chcesz usunąć {name}?"
   },
   "friendTip": {
     "title": "Czy wiesz, że...?",

@@ -2,13 +2,13 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import styles from "./Post.module.scss";
 import Image from "next/image";
 import { FaComment, FaHeart, FaReply } from "react-icons/fa";
-import { Post as PostType} from "@/types";
+import { Post as PostType } from "@/types";
 import dayjs from "dayjs";
 import { Comment } from "@/app/features/profile/feed/Comment/Comment";
 import { MdDeleteSweep, MdModeEdit } from "react-icons/md";
 import { CommentCreator } from "../CommentCreator/CommentCreator";
 import { useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import "dayjs/locale/pl";
 import "dayjs/locale/en";
 import api from "@/config/axios";
@@ -18,6 +18,7 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { useLike } from "@/app/hooks/useLike";
 import { ROUTES } from "@/routes/routes";
 import { Link } from "@/app/uikit/navigation/Link/Link";
+import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 
 export interface PostProps {
   post: PostType;
@@ -25,10 +26,12 @@ export interface PostProps {
 }
 
 export const Post = ({ post, onRefresh }: PostProps) => {
+  const t = useTranslations();
   const locale = useLocale();
   const [showCommentCreator, setShowCommentCreator] = useState(
     (post.comments?.length ?? 0) > 0,
   );
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const { liked, displayCount, likeLoading, handleLike } = useLike({
     initialLiked: post.liked,
@@ -51,11 +54,11 @@ export const Post = ({ post, onRefresh }: PostProps) => {
     <article>
       <div className={styles.wrapper}>
         <Link href={ROUTES.profile(post.user.username)}>
-        <Avatar src={post.user.avatar} />
+          <Avatar src={post.user.avatar} />
         </Link>
         <div className={styles.info}>
           <Link href={ROUTES.profile(post.user.username)}>
-          <div className={styles.name}>{post.user.name}</div>
+            <div className={styles.name}>{post.user.name}</div>
           </Link>
           <time className={styles.time}>
             {dayjs(post.createdAt).locale(locale).format("D MMM YYYY")}
@@ -72,7 +75,9 @@ export const Post = ({ post, onRefresh }: PostProps) => {
               {
                 label: "Delete",
                 icon: <MdDeleteSweep size={20} />,
-                onClick: deletePost,
+                onClick: () => {
+                  setIsDeleteOpen(true);
+                },
               },
             ]}
           />
@@ -126,6 +131,20 @@ export const Post = ({ post, onRefresh }: PostProps) => {
           onSuccess={onRefresh}
         />
       )}
+
+      <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
+        <h2 className={styles.modalTitle}>{t("post.modalTitle")}</h2>
+        <p className={styles.modalDescription}>{t("post.modalDescription")}</p>
+        <div className={styles.actions}>
+          <Button appearance="secondary" onClick={() => setIsDeleteOpen(false)}>
+            {t("common.cancel")}
+          </Button>
+
+          <Button appearance="primary" onClick={() => deletePost()}>
+            {t("common.delete")}
+          </Button>
+        </div>
+      </Modal>
     </article>
   );
 };

@@ -9,6 +9,10 @@ import { MdDeleteSweep } from "react-icons/md";
 import { Friend } from "@/types";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
+import { Modal } from "@/app/uikit/overlays/Modal/Modal";
+import { useState } from "react";
+import { deleteFriend } from "@/app/api/friends";
+import { toast } from "react-toastify";
 
 interface FriendCardProps {
   friend: Friend;
@@ -22,10 +26,16 @@ export const FriendCard = ({
   onFriendDeleted,
 }: FriendCardProps) => {
   const t = useTranslations();
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  const deleteFriend = (friendUsername: string) => {
-    fetch(`/api/friends/${friendUsername}`, { method: "DELETE" });
-    onFriendDeleted?.(friendUsername);
+  const handleDeleteFriend = async () => {
+    try {
+      await deleteFriend(currentUser, friend.username);
+      onFriendDeleted?.(friend.username);
+      setIsDeleteOpen(false);
+    } catch {
+      toast.error(t("toasts.error"));
+    }
   };
 
   return (
@@ -47,11 +57,27 @@ export const FriendCard = ({
         items={[
           {
             label: t("friends.delete"),
-            onClick: () => deleteFriend(friend.username),
+            onClick: () => setIsDeleteOpen(true),
             icon: <MdDeleteSweep size={20} />,
           },
         ]}
       />
+
+      <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
+        <h2 className={styles.modalTitle}>{t("friendCard.modalTitle")}</h2>
+        <p className={styles.modalDescription}>
+          {t("friendCard.modalDescription", { name: friend.name })}
+        </p>
+        <div className={styles.actions}>
+          <Button appearance="secondary" onClick={() => setIsDeleteOpen(false)}>
+            {t("common.cancel")}
+          </Button>
+
+          <Button appearance="primary" onClick={() => handleDeleteFriend()}>
+            {t("common.delete")}
+          </Button>
+        </div>
+      </Modal>
     </li>
   );
 };

@@ -1,10 +1,12 @@
 {
   "common": {
+    "delete": "Delete",
     "save": "Save",
     "continue": "Continue",
     "saveAndContinue": "Save & continue",
     "skip": "Skip",
     "back": "Back",
+    "edit": "Edit",
     "upload": "Upload",
     "cancel": "Cancel",
     "close": "Close",
@@ -164,6 +166,10 @@
     "publish": "Add post",
     "placeholder": "What's new, "
   },
+  "post": {
+    "modalTitle": "Delete post",
+    "modalDescription": "Are you sure you want to delete this post?"
+  },
   "comment": {
     "reply": "Reply"
   },
@@ -181,11 +187,12 @@
     "empty": "No photos yet"
   },
   "photoModal": {
-    "delete": "Delete",
     "makeProfilePhoto": "Make profile photo",
     "counter": "Photos {current} of {total}",
     "commentsTitle": "No tail wags yet...",
-    "commentsText": "Be the first!"
+    "commentsText": "Be the first!",
+    "modalTitle": "Delete photo",
+    "modalDescription": "Are you sure you want to delete this photo?"
   },
   "photoUploadModal": {
     "addPhoto": "Add new photo",
@@ -207,6 +214,10 @@
     "decline": "Decline",
     "mutualFriends": "{count} mutual friends",
     "empty": "No new requests yet"
+  },
+  "friendCard": {
+    "modalTitle": "Delete friend",
+    "modalDescription": "Are you sure you want to delete {name}?"
   },
   "friendTip": {
     "title": "Did you know?",

@@ -49,3 +49,21 @@
 .button {
   width: fit-content;
 }
+
+.modalTitle {
+  margin: 0 0 var(--gap-s) 0;
+  font-size: var(--font-xl);
+}
+
+.modalDescription {
+  font-size: var(--font-m);
+  text-align: center;
+  margin: var(--gap-xs) 0 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--gap-m);
+  gap: var(--gap-s);
+}
