@@ -6,8 +6,6 @@ import styles from "./Chat.module.scss";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SumbitTextarea";
 import { useTranslations } from "next-intl";
-import { Button } from "@/app/uikit/form/Button/Button";
-import { useRouter } from "next/navigation";
 import { ROUTES } from "@/routes/routes";
 import { API_URL } from "@/config/env";
 import { ChatContact, Message, User } from "@/types";
@@ -39,7 +37,6 @@ export const Chat = ({
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [online, setOnline] = useState(selectedChat?.isOnline ?? false);
-  const router = useRouter();
   const listRef = useRef<HTMLUListElement>(null);
 
   const roomId = selectedChat
@@ -95,10 +92,6 @@ export const Chat = ({
     setMessage("");
   };
 
-  const findFriends = () => {
-    router.push(ROUTES.friends(user.username));
-  };
-
   return (
     <section className={styles.container}>
       {selectedChat ? (
@@ -141,11 +134,6 @@ export const Chat = ({
         <div className={styles.emptyMessages}>
           <p className={styles.emptyTitle}>{t("chat.noBarks")}</p>
           <p className={styles.emptyText}>{t("chat.emptyInbox")}</p>
-          <div>
-            <Button appearance="primary" onClick={findFriends}>
-              {t("chat.findDog")}
-            </Button>
-          </div>
         </div>
       )}
     </section>

@@ -8,17 +8,19 @@ import { FriendCard } from "../FriendCard/FriendCard";
 import { Friend } from "@/types";
 
 interface FriendsProps {
-  friends?: Friend[];
+  friends: Friend[];
   currentUser: string;
+  isMyProfile: boolean;
 }
 
 export const Friends = ({
-  friends: initialFriends = [],
+  friends: initialFriends,
   currentUser,
+  isMyProfile,
 }: FriendsProps) => {
   const t = useTranslations();
   const [search, setSearch] = useState("");
-  const [friends, setFriends] = useState<Friend[]>(initialFriends);
+  const [friends, setFriends] = useState(initialFriends);
 
   const filtered = friends.filter((f) =>
     f.name.toLowerCase().includes(search.toLowerCase()),
@@ -41,9 +43,10 @@ export const Friends = ({
         <ul className={styles.list}>
           {filtered.map((friend) => (
             <FriendCard
-              key={friend.username}
+              key={friend.id}
               friend={friend}
               currentUser={currentUser}
+              isOwner={isMyProfile}
               onFriendDeleted={deleteFriend}
             />
           ))}

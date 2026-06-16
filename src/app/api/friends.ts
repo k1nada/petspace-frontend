@@ -19,3 +19,18 @@ export const deleteFriend = async (
 ) => {
   await api.delete(`/friends/${username}/delete/${friendUsername}`);
 };
+
+export const getPendingRequests = async (username: string) => {
+  const { data } = await api.get(`/friends/requests/${username}/pending`);
+  return data;
+};
+
+export const acceptFriendRequest = async (requestId: string) => {
+  const { data } = await api.post(`/friends/request/${requestId}/accept`);
+  return data;
+};
+
+export const rejectFriendRequest = async (requestId: string) => {
+  const { data } = await api.post(`/friends/request/${requestId}/reject`);
+  return data;
+};

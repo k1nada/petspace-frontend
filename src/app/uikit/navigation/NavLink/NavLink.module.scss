@@ -16,3 +16,17 @@
     color: var(--text-primary);
   }
 }
+
+.counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  background-color: var(--bg-input); //TODO COLOR
+  color: var(--text-primary);
+  border-radius: var(--radius-full);
+  font-size: var(--font-s);
+  font-weight: bold;
+}

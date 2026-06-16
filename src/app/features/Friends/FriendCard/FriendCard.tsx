@@ -17,12 +17,14 @@ import { toast } from "react-toastify";
 interface FriendCardProps {
   friend: Friend;
   currentUser: string;
+  isOwner?: boolean;
   onFriendDeleted?: (friendUsername: string) => void;
 }
 
 export const FriendCard = ({
   friend,
   currentUser,
+  isOwner = false,
   onFriendDeleted,
 }: FriendCardProps) => {
   const t = useTranslations();
@@ -53,15 +55,17 @@ export const FriendCard = ({
           </Button>
         </Link>
       </div>
-      <DropdownMenu
-        items={[
-          {
-            label: t("friends.delete"),
-            onClick: () => setIsDeleteOpen(true),
-            icon: <MdDeleteSweep size={20} />,
-          },
-        ]}
-      />
+      {isOwner && (
+        <DropdownMenu
+          items={[
+            {
+              label: t("friends.delete"),
+              onClick: () => setIsDeleteOpen(true),
+              icon: <MdDeleteSweep size={20} />,
+            },
+          ]}
+        />
+      )}
 
       <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
         <h2 className={styles.modalTitle}>{t("friendCard.modalTitle")}</h2>
@@ -72,8 +76,7 @@ export const FriendCard = ({
           <Button appearance="secondary" onClick={() => setIsDeleteOpen(false)}>
             {t("common.cancel")}
           </Button>
-
-          <Button appearance="primary" onClick={() => handleDeleteFriend()}>
+          <Button appearance="primary" onClick={handleDeleteFriend}>
             {t("common.delete")}
           </Button>
         </div>
