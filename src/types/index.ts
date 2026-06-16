@@ -32,9 +32,18 @@ export interface Friend {
   username: string;
   name: string;
   avatar?: string;
+  breed?: string;
   isOnline?: boolean;
   lastSeen?: string;
   friendsCount?: number;
+}
+
+export interface FriendRequest {
+  id: string;
+  from: User;
+  to: string;
+  status: "pending" | "accepted" | "rejected";
+  createdAt: Date;
 }
 
 export interface Achievements {

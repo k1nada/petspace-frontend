@@ -1,6 +1,6 @@
 import styles from "./SidebarSkeleton.module.scss";
 
-const NAV_LINKS_COUNT = 7;
+const NAV_LINKS_COUNT = 6;
 
 export const SidebarSkeleton = () => (
   <nav className={styles.container}>

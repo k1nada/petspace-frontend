@@ -6,17 +6,41 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { ROUTES } from "@/routes/routes";
-import { Friend } from "@/types";
+import { toast } from "react-toastify";
+import { acceptFriendRequest, rejectFriendRequest } from "@/app/api/friends";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
 interface FriendRequestProps {
-  requests?: Friend[];
   currentUser: string;
 }
 
 const MAX_VISIBLE_REQUESTS = 3;
 
-export const FriendRequest = ({ requests = [], currentUser }: FriendRequestProps) => {
+export const FriendRequest = ({ currentUser }: FriendRequestProps) => {
   const t = useTranslations();
+  const requests = useUserStore((state) => state.requests);
+  const setRequests = useUserStore((state) => state.setRequests);
+  const isLoading = useUserStore((state) => state.isLoading);
+
+  const acceptRequest = async (requestId: string) => {
+    try {
+      await acceptFriendRequest(requestId);
+      setRequests(requests.filter((r) => r.id !== requestId));
+      toast.success(t("friendRequest.acceptedSuccess"));
+    } catch {
+      toast.error(t("toasts.error"));
+    }
+  };
+
+  const rejectRequest = async (requestId: string) => {
+    try {
+      await rejectFriendRequest(requestId);
+      setRequests(requests.filter((r) => r.id !== requestId));
+      toast.success(t("friendRequest.rejectedSuccess"));
+    } catch {
+      toast.error(t("toasts.error"));
+    }
+  };
 
   return (
     <section className={styles.wrapper}>
@@ -29,21 +53,29 @@ export const FriendRequest = ({ requests = [], currentUser }: FriendRequestProps
       ) : (
         <ul className={styles.list}>
           {requests.slice(0, MAX_VISIBLE_REQUESTS).map((request) => (
-            <li key={request.username} className={styles.friendRequest}>
-              <Link href={ROUTES.profile(request.username)}>
+            <li key={request.id} className={styles.friendRequest}>
+              <Link href={ROUTES.profile(request.from.username)}>
                 <Avatar
-                  src={request.avatar}
+                  src={request.from.avatar}
                   size={70}
-                  isOnline={request.isOnline}
+                  isOnline={request.from.isOnline}
                 />
               </Link>
               <div className={styles.info}>
-                <div className={styles.name}>{request.name}</div>
+                <div className={styles.name}>{request.from.name}</div>
                 <div className={styles.actions}>
-                  <Button appearance="primary">
+                  <Button
+                    appearance="primary"
+                    onClick={() => acceptRequest(request.id)}
+                    disabled={isLoading}
+                  >
                     {t("friendRequest.accept")}
                   </Button>
-                  <Button appearance="secondary">
+                  <Button
+                    appearance="secondary"
+                    onClick={() => rejectRequest(request.id)}
+                    disabled={isLoading}
+                  >
                     {t("friendRequest.decline")}
                   </Button>
                 </div>
@@ -53,7 +85,10 @@ export const FriendRequest = ({ requests = [], currentUser }: FriendRequestProps
         </ul>
       )}
       {requests.length > MAX_VISIBLE_REQUESTS && (
-        <Link href={ROUTES.friendRequests(currentUser)} className={styles.viewAll}>
+        <Link
+          href={ROUTES.friendRequests(currentUser)}
+          className={styles.viewAll}
+        >
           {t("friendRequest.viewAll")}
         </Link>
       )}

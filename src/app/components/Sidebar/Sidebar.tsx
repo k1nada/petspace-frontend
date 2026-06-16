@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { BiSolidMessage } from "react-icons/bi";
-import { FaMapMarkerAlt, FaPaw, FaBone, FaDog, FaTree } from "react-icons/fa";
+import { FaPaw, FaBone, FaDog, FaTree } from "react-icons/fa";
 import { FaCamera } from "react-icons/fa6";
 import styles from "./Sidebar.module.scss";
 import { ROUTES } from "@/routes/routes";
@@ -14,6 +14,7 @@ import { SidebarSkeleton } from "./SidebarSkeleton";
 export const Sidebar = () => {
   const t = useTranslations();
   const currentUser = useUserStore((state) => state.currentUser);
+  const requestCount = useUserStore((state) => state.requestCount);
   const isLoading = useUserStore((state) => state.isLoading);
   const tips = t.raw("dailyTip.tips") as string[];
   const tip = tips[new Date().getDay()];
@@ -38,7 +39,7 @@ export const Sidebar = () => {
           <BiSolidMessage size={20} />
           {t("sidebar.messages")}
         </NavLink>
-        <NavLink href={ROUTES.friends(username)}>
+        <NavLink href={ROUTES.friends(username)} count={requestCount}>
           <FaPaw size={20} />
           {t("sidebar.friends")}
         </NavLink>
@@ -49,10 +50,6 @@ export const Sidebar = () => {
         <NavLink href={ROUTES.familyTree(username)}>
           <FaTree size={20} />
           {t("sidebar.familyTree")}
-        </NavLink>
-        <NavLink href={ROUTES.places}>
-          <FaMapMarkerAlt size={20} />
-          {t("sidebar.places")}
         </NavLink>
       </div>
       <Tip title={t("dailyTip.title")} text={tip} appearance="secondary" />

@@ -22,6 +22,7 @@ interface AvatarEditProps {
   name?: string;
   size?: number;
   onAvatarChange?: (url: string | undefined) => void;
+  isEditable?: boolean;
 }
 
 export const AvatarEdit = ({
@@ -30,6 +31,7 @@ export const AvatarEdit = ({
   name,
   size,
   onAvatarChange,
+  isEditable = true,
 }: AvatarEditProps) => {
   const t = useTranslations();
   const router = useRouter();
@@ -72,6 +74,16 @@ export const AvatarEdit = ({
       toast.error(t("toasts.error"));
     }
   };
+
+  if (!isEditable) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.avatarWrapper}>
+          <Avatar src={src ?? defaultAvatar} size={size} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.wrapper}>
