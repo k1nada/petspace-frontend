@@ -1,7 +1,7 @@
 "use client";
 
-import { Logo } from "../../uikit/brand/Logo/Logo";
 import styles from "./Header.module.scss";
+import { Logo } from "../../uikit/brand/Logo/Logo";
 import { Link } from "../../uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
 import { IoHomeSharp } from "react-icons/io5";
@@ -12,13 +12,12 @@ import { ThemeToggle } from "@/app/uikit/brand/ThemeToggle/ThemeToggle";
 import { useUserStore } from "@/app/hooks/useUserStore";
 import { LocaleSwitcher } from "@/app/uikit/brand/LocaleSwitcher/LocaleSwitcher";
 import { useSearch } from "@/app/hooks/useSearch";
-import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { HeaderSkeleton } from "./HeaderSkeleton";
+import { UserSearchDropdown } from "@/app/uikit/navigation/UserSearchDropdown/UserSearchDropdown";
 
 export const Header = () => {
   const currentUser = useUserStore((state) => state.currentUser);
   const { results, search, select } = useSearch();
-
   const isLoading = useUserStore((state) => state.isLoading);
 
   if (isLoading) return <HeaderSkeleton />;
@@ -36,25 +35,7 @@ export const Header = () => {
           <>
             <div className={styles.search}>
               <SearchBar onChange={search} />
-              {results.length > 0 && (
-                <ul className={styles.dropdown}>
-                  {results.map((user) => (
-                    <li
-                      key={user._id}
-                      className={styles.dropdownItem}
-                      onClick={() => select(user.username)}
-                    >
-                      <Avatar src={user.avatar} size={32} />
-                      <div className={styles.info}>
-                        <span className={styles.name}>{user.name}</span>
-                        <span className={styles.username}>
-                          @{user.username}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <UserSearchDropdown results={results} onSelect={select} />
             </div>
             <nav className={styles.actions}>
               <LocaleSwitcher className={styles.icon} />

@@ -1,8 +1,7 @@
 .wrapper {
-  position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
+  position: relative;
 }
 
 .icon {
@@ -10,4 +9,18 @@
   left: 14px;
   color: var(--text-secondary);
   pointer-events: none;
+}
+
+.delete {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-left: -25px;
+}
+
+.wrapper input::-webkit-search-cancel-button {
+  display: none;
 }

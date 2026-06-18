@@ -37,6 +37,12 @@
   color: var(--text-primary);
 }
 
+.search {
+  position: relative;
+  justify-self: center;
+  width: 100%;
+}
+
 .actions {
   justify-self: end;
   display: flex;
