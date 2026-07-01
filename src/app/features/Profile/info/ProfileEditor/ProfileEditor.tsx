@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "./ProfileEditor.module.scss";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "use-intl";
@@ -8,8 +6,6 @@ import { DatePicker } from "@/app/uikit/form/DatePicker/DatePicker";
 import { AvatarEdit } from "@/app/uikit/user/AvatarEdit/AvatarEdit";
 import { toast } from "react-toastify";
 import { useForm, Controller, useWatch } from "react-hook-form";
-import dayjs from "dayjs";
-import type { Dayjs } from "dayjs";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { updateProfile } from "@/app/api/profile";
 import { getBreeds } from "@/app/api/breeds";
@@ -25,7 +21,7 @@ interface ProfileEditorProps {
 interface ProfileForm {
   bio: string;
   gender: string;
-  birthDate?: Dayjs;
+  birthDate?: Date | string;
   country: string;
   city: string;
   breed: string;
@@ -41,7 +37,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
     defaultValues: {
       bio: user.bio ?? "",
       gender: user.gender ?? "",
-      birthDate: user.birthDate ? dayjs(user.birthDate) : undefined,
+      birthDate: user.birthDate,
       country: user.country ?? "",
       city: user.city ?? "",
       breed: user.breed ?? "",
@@ -50,14 +46,14 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
 
   const selectedCountry = useWatch({ control, name: "country" });
 
-  const onSubmit = async (data: ProfileForm) => {
-    try {
-      await updateProfile(user.username, data);
-      toast.success(t("toasts.saved"));
-    } catch {
-      toast.error(t("toasts.error"));
-    }
-  };
+const onSubmit = async (data: ProfileForm) => {
+  try {
+    await updateProfile(user.username, data as any);
+    toast.success(t("toasts.saved"));
+  } catch {
+    toast.error(t("toasts.error"));
+  }
+};
 
   useEffect(() => {
     getBreeds().then(setBreeds);

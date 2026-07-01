@@ -51,5 +51,10 @@
 
   img {
     object-fit: cover;
+    transition: filter 0.3s ease;
+  }
+
+  &:hover img {
+    filter: brightness(0.7);
   }
 }

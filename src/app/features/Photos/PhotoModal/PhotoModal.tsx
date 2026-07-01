@@ -8,16 +8,16 @@ import { useLocale, useTranslations } from "next-intl";
 import { Comment } from "../../profile/feed/Comment/Comment";
 import { CommentCreator } from "../../profile/feed/CommentCreator/CommentCreator";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import dayjs from "dayjs";
 import "dayjs/locale/pl";
 import "dayjs/locale/en";
 import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
 import api from "@/config/axios";
-import { MdDeleteSweep, MdModeEdit } from "react-icons/md";
+import { MdDeleteSweep } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { getPhotoComments } from "@/app/api/comment";
 import { toast } from "react-toastify";
 import { usePhotoKeyNavigation } from "@/app/hooks/usePhotoKeyNavigation";
+import { formatDate } from "@/utils/dateFormatters";
 
 interface PhotoModalProps {
   photo: Photo | null;
@@ -129,17 +129,12 @@ export const PhotoModal = ({
                 <div className={styles.info}>
                   <div className={styles.name}>{name}</div>
                   <time className={styles.time}>
-                    {dayjs(photo.createdAt).locale(locale).format("D MMM YYYY")}
+                    {formatDate(photo.createdAt, locale)}
                   </time>
                 </div>
                 <div className={styles.dropdown}>
                   <DropdownMenu
                     items={[
-                      {
-                        label: t("common.edit"),
-                        icon: <MdModeEdit size={20} />,
-                        onClick: () => {},
-                      },
                       {
                         label: t("common.delete"),
                         icon: <MdDeleteSweep size={20} />,

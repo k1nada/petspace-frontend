@@ -11,6 +11,9 @@ import { API_URL } from "@/config/env";
 import { ChatContact, Message, User } from "@/types";
 import { ChatMessage } from "../ChatMessage/ChatMessage";
 import { Link } from "@/app/uikit/navigation/Link/Link";
+import { formatTime } from "@/utils/dateFormatters";
+import api from "@/config/axios";
+import { toast } from "react-toastify";
 
 interface ChatProps {
   conversations: ChatContact[];
@@ -20,12 +23,6 @@ interface ChatProps {
 }
 
 const socket = io(process.env.NEXT_PUBLIC_API_URL);
-
-const formatTime = (createdAt: string) =>
-  new Date(createdAt).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 
 export const Chat = ({
   user,
@@ -46,6 +43,19 @@ export const Chat = ({
   useEffect(() => {
     socket.emit("online", user.id);
   }, [user.id]);
+  useEffect(() => {
+    conversations.forEach(async (contact) => {
+      const contactRoomId = [user.id, contact.id].sort().join("_");
+      try {
+        const { data } = await api.get(`/chat/${contactRoomId}`);
+        if (data.length > 0 && onMessageUpdate) {
+          onMessageUpdate(contact.id, data[data.length - 1]);
+        }
+      } catch {
+        toast.error(t("toasts.error"));
+      }
+    });
+  }, [conversations, user.id, onMessageUpdate]);
 
   useEffect(() => {
     if (listRef.current) {
@@ -58,12 +68,7 @@ export const Chat = ({
 
     fetch(`${API_URL}/chat/${roomId}`)
       .then((res) => res.json())
-      .then((msgs) => {
-        setMessages(msgs);
-        if (msgs.length > 0 && selectedChat && onMessageUpdate) {
-          onMessageUpdate(selectedChat.id, msgs[msgs.length - 1]);
-        }
-      });
+      .then((msgs) => setMessages(msgs));
 
     socket.emit("join", roomId);
 
@@ -85,7 +90,7 @@ export const Chat = ({
       socket.off("message", handleMessage);
       socket.off("statusChange", handleStatus);
     };
-  }, [roomId, selectedChat?.id, onMessageUpdate]);
+  }, [roomId, selectedChat?.id, onMessageUpdate, selectedChat]);
 
   const handleSend = () => {
     socket.emit("message", { roomId, senderId: user.id, text: message });
