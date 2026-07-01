@@ -52,7 +52,7 @@
 .gallery {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: var(--gap-xs);
+  gap: var(--gap-s);
 }
 
 .photo {
@@ -63,8 +63,14 @@
   background: var(--bg-secondary);
   border-radius: var(--radius-s);
   overflow: hidden;
+  cursor: pointer;
 
   img {
     object-fit: cover;
+    transition: filter 0.3s ease;
+  }
+
+  &:hover img {
+    filter: brightness(0.7);
   }
 }

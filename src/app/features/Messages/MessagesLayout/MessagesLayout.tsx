@@ -5,7 +5,7 @@ import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import styles from "./MessagesLayout.module.scss";
 import { Chat } from "../Chat/Chat";
 import { ChatContact, Message, User } from "@/types";
-import { ContactList } from "../ConversationList/ContactList";
+import { ContactList } from "../ContactList/ContactList";
 
 interface MessagesLayoutProps {
   conversations: ChatContact[];

@@ -15,6 +15,8 @@ import { AchievementsModal } from "../../modals/AchievementsModal/AchievementsMo
 import { useUserStore } from "@/app/hooks/useUserStore";
 import { BannerInfo } from "@/types";
 import { ProfileBannerSkeleton } from "./ProfileBannerSkeleton";
+import { addFriend as addFriendAPI } from "@/app/api/friends";
+import { toast } from "react-toastify";
 
 interface ProfileBannerProps {
   bannerInfo: BannerInfo;
@@ -42,8 +44,9 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
   );
 
   const currentUser = useUserStore((state) => state.currentUser);
-  const isOwner = currentUser?.username === bannerInfo.username;
+  const isLoading = useUserStore((state) => state.isLoading);
   const isFriend = !!currentUser?.friends?.find((f) => f.id === bannerInfo.id);
+  const isOwner = currentUser?.username === bannerInfo.username;
 
   const editProfile = () => {
     router.push(ROUTES.editProfile(bannerInfo.username));
@@ -53,12 +56,16 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     router.push(ROUTES.messages(currentUser?.username || "", targetUsername));
   };
 
-  const addFriend = () => {
-    console.log("Add friend:", bannerInfo.id);
-    // TODO implement friend request
+  const addFriend = async () => {
+    if (!currentUser?.username) return;
+    try {
+      await addFriendAPI(currentUser.username, bannerInfo.username);
+      toast.success(t("profileBanner.requestSent"));
+    } catch {
+      toast.error(t("toasts.error"));
+    }
   };
 
-  const isLoading = useUserStore((state) => state.isLoading);
   if (isLoading && !currentUser) return <ProfileBannerSkeleton />;
 
   return (
@@ -70,6 +77,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
           size={140}
           avatarPhotos={bannerInfo.avatarPhotos}
           onAvatarChange={(url) => setAvatarUrl(url)}
+          isEditable={isOwner}
         />
       </div>
       <div className={styles.container}>
@@ -153,13 +161,19 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
             <Button appearance="secondary">
               <FaPaw size={16} />
             </Button>
-            <Button appearance="primary" onClick={() => goToMessages(bannerInfo.username)}>
+            <Button
+              appearance="primary"
+              onClick={() => goToMessages(bannerInfo.username)}
+            >
               {t("profileBanner.message")}
             </Button>
           </>
         ) : (
           <>
-            <Button appearance="secondary" onClick={() => goToMessages(bannerInfo.username)}>
+            <Button
+              appearance="secondary"
+              onClick={() => goToMessages(bannerInfo.username)}
+            >
               <FaMessage size={16} />
             </Button>
             <Button appearance="primary" onClick={addFriend}>

@@ -32,7 +32,9 @@ export const CommentCreator = ({
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <Avatar size={38} src={avatar} />
+        <div className={styles.avatarWrapper}>
+          <Avatar size={38} src={avatar} />
+        </div>
         <SubmitTextarea
           value={content}
           onChange={setContent}

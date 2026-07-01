@@ -10,7 +10,7 @@ import {
   passwordValidationMax,
   passwordValidationMin,
   requiredValidation,
-} from "@/constants/validations";
+} from "@/utils/validations";
 import { ROUTES } from "@/routes/routes";
 import { useTranslations } from "next-intl";
 import { ErrorMessage } from "@/app/uikit/form/ErrorMessage/ErrorMessage";

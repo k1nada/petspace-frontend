@@ -7,19 +7,15 @@ import { Input } from "../Input/Input";
 import "react-day-picker/style.css";
 import dayjs from "dayjs";
 import "dayjs/locale/pl";
-import "dayjs/locale/en";
 import type { Dayjs } from "dayjs";
 import { pl, enUS } from "date-fns/locale";
-import type { Locale } from "date-fns";
 import { useLocale, useTranslations } from "next-intl";
 
 interface DatePickerProps {
-  value: Dayjs | undefined;
+  value: string | Date | Dayjs | undefined;
   onChange: (date: Dayjs | undefined) => void;
   fromYear?: number;
 }
-
-const localeMap: Record<string, Locale> = { pl, en: enUS };
 
 export const DatePicker = ({
   value,
@@ -29,7 +25,9 @@ export const DatePicker = ({
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
   const localeCode = useLocale();
-  const locale = localeMap[localeCode] ?? pl;
+  const isPolish = localeCode === "pl";
+
+  const dateValue = value ? dayjs(value) : undefined;
 
   return (
     <div className={styles.wrapper}>
@@ -40,7 +38,11 @@ export const DatePicker = ({
         appearance="wide"
         placeholder={t("placeholder.chooseDate")}
         readOnly
-        value={value ? value.locale(localeCode).format("D MMMM YYYY") : ""}
+        value={
+          dateValue
+            ? dateValue.locale(isPolish ? "pl" : "en").format("D MMMM YYYY")
+            : ""
+        }
         onClick={() => setIsOpen(!isOpen)}
       />
       {isOpen && (
@@ -48,7 +50,7 @@ export const DatePicker = ({
           <DayPicker
             className={styles.picker}
             mode="single"
-            selected={value?.toDate()}
+            selected={dateValue?.toDate()}
             onSelect={(date) => {
               onChange(date ? dayjs(date) : undefined);
               setIsOpen(false);
@@ -57,7 +59,7 @@ export const DatePicker = ({
             fromYear={fromYear}
             toYear={new Date().getFullYear()}
             disabled={{ after: new Date() }}
-            locale={locale}
+            locale={isPolish ? pl : enUS}
           />
         </div>
       )}

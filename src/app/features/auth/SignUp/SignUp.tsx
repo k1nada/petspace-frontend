@@ -14,7 +14,7 @@ import {
   usernameValidationMax,
   usernameValidationMin,
   usernameValidationPattern,
-} from "@/constants/validations";
+} from "@/utils/validations";
 import { useTranslations } from "next-intl";
 import { Input } from "@/app/uikit/form/Input/Input";
 import { Button } from "@/app/uikit/form/Button/Button";

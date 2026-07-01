@@ -5,12 +5,12 @@ import styles from "./PhotoGallery.module.scss";
 import Image from "next/image";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { PhotoModal } from "../PhotoModal/PhotoModal";
-import { CLOUD_NAME } from "@/config/env";
 import { toast } from "react-toastify";
-import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
+import { PhotoModal } from "../PhotoModal/PhotoModal";
 import { PhotoUploadModal } from "../PhotoUploadModal/PhotoUploadModal";
+import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
 import api from "@/config/axios";
+import { CLOUD_NAME } from "@/config/env";
 import { Photo } from "@/types";
 
 interface PhotoGalleryProps {
@@ -19,35 +19,31 @@ interface PhotoGalleryProps {
   name: string;
 }
 
-const uploadFile = async (file: File) => {
-  const formData = new FormData();
-  formData.append("image", file);
-  const { data } = await api.post("/api/upload/photo", formData);
-  return {
-    id: data.data._id,
-    publicId: data.data.public_id,
-    createdAt: data.data.createdAt,
-    liked: false,
-    likesCount: 0,
-  };
-};
-
 export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
   const t = useTranslations();
-  const [isOpen, setIsOpen] = useState(false);
   const [localPhotos, setLocalPhotos] = useState<Photo[]>(photos);
-
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
     usePhotoNavigation(localPhotos);
 
-  const selectedPhoto =
-    selectedIndex !== null ? localPhotos[selectedIndex] : null;
+  const uploadFile = async (file: File) => {
+    const formData = new FormData();
+    formData.append("image", file);
+    const { data } = await api.post("/api/upload/photo", formData);
+    return {
+      id: data.data._id,
+      publicId: data.data.public_id,
+      createdAt: data.data.createdAt,
+      liked: false,
+      likesCount: 0,
+    };
+  };
 
   const addPhoto = async (files: File[]) => {
     try {
       const uploaded = await Promise.all(files.map(uploadFile));
       setLocalPhotos((prev) => [...prev, ...uploaded]);
-      setIsOpen(false);
+      setIsUploadOpen(false);
     } catch {
       toast.error(t("toasts.error"));
     }
@@ -63,6 +59,10 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
     }
   };
 
+  const selectedPhoto =
+    selectedIndex !== null ? localPhotos[selectedIndex] : null;
+  const isEmpty = localPhotos.length === 0;
+
   return (
     <section className={styles.container}>
       <div className={styles.header}>
@@ -70,15 +70,19 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
           {t("photoGallery.title")}
           <span className={styles.count}>{localPhotos.length}</span>
         </h1>
-        <Button appearance="primary" onClick={() => setIsOpen(true)}>
+        <Button appearance="primary" onClick={() => setIsUploadOpen(true)}>
           {t("photoGallery.addPhoto")}
         </Button>
       </div>
 
-      {localPhotos.length === 0 ? (
+      {isEmpty ? (
         <div className={styles.emptyPhotos}>
-          <p className={styles.emptyTitle}>{t("photoGallery.emptyPhotosTitle")}</p>
-          <p className={styles.emptyText}>{t("photoGallery.emptyPhotosText")}</p>
+          <p className={styles.emptyTitle}>
+            {t("photoGallery.emptyPhotosTitle")}
+          </p>
+          <p className={styles.emptyText}>
+            {t("photoGallery.emptyPhotosText")}
+          </p>
         </div>
       ) : (
         <ul className={styles.gallery}>
@@ -95,22 +99,24 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
         </ul>
       )}
 
-      <PhotoModal
-        photo={selectedPhoto}
-        avatar={avatar}
-        name={name}
-        cloudName={CLOUD_NAME}
-        currentIndex={selectedIndex ?? 0}
-        photosCount={localPhotos.length}
-        onClose={() => setSelectedIndex(null)}
-        onPrev={handlePrev}
-        onNext={handleNext}
-        onDelete={() => selectedPhoto && deletePhoto(selectedPhoto.id)}
-      />
+      {selectedPhoto && (
+        <PhotoModal
+          photo={selectedPhoto}
+          avatar={avatar}
+          name={name}
+          cloudName={CLOUD_NAME}
+          currentIndex={selectedIndex ?? 0}
+          photosCount={localPhotos.length}
+          onClose={() => setSelectedIndex(null)}
+          onPrev={handlePrev}
+          onNext={handleNext}
+          onDelete={() => deletePhoto(selectedPhoto.id)}
+        />
+      )}
 
       <PhotoUploadModal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        isOpen={isUploadOpen}
+        onClose={() => setIsUploadOpen(false)}
         onUpload={addPhoto}
       />
     </section>

@@ -8,10 +8,10 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import { useTranslations, useLocale } from "next-intl";
-import dayjs from "dayjs";
 import "dayjs/locale/pl";
 import "dayjs/locale/en";
 import { BannerInfo } from "@/types";
+import { formatDate } from "@/utils/dateFormatters";
 
 interface ProfileInfoModalProps {
   isOpen: boolean;
@@ -66,9 +66,7 @@ export const ProfileInfoModal = ({
           {birthDate && (
             <div className={styles.row}>
               <FaBirthdayCake size={16} className={styles.icon} />
-              <span>
-                {dayjs(birthDate).locale(locale).format("D MMMM YYYY")}
-              </span>
+              <span>{formatDate(birthDate, locale)}</span>
             </div>
           )}
 

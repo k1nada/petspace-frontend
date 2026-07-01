@@ -19,6 +19,7 @@ import { useLike } from "@/app/hooks/useLike";
 import { ROUTES } from "@/routes/routes";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
+import { formatDate } from "@/utils/dateFormatters";
 
 export interface PostProps {
   post: PostType;
@@ -61,7 +62,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
             <div className={styles.name}>{post.user.name}</div>
           </Link>
           <time className={styles.time}>
-            {dayjs(post.createdAt).locale(locale).format("D MMM YYYY")}
+            {formatDate(post.createdAt, locale)}
           </time>
         </div>
         <div className={styles.dropdown}>

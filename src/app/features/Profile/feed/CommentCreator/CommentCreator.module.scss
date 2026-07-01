@@ -8,3 +8,7 @@
   align-items: center;
   gap: var(--gap-m);
 }
+
+.avatarWrapper {
+  flex-shrink: 0;
+}

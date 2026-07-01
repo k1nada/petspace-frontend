@@ -7,7 +7,7 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { ROUTES } from "@/routes/routes";
 import { useRouter } from "next/navigation";
 import { ChatContact, User } from "@/types";
-import { ContactCard } from "../ConversationCard/ContactCard";
+import { ContactCard } from "../ContactCard/ContactCard";
 
 interface ContactListProps {
   conversations: ChatContact[];
