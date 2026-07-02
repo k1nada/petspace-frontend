@@ -1,10 +1,10 @@
 import api from "@/config/axios";
-import type { Dayjs } from "dayjs";
 
 interface UpdateProfileData {
+  name: string;
   bio: string;
-  gender: string;
-  birthDate?: Dayjs;
+  sex: string;
+  birthDate?: Date | string;
   country: string;
   city: string;
   breed: string;
@@ -13,6 +13,5 @@ interface UpdateProfileData {
 export const updateProfile = (username: string, data: UpdateProfileData) => {
   return api.put(`/user/${username}`, {
     ...data,
-    birthDate: data.birthDate?.valueOf(),
   });
 };

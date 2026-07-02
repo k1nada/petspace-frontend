@@ -6,7 +6,7 @@ interface TextareaProps extends DetailedHTMLProps<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
   HTMLTextAreaElement
 > {
-  appearance?: "primary" | "secondary";
+  appearance?: "primary" | "secondary" | "third";
 }
 
 export const Textarea = ({ appearance, className, ...rest }: TextareaProps) => {
@@ -16,6 +16,7 @@ export const Textarea = ({ appearance, className, ...rest }: TextareaProps) => {
       className={cn(styles.default, className, {
         [styles.primary]: appearance === "primary",
         [styles.secondary]: appearance === "secondary",
+        [styles.third]: appearance === "third",
       })}
     />
   );

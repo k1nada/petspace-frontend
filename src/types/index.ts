@@ -9,7 +9,7 @@ export interface User {
   isOnline?: boolean;
   lastSeen?: string;
   bio?: string;
-  gender?: string;
+  sex?: string;
   birthDate?: string;
   interests?: Interests;
   photos?: Photo[];

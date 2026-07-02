@@ -27,7 +27,7 @@
   },
   "placeholder": {
     "noneSelected": "None selected",
-    "chooseDate": "Chose a date"
+    "chooseDate": "Choose a date"
   },
   "signin": {
     "title": "Petspace",
@@ -56,7 +56,7 @@
     "subtitle": "Every great pack starts with an introduction",
     "bio": "About:",
     "birthday": "Birthday:",
-    "gender": "Gender:",
+    "sex": "Sex:",
     "country": "Country:",
     "city": "City:",
     "breed": "Breed:"
@@ -118,7 +118,7 @@
     "bio": "About:",
     "name": "Name:",
     "birthday": "Birthday:",
-    "gender": "Gender:",
+    "sex": "Sex:",
     "country": "Country:",
     "city": "City:",
     "breed": "Breed:"
@@ -188,7 +188,7 @@
   },
   "photoModal": {
     "makeProfilePhoto": "Make profile photo",
-    "counter": "Photos {current} of {total}",
+    "counter": "{current} / {total}",
     "commentsTitle": "No tail wags yet...",
     "commentsText": "Be the first!",
     "modalTitle": "Delete photo",
@@ -244,7 +244,7 @@
     "firstPostText": "Write your first post",
     "totalBones": "Total bones collected"
   },
-  "gender": {
+  "sex": {
     "male": "Male",
     "female": "Female"
   }

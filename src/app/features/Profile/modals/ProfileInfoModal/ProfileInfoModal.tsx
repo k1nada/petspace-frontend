@@ -26,7 +26,7 @@ export const ProfileInfoModal = ({
 }: ProfileInfoModalProps) => {
   const t = useTranslations();
   const locale = useLocale();
-  const { bio, breed, city, gender, birthDate, interests } = user;
+  const { bio, breed, city, sex, birthDate, interests } = user;
   const hasInterests = interests && Object.values(interests).some(Boolean);
 
   return (
@@ -49,17 +49,17 @@ export const ProfileInfoModal = ({
             </div>
           )}
 
-          {gender === "female" && (
+          {sex === "female" && (
             <div className={styles.row}>
               <FaVenus size={16} className={styles.icon} />
-              <span>{t("gender.female")}</span>
+              <span>{t("sex.female")}</span>
             </div>
           )}
 
-          {gender === "male" && (
+          {sex === "male" && (
             <div className={styles.row}>
               <FaMars size={16} className={styles.icon} />
-              <span>{t("gender.male")}</span>
+              <span>{t("sex.male")}</span>
             </div>
           )}
 

@@ -3,24 +3,23 @@ import styles from "./CommentCreator.module.scss";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { createComment } from "@/app/api/comment";
-import { StaticImageData } from "next/image";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SumbitTextarea";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
 interface CommentCreatorProps {
   postId?: string;
   photoId?: string;
-  avatar?: string | StaticImageData;
   onSuccess?: () => void;
 }
 
 export const CommentCreator = ({
   postId,
   photoId,
-  avatar,
   onSuccess,
 }: CommentCreatorProps) => {
   const t = useTranslations();
   const [content, setContent] = useState("");
+  const currentUser = useUserStore((state) => state.currentUser);
 
   const handleSubmit = async () => {
     if (!content) return;
@@ -33,7 +32,7 @@ export const CommentCreator = ({
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.avatarWrapper}>
-          <Avatar size={38} src={avatar} />
+          <Avatar size={38} src={currentUser?.avatar} />
         </div>
         <SubmitTextarea
           value={content}
