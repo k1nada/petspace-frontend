@@ -6,6 +6,7 @@
   background: var(--bg-card);
   border-radius: var(--radius-m);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
 }
 
 .title {
@@ -16,21 +17,14 @@
 
 .profileContent {
   display: flex;
-  flex-direction: row;
-  gap: var(--gap-xl);
-}
-
-.avatarSection {
-  display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: var(--gap-m);
 }
 
 .userInfo {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-s);
-  justify-content: center;
+  gap: 2px;
 }
 
 .name {
@@ -46,28 +40,22 @@
 }
 
 .fields {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-m);
-  color: var(--text-primary);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-s) var(--gap-xl);
 }
 
 .field {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
-  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
   font-size: var(--font-m);
+  color: var(--text-primary);
 }
 
 .label {
-  padding: var(--padding-s);
-}
-
-.profileActions {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--gap-s);
+  font-size: var(--font-s);
+  color: var(--text-secondary);
 }
 
 .actions {

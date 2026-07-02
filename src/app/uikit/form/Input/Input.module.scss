@@ -4,6 +4,7 @@
   cursor: text;
   outline: none;
   border-radius: var(--radius-m);
+  box-sizing: border-box;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -15,7 +16,7 @@
 
 .primary {
   background: var(--bg-input);
-  color: var(--text-placeholder);
+  color: var(--text-primary);
 
   &:hover {
     background: var(--button-secondary-hover);
@@ -35,6 +36,6 @@
 
 .wide {
   background: var(--bg-input);
-  color: var(--text-placeholder);
-  width: 250px;
+  color: var(--text-primary);
+  width: 100%;
 }

@@ -6,11 +6,19 @@
 .inputWrapper {
   display: flex;
   align-items: center;
+  width: 100%;
+  position: relative;
+
+  input {
+    width: 100%;
+  }
 }
 
 .arrowIcon {
-  position: relative;
-  right: 30px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--text-secondary);
   cursor: pointer;
 }
@@ -18,13 +26,13 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: calc(var(--z-dropdown) - 1);
+  z-index: var(--z-dropdown);
 }
 
 .dropdown {
   position: absolute;
   top: calc(100% + var(--gap-xs));
-  width: 280px;
+  width: 100%;
   list-style: none;
   margin: 0;
   padding: var(--gap-xs) 0;

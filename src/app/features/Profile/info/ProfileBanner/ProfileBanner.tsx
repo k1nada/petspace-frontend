@@ -38,7 +38,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
   const hasMoreInfo = !!(
     bannerInfo.breed ||
     bannerInfo.birthDate ||
-    bannerInfo.gender ||
+    bannerInfo.sex ||
     bannerInfo.bio ||
     (bannerInfo.interests && Object.values(bannerInfo.interests).some(Boolean))
   );

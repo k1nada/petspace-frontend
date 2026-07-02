@@ -56,7 +56,7 @@
     "subtitle": "Każda wielka sfora zaczyna się od przedstawienia",
     "bio": "O sobie:",
     "birthday": "Urodziny:",
-    "gender": "Płeć:",
+    "sex": "Płeć:",
     "country": "Kraj:",
     "city": "Miasto:",
     "breed": "Rasa:"
@@ -116,10 +116,10 @@
   "profileEditor": {
     "title": "Edytuj profil",
     "bio": "Bio:",
-    "name": "Imię",
+    "name": "Imię:",
     "birthday": "Wiek:",
-    "gender": "Płeć:",
-    "country": "Kraj",
+    "sex": "Płeć:",
+    "country": "Kraj:",
     "city": "Miasto:",
     "breed": "Rasa:"
   },
@@ -188,7 +188,7 @@
   },
   "photoModal": {
     "makeProfilePhoto": "Ustaw jako zdjęcie profilowe",
-    "counter": "Zdjęcia {current} z {total}",
+    "counter": "{current} / {total}",
     "commentsTitle": "Jeszcze żadnych merdań ogonem...",
     "commentsText": "Bądź pierwszy!",
     "modalTitle": "Usunąć zdjęcie",
@@ -244,7 +244,7 @@
     "firstPostText": "Napisz swój pierwszy wpis",
     "totalBones": "Zebrane kości"
   },
-  "gender": {
+  "sex": {
     "male": "Samiec",
     "female": "Samica"
   }

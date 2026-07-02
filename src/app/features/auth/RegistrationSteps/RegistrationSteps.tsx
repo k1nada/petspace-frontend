@@ -17,7 +17,7 @@ import { Select } from "@/app/uikit/form/Select/Select";
 interface RegistrationStepsProps {
   username: string;
   birthDate?: number;
-  gender?: string;
+  sex?: string;
   country?: string;
   city?: string;
   breed?: string;
@@ -26,7 +26,7 @@ interface RegistrationStepsProps {
 const RegistrationSteps = ({
   username,
   birthDate,
-  gender,
+  sex,
   country,
   city,
   breed,
@@ -34,7 +34,7 @@ const RegistrationSteps = ({
   const t = useTranslations();
   const router = useRouter();
 
-  const [genderValue, setGenderValue] = useState(gender ?? "");
+  const [sexValue, setsexValue] = useState(sex ?? "");
   const [selectedAge, setSelectedAge] = useState<Dayjs | undefined>(
     birthDate ? dayjs(birthDate) : undefined,
   );
@@ -62,7 +62,7 @@ const RegistrationSteps = ({
   const saveChanges = async () => {
     try {
       await api.put(`/user/${username}`, {
-        gender: genderValue,
+        sex: sexValue,
         birthDate: selectedAge?.valueOf(),
         country: selectedCountry,
         city: selectedCity,
@@ -85,16 +85,14 @@ const RegistrationSteps = ({
           <p className={styles.subtitle}>{t("registrationSteps.subtitle")}</p>
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>
-            {t("registrationSteps.gender")}
-          </label>
+          <label className={styles.label}>{t("registrationSteps.sex")}</label>
           {/* TODO */}
           <Select
-            value={genderValue}
-            onChange={setGenderValue}
+            value={sexValue}
+            onChange={setsexValue}
             options={[
-              { value: "male", label: t("gender.male") },
-              { value: "female", label: t("gender.female") },
+              { value: "male", label: t("sex.male") },
+              { value: "female", label: t("sex.female") },
             ]}
             placeholder={t("placeholder.noneSelected")}
           ></Select>

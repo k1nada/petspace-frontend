@@ -13,14 +13,16 @@ import { getCities, getCountries } from "@/app/api/locations";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Select } from "@/app/uikit/form/Select/Select";
 import { BannerInfo } from "@/types";
+import { Input } from "@/app/uikit/form/Input/Input";
 
 interface ProfileEditorProps {
   user: BannerInfo;
 }
 
 interface ProfileForm {
+  name: string;
   bio: string;
-  gender: string;
+  sex: string;
   birthDate?: Date | string;
   country: string;
   city: string;
@@ -35,8 +37,9 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
 
   const { handleSubmit, control, setValue, reset } = useForm<ProfileForm>({
     defaultValues: {
+      name: user.name,
       bio: user.bio ?? "",
-      gender: user.gender ?? "",
+      sex: user.sex ?? "",
       birthDate: user.birthDate,
       country: user.country ?? "",
       city: user.city ?? "",
@@ -45,15 +48,24 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
   });
 
   const selectedCountry = useWatch({ control, name: "country" });
+  const nameValue = useWatch({ control, name: "name" });
 
-const onSubmit = async (data: ProfileForm) => {
-  try {
-    await updateProfile(user.username, data as any);
-    toast.success(t("toasts.saved"));
-  } catch {
-    toast.error(t("toasts.error"));
-  }
-};
+  const onSubmit = async (data: ProfileForm) => {
+    try {
+      await updateProfile(user.username, {
+        name: data.name,
+        bio: data.bio,
+        sex: data.sex,
+        birthDate: data.birthDate,
+        country: data.country,
+        city: data.city,
+        breed: data.breed,
+      });
+      toast.success(t("toasts.saved"));
+    } catch {
+      toast.error(t("toasts.error"));
+    }
+  };
 
   useEffect(() => {
     getBreeds().then(setBreeds);
@@ -77,19 +89,18 @@ const onSubmit = async (data: ProfileForm) => {
           />
         </div>
         <div className={styles.userInfo}>
-          <h2 className={styles.name}>{user.name}</h2>
+          <h2 className={styles.name}>{nameValue}</h2>
           <div className={styles.username}>Username: @{user.username}</div>
         </div>
       </div>
+
       <div className={styles.fields}>
         <div className={styles.field}>
-          <label className={styles.label}>{t("profileEditor.bio")}</label>
+          <label className={styles.label}>{t("profileEditor.name")}</label>
           <Controller
-            name="bio"
+            name="name"
             control={control}
-            render={({ field }) => (
-              <Textarea appearance="primary" {...field} maxLength={150} />
-            )}
+            render={({ field }) => <Input appearance="wide" {...field} />}
           />
         </div>
         <div className={styles.field}>
@@ -98,22 +109,25 @@ const onSubmit = async (data: ProfileForm) => {
             name="birthDate"
             control={control}
             render={({ field }) => (
-              <DatePicker value={field.value} onChange={field.onChange} />
+              <DatePicker
+                value={field.value}
+                onChange={(date) => field.onChange(date?.toDate())}
+              />
             )}
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("profileEditor.gender")}</label>
+          <label className={styles.label}>{t("profileEditor.sex")}</label>
           <Controller
-            name="gender"
+            name="sex"
             control={control}
             render={({ field }) => (
               <Select
                 value={field.value}
                 onChange={field.onChange}
                 options={[
-                  { value: "male", label: t("gender.male") },
-                  { value: "female", label: t("gender.female") },
+                  { value: "male", label: t("sex.male") },
+                  { value: "female", label: t("sex.female") },
                 ]}
                 placeholder={t("placeholder.noneSelected")}
               />
@@ -170,6 +184,18 @@ const onSubmit = async (data: ProfileForm) => {
           />
         </div>
       </div>
+
+      <div className={styles.field}>
+        <label className={styles.label}>{t("profileEditor.bio")}</label>
+        <Controller
+          name="bio"
+          control={control}
+          render={({ field }) => (
+            <Textarea appearance="third" {...field} maxLength={150} />
+          )}
+        />
+      </div>
+
       <div className={styles.actions}>
         <Button appearance="primary" type="submit">
           {t("common.save")}
