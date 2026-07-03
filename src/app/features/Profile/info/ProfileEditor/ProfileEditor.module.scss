@@ -42,7 +42,7 @@
 .fields {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-s) var(--gap-xl);
+  gap: var(--gap-m) var(--gap-xl);
 }
 
 .field {
@@ -54,7 +54,6 @@
 }
 
 .label {
-  font-size: var(--font-s);
   color: var(--text-secondary);
 }
 

@@ -84,7 +84,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
         <div className={styles.avatarSection}>
           <AvatarEdit
             src={user.avatar}
-            size={120}
+            size={140}
             avatarPhotos={user.avatarPhotos}
           />
         </div>
@@ -191,7 +191,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
           name="bio"
           control={control}
           render={({ field }) => (
-            <Textarea appearance="third" {...field} maxLength={150} />
+            <Textarea appearance="third" {...field} maxLength={150} placeholder={t("profileEditor.about")}/>
           )}
         />
       </div>

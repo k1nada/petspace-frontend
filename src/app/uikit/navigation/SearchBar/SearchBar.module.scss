@@ -1,13 +1,20 @@
 .wrapper {
   display: flex;
   align-items: center;
+  gap: var(--gap-s);
+  width: 300px;
   position: relative;
+  max-width: 100%;
+}
+
+.fullWidth {
+  width: 100%;
 }
 
 .icon {
   position: absolute;
-  left: 14px;
-  color: var(--text-secondary);
+  left: var(--padding-s);
+  color: var(--text-tertiary);
   pointer-events: none;
 }
 

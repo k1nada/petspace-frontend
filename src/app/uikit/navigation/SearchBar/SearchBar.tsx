@@ -10,9 +10,16 @@ import { Button } from "../../form/Button/Button";
 interface SearchBarProps {
   placeholder?: string;
   onChange?: (value: string) => void;
+  className?: string;
+  fullWidth?: boolean;
 }
 
-export const SearchBar = ({ placeholder, onChange }: SearchBarProps) => {
+export const SearchBar = ({
+  placeholder,
+  onChange,
+  className,
+  fullWidth,
+}: SearchBarProps) => {
   const t = useTranslations();
   const [value, setValue] = useState("");
 
@@ -27,7 +34,9 @@ export const SearchBar = ({ placeholder, onChange }: SearchBarProps) => {
   };
 
   return (
-    <search className={styles.wrapper}>
+    <search
+      className={`${styles.wrapper} ${fullWidth ? styles.fullWidth : ""} ${className ?? ""}`}
+    >
       <FaSearch className={styles.icon} />
       <Input
         type="search"

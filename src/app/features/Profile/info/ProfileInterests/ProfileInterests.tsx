@@ -64,6 +64,7 @@ export const ProfileInterests = ({ user }: ProfileInterestsProps) => {
             appearance="primary"
             {...register("toys")}
             maxLength={300}
+            placeholder={t("profileInterests.toysPlaceholder")}
           />
         </div>
         <div className={styles.field}>
@@ -72,6 +73,7 @@ export const ProfileInterests = ({ user }: ProfileInterestsProps) => {
             appearance="primary"
             {...register("treats")}
             maxLength={300}
+            placeholder={t("profileInterests.treatsPlaceholder")}
           />
         </div>
         <div className={styles.field}>
@@ -82,6 +84,7 @@ export const ProfileInterests = ({ user }: ProfileInterestsProps) => {
             appearance="primary"
             {...register("activities")}
             maxLength={300}
+            placeholder={t("profileInterests.activitiesPlaceholder")}
           />
         </div>
         <div className={styles.field}>
@@ -90,6 +93,7 @@ export const ProfileInterests = ({ user }: ProfileInterestsProps) => {
             appearance="primary"
             {...register("crimes")}
             maxLength={300}
+            placeholder={t("profileInterests.crimesPlaceholder")}
           />
         </div>
         <div className={styles.field}>
@@ -98,6 +102,7 @@ export const ProfileInterests = ({ user }: ProfileInterestsProps) => {
             appearance="primary"
             {...register("habits")}
             maxLength={300}
+            placeholder={t("profileInterests.habitsPlaceholder")}
           />
         </div>
         <div className={styles.field}>
@@ -106,6 +111,7 @@ export const ProfileInterests = ({ user }: ProfileInterestsProps) => {
             appearance="primary"
             {...register("humans")}
             maxLength={300}
+            placeholder={t("profileInterests.humansPlaceholder")}
           />
         </div>
       </div>

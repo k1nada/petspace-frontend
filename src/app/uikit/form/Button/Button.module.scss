@@ -18,16 +18,16 @@
 }
 
 .secondary {
-  background: var(--button-secondary-bg);
+  background: var(--button-secondary);
   color: var(--text-secondary);
 
   &:hover {
-    background: var(--bg-page);
+    background: var(--button-secondary-hover);
   }
 }
 
 .tertiary {
-  background: var(--button-secondary-hover);
+  background: var(--button-tertiary);
   color: var(--text-secondary);
 
   &:hover {

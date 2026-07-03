@@ -11,7 +11,7 @@
 
   &:global(.Toastify__toast--error) {
     background: var(--primary);
-    color: var(--text-on-primary);
+    color: var(--text-primary);
   }
 
   :global(.Toastify__close-button) {
