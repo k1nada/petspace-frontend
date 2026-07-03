@@ -23,7 +23,7 @@
   width: 20px;
   height: 20px;
   border-radius: var(--radius-full);
-  background: var(--bg-surface);
+  background: var(--bg-card);
   flex-shrink: 0;
 }
 
@@ -31,11 +31,11 @@
   height: 20px;
   width: 90%;
   border-radius: var(--radius-m);
-  background: var(--bg-surface);
+  background: var(--bg-card);
 }
 
 .tip {
   height: 80px;
   border-radius: var(--radius-m);
-  background: var(--bg-surface);
+  background: var(--bg-card);
 }

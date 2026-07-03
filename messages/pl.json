@@ -121,7 +121,8 @@
     "sex": "Płeć:",
     "country": "Kraj:",
     "city": "Miasto:",
-    "breed": "Rasa:"
+    "breed": "Rasa:",
+    "about": "Hau! Pochwal się wszystkim, jaki jestem grzeczny"
   },
   "profileInformation": {
     "profile": "Profil",
@@ -134,7 +135,13 @@
     "activities": "Moje ulubione aktywności:",
     "crimes": "Moje zbrodnie:",
     "habits": "Winne nawyki:",
-    "humans": "Moi ludzie:"
+    "humans": "Moi ludzie:",
+    "toysPlaceholder": "Piłka, lina i mój stary pluszowy miś",
+    "treatsPlaceholder": "Kurczak, ser i wszystko, co spadnie ze stołu",
+    "activitiesPlaceholder": "Gonienie piłki, kopanie dołków, długie drzemki",
+    "crimesPlaceholder": "Zjadłem kapeć. Bez żalu",
+    "habitsPlaceholder": "Kradnę jedzenie ze stołu, gdy nikt nie widzi",
+    "humansPlaceholder": "Ci, którzy mnie karmią i wyprowadzają na spacery"
   },
   "profileInfoModal": {
     "title": "Moje informacje",
@@ -200,7 +207,7 @@
     "modalFormats": "JPG, PNG, GIF, WEBP"
   },
   "friends": {
-    "title": "Moi znajomi",
+    "title": "Znajomi",
     "message": "Wiadomość",
     "friends": "znajomych",
     "remove": "Usuń",

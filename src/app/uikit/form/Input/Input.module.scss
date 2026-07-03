@@ -24,13 +24,13 @@
 }
 
 .search {
-  background: var(--bg-input);
+  background: var(--bg-search);
   color: var(--text-primary);
   padding-left: 40px;
-  width: 300px;
+  width: 100%;
 
   &:hover {
-    background: var(--button-secondary-hover);
+    background: var(--bg-search-hover);
   }
 }
 

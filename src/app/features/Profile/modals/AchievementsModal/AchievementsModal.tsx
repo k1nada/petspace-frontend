@@ -27,7 +27,7 @@ export const AchievementsModal = ({ isOpen, onClose, achievements }: Props) => {
                 key={key}
                 className={`${styles.item} ${unlocked ? styles.unlocked : styles.locked}`}
               >
-                {unlocked ? <FaDog size={25} /> : <FaLock size={25} />}
+                {unlocked ? <FaDog size={25} /> : <FaLock size={18} />}
                 <div className={styles.content}>
                   <div className={styles.contentTitle}>
                     {t(`achievements.${key}`)}

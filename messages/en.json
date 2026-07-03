@@ -121,7 +121,8 @@
     "sex": "Sex:",
     "country": "Country:",
     "city": "City:",
-    "breed": "Breed:"
+    "breed": "Breed:",
+    "about": "Woof! Tell everyone what a good boy I am"
   },
   "profileInformation": {
     "profile": "Profile",
@@ -134,7 +135,13 @@
     "activities": "My favorite activities:",
     "crimes": "My crimes:",
     "habits": "Guilty habits:",
-    "humans": "My humans:"
+    "humans": "My humans:",
+    "toysPlaceholder": "Ball, rope and my old plush bear",
+    "treatsPlaceholder": "Chicken, cheese, and anything that falls off the table",
+    "activitiesPlaceholder": "Chasing balls, digging holes, long naps",
+    "crimesPlaceholder": "Ate a slipper. No regrets",
+    "habitsPlaceholder": "Steal food from the table when no one's looking",
+    "humansPlaceholder": "The ones who feed me and take me for walks"
   },
   "profileInfoModal": {
     "title": "My info",
@@ -200,7 +207,7 @@
     "modalFormats": "JPG, PNG, GIF, WEBP"
   },
   "friends": {
-    "title": "My friends",
+    "title": "Friends",
     "message": "Message",
     "friends": "friends",
     "remove": "Remove",
