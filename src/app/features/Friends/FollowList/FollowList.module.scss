@@ -1,30 +1,10 @@
-.container {
-  background: var(--bg-card);
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-l);
-  padding: var(--padding-xl);
-  border-radius: var(--radius-m);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-m);
-}
-
-.search {
-  width: 100%;
-}
-
 .list {
   display: flex;
   flex-direction: column;
   gap: var(--gap-s);
 }
 
-.emptyFriends {
+.empty {
   display: flex;
   flex-direction: column;
   gap: var(--gap-l);

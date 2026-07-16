@@ -30,6 +30,7 @@ export const Select = ({
       <div className={styles.inputWrapper}>
         <Input
           appearance="wide"
+          className={styles.input}
           value={selected?.label ?? ""}
           placeholder={placeholder}
           readOnly

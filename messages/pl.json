@@ -10,7 +10,10 @@
     "upload": "Prześlij",
     "cancel": "Anuluj",
     "close": "Zamknij",
-    "or": "lub"
+    "or": "lub",
+    "online": "Online",
+    "offline": "Offline",
+    "lastSeenAt": "Ostatnio widziany(a) {time}"
   },
   "validations": {
     "minLength": "Musi zawierać co najmniej {min} znaków",
@@ -40,7 +43,7 @@
   },
   "signUp": {
     "title": "Rejestracja",
-    "subtitle": "Wypełnij poniższy formularz, aby utworzyć konto.",
+    "subtitle": "Wypełnij formularz, aby utworzyć konto",
     "name": "Imię",
     "displayNameHint": "Twoje imię wyświetlane",
     "username": "Nazwa użytkownika",
@@ -85,7 +88,7 @@
     "Potrzebuję co najmniej 30 minut spaceru dzisiaj. Bez wymówek, człowieku!",
     "Miska znowu pusta. Świeża woda, proszę, jestem bardzo spragniony.",
     "Karm mnie o tej samej porze każdego dnia. Mój brzuszek ma swój harmonogram.",
-    "Znudzone łapy = pogryziane buty. Kup mi zabawkę logiczną, już!",
+    "Znudzone łapy = pogryzione buty. Kup mi zabawkę logiczną, już!",
     "Wyczesz mnie! To cudowne uczucie, a ja pokocham cię jeszcze bardziej.",
     "Potrzebuję przyjaciół! Zabierz mnie do parku poznać nowych znajomych.",
     "Czas na coroczną wizytę u weterynarza. Obiecuję, że nie ugryzę... za bardzo."
@@ -97,7 +100,7 @@
   },
   "notFound": {
     "text": "Ups! Jamnik poszedł kopać sobie norkę...",
-    "description": "Ta strona zaginęła gdzieś w ogrodzie. Jamnik jej szuka, ale jak dotąd bez powodzenia.",
+    "description": "Ta strona zaginęła gdzieś głęboko w ogrodzie.\nJamnik jej szuka, ale jak dotąd bez powodzenia.",
     "goBack": "Wróć wstecz"
   },
   "profileBanner": {
@@ -111,13 +114,15 @@
     "modalInterests": "Zainteresowania",
     "addFriend": "Dodaj znajomego",
     "message": "Wiadomość",
-    "familyTree": "Drzewo rodzinne"
+    "familyTree": "Drzewo rodzinne",
+    "requestSent": "Wysłano zaproszenie",
+    "following": "Obserwujesz"
   },
   "profileEditor": {
     "title": "Edytuj profil",
-    "bio": "Bio:",
+    "bio": "O sobie:",
     "name": "Imię:",
-    "birthday": "Wiek:",
+    "birthday": "Urodziny:",
     "sex": "Płeć:",
     "country": "Kraj:",
     "city": "Miasto:",
@@ -150,7 +155,7 @@
   "profileFriends": {
     "title": "Znajomi",
     "showFriends": "Pokaż wszystkich znajomych",
-    "empty": "Brak znajomych"
+    "empty": "Brak członków sfory"
   },
   "avatarEdit": {
     "open": "Otwórz zdjęcie",
@@ -174,7 +179,7 @@
     "placeholder": "Co nowego, "
   },
   "post": {
-    "modalTitle": "Usunąć post?",
+    "modalTitle": "Usuń post",
     "modalDescription": "Czy na pewno chcesz usunąć ten post?"
   },
   "comment": {
@@ -191,14 +196,14 @@
   },
   "profilePhotos": {
     "title": "Zdjęcia",
-    "empty": "Brak zdjęć"
+    "empty": "Brak chwil merdania ogonem"
   },
   "photoModal": {
     "makeProfilePhoto": "Ustaw jako zdjęcie profilowe",
     "counter": "{current} / {total}",
     "commentsTitle": "Jeszcze żadnych merdań ogonem...",
     "commentsText": "Bądź pierwszy!",
-    "modalTitle": "Usunąć zdjęcie",
+    "modalTitle": "Usuń zdjęcie",
     "modalDescription": "Czy na pewno chcesz usunąć to zdjęcie?"
   },
   "photoUploadModal": {
@@ -207,24 +212,42 @@
     "modalFormats": "JPG, PNG, GIF, WEBP"
   },
   "friends": {
-    "title": "Znajomi",
+    "friendsTitle": "Znajomi",
+    "requestsTitle": "Zaproszenia",
+    "followersTitle": "Obserwujący",
+    "followingTitle": "Obserwowani",
     "message": "Wiadomość",
     "friends": "znajomych",
+    "addFriend": "Dodaj znajomego",
+    "following": "Obserwujesz",
+    "requestSent": "Zaproszenie wysłane",
     "remove": "Usuń",
+    "unfollow": "Przestań obserwować",
     "emptyFriendsTitle": "Brak znajomych",
     "emptyFriendsText": "Ale każda legenda zaczyna w pojedynkę. Idź i znajdź swoją sforę!",
+    "emptyFollowersTitle": "Brak obserwujących",
+    "emptyFollowersText": "Udostępnij swój profil i patrz, jak rośnie twoja sfora!",
+    "emptyFollowingTitle": "Nikogo jeszcze nie obserwujesz",
+    "emptyFollowingText": "Przeglądaj profile i obserwuj psy, które lubisz!",
     "delete": "Usuń"
   },
   "friendRequest": {
-    "title": "Zaproszenia do znajomych",
+    "title": "Brak zaproszeń",
     "accept": "Akceptuj",
     "decline": "Odrzuć",
     "mutualFriends": "{count} wspólnych znajomych",
-    "empty": "Brak nowych zaproszeń"
+    "wantsToBeFriends": "Chce zostać znajomym",
+    "empty": "Jeszcze nic tu nie ma — czas poznać nowych znajomych!",
+    "acceptedSuccess": "Zaproszenie zaakceptowane",
+    "rejectedSuccess": "Zaproszenie odrzucone"
   },
   "friendCard": {
-    "modalTitle": "Usunąć znajomego",
+    "modalTitle": "Usuń znajomego",
     "modalDescription": "Czy na pewno chcesz usunąć {name}?"
+  },
+  "followCard": {
+    "removeModalDescription": "{name} nie będzie już Cię obserwować.",
+    "unfollowModalDescription": "Zawsze możesz ponownie zacząć obserwować {name}."
   },
   "friendTip": {
     "title": "Czy wiesz, że...?",

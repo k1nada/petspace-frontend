@@ -17,13 +17,15 @@
   --primary-hover: #9c6a48;
   --primary-light: #cca384;
 
-  --border-field: #d2ceca;
-  --border-field-hover: #a09890;
-  --border-field-focus: #b07d58;
-  --border-divider: #e2dfdc;
-  --border-button-secondary: #c4beb8;
-  --border-error: #ff4444;
+  --border-primary: #b07d58;
+  --border-primary-hover: #9c6a48;
+  --border-secondary: #c4beb8;
+  --border-secondary-hover: #a89f97;
+  --border-tertiary: #e2dfdc;
+  --border-tertiary-hover: #d2ceca;
 
+  --border-divider: #e2dfdc;
+  --border-error: #ff4444;
   --border-card: #e8e6e2;
 
   --text-primary: #1a1a1a;
@@ -40,8 +42,8 @@
 
   --button-secondary: #f5f4f3;
   --button-secondary-hover: #eae8e6;
---button-tertiary: #dfdfdd;
---button-tertiary-hover: #d4d4d2;
+  --button-tertiary: #dfdfdd;
+  --button-tertiary-hover: #d4d4d2;
   --button-ghost-hover: #eceae8;
 
   --icon-on-primary: #686460;
@@ -97,7 +99,6 @@
   --bg-nested: #2c2c2e;
   --bg-nested-hover: #363638;
   --bg-elevated: #2a2a2c;
-
   --bg-search: #333335;
   --bg-search-hover: #3d3d40;
 
@@ -105,12 +106,14 @@
   --primary-hover: #c49070;
   --primary-light: #d4a688;
 
-  --border-field: #444448;
-  --border-field-hover: #666668;
-  --border-field-focus: #b07d58;
-  --border-divider: #333336;
-  --border-button-secondary: #484850;
+  --border-primary: #b07d58;
+  --border-primary-hover: #c49070;
+  --border-secondary: #484850;
+  --border-secondary-hover: #5a5a62;
+  --border-tertiary: #333336;
+  --border-tertiary-hover: #444448;
 
+  --border-divider: #333336;
   --border-card: #333336;
 
   --text-primary: #f5f5f5;
@@ -157,6 +160,13 @@ body {
 
 a {
   text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
 html {

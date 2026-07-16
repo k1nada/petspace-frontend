@@ -1,7 +1,6 @@
 .wrapper {
   display: flex;
   align-items: center;
-  gap: var(--gap-s);
   width: 300px;
   position: relative;
   max-width: 100%;
@@ -19,13 +18,14 @@
 }
 
 .delete {
+  position: absolute;
+  right: var(--padding-s);
   background: none;
   border: none;
-  color: var(--text-secondary);
+  color: var(--text-tertiary);
   cursor: pointer;
   display: flex;
   align-items: center;
-  margin-left: -25px;
 }
 
 .wrapper input::-webkit-search-cancel-button {

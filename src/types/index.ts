@@ -15,6 +15,9 @@ export interface User {
   photos?: Photo[];
   avatarPhotos?: Photo[];
   friends?: Friend[];
+  following?: string[];
+  followers?: string[];
+  sentRequests?: string[];
   achievements?: Achievements;
 }
 
@@ -45,6 +48,17 @@ export interface FriendRequest {
   status: "pending" | "accepted" | "rejected";
   createdAt: Date;
 }
+
+export interface FollowUser {
+  id: string;
+  username: string;
+  name: string;
+  avatar?: string;
+  isOnline?: boolean;
+  lastSeen?: string;
+}
+
+export type FollowListType = "followers" | "following";
 
 export interface Achievements {
   firstFriend?: boolean;

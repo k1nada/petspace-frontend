@@ -17,7 +17,7 @@ import { UserSearchDropdown } from "@/app/uikit/navigation/UserSearchDropdown/Us
 
 export const Header = () => {
   const currentUser = useUserStore((state) => state.currentUser);
-  const { results, search, select } = useSearch();
+  const { query, results, search, select } = useSearch();
   const isLoading = useUserStore((state) => state.isLoading);
 
   if (isLoading) return <HeaderSkeleton />;
@@ -34,7 +34,7 @@ export const Header = () => {
         {currentUser && (
           <>
             <div className={styles.search}>
-              <SearchBar onChange={search} />
+              <SearchBar value={query} onChange={search} />
               <UserSearchDropdown results={results} onSelect={select} />
             </div>
             <nav className={styles.actions}>

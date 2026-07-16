@@ -3,7 +3,6 @@ import styles from "./Post.module.scss";
 import Image from "next/image";
 import { FaComment, FaHeart, FaReply } from "react-icons/fa";
 import { Post as PostType } from "@/types";
-import dayjs from "dayjs";
 import { Comment } from "@/app/features/profile/feed/Comment/Comment";
 import { MdDeleteSweep, MdModeEdit } from "react-icons/md";
 import { CommentCreator } from "../CommentCreator/CommentCreator";
@@ -126,11 +125,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
         ))}
       </ul>
       {showCommentCreator && (
-        <CommentCreator
-          postId={post.id}
-          avatar={post.user.avatar}
-          onSuccess={onRefresh}
-        />
+        <CommentCreator postId={post.id} onSuccess={onRefresh} />
       )}
 
       <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>

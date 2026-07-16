@@ -29,7 +29,7 @@ interface PhotoModalProps {
   onClose: () => void;
   onPrev?: () => void;
   onNext?: () => void;
-  onDelete?: () => void;
+  onDelete?: () => void | Promise<void>;
 }
 
 export const PhotoModal = ({
@@ -62,13 +62,17 @@ export const PhotoModal = ({
     getPhotoComments(photo.id).then((data) => {
       if (data) setComments(data);
     });
-  }, [photo, commentRefresh]);
+  }, [photo?.id, commentRefresh]);
 
   const refreshComments = () => setCommentRefresh((r) => r + 1);
 
   const deleteComment = async (commentId: string) => {
-    await api.delete(`/comments/${commentId}`);
-    refreshComments();
+    try {
+      await api.delete(`/comments/${commentId}`);
+      refreshComments();
+    } catch {
+      toast.error(t("toasts.error"));
+    }
   };
 
   const handleDeletePhoto = async () => {
@@ -90,6 +94,14 @@ export const PhotoModal = ({
           autoFocus
         >
           <div className={styles.photoWrapper}>
+            <div className={styles.photoBackground}>
+              <Image
+                src={`https://res.cloudinary.com/${cloudName}/image/upload/${photo.publicId}`}
+                alt=""
+                fill
+                className={styles.imageBackground}
+              />
+            </div>
             <span className={styles.counter}>
               {t("photoModal.counter", {
                 current: (currentIndex ?? 0) + 1,
@@ -97,26 +109,26 @@ export const PhotoModal = ({
               })}
             </span>
             <Button
-              className={styles.arrow}
+              className={`${styles.arrow} ${styles.arrowLeft}`}
               appearance="ghost"
               onClick={onPrev}
             >
-              <FaAngleLeft size={40} />
+              <FaAngleLeft size={30} />
             </Button>
             <div className={styles.photo}>
               <Image
                 src={`https://res.cloudinary.com/${cloudName}/image/upload/${photo.publicId}`}
                 alt="Photo"
                 fill
-                style={{ objectFit: "contain" }}
+                className={styles.photoImage}
               />
             </div>
             <Button
-              className={styles.arrow}
+              className={`${styles.arrow} ${styles.arrowRight}`}
               appearance="ghost"
               onClick={onNext}
             >
-              <FaAngleRight size={40} />
+              <FaAngleRight size={30} />
             </Button>
           </div>
 
@@ -167,11 +179,7 @@ export const PhotoModal = ({
               )}
             </ul>
             <div className={styles.sidebarFooter}>
-              <CommentCreator
-                photoId={photo.id}
-                avatar={avatar}
-                onSuccess={refreshComments}
-              />
+              <CommentCreator photoId={photo.id} onSuccess={refreshComments} />
             </div>
           </div>
 
@@ -188,7 +196,7 @@ export const PhotoModal = ({
                 {t("common.cancel")}
               </Button>
 
-              <Button appearance="primary" onClick={() => handleDeletePhoto()}>
+              <Button appearance="primary" onClick={handleDeletePhoto}>
                 {t("common.delete")}
               </Button>
             </div>
