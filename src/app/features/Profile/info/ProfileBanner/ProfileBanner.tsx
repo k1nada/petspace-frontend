@@ -16,6 +16,7 @@ import { useUserStore } from "@/app/hooks/useUserStore";
 import { BannerInfo } from "@/types";
 import { ProfileBannerSkeleton } from "./ProfileBannerSkeleton";
 import { addFriend as addFriendAPI } from "@/app/api/friends";
+import { getRelationshipStatus } from "@/utils/friends";
 import { toast } from "react-toastify";
 
 interface ProfileBannerProps {
@@ -45,7 +46,11 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
 
   const currentUser = useUserStore((state) => state.currentUser);
   const isLoading = useUserStore((state) => state.isLoading);
-  const isFriend = !!currentUser?.friends?.find((f) => f.id === bannerInfo.id);
+  const fetchCurrentUser = useUserStore((state) => state.fetchCurrentUser);
+  const { isFriend, isPending, isFollowing } = getRelationshipStatus(
+    currentUser,
+    bannerInfo.id,
+  );
   const isOwner = currentUser?.username === bannerInfo.username;
 
   const editProfile = () => {
@@ -60,6 +65,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     if (!currentUser?.username) return;
     try {
       await addFriendAPI(currentUser.username, bannerInfo.username);
+      await fetchCurrentUser();
       toast.success(t("profileBanner.requestSent"));
     } catch {
       toast.error(t("toasts.error"));
@@ -166,6 +172,30 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
               onClick={() => goToMessages(bannerInfo.username)}
             >
               {t("profileBanner.message")}
+            </Button>
+          </>
+        ) : isPending ? (
+          <>
+            <Button
+              appearance="secondary"
+              onClick={() => goToMessages(bannerInfo.username)}
+            >
+              <FaMessage size={16} />
+            </Button>
+            <Button appearance="primary" disabled>
+              {t("profileBanner.requestSent")}
+            </Button>
+          </>
+        ) : isFollowing ? (
+          <>
+            <Button
+              appearance="secondary"
+              onClick={() => goToMessages(bannerInfo.username)}
+            >
+              <FaMessage size={16} />
+            </Button>
+            <Button appearance="secondary" disabled>
+              {t("profileBanner.following")}
             </Button>
           </>
         ) : (

@@ -9,15 +9,15 @@
   z-index: var(--z-dropdown);
 }
 
-.picker {
-  --rdp-accent-color: var(--color-primary);
+.picker:global(.rdp-root) {
+  --rdp-accent-color: var(--primary);
 }
 
 .dropdown {
   position: absolute;
   z-index: var(--z-dropdown);
   padding: var(--padding-xs);
-  background: var(--bg-surface);
+  background: var(--bg-card);
   border-radius: var(--radius-m);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   margin-top: 5px;

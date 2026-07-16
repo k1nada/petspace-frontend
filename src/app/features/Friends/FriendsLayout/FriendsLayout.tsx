@@ -1,20 +1,26 @@
 "use client";
 
+import styles from "./FriendsLayout.module.scss";
 import { useTranslations } from "next-intl";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
-import styles from "./FriendsLayout.module.scss";
-import { Friends } from "../Friends/Friends";
-import { FriendRequest } from "../FriendRequest/FriendRequest";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
 import { useUserStore } from "@/app/hooks/useUserStore";
-import { Friend } from "@/types";
+import { FollowUser, Friend } from "@/types";
+import { Friends } from "../Friends/Friends";
 
 interface FriendsLayoutProps {
   username: string;
   friends: Friend[];
+  followers: FollowUser[];
+  following: FollowUser[];
 }
 
-export const FriendsLayout = ({ username, friends }: FriendsLayoutProps) => {
+export const FriendsLayout = ({
+  username,
+  friends,
+  followers,
+  following,
+}: FriendsLayoutProps) => {
   const t = useTranslations();
   const currentUser = useUserStore((state) => state.currentUser);
   const isMyProfile = currentUser?.username === username;
@@ -26,13 +32,15 @@ export const FriendsLayout = ({ username, friends }: FriendsLayoutProps) => {
       </div>
       <div className={styles.content}>
         <Friends
+          username={username}
           friends={friends}
+          followers={followers}
+          following={following}
           currentUser={currentUser?.username || ""}
           isMyProfile={isMyProfile}
         />
       </div>
       <div className={styles.rightColumn}>
-        <FriendRequest currentUser={username} />
         <Tip
           title={t("friendTip.title")}
           text={t("friendTip.text")}

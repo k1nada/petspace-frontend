@@ -10,6 +10,7 @@ import "dayjs/locale/pl";
 import type { Dayjs } from "dayjs";
 import { pl, enUS } from "date-fns/locale";
 import { useLocale, useTranslations } from "next-intl";
+import { CalendarDropdown } from "../CalendarDropdown/CalendarDropdown";
 
 interface DatePickerProps {
   value: string | Date | Dayjs | undefined;
@@ -60,6 +61,7 @@ export const DatePicker = ({
             toYear={new Date().getFullYear()}
             disabled={{ after: new Date() }}
             locale={isPolish ? pl : enUS}
+            components={{Dropdown: CalendarDropdown}}
           />
         </div>
       )}

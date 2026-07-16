@@ -12,6 +12,8 @@ import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
 import api from "@/config/axios";
 import { CLOUD_NAME } from "@/config/env";
 import { Photo } from "@/types";
+import { useUserStore } from "@/app/hooks/useUserStore";
+import { PhotoGallerySkeleton } from "./PhotoGallerySkeleton";
 
 interface PhotoGalleryProps {
   photos: Photo[];
@@ -25,6 +27,11 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
     usePhotoNavigation(localPhotos);
+
+  const isLoading = useUserStore((state) => state.isLoading);
+  const currentUser = useUserStore((state) => state.currentUser);
+
+  if (isLoading && !currentUser) return <PhotoGallerySkeleton />;
 
   const uploadFile = async (file: File) => {
     const formData = new FormData();

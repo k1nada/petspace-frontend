@@ -9,10 +9,12 @@ import { MdDeleteSweep } from "react-icons/md";
 import { Friend } from "@/types";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
-import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { useState } from "react";
-import { deleteFriend } from "@/app/api/friends";
+import { addFriend as addFriendAPI, deleteFriend } from "@/app/api/friends";
 import { toast } from "react-toastify";
+import { useUserStore } from "@/app/hooks/useUserStore";
+import { getRelationshipStatus } from "@/utils/friends";
+import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 
 interface FriendCardProps {
   friend: Friend;
@@ -29,6 +31,12 @@ export const FriendCard = ({
 }: FriendCardProps) => {
   const t = useTranslations();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const currentUserData = useUserStore((state) => state.currentUser);
+  const fetchCurrentUser = useUserStore((state) => state.fetchCurrentUser);
+  const { isFriend, isPending, isFollowing } = getRelationshipStatus(
+    currentUserData,
+    friend.id,
+  );
 
   const handleDeleteFriend = async () => {
     try {
@@ -40,47 +48,83 @@ export const FriendCard = ({
     }
   };
 
+  const handleAddFriend = async () => {
+    try {
+      await addFriendAPI(currentUser, friend.username);
+      await fetchCurrentUser();
+    } catch {
+      toast.error(t("toasts.error"));
+    }
+  };
+
   return (
     <li className={styles.card}>
       <Link href={ROUTES.profile(friend.username)}>
-        <Avatar src={friend.avatar} size={90} isOnline={friend.isOnline} />
+        <Avatar src={friend.avatar} size={70} isOnline={friend.isOnline} />
       </Link>
-      <div className={styles.right}>
+
+      <div className={styles.info}>
         <Link href={ROUTES.profile(friend.username)}>
           <div className={styles.name}>{friend.name}</div>
         </Link>
-        <Link href={ROUTES.messages(currentUser, friend.username)}>
-          <Button appearance="tertiary" className={styles.button}>
-            {t("friends.message")}
-          </Button>
-        </Link>
+        <div className={styles.status}>
+          {friend.isOnline ? t("common.online") : t("common.offline")}
+        </div>
       </div>
+
+      <div className={styles.actions}>
+        {isOwner ? (
+          <Link href={ROUTES.messages(currentUser, friend.username)}>
+            <Button appearance="primary">{t("friends.message")}</Button>
+          </Link>
+        ) : (
+          <>
+            <Link href={ROUTES.messages(currentUser, friend.username)}>
+              <Button appearance="secondary">{t("friends.message")}</Button>
+            </Link>
+            {!isFriend &&
+              (isPending ? (
+                <Button appearance="secondary" disabled>
+                  {t("friends.requestSent")}
+                </Button>
+              ) : isFollowing ? (
+                <Button appearance="secondary" disabled>
+                  {t("friends.following")}
+                </Button>
+              ) : (
+                <Button appearance="primary" onClick={handleAddFriend}>
+                  {t("friends.addFriend")}
+                </Button>
+              ))}
+          </>
+        )}
+      </div>
+
       {isOwner && (
-        <DropdownMenu
-          items={[
-            {
-              label: t("friends.delete"),
-              onClick: () => setIsDeleteOpen(true),
-              icon: <MdDeleteSweep size={20} />,
-            },
-          ]}
-        />
+        <div className={styles.menu}>
+          <DropdownMenu
+            items={[
+              {
+                label: t("friends.delete"),
+                onClick: () => setIsDeleteOpen(true),
+                icon: <MdDeleteSweep size={20} />,
+              },
+            ]}
+          />
+        </div>
       )}
 
-      <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
-        <h2 className={styles.modalTitle}>{t("friendCard.modalTitle")}</h2>
-        <p className={styles.modalDescription}>
-          {t("friendCard.modalDescription", { name: friend.name })}
-        </p>
-        <div className={styles.actions}>
-          <Button appearance="secondary" onClick={() => setIsDeleteOpen(false)}>
-            {t("common.cancel")}
-          </Button>
-          <Button appearance="primary" onClick={handleDeleteFriend}>
-            {t("common.delete")}
-          </Button>
-        </div>
-      </Modal>
+      {isOwner && (
+        <ConfirmModal
+          isOpen={isDeleteOpen}
+          onClose={() => setIsDeleteOpen(false)}
+          onConfirm={handleDeleteFriend}
+          title={t("friendCard.modalTitle")}
+          description={t("friendCard.modalDescription", {
+            name: friend.name,
+          })}
+        />
+      )}
     </li>
   );
 };

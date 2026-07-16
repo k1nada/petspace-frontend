@@ -10,7 +10,10 @@
     "upload": "Upload",
     "cancel": "Cancel",
     "close": "Close",
-    "or": "or"
+    "or": "or",
+    "online": "Online",
+    "offline": "Offline",
+    "lastSeenAt": "Last seen {time}"
   },
   "validations": {
     "minLength": "Must be at least {min} characters",
@@ -111,7 +114,9 @@
     "modalInterests": "Interests",
     "addFriend": "Add friend",
     "message": "Message",
-    "familyTree": "Family tree"
+    "familyTree": "Family tree",
+    "requestSent": "Request sent",
+    "following": "Following"
   },
   "profileEditor": {
     "title": "Edit profile",
@@ -150,7 +155,7 @@
   "profileFriends": {
     "title": "Friends",
     "showFriends": "Show all friends",
-    "empty": "No friends yet"
+    "empty": "No pack members yet"
   },
   "avatarEdit": {
     "open": "Open photo",
@@ -191,7 +196,7 @@
   },
   "profilePhotos": {
     "title": "Photos",
-    "empty": "No photos yet"
+    "empty": "No tail-wagging moments yet"
   },
   "photoModal": {
     "makeProfilePhoto": "Make profile photo",
@@ -207,24 +212,42 @@
     "modalFormats": "JPG, PNG, GIF, WEBP"
   },
   "friends": {
-    "title": "Friends",
+    "friendsTitle": "Friends",
+    "requestsTitle": "Requests",
+    "followersTitle": "Followers",
+    "followingTitle": "Following",
     "message": "Message",
     "friends": "friends",
+    "addFriend": "Add friend",
+    "following": "Following",
+    "requestSent": "Request sent",
     "remove": "Remove",
+    "unfollow": "Unfollow",
     "emptyFriendsTitle": "No friends yet",
-    "emptyFriendsText": "But every legend starts alone. Go find your crew!", 
+    "emptyFriendsText": "Every legend starts alone. Go find your pack!",
+    "emptyFollowersTitle": "No followers yet",
+    "emptyFollowersText": "Share your profile and watch the pack grow!",
+    "emptyFollowingTitle": "Not following anyone yet",
+    "emptyFollowingText": "Explore profiles and follow dogs you like!",
     "delete": "Delete"
   },
   "friendRequest": {
-    "title": "Friend Requests",
+    "title": "No requests yet",
     "accept": "Accept",
     "decline": "Decline",
     "mutualFriends": "{count} mutual friends",
-    "empty": "No new requests yet"
+    "wantsToBeFriends": "Wants to be friends",
+    "empty": "Nothing here yet — go make some new friends!",
+    "acceptedSuccess": "Friend request accepted",
+    "rejectedSuccess": "Friend request declined"
   },
   "friendCard": {
     "modalTitle": "Delete friend",
     "modalDescription": "Are you sure you want to delete {name}?"
+  },
+  "followCard": {
+    "removeModalDescription": "{name} will no longer follow you.",
+    "unfollowModalDescription": "You can always follow {name} again later."
   },
   "friendTip": {
     "title": "Did you know?",

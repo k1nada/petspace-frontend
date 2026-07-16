@@ -12,7 +12,7 @@ interface ProfileFriendsProps {
   friends: Friend[];
 }
 
-const MAX_VISIBLE_FRIENDS = 5;
+const MAX_VISIBLE_FRIENDS = 3;
 
 export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
   const t = useTranslations();
@@ -21,6 +21,8 @@ export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
   const currentUser = useUserStore((state) => state.currentUser);
 
   if (isLoading && !currentUser) return <ProfileFriendsSkeleton />;
+
+  const visibleFriends = friends.slice(0, MAX_VISIBLE_FRIENDS);
 
   return (
     <section className={styles.container}>
@@ -31,28 +33,23 @@ export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
       {friends.length === 0 ? (
         <p className={styles.empty}>{t("profileFriends.empty")}</p>
       ) : (
-        <>
-          <ul className={styles.friends}>
-            {friends.slice(0, MAX_VISIBLE_FRIENDS).map((friend) => (
-              <li key={friend.username}>
-                <Link
-                  href={ROUTES.profile(friend.username)}
-                  className={styles.friend}
-                >
-                  <Avatar
-                    src={friend.avatar}
-                    size={50}
-                    isOnline={friend.isOnline}
-                  />
-                  <div className={styles.info}>
-                    <div className={styles.name}>{friend.name}</div>
-                    <div className={styles.breed}>{friend.breed}</div>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </>
+        <ul className={styles.friends}>
+          {visibleFriends.map((friend) => (
+            <li key={friend.username}>
+              <Link
+                href={ROUTES.profile(friend.username)}
+                className={styles.friend}
+              >
+                <Avatar
+                  src={friend.avatar}
+                  size={70}
+                  isOnline={friend.isOnline}
+                />
+                <div className={styles.name}>{friend.name}</div>
+              </Link>
+            </li>
+          ))}
+        </ul>
       )}
     </section>
   );
