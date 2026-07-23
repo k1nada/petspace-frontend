@@ -14,6 +14,7 @@ import { CLOUD_NAME } from "@/config/env";
 import { Photo } from "@/types";
 import { useUserStore } from "@/app/hooks/useUserStore";
 import { PhotoGallerySkeleton } from "./PhotoGallerySkeleton";
+import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 
 interface PhotoGalleryProps {
   photos: Photo[];
@@ -83,14 +84,11 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
       </div>
 
       {isEmpty ? (
-        <div className={styles.emptyPhotos}>
-          <p className={styles.emptyTitle}>
-            {t("photoGallery.emptyPhotosTitle")}
-          </p>
-          <p className={styles.emptyText}>
-            {t("photoGallery.emptyPhotosText")}
-          </p>
-        </div>
+        <EmptyState
+          compact
+          title={t("photoGallery.emptyPhotosTitle")}
+          text={t("photoGallery.emptyPhotosText")}
+        />
       ) : (
         <ul className={styles.gallery}>
           {localPhotos.map((photo, index) => (

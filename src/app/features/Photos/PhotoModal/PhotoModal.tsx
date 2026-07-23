@@ -11,6 +11,7 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import "dayjs/locale/pl";
 import "dayjs/locale/en";
 import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
+import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import api from "@/config/axios";
 import { MdDeleteSweep } from "react-icons/md";
 import { useState, useEffect } from "react";
@@ -49,7 +50,6 @@ export const PhotoModal = ({
   const [comments, setComments] = useState<CommentType[]>(
     photo?.comments ?? [],
   );
-  const [commentRefresh, setCommentRefresh] = useState(0);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const { handleKeyDown } = usePhotoKeyNavigation({
@@ -57,14 +57,16 @@ export const PhotoModal = ({
     onNext,
   });
 
-  useEffect(() => {
-    if (!photo) return;
-    getPhotoComments(photo.id).then((data) => {
+  const photoId = photo?.id;
+
+  const refreshComments = () => {
+    if (!photoId) return;
+    getPhotoComments(photoId).then((data) => {
       if (data) setComments(data);
     });
-  }, [photo?.id, commentRefresh]);
+  };
 
-  const refreshComments = () => setCommentRefresh((r) => r + 1);
+  useEffect(refreshComments, [photoId]);
 
   const deleteComment = async (commentId: string) => {
     try {
@@ -183,24 +185,13 @@ export const PhotoModal = ({
             </div>
           </div>
 
-          <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
-            <h2 className={styles.modalTitle}>{t("photoModal.modalTitle")}</h2>
-            <p className={styles.modalDescription}>
-              {t("photoModal.modalDescription")}
-            </p>
-            <div className={styles.actions}>
-              <Button
-                appearance="secondary"
-                onClick={() => setIsDeleteOpen(false)}
-              >
-                {t("common.cancel")}
-              </Button>
-
-              <Button appearance="primary" onClick={handleDeletePhoto}>
-                {t("common.delete")}
-              </Button>
-            </div>
-          </Modal>
+          <ConfirmModal
+            isOpen={isDeleteOpen}
+            title={t("photoModal.modalTitle")}
+            description={t("photoModal.modalDescription")}
+            onConfirm={handleDeletePhoto}
+            onClose={() => setIsDeleteOpen(false)}
+          />
         </div>
       )}
     </Modal>

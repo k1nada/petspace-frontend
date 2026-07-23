@@ -30,7 +30,6 @@ export default async function RootLayout({
             const t = localStorage.getItem('theme');
             const theme = t ? JSON.parse(t).state?.theme : 'light';
             document.documentElement.setAttribute('data-theme', theme || 'light');
-            document.documentElement.style.background = theme === 'dark' ? '#1a1a1c' : '#f2f2f2';
           } catch {}
           `,
           }}

@@ -60,6 +60,19 @@ export interface FollowUser {
 
 export type FollowListType = "followers" | "following";
 
+export type FamilyRelation = "parent" | "child";
+
+export interface FamilyMember {
+  id: string;
+  name: string;
+  relation: FamilyRelation;
+  avatar?: string;
+  breed?: string;
+  username?: string;
+}
+
+export type NewFamilyMember = Omit<FamilyMember, "id" | "relation">;
+
 export interface Achievements {
   firstFriend?: boolean;
   firstPost?: boolean;
