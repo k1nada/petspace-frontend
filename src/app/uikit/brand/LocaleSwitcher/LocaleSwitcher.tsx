@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { FaGlobe } from "react-icons/fa";
 import { Button } from "../../form/Button/Button";
 
@@ -12,11 +12,10 @@ interface LocaleSwitcherProps {
 export const LocaleSwitcher = ({ className }: LocaleSwitcherProps) => {
   const locale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
 
   const toggle = () => {
-    const next = locale === "en" ? "pl" : "en";
-    const newPath = pathname.replace(`/${locale}`, `/${next}`);
-    window.location.href = newPath;
+    router.replace(pathname, { locale: locale === "en" ? "pl" : "en" });
   };
 
   return (

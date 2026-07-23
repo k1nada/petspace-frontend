@@ -8,6 +8,7 @@ import defaultAvatar from "@/public/avatars/default.png";
 import { Avatar } from "../Avatar/Avatar";
 import { useState } from "react";
 import { Modal } from "../../overlays/Modal/Modal";
+import { ConfirmModal } from "../../overlays/ConfirmModal/ConfirmModal";
 import { toast } from "react-toastify";
 import { CLOUD_NAME } from "@/config/env";
 import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadModal/AvatarUploadModal";
@@ -140,20 +141,13 @@ export const AvatarEdit = ({
         </div>
       </Modal>
 
-      <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
-        <h2 className={styles.modalTitle}>{t("avatarEdit.deleteModalTitle")}</h2>
-        <p className={styles.deleteDescription}>
-          {t("avatarEdit.deleteModalDescription")}
-        </p>
-        <div className={styles.actions}>
-          <Button appearance="secondary" onClick={() => setIsDeleteOpen(false)}>
-            {t("common.cancel")}
-          </Button>
-          <Button appearance="primary" onClick={deleteAvatar}>
-            {t("avatarEdit.delete")}
-          </Button>
-        </div>
-      </Modal>
+      <ConfirmModal
+        isOpen={isDeleteOpen}
+        title={t("avatarEdit.deleteModalTitle")}
+        description={t("avatarEdit.deleteModalDescription")}
+        onConfirm={deleteAvatar}
+        onClose={() => setIsDeleteOpen(false)}
+      />
     </div>
   );
 };

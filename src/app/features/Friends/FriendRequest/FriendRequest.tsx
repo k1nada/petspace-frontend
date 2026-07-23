@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { acceptFriendRequest, rejectFriendRequest } from "@/app/api/friends";
 import { FriendRequestCard } from "../FriendRequestCard/FriendRequestCard";
+import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { useUserStore } from "@/app/hooks/useUserStore";
 
 export const FriendRequest = () => {
@@ -38,10 +39,10 @@ export const FriendRequest = () => {
 
   if (!requests.length) {
     return (
-      <div className={styles.empty}>
-        <p className={styles.emptyTitle}>{t("friendRequest.title")}</p>
-        <p className={styles.emptyText}>{t("friendRequest.empty")}</p>
-      </div>
+      <EmptyState
+        title={t("friendRequest.title")}
+        text={t("friendRequest.empty")}
+      />
     );
   }
 

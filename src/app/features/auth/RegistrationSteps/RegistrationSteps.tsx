@@ -2,14 +2,14 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import styles from "./RegistrationSteps.module.scss";
 import { ROUTES } from "@/routes/routes";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslations } from "use-intl";
 import { DatePicker } from "@/app/uikit/form/DatePicker/DatePicker";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
 import { toast } from "react-toastify";
-import { getBreeds } from "@/app/api/breeds";
-import { getCities, getCountries } from "@/app/api/locations";
+import { useBreeds } from "@/app/hooks/useBreeds";
+import { useCities, useCountries } from "@/app/hooks/useLocationOptions";
 import api from "@/config/axios";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Select } from "@/app/uikit/form/Select/Select";
@@ -38,22 +38,12 @@ const RegistrationSteps = ({
   const [selectedAge, setSelectedAge] = useState<Dayjs | undefined>(
     birthDate ? dayjs(birthDate) : undefined,
   );
-  const [breeds, setBreeds] = useState([]);
   const [selectedBreed, setSelectedBreed] = useState(breed ?? "");
-  const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(city ?? "");
-  const [countries, setCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(country ?? "");
-
-  useEffect(() => {
-    getBreeds().then(setBreeds);
-    getCountries().then(setCountries);
-  }, []);
-
-  useEffect(() => {
-    if (!selectedCountry) return;
-    getCities(selectedCountry).then(setCities);
-  }, [selectedCountry]);
+  const breeds = useBreeds();
+  const countries = useCountries();
+  const cities = useCities(selectedCountry);
 
   const skipRegistration = () => {
     router.push(ROUTES.registrationStepsAvatar);

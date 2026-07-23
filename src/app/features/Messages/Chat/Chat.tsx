@@ -12,8 +12,7 @@ import { ChatContact, Message, User } from "@/types";
 import { ChatMessage } from "../ChatMessage/ChatMessage";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { formatTime } from "@/utils/dateFormatters";
-import api from "@/config/axios";
-import { toast } from "react-toastify";
+import { useLocale } from "next-intl";
 
 interface ChatProps {
   conversations: ChatContact[];
@@ -22,7 +21,11 @@ interface ChatProps {
   onMessageUpdate?: (contactId: string, lastMessage: Message) => void;
 }
 
-const socket = io(process.env.NEXT_PUBLIC_API_URL);
+const socket = io(process.env.NEXT_PUBLIC_API_URL, {
+  auth: {
+    token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+  },
+});
 
 export const Chat = ({
   user,
@@ -31,6 +34,7 @@ export const Chat = ({
   onMessageUpdate,
 }: ChatProps) => {
   const t = useTranslations();
+  const locale = useLocale();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [online, setOnline] = useState(selectedChat?.isOnline ?? false);
@@ -39,23 +43,6 @@ export const Chat = ({
   const roomId = selectedChat
     ? [user.id, selectedChat.id].sort().join("_")
     : null;
-
-  useEffect(() => {
-    socket.emit("online", user.id);
-  }, [user.id]);
-  useEffect(() => {
-    conversations.forEach(async (contact) => {
-      const contactRoomId = [user.id, contact.id].sort().join("_");
-      try {
-        const { data } = await api.get(`/chat/${contactRoomId}`);
-        if (data.length > 0 && onMessageUpdate) {
-          onMessageUpdate(contact.id, data[data.length - 1]);
-        }
-      } catch {
-        toast.error(t("toasts.error"));
-      }
-    });
-  }, [conversations, user.id, onMessageUpdate]);
 
   useEffect(() => {
     if (listRef.current) {
@@ -79,7 +66,13 @@ export const Chat = ({
       }
     };
 
-    const handleStatus = ({ userId, isOnline }: any) => {
+    const handleStatus = ({
+      userId,
+      isOnline,
+    }: {
+      userId: string;
+      isOnline: boolean;
+    }) => {
       if (userId === selectedChat?.id) setOnline(isOnline);
     };
 
@@ -93,7 +86,7 @@ export const Chat = ({
   }, [roomId, selectedChat?.id, onMessageUpdate, selectedChat]);
 
   const handleSend = () => {
-    socket.emit("message", { roomId, senderId: user.id, text: message });
+    socket.emit("message", { roomId, text: message });
     setMessage("");
   };
 
@@ -108,7 +101,9 @@ export const Chat = ({
               </Link>
               <div className={styles.info}>
                 <span className={styles.name}>{selectedChat.name}</span>
-                {online && <span className={styles.online}>online</span>}
+                <span className={online ? styles.online : styles.status}>
+                  {online ? t("common.online") : t("chat.offline")}
+                </span>
               </div>
             </div>
           </div>
@@ -117,7 +112,7 @@ export const Chat = ({
               <ChatMessage
                 key={msg.id}
                 text={msg.text}
-                time={formatTime(msg.createdAt)}
+                time={formatTime(msg.createdAt, locale)}
                 isOwn={msg.sender?.id === user.id}
               />
             ))}

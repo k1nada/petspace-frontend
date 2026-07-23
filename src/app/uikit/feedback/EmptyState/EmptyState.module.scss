@@ -1,0 +1,31 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-l);
+  text-align: center;
+  padding: 70px 0;
+}
+
+.compact {
+  padding: 55px 0;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: var(--padding-xl);
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--font-l);
+}
+
+.text {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-m);
+}

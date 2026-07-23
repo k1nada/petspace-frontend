@@ -183,7 +183,9 @@
     "modalDescription": "Czy na pewno chcesz usunąć ten post?"
   },
   "comment": {
-    "reply": "Odpowiedz"
+    "reply": "Odpowiedz",
+    "deleteModalTitle": "Usuń komentarz",
+    "deleteModalDescription": "Czy na pewno chcesz usunąć ten komentarz?"
   },
   "commentCreator": {
     "placeholder": "Powąchaj i skomentuj..."
@@ -252,6 +254,32 @@
   "friendTip": {
     "title": "Czy wiesz, że...?",
     "text": "Psy w tym samym wieku i rasie najlepiej się dogadują. Uzupełnij swój profil, a znajdziemy świetnych znajomych w pobliżu!"
+  },
+  "familyTree": {
+    "title": "Drzewo rodzinne",
+    "parents": "Rodzice",
+    "children": "Szczeniaki",
+    "emptyParents": "Nie dodano jeszcze rodziców",
+    "emptyChildren": "Nie dodano jeszcze szczeniaków",
+    "addParent": "Dodaj rodzica",
+    "addPuppy": "Dodaj szczeniaka",
+    "remove": "Usuń",
+    "modalTitle": "Usuń członka rodziny",
+    "modalDescription": "Czy na pewno chcesz usunąć {name} z drzewa rodzinnego?",
+    "addModalTitleParent": "Dodaj rodzica",
+    "addModalTitleChild": "Dodaj szczeniaka",
+    "searchTab": "Szukaj",
+    "manualTab": "Dodaj ręcznie",
+    "searchPlaceholder": "Szukaj po imieniu lub nazwie użytkownika",
+    "noResults": "Nie znaleziono psów",
+    "nameLabel": "Imię",
+    "namePlaceholder": "Wpisz imię",
+    "breedLabel": "Rasa",
+    "avatarLabel": "Adres URL zdjęcia",
+    "avatarPlaceholder": "https://...",
+    "generatePhoto": "Wygeneruj zdjęcie",
+    "generatePhotoComingSoon": "Generowanie zdjęć przez AI wkrótce!",
+    "add": "Dodaj"
   },
   "contactList": {
     "title": "Wiadomości",

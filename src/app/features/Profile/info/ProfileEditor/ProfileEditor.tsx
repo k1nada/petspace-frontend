@@ -1,15 +1,14 @@
 import styles from "./ProfileEditor.module.scss";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "use-intl";
-import { useEffect, useState } from "react";
 import { DatePicker } from "@/app/uikit/form/DatePicker/DatePicker";
 import { AvatarEdit } from "@/app/uikit/user/AvatarEdit/AvatarEdit";
 import { toast } from "react-toastify";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { updateProfile } from "@/app/api/profile";
-import { getBreeds } from "@/app/api/breeds";
-import { getCities, getCountries } from "@/app/api/locations";
+import { useBreeds } from "@/app/hooks/useBreeds";
+import { useCities, useCountries } from "@/app/hooks/useLocationOptions";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Select } from "@/app/uikit/form/Select/Select";
 import { BannerInfo } from "@/types";
@@ -31,9 +30,6 @@ interface ProfileForm {
 
 export const ProfileEditor = ({ user }: ProfileEditorProps) => {
   const t = useTranslations();
-  const [breeds, setBreeds] = useState([]);
-  const [cities, setCities] = useState([]);
-  const [countries, setCountries] = useState([]);
 
   const { handleSubmit, control, setValue, reset } = useForm<ProfileForm>({
     defaultValues: {
@@ -49,6 +45,9 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
 
   const selectedCountry = useWatch({ control, name: "country" });
   const nameValue = useWatch({ control, name: "name" });
+  const breeds = useBreeds();
+  const countries = useCountries();
+  const cities = useCities(selectedCountry);
 
   const onSubmit = async (data: ProfileForm) => {
     try {
@@ -66,16 +65,6 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
       toast.error(t("toasts.error"));
     }
   };
-
-  useEffect(() => {
-    getBreeds().then(setBreeds);
-    getCountries().then(setCountries);
-  }, []);
-
-  useEffect(() => {
-    if (!selectedCountry) return;
-    getCities(selectedCountry).then(setCities);
-  }, [selectedCountry]);
 
   return (
     <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>

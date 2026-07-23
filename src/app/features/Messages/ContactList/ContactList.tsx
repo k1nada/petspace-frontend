@@ -8,6 +8,7 @@ import { ROUTES } from "@/routes/routes";
 import { useRouter } from "next/navigation";
 import { ChatContact, User } from "@/types";
 import { ContactCard } from "../ContactCard/ContactCard";
+import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 
 interface ContactListProps {
   conversations: ChatContact[];
@@ -45,16 +46,21 @@ export const ContactList = ({
             />
           ))
         ) : (
-          <div className={styles.emptyMessages}>
-            <p className={styles.emptyText}>
-              {t("contactList.emptyTitle")}
-              <br />
-              {t("contactList.emptyText")}
-            </p>
-            <Button appearance="primary" onClick={findFriends}>
-              {t("contactList.findFriends")}
-            </Button>
-          </div>
+          <EmptyState
+            center
+            text={
+              <>
+                {t("contactList.emptyTitle")}
+                <br />
+                {t("contactList.emptyText")}
+              </>
+            }
+            action={
+              <Button appearance="primary" onClick={findFriends}>
+                {t("contactList.findFriends")}
+              </Button>
+            }
+          />
         )}
       </ul>
     </div>

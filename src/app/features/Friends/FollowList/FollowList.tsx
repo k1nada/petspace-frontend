@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { unfollowUser, removeFollower } from "@/app/api/follows";
 import { FollowCard } from "../FollowCard/FollowCard";
+import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { FollowUser, FollowListType } from "@/types";
 
 interface FollowListProps {
@@ -41,14 +42,14 @@ export const FollowList = ({
 
   if (!users.length) {
     return (
-      <div className={styles.empty}>
-        <p className={styles.emptyTitle}>
-          {t(isFollowers ? "friends.emptyFollowersTitle" : "friends.emptyFollowingTitle")}
-        </p>
-        <p className={styles.emptyText}>
-          {t(isFollowers ? "friends.emptyFollowersText" : "friends.emptyFollowingText")}
-        </p>
-      </div>
+      <EmptyState
+        title={t(
+          isFollowers ? "friends.emptyFollowersTitle" : "friends.emptyFollowingTitle",
+        )}
+        text={t(
+          isFollowers ? "friends.emptyFollowersText" : "friends.emptyFollowingText",
+        )}
+      />
     );
   }
 
