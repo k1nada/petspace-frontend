@@ -73,7 +73,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
         <div className={styles.avatarSection}>
           <AvatarEdit
             src={user.avatar}
-            size={140}
+            size={120}
             avatarPhotos={user.avatarPhotos}
           />
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { io } from "socket.io-client";
+import socket from "@/services/socket";
 import styles from "./Chat.module.scss";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SumbitTextarea";
@@ -20,12 +20,6 @@ interface ChatProps {
   selectedChat?: ChatContact;
   onMessageUpdate?: (contactId: string, lastMessage: Message) => void;
 }
-
-const socket = io(process.env.NEXT_PUBLIC_API_URL, {
-  auth: {
-    token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
-  },
-});
 
 export const Chat = ({
   user,
@@ -80,10 +74,11 @@ export const Chat = ({
     socket.on("statusChange", handleStatus);
 
     return () => {
+      socket.emit("leave", roomId);
       socket.off("message", handleMessage);
       socket.off("statusChange", handleStatus);
     };
-  }, [roomId, selectedChat?.id, onMessageUpdate, selectedChat]);
+  }, [roomId, selectedChat, onMessageUpdate]);
 
   const handleSend = () => {
     socket.emit("message", { roomId, text: message });

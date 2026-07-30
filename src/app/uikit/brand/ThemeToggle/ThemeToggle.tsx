@@ -1,5 +1,6 @@
 "use client";
 
+import { useLayoutEffect } from "react";
 import { useThemeStore } from "../../../hooks/useThemeStore";
 import { Button } from "../../form/Button/Button";
 import { FaMoon } from "react-icons/fa";
@@ -11,6 +12,12 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ className }: ThemeToggleProps) {
   const { theme, toggle } = useThemeStore();
+
+  // Keeps <html data-theme> in sync with the store, including after a
+  // locale switch remounts the root layout and wipes the attribute.
+  useLayoutEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
   return (
     <Button appearance="ghost" onClick={toggle} className={className}>

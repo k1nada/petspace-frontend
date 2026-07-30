@@ -17,7 +17,7 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { useLike } from "@/app/hooks/useLike";
 import { ROUTES } from "@/routes/routes";
 import { Link } from "@/app/uikit/navigation/Link/Link";
-import { Modal } from "@/app/uikit/overlays/Modal/Modal";
+import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { formatDate } from "@/utils/dateFormatters";
 
 export interface PostProps {
@@ -128,19 +128,13 @@ export const Post = ({ post, onRefresh }: PostProps) => {
         <CommentCreator postId={post.id} onSuccess={onRefresh} />
       )}
 
-      <Modal isOpen={isDeleteOpen} onClose={() => setIsDeleteOpen(false)}>
-        <h2 className={styles.modalTitle}>{t("post.modalTitle")}</h2>
-        <p className={styles.modalDescription}>{t("post.modalDescription")}</p>
-        <div className={styles.actions}>
-          <Button appearance="secondary" onClick={() => setIsDeleteOpen(false)}>
-            {t("common.cancel")}
-          </Button>
-
-          <Button appearance="primary" onClick={() => deletePost()}>
-            {t("common.delete")}
-          </Button>
-        </div>
-      </Modal>
+      <ConfirmModal
+        isOpen={isDeleteOpen}
+        title={t("post.modalTitle")}
+        description={t("post.modalDescription")}
+        onConfirm={deletePost}
+        onClose={() => setIsDeleteOpen(false)}
+      />
     </article>
   );
 };

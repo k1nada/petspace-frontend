@@ -57,6 +57,15 @@ export const FriendCard = ({
     }
   };
 
+  const handleCancelRequest = async () => {
+    try {
+      await deleteFriend(currentUser, friend.username);
+      await fetchCurrentUser();
+    } catch {
+      toast.error(t("toasts.error"));
+    }
+  };
+
   return (
     <li className={styles.card}>
       <Link href={ROUTES.profile(friend.username)}>
@@ -84,7 +93,7 @@ export const FriendCard = ({
             </Link>
             {!isFriend &&
               (isPending ? (
-                <Button appearance="secondary" disabled>
+                <Button appearance="secondary" onClick={handleCancelRequest}>
                   {t("friends.requestSent")}
                 </Button>
               ) : isFollowing ? (

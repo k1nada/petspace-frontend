@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import { FormField } from "@/app/uikit/form/FormField/FormField";
 import api from "@/config/axios";
 import { SignUpData } from "@/types";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
 export const SignUp = () => {
   const t = useTranslations();
@@ -35,12 +36,18 @@ export const SignUp = () => {
   } = useForm<SignUpData>();
 
   const handleError = (e: unknown) => {
-    if (!isAxiosError(e)) return;
+    if (!isAxiosError(e)) {
+      toast.error(t("toasts.error"));
+      return;
+    }
     const type = e.response?.data?.type;
-    if (type === "EMAIL_ALREADY_EXISTS")
+    if (type === "EMAIL_ALREADY_EXISTS") {
       toast.error(t("errors.EMAIL_ALREADY_EXISTS"));
-    if (type === "USERNAME_ALREADY_EXISTS")
+    } else if (type === "USERNAME_ALREADY_EXISTS") {
       toast.error(t("errors.USERNAME_ALREADY_EXISTS"));
+    } else {
+      toast.error(t("toasts.error"));
+    }
   };
 
   const onSubmit = async (data: SignUpData) => {
@@ -50,11 +57,12 @@ export const SignUp = () => {
       } = await api.post("/signup", data);
 
       if (!user?.username) {
-        toast.error(t("toast.error"));
+        toast.error(t("toasts.error"));
         return;
       }
 
       localStorage.setItem("token", token);
+      useUserStore.getState().fetchCurrentUser();
       router.push(ROUTES.registrationSteps);
     } catch (e) {
       handleError(e);

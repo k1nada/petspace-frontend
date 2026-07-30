@@ -1,7 +1,7 @@
 "use client";
 
 import { useDropzone } from "react-dropzone";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Avatar } from "../../../../uikit/user/Avatar/Avatar";
 import { MdPhotoCamera } from "react-icons/md";
 import styles from "./AvatarUploadModal.module.scss";
@@ -18,6 +18,15 @@ export const AvatarUploadModal = ({
   profileAvatar,
 }: AvatarUploadModalProps) => {
   const [preview, setPreview] = useState(profileAvatar);
+
+  useEffect(() => {
+    return () => {
+      if (preview?.startsWith("blob:")) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/jpeg": [],

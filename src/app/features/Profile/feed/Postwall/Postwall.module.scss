@@ -4,29 +4,9 @@
   gap: var(--gap-xl);
   background: var(--bg-card);
   padding: var(--padding-xl);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius-m);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.emptyFeed {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-l);
-  text-align: center;
-  padding: 55px 0;
-}
-
-.emptyTitle {
-  margin: 0;
-  font-weight: 600;
-  color: var(--text-primary);
-  font-size: var(--font-l);
-}
-
-.emptyText {
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: var(--font-m);
 }
 
 .list {

@@ -12,6 +12,8 @@ import { Comment as CommentType } from "@/types";
 import { ROUTES } from "@/routes/routes";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { formatDate } from "@/utils/dateFormatters";
+import { useState } from "react";
+import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 
 interface CommentProps {
   comment: CommentType;
@@ -21,6 +23,7 @@ interface CommentProps {
 export const Comment = ({ comment, onDelete }: CommentProps) => {
   const t = useTranslations();
   const locale = useLocale();
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   const { liked, displayCount, likeLoading, handleLike } = useLike({
     initialLiked: comment.liked,
@@ -28,6 +31,11 @@ export const Comment = ({ comment, onDelete }: CommentProps) => {
     onLike: likeComment,
     id: comment.id,
   });
+
+  const handleConfirmDelete = () => {
+    onDelete();
+    setIsDeleteOpen(false);
+  };
 
   return (
     <article className={styles.container}>
@@ -59,11 +67,19 @@ export const Comment = ({ comment, onDelete }: CommentProps) => {
         <Button
           appearance="ghost"
           className={styles.deleteButton}
-          onClick={onDelete}
+          onClick={() => setIsDeleteOpen(true)}
         >
           <IoCloseSharp size={20} />
         </Button>
       </div>
+
+      <ConfirmModal
+        isOpen={isDeleteOpen}
+        title={t("comment.deleteModalTitle")}
+        description={t("comment.deleteModalDescription")}
+        onConfirm={handleConfirmDelete}
+        onClose={() => setIsDeleteOpen(false)}
+      />
     </article>
   );
 };

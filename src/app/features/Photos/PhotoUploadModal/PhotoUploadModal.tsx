@@ -32,12 +32,14 @@ export const PhotoUploadModal = ({
     },
     multiple: true,
     onDrop: (dropped) => {
+      previews.forEach((url) => URL.revokeObjectURL(url));
       setFiles(dropped);
       setPreviews(dropped.map((f) => URL.createObjectURL(f)));
     },
   });
 
   const handleClose = () => {
+    previews.forEach((url) => URL.revokeObjectURL(url));
     setFiles([]);
     setPreviews([]);
     onClose();
@@ -46,6 +48,7 @@ export const PhotoUploadModal = ({
   const handleUpload = () => {
     if (!files.length) return;
     onUpload(files);
+    previews.forEach((url) => URL.revokeObjectURL(url));
     setFiles([]);
     setPreviews([]);
     onClose();

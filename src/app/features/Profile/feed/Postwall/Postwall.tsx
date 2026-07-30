@@ -5,6 +5,7 @@ import styles from "./Postwall.module.scss";
 import { useTranslations } from "next-intl";
 import { Post as PostType } from "@/types";
 import { PostwallSkeleton } from "./PostwallSkeleton";
+import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 
 interface PostwallProps {
   posts: PostType[];
@@ -28,10 +29,7 @@ export const Postwall = ({ posts, loading, onRefresh }: PostwallProps) => {
           ))}
         </ul>
       ) : (
-        <div className={styles.emptyFeed}>
-          <p className={styles.emptyTitle}>{t("feed.title")}</p>
-          <p className={styles.emptyText}>{t("feed.text")}</p>
-        </div>
+        <EmptyState compact title={t("feed.title")} text={t("feed.text")} />
       )}
     </div>
   );

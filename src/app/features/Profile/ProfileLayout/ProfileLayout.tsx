@@ -20,18 +20,20 @@ interface ProfileLayoutProps {
 export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
-  const [refresh, setRefresh] = useState(0);
   const currentUser = useUserStore((state) => state.currentUser);
   const isOwner = currentUser?.username === bannerInfo.username;
+  const postwallId = bannerInfo.postwallId;
 
-  useEffect(() => {
-    getPosts(bannerInfo.postwallId!).then((data) => {
+  const triggerRefresh = () => {
+    if (!postwallId) return;
+    getPosts(postwallId).then((data) => {
       setPosts(data ?? []);
       setLoading(false);
     });
-  }, [refresh, bannerInfo.postwallId]);
+  };
 
-  const triggerRefresh = () => setRefresh((r) => r + 1);
+  useEffect(triggerRefresh, [postwallId]);
+
   const friends = bannerInfo.friends ?? [];
   const photos = bannerInfo.photos ?? [];
 

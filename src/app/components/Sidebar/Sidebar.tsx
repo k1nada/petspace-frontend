@@ -19,7 +19,7 @@ export const Sidebar = () => {
   const tips = t.raw("dailyTip.tips") as string[];
   const tip = tips[new Date().getDay()];
 
-  if (isLoading) return <SidebarSkeleton />;
+  if (isLoading && !currentUser) return <SidebarSkeleton />;
   if (!currentUser) return null;
 
   const username = currentUser.username;
