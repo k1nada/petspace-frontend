@@ -20,7 +20,7 @@ export const Header = () => {
   const { query, results, search, select } = useSearch();
   const isLoading = useUserStore((state) => state.isLoading);
 
-  if (isLoading) return <HeaderSkeleton />;
+  if (isLoading && !currentUser) return <HeaderSkeleton />;
 
   return (
     <header className={styles.header}>

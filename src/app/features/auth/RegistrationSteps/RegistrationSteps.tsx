@@ -45,6 +45,11 @@ const RegistrationSteps = ({
   const countries = useCountries();
   const cities = useCities(selectedCountry);
 
+  const handleCountryChange = (value: string) => {
+    setSelectedCountry(value);
+    setSelectedCity("");
+  };
+
   const skipRegistration = () => {
     router.push(ROUTES.registrationStepsAvatar);
   };
@@ -102,7 +107,7 @@ const RegistrationSteps = ({
           </label>
           <Combobox
             value={selectedCountry}
-            onChange={setSelectedCountry}
+            onChange={handleCountryChange}
             options={countries}
             placeholder={t("placeholder.noneSelected")}
           />

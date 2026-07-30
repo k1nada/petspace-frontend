@@ -2,17 +2,16 @@
 
 import RegistrationSteps from "@/app/features/auth/RegistrationSteps/RegistrationSteps";
 import styles from "./page.module.scss";
-import { Header } from "@/app/components/Header/Header";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
-interface RegistrationStepsPageProps {
-  username: string;
-}
+const RegistrationStepsPage = () => {
+  const currentUser = useUserStore((state) => state.currentUser);
 
-const RegistrationStepsPage = ({ username }: RegistrationStepsPageProps) => {
+  if (!currentUser) return null;
+
   return (
     <main className={styles.page}>
-      <Header />
-      <RegistrationSteps username={username} />
+      <RegistrationSteps username={currentUser.username} />
     </main>
   );
 };

@@ -9,15 +9,16 @@ import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadMod
 import { useState } from "react";
 import { toast } from "react-toastify";
 import api from "@/config/axios";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
 export const RegistrationStepsAvatar = () => {
   const router = useRouter();
   const t = useTranslations();
+  const currentUser = useUserStore((state) => state.currentUser);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
   const navigateToProfile = () => {
-    const username = localStorage.getItem("username");
-    if (username) router.push(ROUTES.profile(username));
+    if (currentUser) router.push(ROUTES.profile(currentUser.username));
   };
 
   const saveAvatar = async () => {

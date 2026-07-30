@@ -15,7 +15,7 @@ import { AchievementsModal } from "../../modals/AchievementsModal/AchievementsMo
 import { useUserStore } from "@/app/hooks/useUserStore";
 import { BannerInfo } from "@/types";
 import { ProfileBannerSkeleton } from "./ProfileBannerSkeleton";
-import { addFriend as addFriendAPI } from "@/app/api/friends";
+import { addFriend as addFriendAPI, deleteFriend } from "@/app/api/friends";
 import { getRelationshipStatus } from "@/utils/friends";
 import { toast } from "react-toastify";
 
@@ -67,6 +67,16 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
       await addFriendAPI(currentUser.username, bannerInfo.username);
       await fetchCurrentUser();
       toast.success(t("profileBanner.requestSent"));
+    } catch {
+      toast.error(t("toasts.error"));
+    }
+  };
+
+  const cancelRequest = async () => {
+    if (!currentUser?.username) return;
+    try {
+      await deleteFriend(currentUser.username, bannerInfo.username);
+      await fetchCurrentUser();
     } catch {
       toast.error(t("toasts.error"));
     }
@@ -182,7 +192,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
             >
               <FaMessage size={16} />
             </Button>
-            <Button appearance="primary" disabled>
+            <Button appearance="primary" onClick={cancelRequest}>
               {t("profileBanner.requestSent")}
             </Button>
           </>

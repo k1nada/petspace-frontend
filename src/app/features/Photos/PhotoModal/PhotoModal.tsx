@@ -79,7 +79,7 @@ export const PhotoModal = ({
 
   const handleDeletePhoto = async () => {
     try {
-      onDelete?.();
+      await onDelete?.();
       setIsDeleteOpen(false);
     } catch {
       toast.error(t("toasts.error"));
