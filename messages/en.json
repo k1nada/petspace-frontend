@@ -8,6 +8,7 @@
     "back": "Back",
     "edit": "Edit",
     "upload": "Upload",
+    "select": "Select",
     "cancel": "Cancel",
     "close": "Close",
     "or": "or",
@@ -85,13 +86,13 @@
   "dailyTip": {
     "title": "Tip of the day",
   "tips": [
-    "I need at least 30 minutes of walkies today. No excuses, hooman!",
-    "My bowl is empty again. Fresh water, please, I'm very thirsty.",
-    "Feed me at the same time every day. My tummy has a schedule.",
-    "Bored paws = chewed shoes. Get me a puzzle toy, stat!",
-    "Brush me! It feels amazing and I'll love you even more.",
-    "I need friends! Take me to the park to meet new pals.",
-    "Time for my annual vet visit. I promise I won't bite... much."
+    "I still need my 30 minutes outside today. Grab the leash.",
+    "My water bowl's empty again. Fill it up before I start complaining.",
+    "Feed me at the same time every day, my stomach keeps better track than you do.",
+    "If I get bored I chew things. Buy me a puzzle toy and save your shoes.",
+    "Brush me for a bit, I love it more than I let on.",
+    "Take me somewhere with other dogs, I've been cooped up too long.",
+    "I have a vet appointment coming up. Bring treats and I'll forgive you faster."
   ]
   },
   "toasts": {
@@ -174,6 +175,7 @@
   },
   "postCreator": {
     "photo": "Photo",
+    "removePhoto": "Remove photo",
     "place": "Place",
     "publish": "Add post",
     "placeholder": "What's new, "
@@ -254,6 +256,14 @@
   "friendTip": {
     "title": "Did you know?",
     "text": "Dogs the same age and breed make the best friends. Fill in your profile and we'll find great matches nearby!"
+  },
+  "feedTip": {
+    "title": "Did you know?",
+    "text": "Follow more dogs to fill your feed with fresh sniffs, walks and zoomies from friends nearby!"
+  },
+  "familyTip": {
+    "title": "Did you know?",
+    "text": "Building out your family tree helps other dogs spot relatives and see shared traits across generations!"
   },
   "familyTree": {
     "title": "Family tree",

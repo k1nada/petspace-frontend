@@ -8,6 +8,7 @@
     "back": "Wróć",
     "edit": "Edytuj",
     "upload": "Prześlij",
+    "select": "Wybierz",
     "cancel": "Anuluj",
     "close": "Zamknij",
     "or": "lub",
@@ -85,13 +86,13 @@
   "dailyTip": {
   "title": "Porada dnia",
   "tips": [
-    "Potrzebuję co najmniej 30 minut spaceru dzisiaj. Bez wymówek, człowieku!",
-    "Miska znowu pusta. Świeża woda, proszę, jestem bardzo spragniony.",
-    "Karm mnie o tej samej porze każdego dnia. Mój brzuszek ma swój harmonogram.",
-    "Znudzone łapy = pogryzione buty. Kup mi zabawkę logiczną, już!",
-    "Wyczesz mnie! To cudowne uczucie, a ja pokocham cię jeszcze bardziej.",
-    "Potrzebuję przyjaciół! Zabierz mnie do parku poznać nowych znajomych.",
-    "Czas na coroczną wizytę u weterynarza. Obiecuję, że nie ugryzę... za bardzo."
+    "Wciąż potrzebuję dzisiaj moich 30 minut na dworze. Bierz smycz.",
+    "Miska znowu pusta. Napełnij ją, zanim zacznę narzekać.",
+    "Karm mnie o tej samej porze każdego dnia, mój brzuch pilnuje tego lepiej niż ty.",
+    "Jak się nudzę, to gryzę. Kup mi zabawkę logiczną i ratuj swoje buty.",
+    "Wyczesz mnie chwilę, lubię to bardziej, niż okazuję.",
+    "Zabierz mnie gdzieś, gdzie są inne psy, za długo siedzę w czterech ścianach.",
+    "Mam wkrótce wizytę u weterynarza. Przynieś smakołyki, szybciej ci wybaczę."
   ]
   },
   "toasts": {
@@ -174,6 +175,7 @@
   },
   "postCreator": {
     "photo": "Zdjęcie",
+    "removePhoto": "Usuń zdjęcie",
     "place": "Miejsce",
     "publish": "Opublikuj post",
     "placeholder": "Co nowego, "
@@ -254,6 +256,14 @@
   "friendTip": {
     "title": "Czy wiesz, że...?",
     "text": "Psy w tym samym wieku i rasie najlepiej się dogadują. Uzupełnij swój profil, a znajdziemy świetnych znajomych w pobliżu!"
+  },
+  "feedTip": {
+    "title": "Czy wiesz, że...?",
+    "text": "Obserwuj więcej psów, aby Twój feed wypełnił się świeżymi spacerami i zabawami znajomych z okolicy!"
+  },
+  "familyTip": {
+    "title": "Czy wiesz, że...?",
+    "text": "Uzupełnianie drzewa rodzinnego pomaga innym psom odnaleźć krewnych i dostrzec wspólne cechy między pokoleniami!"
   },
   "familyTree": {
     "title": "Drzewo rodzinne",
