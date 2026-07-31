@@ -4,7 +4,6 @@
   gap: var(--gap-xl);
   background: var(--bg-card);
   padding: var(--padding-xl);
-  border: 1px solid var(--border-card);
   border-radius: var(--radius-m);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
@@ -12,5 +11,10 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-m);
+  gap: var(--gap-l);
+}
+
+.list > li + li {
+  padding-top: var(--gap-l);
+  border-top: 1px solid var(--border-divider);
 }
