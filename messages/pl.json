@@ -5,16 +5,14 @@
     "continue": "Kontynuuj",
     "saveAndContinue": "Zapisz i kontynuuj",
     "skip": "Pomiń",
-    "back": "Wróć",
-    "edit": "Edytuj",
     "upload": "Prześlij",
     "select": "Wybierz",
     "cancel": "Anuluj",
-    "close": "Zamknij",
     "or": "lub",
     "online": "Online",
     "offline": "Offline",
-    "lastSeenAt": "Ostatnio widziany(a) {time}"
+    "avatar": "Awatar",
+    "preview": "Podgląd"
   },
   "validations": {
     "minLength": "Musi zawierać co najmniej {min} znaków",
@@ -25,9 +23,9 @@
     "passwordPattern": "Hasło musi zawierać co najmniej jedną literę i jedną cyfrę"
   },
   "errors": {
-    "EMAIL_ALREADY_EXISTS": "Ten email jest już zarejestrowany",
+    "EMAIL_ALREADY_EXISTS": "Ten e-mail jest już zarejestrowany",
     "USERNAME_ALREADY_EXISTS": "Ta nazwa użytkownika jest już zajęta",
-    "INVALID_CREDENTIALS": "Nieprawidłowy email lub hasło"
+    "INVALID_CREDENTIALS": "Nieprawidłowy e-mail lub hasło"
   },
   "placeholder": {
     "noneSelected": "Nie wybrano",
@@ -45,20 +43,19 @@
   "signUp": {
     "title": "Rejestracja",
     "subtitle": "Wypełnij formularz, aby utworzyć konto",
-    "name": "Imię",
-    "displayNameHint": "Twoje imię wyświetlane",
+    "name": "Nazwa wyświetlana",
+    "displayNameHint": "Tak zobaczą Cię inni",
     "username": "Nazwa użytkownika",
     "displayUsernameHint": "Twój @identyfikator",
     "email": "E-mail",
     "password": "Hasło",
     "createAccount": "Utwórz konto",
-    "haveAccount": "Mam już konto"
+    "haveAccount": "Masz już konto?"
   },
   "registrationSteps": {
     "step": "KROK 1 Z 2",
     "title": "Zanim zaczniemy...",
     "subtitle": "Każda wielka sfora zaczyna się od przedstawienia",
-    "bio": "O sobie:",
     "birthday": "Urodziny:",
     "sex": "Płeć:",
     "country": "Kraj:",
@@ -76,8 +73,6 @@
     "messages": "Wiadomości",
     "friends": "Znajomi",
     "photos": "Zdjęcia",
-    "favorites": "Ulubione",
-    "places": "Miejsca",
     "familyTree": "Drzewo rodzinne"
   },
   "searchBar": {
@@ -102,21 +97,17 @@
   "notFound": {
     "text": "Ups! Jamnik poszedł kopać sobie norkę...",
     "description": "Ta strona zaginęła gdzieś głęboko w ogrodzie.\nJamnik jej szuka, ale jak dotąd bez powodzenia.",
-    "goBack": "Wróć wstecz"
+    "goBack": "Wróć"
   },
   "profileBanner": {
     "info": "Więcej info",
     "friends": "znajomi",
     "photos": "zdjęcia",
-    "places": "miejsca",
-    "achievements": "Osiągnięcia",
     "editProfile": "Edytuj profil",
-    "modalTitle": "Moje info",
-    "modalInterests": "Zainteresowania",
     "addFriend": "Dodaj znajomego",
     "message": "Wiadomość",
     "familyTree": "Drzewo rodzinne",
-    "requestSent": "Wysłano zaproszenie",
+    "requestSent": "Zaproszenie wysłane",
     "following": "Obserwujesz"
   },
   "profileEditor": {
@@ -155,7 +146,6 @@
   },
   "profileFriends": {
     "title": "Znajomi",
-    "showFriends": "Pokaż wszystkich znajomych",
     "empty": "Brak członków sfory"
   },
   "avatarEdit": {
@@ -176,11 +166,15 @@
   "postCreator": {
     "photo": "Zdjęcie",
     "removePhoto": "Usuń zdjęcie",
+    "gallery": "Galeria",
+    "chooseFromGallery": "Wybierz z galerii",
+    "noGalleryPhotos": "Brak zdjęć w galerii",
     "place": "Miejsce",
     "publish": "Opublikuj post",
     "placeholder": "Co nowego, "
   },
   "post": {
+    "image": "Zdjęcie posta",
     "modalTitle": "Usuń post",
     "modalDescription": "Czy na pewno chcesz usunąć ten post?"
   },
@@ -194,7 +188,8 @@
   },
   "photoGallery": {
     "title": "Moje zdjęcia",
-    "addPhoto": "Dodaj zdjęcie",
+    "addPhoto": "Dodaj nowe zdjęcie",
+    "photoAlt": "Zdjęcie {name}",
     "emptyPhotosTitle": "Brak zdjęć",
     "emptyPhotosText": "Czas uwiecznić chwile merdania ogonem!"
   },
@@ -203,7 +198,6 @@
     "empty": "Brak chwil merdania ogonem"
   },
   "photoModal": {
-    "makeProfilePhoto": "Ustaw jako zdjęcie profilowe",
     "counter": "{current} / {total}",
     "commentsTitle": "Jeszcze żadnych merdań ogonem...",
     "commentsText": "Bądź pierwszy!",
@@ -221,7 +215,6 @@
     "followersTitle": "Obserwujący",
     "followingTitle": "Obserwowani",
     "message": "Wiadomość",
-    "friends": "znajomych",
     "addFriend": "Dodaj znajomego",
     "following": "Obserwujesz",
     "requestSent": "Zaproszenie wysłane",
@@ -239,7 +232,6 @@
     "title": "Brak zaproszeń",
     "accept": "Akceptuj",
     "decline": "Odrzuć",
-    "mutualFriends": "{count} wspólnych znajomych",
     "wantsToBeFriends": "Chce zostać znajomym",
     "empty": "Jeszcze nic tu nie ma — czas poznać nowych znajomych!",
     "acceptedSuccess": "Zaproszenie zaakceptowane",
@@ -299,7 +291,6 @@
   },
   "chat": {
     "placeholder": "Napisz wiadomość...",
-    "offline": "Offline",
     "selectFriend": "Wybierz znajomego, aby zacząć rozmawiać",
     "noBarks": "Brak szczekania",
     "emptyInbox": "Twoja skrzynka jest cichsza niż śpiący szczeniak."

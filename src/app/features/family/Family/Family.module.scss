@@ -5,7 +5,7 @@
   gap: var(--gap-l);
   padding: var(--padding-xl);
   border-radius: var(--radius-m);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-card);
 }
 
 .title {
@@ -48,5 +48,10 @@
 }
 
 .breed {
-  font-size: var(--font-m);
+  padding: 2px var(--gap-s);
+  border-radius: var(--radius-full);
+  background: var(--bg-tag);
+  color: var(--text-tag);
+  font-size: var(--font-xs);
+  font-weight: 600;
 }

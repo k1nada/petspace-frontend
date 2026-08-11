@@ -1,6 +1,6 @@
 .errorMessage {
   color: var(--text-error);
   font-size: var(--font-s);
-  margin-top: 4px;
+  margin-top: var(--gap-xs);
   display: block;
 }

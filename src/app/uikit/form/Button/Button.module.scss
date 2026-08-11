@@ -10,7 +10,7 @@
 
 .primary {
   background: var(--primary);
-  color: white;
+  color: var(--text-on-color);
 
   &:hover {
     background: var(--primary-hover);
@@ -39,4 +39,8 @@
   background: transparent;
   border-radius: var(--radius-full);
   padding: 0;
+
+  &:hover {
+    background: var(--button-ghost-hover);
+  }
 }

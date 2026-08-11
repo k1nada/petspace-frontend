@@ -1,11 +1,5 @@
 .wrapper {
   position: relative;
-
-  &:hover .dropdown {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0.5s;
-  }
 }
 
 .trigger {
@@ -17,29 +11,36 @@
   }
 }
 
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dropdown);
+}
+
 .dropdown {
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 100%;
   right: 0;
+  margin-top: var(--gap-xs);
   z-index: var(--z-dropdown);
   background: var(--bg-elevated);
   border-radius: var(--radius-m);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   min-width: 150px;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.2s,
-    visibility 0.2s;
-  transition-delay: 0.5s;
+  overflow: hidden;
 }
 
 .item {
   display: flex;
   align-items: center;
-  width: 100%;
   gap: var(--gap-s);
   padding: var(--padding-s);
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--button-secondary-hover);
+  }
 }

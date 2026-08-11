@@ -1,0 +1,41 @@
+.container {
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-l);
+  padding: var(--padding-xl);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-card);
+}
+
+.title {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: var(--font-l);
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  color: var(--text-primary);
+  gap: var(--gap-m) var(--gap-xl);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  font-size: var(--font-m);
+}
+
+.label {
+  padding: 0;
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--gap-s);
+}
