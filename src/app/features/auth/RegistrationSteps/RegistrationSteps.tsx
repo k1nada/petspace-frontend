@@ -3,7 +3,7 @@ import styles from "./RegistrationSteps.module.scss";
 import { ROUTES } from "@/routes/routes";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useTranslations } from "use-intl";
+import { useTranslations } from "next-intl";
 import { DatePicker } from "@/app/uikit/form/DatePicker/DatePicker";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
@@ -81,7 +81,6 @@ const RegistrationSteps = ({
         </div>
         <div className={styles.field}>
           <label className={styles.label}>{t("registrationSteps.sex")}</label>
-          {/* TODO */}
           <Select
             value={sexValue}
             onChange={setsexValue}

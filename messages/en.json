@@ -5,16 +5,14 @@
     "continue": "Continue",
     "saveAndContinue": "Save & continue",
     "skip": "Skip",
-    "back": "Back",
-    "edit": "Edit",
     "upload": "Upload",
     "select": "Select",
     "cancel": "Cancel",
-    "close": "Close",
     "or": "or",
     "online": "Online",
     "offline": "Offline",
-    "lastSeenAt": "Last seen {time}"
+    "avatar": "Avatar",
+    "preview": "Preview"
   },
   "validations": {
     "minLength": "Must be at least {min} characters",
@@ -58,7 +56,6 @@
     "step": "STEP 1 OF 2",
     "title": "Before we begin...",
     "subtitle": "Every great pack starts with an introduction",
-    "bio": "About:",
     "birthday": "Birthday:",
     "sex": "Sex:",
     "country": "Country:",
@@ -76,8 +73,6 @@
     "messages": "Messages",
     "friends": "Friends",
     "photos": "Photos",
-    "favorites": "Favorites",
-    "places": "Places",
     "familyTree": "Family tree"
   },
   "searchBar": {
@@ -108,11 +103,7 @@
     "info": "More info",
     "friends": "friends",
     "photos": "photos",
-    "places": "places",
-    "achievements": "Achievements",
     "editProfile": "Edit profile",
-    "modalTitle": "My info",
-    "modalInterests": "Interests",
     "addFriend": "Add friend",
     "message": "Message",
     "familyTree": "Family tree",
@@ -155,7 +146,6 @@
   },
   "profileFriends": {
     "title": "Friends",
-    "showFriends": "Show all friends",
     "empty": "No pack members yet"
   },
   "avatarEdit": {
@@ -176,11 +166,15 @@
   "postCreator": {
     "photo": "Photo",
     "removePhoto": "Remove photo",
+    "gallery": "Gallery",
+    "chooseFromGallery": "Choose from gallery",
+    "noGalleryPhotos": "No photos in your gallery yet",
     "place": "Place",
     "publish": "Add post",
     "placeholder": "What's new, "
   },
   "post": {
+    "image": "Post image",
     "modalTitle": "Delete post",
     "modalDescription": "Are you sure you want to delete this post?"
   },
@@ -195,6 +189,7 @@
   "photoGallery": {
     "title": "My photos",
     "addPhoto": "Add new photo",
+    "photoAlt": "{name}'s photo",
     "emptyPhotosTitle": "No photos yet",
     "emptyPhotosText": "Time to capture some tail-wagging moments!"
   },
@@ -203,7 +198,6 @@
     "empty": "No tail-wagging moments yet"
   },
   "photoModal": {
-    "makeProfilePhoto": "Make profile photo",
     "counter": "{current} / {total}",
     "commentsTitle": "No tail wags yet...",
     "commentsText": "Be the first!",
@@ -221,7 +215,6 @@
     "followersTitle": "Followers",
     "followingTitle": "Following",
     "message": "Message",
-    "friends": "friends",
     "addFriend": "Add friend",
     "following": "Following",
     "requestSent": "Request sent",
@@ -239,7 +232,6 @@
     "title": "No requests yet",
     "accept": "Accept",
     "decline": "Decline",
-    "mutualFriends": "{count} mutual friends",
     "wantsToBeFriends": "Wants to be friends",
     "empty": "Nothing here yet — go make some new friends!",
     "acceptedSuccess": "Friend request accepted",
@@ -297,9 +289,8 @@
     "emptyText": "Find other dogs to start chatting!",
     "findFriends": "Find friends"
   },
-  "chat": {    
+  "chat": {
     "placeholder": "Write a message...",
-    "offline": "Offline",
     "selectFriend": "Select a friend to start chatting",
     "noBarks": "No barks yet",
     "emptyInbox": "Your inbox is quieter than a sleeping puppy."

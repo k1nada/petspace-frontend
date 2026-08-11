@@ -10,7 +10,6 @@ import { useState } from "react";
 import { Modal } from "../../overlays/Modal/Modal";
 import { ConfirmModal } from "../../overlays/ConfirmModal/ConfirmModal";
 import { toast } from "react-toastify";
-import { CLOUD_NAME } from "@/config/env";
 import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadModal/AvatarUploadModal";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Photo } from "@/types";
@@ -114,7 +113,6 @@ export const AvatarEdit = ({
         photo={isPhotoOpen ? (avatarPhotos?.[currentIndex] ?? null) : null}
         name={name ?? ""}
         avatar={src}
-        cloudName={CLOUD_NAME}
         photosCount={avatarPhotos?.length ?? 0}
         currentIndex={(avatarPhotos?.length ?? 1) - 1 - currentIndex}
         onClose={() => setIsPhotoOpen(false)}

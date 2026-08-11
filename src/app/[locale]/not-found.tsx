@@ -24,7 +24,7 @@ export default function NotFound() {
         </main>
         <Image
           src={notFoundBg}
-          alt="background"
+          alt=""
           width={700}
           height={700}
           className={styles.background}
