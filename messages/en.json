@@ -161,15 +161,16 @@
   },
   "feed": {
     "title": "Still sniffing around for posts",
-    "text": "No bones to fetch here yet. Be the first to leave a mark!"
+    "text": "No bones to fetch here yet. Be the first to leave a mark!",
+    "friendsEmptyTitle": "No news from your friends yet",
+    "friendsEmptyText": "Nobody in your pack has posted anything. Check back later or add a few more friends."
+  },
+  "suggestedFriends": {
+    "title": "Dogs you may know"
   },
   "postCreator": {
     "photo": "Photo",
     "removePhoto": "Remove photo",
-    "gallery": "Gallery",
-    "chooseFromGallery": "Choose from gallery",
-    "noGalleryPhotos": "No photos in your gallery yet",
-    "place": "Place",
     "publish": "Add post",
     "placeholder": "What's new, "
   },
@@ -306,5 +307,14 @@
   "sex": {
     "male": "Male",
     "female": "Female"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "No notifications yet",
+    "liked": "{name} liked your post",
+    "commented": "{name} commented on your post",
+    "friendRequest": "{name} wants to be friends",
+    "achievement": "You unlocked a new achievement"
   }
 }

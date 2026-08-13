@@ -150,3 +150,22 @@ export interface SignInData {
   email: string;
   password: string;
 }
+
+export type NotificationType =
+  | "like"
+  | "comment"
+  | "friendRequest"
+  | "achievement";
+
+export interface NotificationUser {
+  name: string;
+  avatar?: string;
+}
+
+export interface AppNotification {
+  id: string;
+  type: NotificationType;
+  user?: NotificationUser;
+  createdAt: Date;
+  read: boolean;
+}

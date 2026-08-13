@@ -3,6 +3,7 @@ export const formatTime = (date: string | Date, locale = "en-US") =>
     hour: "2-digit",
     minute: "2-digit",
   });
+
 export const formatDate = (date: string | Date, locale = "en-US") =>
   new Date(date).toLocaleDateString(locale, { dateStyle: "medium" });
 

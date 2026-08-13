@@ -5,7 +5,6 @@ import { Logo } from "../../uikit/brand/Logo/Logo";
 import { Link } from "../../uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
 import { IoHomeSharp } from "react-icons/io5";
-import { BsBellFill } from "react-icons/bs";
 import { BiSolidMessage } from "react-icons/bi";
 import { SearchBar } from "../../uikit/navigation/SearchBar/SearchBar";
 import { ThemeToggle } from "@/app/uikit/brand/ThemeToggle/ThemeToggle";
@@ -14,6 +13,7 @@ import { LocaleSwitcher } from "@/app/uikit/brand/LocaleSwitcher/LocaleSwitcher"
 import { useSearch } from "@/app/hooks/useSearch";
 import { HeaderSkeleton } from "./HeaderSkeleton";
 import { UserSearchDropdown } from "@/app/uikit/navigation/UserSearchDropdown/UserSearchDropdown";
+import { NotificationsDropdown } from "@/app/uikit/overlays/NotificationsDropdown/NotificationsDropdown";
 
 export const Header = () => {
   const currentUser = useUserStore((state) => state.currentUser);
@@ -40,9 +40,7 @@ export const Header = () => {
             <nav className={styles.actions}>
               <LocaleSwitcher className={styles.icon} />
               <ThemeToggle className={styles.icon} />
-              <Link href={ROUTES.notifications} className={styles.icon}>
-                <BsBellFill size={20} />
-              </Link>
+              <NotificationsDropdown />
               <Link
                 href={ROUTES.messages(currentUser.username)}
                 className={styles.icon}

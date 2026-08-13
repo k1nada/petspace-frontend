@@ -8,8 +8,6 @@ import { MdDeleteSweep, MdModeEdit } from "react-icons/md";
 import { CommentCreator } from "../CommentCreator/CommentCreator";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import "dayjs/locale/pl";
-import "dayjs/locale/en";
 import api from "@/config/axios";
 import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
 import { likePost } from "@/app/api/likes";

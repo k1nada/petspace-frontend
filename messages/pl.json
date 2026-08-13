@@ -161,15 +161,16 @@
   },
   "feed": {
     "title": "Wciąż węszymy w poszukiwaniu postów",
-    "text": "Nie ma tu jeszcze żadnych kości do gryzienia. Bądź pierwszy i zostaw ślad!"
+    "text": "Nie ma tu jeszcze żadnych kości do gryzienia. Bądź pierwszy i zostaw ślad!",
+    "friendsEmptyTitle": "Brak nowości od znajomych",
+    "friendsEmptyText": "Nikt z Twojej paczki nic jeszcze nie opublikował. Zajrzyj tu później albo dodaj kilku znajomych."
+  },
+  "suggestedFriends": {
+    "title": "Psy, które możesz znać"
   },
   "postCreator": {
     "photo": "Zdjęcie",
     "removePhoto": "Usuń zdjęcie",
-    "gallery": "Galeria",
-    "chooseFromGallery": "Wybierz z galerii",
-    "noGalleryPhotos": "Brak zdjęć w galerii",
-    "place": "Miejsce",
     "publish": "Opublikuj post",
     "placeholder": "Co nowego, "
   },
@@ -306,5 +307,14 @@
   "sex": {
     "male": "Samiec",
     "female": "Samica"
+  },
+  "notifications": {
+    "title": "Powiadomienia",
+    "markAllRead": "Oznacz wszystkie jako przeczytane",
+    "empty": "Brak powiadomień",
+    "liked": "{name} polubił(a) Twój post",
+    "commented": "{name} skomentował(a) Twój post",
+    "friendRequest": "{name} chce zostać znajomym",
+    "achievement": "Odblokowałeś nowe osiągnięcie"
   }
 }

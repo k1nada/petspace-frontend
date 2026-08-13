@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-m);
+  border-radius: var(--radius-m);
+  padding: var(--padding-l);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+
+.title {
+  height: 16px;
+  width: 130px;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-m);
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: var(--radius-full);
+  background: var(--bg-input);
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  flex: 1;
+}
+
+.name {
+  height: 14px;
+  width: 60%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+}
+
+.breed {
+  height: 12px;
+  width: 40%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+}
+
+.button {
+  flex-shrink: 0;
+  height: 28px;
+  width: 70px;
+  border-radius: var(--radius-m);
+  background: var(--bg-input);
+}
