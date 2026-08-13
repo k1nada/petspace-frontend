@@ -306,5 +306,14 @@
   "sex": {
     "male": "Samiec",
     "female": "Samica"
+  },
+  "notifications": {
+    "title": "Powiadomienia",
+    "markAllRead": "Oznacz wszystkie jako przeczytane",
+    "empty": "Brak powiadomień",
+    "liked": "{name} polubił(a) Twój post",
+    "commented": "{name} skomentował(a) Twój post",
+    "friendRequest": "{name} chce zostać znajomym",
+    "achievement": "Odblokowałeś nowe osiągnięcie"
   }
 }

@@ -8,8 +8,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { Comment } from "../../profile/feed/Comment/Comment";
 import { CommentCreator } from "../../profile/feed/CommentCreator/CommentCreator";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import "dayjs/locale/pl";
-import "dayjs/locale/en";
 import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import api from "@/config/axios";

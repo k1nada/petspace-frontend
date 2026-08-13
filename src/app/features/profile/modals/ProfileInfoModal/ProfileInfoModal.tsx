@@ -8,8 +8,6 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 import { useTranslations, useLocale } from "next-intl";
-import "dayjs/locale/pl";
-import "dayjs/locale/en";
 import { BannerInfo } from "@/types";
 import { formatDate } from "@/utils/dateFormatters";
 

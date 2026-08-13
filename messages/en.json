@@ -306,5 +306,14 @@
   "sex": {
     "male": "Male",
     "female": "Female"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all as read",
+    "empty": "No notifications yet",
+    "liked": "{name} liked your post",
+    "commented": "{name} commented on your post",
+    "friendRequest": "{name} wants to be friends",
+    "achievement": "You unlocked a new achievement"
   }
 }
