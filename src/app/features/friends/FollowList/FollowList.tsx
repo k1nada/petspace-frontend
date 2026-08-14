@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import styles from "./FollowList.module.scss";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
@@ -10,22 +9,23 @@ import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { FollowUser, FollowListType } from "@/types";
 
 interface FollowListProps {
-  initialUsers: FollowUser[];
+  users: FollowUser[];
   type: FollowListType;
   username: string;
   currentUser: string;
   isMyProfile: boolean;
+  onRemove: (username: string) => void;
 }
 
 export const FollowList = ({
-  initialUsers,
+  users,
   type,
   username,
   currentUser,
   isMyProfile,
+  onRemove,
 }: FollowListProps) => {
   const t = useTranslations();
-  const [users, setUsers] = useState(initialUsers);
   const isFollowers = type === "followers";
 
   const removeUser = async (targetUsername: string) => {
@@ -34,7 +34,7 @@ export const FollowList = ({
         username,
         targetUsername,
       );
-      setUsers((prev) => prev.filter((u) => u.username !== targetUsername));
+      onRemove(targetUsername);
     } catch {
       toast.error(t("toasts.error"));
     }

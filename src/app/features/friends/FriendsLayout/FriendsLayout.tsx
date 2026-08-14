@@ -7,6 +7,7 @@ import { Tip } from "@/app/uikit/feedback/Tip/Tip";
 import { useUserStore } from "@/app/hooks/useUserStore";
 import { FollowUser, Friend } from "@/types";
 import { Friends } from "../Friends/Friends";
+import { SuggestedFriends } from "@/app/features/feed/SuggestedFriends/SuggestedFriends";
 
 interface FriendsLayoutProps {
   username: string;
@@ -41,6 +42,7 @@ export const FriendsLayout = ({
         />
       </div>
       <div className={styles.rightColumn}>
+        {isMyProfile && <SuggestedFriends />}
         <Tip
           title={t("friendTip.title")}
           text={t("friendTip.text")}

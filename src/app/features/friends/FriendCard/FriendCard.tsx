@@ -97,7 +97,7 @@ export const FriendCard = ({
             {!isFriend &&
               (isPending ? (
                 <Button appearance="secondary" onClick={handleCancelRequest}>
-                  {t("friends.requestSent")}
+                  {t("friends.sent")}
                 </Button>
               ) : isFollowing ? (
                 <Button appearance="secondary" disabled>

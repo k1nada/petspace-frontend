@@ -4,12 +4,16 @@ import styles from "./Friends.module.scss";
 import { useState, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { Tab } from "@/app/uikit/navigation/Tab/Tab";
+import { Button } from "@/app/uikit/form/Button/Button";
+import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { FriendCard } from "../FriendCard/FriendCard";
 import { Friend, FollowUser } from "@/types";
 import { FriendRequest } from "../FriendRequest/FriendRequest";
 import { useUserStore } from "@/app/hooks/useUserStore";
+import { unfollowUser } from "@/app/api/follows";
 import { FollowList } from "../FollowList/FollowList";
 import { FriendsSkeleton } from "./FriendsSkeleton";
 
@@ -27,8 +31,8 @@ interface FriendsProps {
 export const Friends = ({
   username,
   friends: initialFriends,
-  followers,
-  following,
+  followers: initialFollowers,
+  following: initialFollowing,
   currentUser,
   isMyProfile,
 }: FriendsProps) => {
@@ -39,6 +43,9 @@ export const Friends = ({
 
   const [search, setSearch] = useState("");
   const [friends, setFriends] = useState(initialFriends);
+  const [followers, setFollowers] = useState(initialFollowers);
+  const [following, setFollowing] = useState(initialFollowing);
+  const [isConfirmAllOpen, setIsConfirmAllOpen] = useState(false);
 
   const requestsCount = useUserStore((state) => state.requestCount);
   const isLoading = useUserStore((state) => state.isLoading);
@@ -55,9 +62,28 @@ export const Friends = ({
   const deleteFriend = (friendUsername: string) =>
     setFriends((prev) => prev.filter((f) => f.username !== friendUsername));
 
+  const removeFollower = (targetUsername: string) =>
+    setFollowers((prev) => prev.filter((u) => u.username !== targetUsername));
+
+  const removeFollowing = (targetUsername: string) =>
+    setFollowing((prev) => prev.filter((u) => u.username !== targetUsername));
+
+  const unfollowAll = async () => {
+    setIsConfirmAllOpen(false);
+    try {
+      await Promise.all(following.map((u) => unfollowUser(username, u.username)));
+      setFollowing([]);
+    } catch {
+      toast.error(t("toasts.error"));
+    }
+  };
+
   const goToTab = (tab: FriendsTab) => router.push(`?tab=${tab}`);
 
   if (isLoading && !loadedUser) return <FriendsSkeleton />;
+
+  const canUnfollowAll =
+    activeTab === "following" && isMyProfile && following.length > 0;
 
   const tabs = [
     { key: "friends", label: t("friends.friendsTitle"), count: friends.length },
@@ -87,17 +113,25 @@ export const Friends = ({
   return (
     <section className={styles.container}>
       <div className={styles.header}>
-        {tabs
-          .filter((tab) => !tab.hidden)
-          .map(({ key, label, count }) => (
-            <Tab
-              key={key}
-              label={label}
-              count={count}
-              isActive={activeTab === key}
-              onClick={() => goToTab(key)}
-            />
-          ))}
+        <div className={styles.tabs}>
+          {tabs
+            .filter((tab) => !tab.hidden)
+            .map(({ key, label, count }) => (
+              <Tab
+                key={key}
+                label={label}
+                count={count}
+                isActive={activeTab === key}
+                onClick={() => goToTab(key)}
+              />
+            ))}
+        </div>
+
+        {canUnfollowAll && (
+          <Button appearance="secondary" onClick={() => setIsConfirmAllOpen(true)}>
+            {t("friends.unfollowAll")}
+          </Button>
+        )}
       </div>
 
       {activeTab === "friends" &&
@@ -130,24 +164,34 @@ export const Friends = ({
       {activeTab === "followers" && (
         <FollowList
           key="followers"
-          initialUsers={followers}
+          users={followers}
           type="followers"
           username={username}
           currentUser={currentUser}
           isMyProfile={isMyProfile}
+          onRemove={removeFollower}
         />
       )}
 
       {activeTab === "following" && (
         <FollowList
           key="following"
-          initialUsers={following}
+          users={following}
           type="following"
           username={username}
           currentUser={currentUser}
           isMyProfile={isMyProfile}
+          onRemove={removeFollowing}
         />
       )}
+
+      <ConfirmModal
+        isOpen={isConfirmAllOpen}
+        title={t("friends.unfollowAll")}
+        description={t("followCard.unfollowAllModalDescription")}
+        onConfirm={unfollowAll}
+        onClose={() => setIsConfirmAllOpen(false)}
+      />
     </section>
   );
 };
