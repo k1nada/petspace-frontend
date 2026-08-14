@@ -10,6 +10,13 @@
 
 .header {
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gap-m);
+}
+
+.tabs {
+  display: flex;
   align-items: center;
   gap: var(--gap-m);
 }

@@ -218,7 +218,8 @@
     "message": "Message",
     "addFriend": "Add friend",
     "following": "Following",
-    "requestSent": "Request sent",
+    "sent": "Sent",
+    "unfollowAll": "Unfollow all",
     "remove": "Remove",
     "unfollow": "Unfollow",
     "emptyFriendsTitle": "No friends yet",
@@ -244,7 +245,8 @@
   },
   "followCard": {
     "removeModalDescription": "{name} will no longer follow you.",
-    "unfollowModalDescription": "You can always follow {name} again later."
+    "unfollowModalDescription": "You can always follow {name} again later.",
+    "unfollowAllModalDescription": "You won't follow anyone from this list anymore. You can always follow them again later."
   },
   "friendTip": {
     "title": "Did you know?",

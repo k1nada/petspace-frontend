@@ -4,9 +4,6 @@ import Img2 from "@/public/img2.jpg";
 import Img3 from "@/public/img3.jpg";
 import Img4 from "@/public/img4.jpg";
 import Img5 from "@/public/img5.jpg";
-import fritzAvatar from "@/public/avatar2.jpg";
-import nalaAvatar from "@/public/friend1.jpg";
-import ottoAvatar from "@/public/img4.jpg";
 
 export const MOCK_PROFILE = {
   avatar: AvatarImg,
@@ -29,12 +26,6 @@ export const MOCK_PHOTOS = {
   img5: Img5,
   img6: Img5,
 };
-
-export const MOCK_SUGGESTIONS = [
-  { id: "1", name: "Fritz", breed: "Dachshund", avatar: fritzAvatar.src },
-  { id: "2", name: "Nala", breed: "Golden Retriever", avatar: nalaAvatar.src },
-  { id: "3", name: "Otto", breed: "Dachshund", avatar: ottoAvatar.src },
-];
 
 export const MOCK_POSTS = [
   {

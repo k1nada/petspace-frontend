@@ -218,7 +218,8 @@
     "message": "Wiadomość",
     "addFriend": "Dodaj znajomego",
     "following": "Obserwujesz",
-    "requestSent": "Zaproszenie wysłane",
+    "sent": "Wysłano",
+    "unfollowAll": "Przestań obserwować wszystkich",
     "remove": "Usuń",
     "unfollow": "Przestań obserwować",
     "emptyFriendsTitle": "Brak znajomych",
@@ -244,7 +245,8 @@
   },
   "followCard": {
     "removeModalDescription": "{name} nie będzie już Cię obserwować.",
-    "unfollowModalDescription": "Zawsze możesz ponownie zacząć obserwować {name}."
+    "unfollowModalDescription": "Zawsze możesz ponownie zacząć obserwować {name}.",
+    "unfollowAllModalDescription": "Przestaniesz obserwować wszystkich z tej listy. Zawsze możesz zacząć ich obserwować ponownie później."
   },
   "friendTip": {
     "title": "Czy wiesz, że...?",

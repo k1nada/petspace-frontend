@@ -1,3 +1,13 @@
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -13,6 +23,7 @@
   width: 130px;
   border-radius: var(--radius-s);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .list {
@@ -32,6 +43,7 @@
   height: 45px;
   border-radius: var(--radius-full);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
   flex-shrink: 0;
 }
 
@@ -47,6 +59,7 @@
   width: 60%;
   border-radius: var(--radius-s);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .breed {
@@ -54,6 +67,7 @@
   width: 40%;
   border-radius: var(--radius-s);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .button {
@@ -62,4 +76,5 @@
   width: 70px;
   border-radius: var(--radius-m);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
