@@ -7,7 +7,7 @@ import { ProfileBanner } from "../info/ProfileBanner/ProfileBanner";
 import styles from "./ProfileLayout.module.scss";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import { ProfilePhotos } from "../photos/ProfilePhotos/ProfilePhotos";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getPosts } from "@/app/api/post";
 import { useUserStore } from "@/app/hooks/useUserStore";
 import { BannerInfo } from "@/types";
@@ -15,24 +15,22 @@ import { Post } from "@/types";
 
 interface ProfileLayoutProps {
   bannerInfo: BannerInfo;
+  initialPosts: Post[];
 }
 
-export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
+export const ProfileLayout = ({
+  bannerInfo,
+  initialPosts,
+}: ProfileLayoutProps) => {
+  const [posts, setPosts] = useState<Post[]>(initialPosts);
   const currentUser = useUserStore((state) => state.currentUser);
   const isOwner = currentUser?.username === bannerInfo.username;
   const postwallId = bannerInfo.postwallId;
 
   const triggerRefresh = () => {
     if (!postwallId) return;
-    getPosts(postwallId).then((data) => {
-      setPosts(data ?? []);
-      setLoading(false);
-    });
+    getPosts(postwallId).then((data) => setPosts(data ?? []));
   };
-
-  useEffect(triggerRefresh, [postwallId]);
 
   const friends = bannerInfo.friends ?? [];
   const photos = bannerInfo.photos ?? [];
@@ -48,14 +46,13 @@ export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
       <div className={styles.feedContainer}>
         {isOwner && (
           <PostCreator
-            username={currentUser.username}
             name={currentUser.name}
             avatar={currentUser.avatar}
             postwallId={bannerInfo.postwallId ?? ""}
             onSuccess={triggerRefresh}
           />
         )}
-        <Postwall posts={posts} loading={loading} onRefresh={triggerRefresh} />
+        <Postwall posts={posts} onRefresh={triggerRefresh} />
       </div>
       <div className={styles.rightColumn}>
         <div className={styles.photos}>

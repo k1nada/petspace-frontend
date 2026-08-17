@@ -32,6 +32,14 @@
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
+.search {
+  height: 40px;
+  width: 100%;
+  border-radius: var(--radius-m);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -83,6 +91,15 @@
   height: 40px;
   width: 100px;
   border-radius: var(--radius-m);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.menu {
+  height: 24px;
+  width: 24px;
+  border-radius: var(--radius-s);
   background: var(--bg-input);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
   flex-shrink: 0;

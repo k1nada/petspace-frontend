@@ -1,3 +1,13 @@
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -13,45 +23,35 @@
   width: 100px;
   border-radius: var(--radius-s);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .friends {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .friend {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--gap-s);
+  gap: var(--gap-xs);
   padding: var(--gap-xs);
 }
 
 .avatar {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: var(--radius-full);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
   flex-shrink: 0;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-xs);
-  flex: 1;
 }
 
 .name {
   height: 14px;
-  width: 50%;
+  width: 60%;
   border-radius: var(--radius-s);
   background: var(--bg-input);
-}
-
-.breed {
-  height: 12px;
-  width: 40%;
-  border-radius: var(--radius-s);
-  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }

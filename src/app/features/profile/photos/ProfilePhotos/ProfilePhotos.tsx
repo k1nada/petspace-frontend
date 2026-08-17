@@ -8,7 +8,7 @@ import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Photo } from "@/types";
 import { ProfilePhotosSkeleton } from "./ProfilePhotosSkeleton";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 
 interface ProfilePhotosProps {
   photos: Photo[];
@@ -29,44 +29,41 @@ export const ProfilePhotos = ({
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
     usePhotoNavigation(photos);
 
-  const currentUser = useUserStore((state) => state.currentUser);
-  
-  const isLoading = useUserStore((state) => state.isLoading);
-  if (isLoading && !currentUser) return <ProfilePhotosSkeleton />;
-
   return (
-    <section className={styles.container}>
-      <Link href={ROUTES.photos(username)} className={styles.titleLink}>
-        <h3 className={styles.title}>{t("profilePhotos.title")}</h3>
-        <span className={styles.count}>{photos.length}</span>
-      </Link>
-      {photos.length === 0 ? (
-        <div className={styles.empty}>{t("profilePhotos.empty")}</div>
-      ) : (
-        <ul className={styles.gallery}>
-          {photos.slice(0, MAX_VISIBLE_PHOTOS).map((photo, index) => (
-            <li key={photo.publicId} className={styles.photo}>
-              <Image
-                onClick={() => setSelectedIndex(index)}
-                src={getPhotoUrl(photo)}
-                alt={t("postCreator.photo")}
-                fill
-              />
-            </li>
-          ))}
-        </ul>
-      )}
+    <AuthLoader fallback={<ProfilePhotosSkeleton />}>
+      <section className={styles.container}>
+        <Link href={ROUTES.photos(username)} className={styles.titleLink}>
+          <h3 className={styles.title}>{t("profilePhotos.title")}</h3>
+          <span className={styles.count}>{photos.length}</span>
+        </Link>
+        {photos.length === 0 ? (
+          <div className={styles.empty}>{t("profilePhotos.empty")}</div>
+        ) : (
+          <ul className={styles.gallery}>
+            {photos.slice(0, MAX_VISIBLE_PHOTOS).map((photo, index) => (
+              <li key={photo.publicId} className={styles.photo}>
+                <Image
+                  onClick={() => setSelectedIndex(index)}
+                  src={getPhotoUrl(photo)}
+                  alt={t("postCreator.photo")}
+                  fill
+                />
+              </li>
+            ))}
+          </ul>
+        )}
 
-      <PhotoModal
-        photo={selectedIndex !== null ? photos[selectedIndex] : null}
-        avatar={avatar}
-        name={name}
-        currentIndex={selectedIndex ?? 0}
-        photosCount={photos.length}
-        onClose={() => setSelectedIndex(null)}
-        onPrev={handlePrev}
-        onNext={handleNext}
-      />
-    </section>
+        <PhotoModal
+          photo={selectedIndex !== null ? photos[selectedIndex] : null}
+          avatar={avatar}
+          name={name}
+          currentIndex={selectedIndex ?? 0}
+          photosCount={photos.length}
+          onClose={() => setSelectedIndex(null)}
+          onPrev={handlePrev}
+          onNext={handleNext}
+        />
+      </section>
+    </AuthLoader>
   );
 };

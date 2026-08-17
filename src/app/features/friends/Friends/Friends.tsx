@@ -16,6 +16,7 @@ import { useUserStore } from "@/app/hooks/useUserStore";
 import { unfollowUser } from "@/app/api/follows";
 import { FollowList } from "../FollowList/FollowList";
 import { FriendsSkeleton } from "./FriendsSkeleton";
+import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 
 type FriendsTab = "friends" | "requests" | "followers" | "following";
 
@@ -48,8 +49,6 @@ export const Friends = ({
   const [isConfirmAllOpen, setIsConfirmAllOpen] = useState(false);
 
   const requestsCount = useUserStore((state) => state.requestCount);
-  const isLoading = useUserStore((state) => state.isLoading);
-  const loadedUser = useUserStore((state) => state.currentUser);
 
   const filtered = useMemo(
     () =>
@@ -71,7 +70,9 @@ export const Friends = ({
   const unfollowAll = async () => {
     setIsConfirmAllOpen(false);
     try {
-      await Promise.all(following.map((u) => unfollowUser(username, u.username)));
+      await Promise.all(
+        following.map((u) => unfollowUser(username, u.username)),
+      );
       setFollowing([]);
     } catch {
       toast.error(t("toasts.error"));
@@ -79,8 +80,6 @@ export const Friends = ({
   };
 
   const goToTab = (tab: FriendsTab) => router.push(`?tab=${tab}`);
-
-  if (isLoading && !loadedUser) return <FriendsSkeleton />;
 
   const canUnfollowAll =
     activeTab === "following" && isMyProfile && following.length > 0;
@@ -111,87 +110,94 @@ export const Friends = ({
   }[];
 
   return (
-    <section className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.tabs}>
-          {tabs
-            .filter((tab) => !tab.hidden)
-            .map(({ key, label, count }) => (
-              <Tab
-                key={key}
-                label={label}
-                count={count}
-                isActive={activeTab === key}
-                onClick={() => goToTab(key)}
-              />
-            ))}
-        </div>
-
-        {canUnfollowAll && (
-          <Button appearance="secondary" onClick={() => setIsConfirmAllOpen(true)}>
-            {t("friends.unfollowAll")}
-          </Button>
-        )}
-      </div>
-
-      {activeTab === "friends" &&
-        (filtered.length > 0 ? (
-          <>
-            <SearchBar onChange={setSearch} fullWidth />
-            <ul className={styles.list}>
-              {filtered.map((friend) => (
-                <FriendCard
-                  key={friend.id}
-                  friend={friend}
-                  currentUser={currentUser}
-                  isOwner={isMyProfile}
-                  onFriendDeleted={deleteFriend}
+    <AuthLoader fallback={<FriendsSkeleton />}>
+      <section className={styles.container}>
+        <div className={styles.header}>
+          <div className={styles.tabs}>
+            {tabs
+              .filter((tab) => !tab.hidden)
+              .map(({ key, label, count }) => (
+                <Tab
+                  key={key}
+                  label={label}
+                  count={count}
+                  isActive={activeTab === key}
+                  onClick={() => goToTab(key)}
                 />
               ))}
-            </ul>
-          </>
-        ) : (
-          <div className={styles.emptyFriends}>
-            <p className={styles.emptyTitle}>
-              {t("friends.emptyFriendsTitle")}
-            </p>
-            <p className={styles.emptyText}>{t("friends.emptyFriendsText")}</p>
           </div>
-        ))}
 
-      {activeTab === "requests" && isMyProfile && <FriendRequest />}
+          {canUnfollowAll && (
+            <Button
+              appearance="secondary"
+              onClick={() => setIsConfirmAllOpen(true)}
+            >
+              {t("friends.unfollowAll")}
+            </Button>
+          )}
+        </div>
 
-      {activeTab === "followers" && (
-        <FollowList
-          key="followers"
-          users={followers}
-          type="followers"
-          username={username}
-          currentUser={currentUser}
-          isMyProfile={isMyProfile}
-          onRemove={removeFollower}
+        {activeTab === "friends" &&
+          (filtered.length > 0 ? (
+            <>
+              <SearchBar onChange={setSearch} fullWidth />
+              <ul className={styles.list}>
+                {filtered.map((friend) => (
+                  <FriendCard
+                    key={friend.id}
+                    friend={friend}
+                    currentUser={currentUser}
+                    isOwner={isMyProfile}
+                    onFriendDeleted={deleteFriend}
+                  />
+                ))}
+              </ul>
+            </>
+          ) : (
+            <div className={styles.emptyFriends}>
+              <p className={styles.emptyTitle}>
+                {t("friends.emptyFriendsTitle")}
+              </p>
+              <p className={styles.emptyText}>
+                {t("friends.emptyFriendsText")}
+              </p>
+            </div>
+          ))}
+
+        {activeTab === "requests" && isMyProfile && <FriendRequest />}
+
+        {activeTab === "followers" && (
+          <FollowList
+            key="followers"
+            users={followers}
+            type="followers"
+            username={username}
+            currentUser={currentUser}
+            isMyProfile={isMyProfile}
+            onRemove={removeFollower}
+          />
+        )}
+
+        {activeTab === "following" && (
+          <FollowList
+            key="following"
+            users={following}
+            type="following"
+            username={username}
+            currentUser={currentUser}
+            isMyProfile={isMyProfile}
+            onRemove={removeFollowing}
+          />
+        )}
+
+        <ConfirmModal
+          isOpen={isConfirmAllOpen}
+          title={t("friends.unfollowAll")}
+          description={t("followCard.unfollowAllModalDescription")}
+          onConfirm={unfollowAll}
+          onClose={() => setIsConfirmAllOpen(false)}
         />
-      )}
-
-      {activeTab === "following" && (
-        <FollowList
-          key="following"
-          users={following}
-          type="following"
-          username={username}
-          currentUser={currentUser}
-          isMyProfile={isMyProfile}
-          onRemove={removeFollowing}
-        />
-      )}
-
-      <ConfirmModal
-        isOpen={isConfirmAllOpen}
-        title={t("friends.unfollowAll")}
-        description={t("followCard.unfollowAllModalDescription")}
-        onConfirm={unfollowAll}
-        onClose={() => setIsConfirmAllOpen(false)}
-      />
-    </section>
+      </section>
+    </AuthLoader>
   );
 };

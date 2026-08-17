@@ -22,7 +22,7 @@ interface AddFamilyMemberModalProps {
   relation: FamilyRelation;
   breeds: string[];
   onClose: () => void;
-  onAdd: (member: NewFamilyMember) => void;
+  onAdd: (member: NewFamilyMember) => Promise<void>;
 }
 
 export const AddFamilyMemberModal = ({
@@ -48,23 +48,31 @@ export const AddFamilyMemberModal = ({
     onClose();
   };
 
-  const selectUser = (user: User) => {
-    onAdd({
-      name: user.name,
-      avatar: user.avatar,
-      breed: user.breed,
-      username: user.username,
-    });
-    reset();
+  const selectUser = async (user: User) => {
+    try {
+      await onAdd({
+        name: user.name,
+        avatar: user.avatar,
+        breed: user.breed,
+        username: user.username,
+      });
+      reset();
+    } catch {
+      toast.error(t("toasts.error"));
+    }
   };
 
-  const submitManual = () => {
-    onAdd({
-      name: form.name.trim(),
-      breed: form.breed.trim() || undefined,
-      avatar: form.avatar.trim() || undefined,
-    });
-    reset();
+  const submitManual = async () => {
+    try {
+      await onAdd({
+        name: form.name.trim(),
+        breed: form.breed.trim() || undefined,
+        avatar: form.avatar.trim() || undefined,
+      });
+      reset();
+    } catch {
+      toast.error(t("toasts.error"));
+    }
   };
 
   const generatePhoto = () => {

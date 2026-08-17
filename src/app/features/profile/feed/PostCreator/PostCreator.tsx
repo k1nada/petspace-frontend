@@ -1,18 +1,17 @@
 import styles from "./PostCreator.module.scss";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { FaCamera, FaMapMarkerAlt } from "react-icons/fa";
-import { Link } from "@/app/uikit/navigation/Link/Link";
-import { ROUTES } from "@/routes/routes";
+import { FaCamera, FaTimes } from "react-icons/fa";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { createPost } from "@/app/api/post";
+import { useRef, useState } from "react";
+import { createPost, uploadPostPhoto } from "@/app/api/post";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { useTextareaSubmit } from "@/app/hooks/useTextareaSubmit";
+import { toast } from "react-toastify";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
 interface PostCreatorProps {
   avatar?: string;
-  username: string;
   name: string;
   postwallId: string;
   onSuccess?: () => void;
@@ -20,19 +19,51 @@ interface PostCreatorProps {
 
 export const PostCreator = ({
   avatar,
-  username,
   name,
   postwallId,
   onSuccess,
 }: PostCreatorProps) => {
   const t = useTranslations();
   const [content, setContent] = useState("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isPublishing, setIsPublishing] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const currentUser = useUserStore((state) => state.currentUser);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    if (imagePreview) URL.revokeObjectURL(imagePreview);
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+  };
+
+  const removeImage = () => {
+    if (imagePreview) URL.revokeObjectURL(imagePreview);
+    setImageFile(null);
+    setImagePreview(null);
+  };
 
   const publishPost = async () => {
-    if (!content) return;
-    await createPost(content, postwallId);
-    setContent("");
-    onSuccess?.();
+    if (!content && !imagePreview) return;
+    setIsPublishing(true);
+    try {
+      const image = imageFile ? await uploadPostPhoto(imageFile) : undefined;
+      const post = await createPost(content, postwallId, image);
+      if (!post) {
+        toast.error(t("toasts.error"));
+        return;
+      }
+      setContent("");
+      removeImage();
+      onSuccess?.();
+    } catch {
+      toast.error(t("toasts.error"));
+    } finally {
+      setIsPublishing(false);
+    }
   };
 
   const { handleKeyDown } = useTextareaSubmit({ onSubmit: publishPost });
@@ -51,21 +82,46 @@ export const PostCreator = ({
           />
         </div>
       </div>
+      {imagePreview && (
+        <div className={styles.imagePreviewWrapper}>
+          <img
+            src={imagePreview}
+            alt={t("postCreator.photo")}
+            className={styles.imagePreview}
+          />
+          <button
+            type="button"
+            className={styles.removeImage}
+            onClick={removeImage}
+            aria-label={t("postCreator.removePhoto")}
+          >
+            <FaTimes size={14} />
+          </button>
+        </div>
+      )}
       <div className={styles.actions}>
         <div className={styles.attachments}>
-          <Link
-            href={ROUTES.photos(username)}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handleFileChange}
+          />
+          <button
+            type="button"
             className={styles.attachmentItem}
+            onClick={() => fileInputRef.current?.click()}
           >
             <FaCamera size={16} />
             {t("postCreator.photo")}
-          </Link>
-          <Link href={ROUTES.places} className={styles.attachmentItem}>
-            <FaMapMarkerAlt size={16} />
-            {t("postCreator.place")}
-          </Link>
+          </button>
         </div>
-        <Button appearance="primary" onClick={publishPost}>
+        <Button
+          appearance="primary"
+          onClick={publishPost}
+          disabled={isPublishing || (!content && !imagePreview)}
+        >
           {t("postCreator.publish")}
         </Button>
       </div>

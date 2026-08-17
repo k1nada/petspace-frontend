@@ -1,0 +1,112 @@
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-l);
+  padding: var(--padding-xl);
+  background: var(--bg-card);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-card);
+}
+
+.title {
+  height: 24px;
+  width: 150px;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.profileContent {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-m);
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+}
+
+.name {
+  height: 20px;
+  width: 140px;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.username {
+  height: 16px;
+  width: 100px;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-m) var(--gap-xl);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+}
+
+.label {
+  height: 14px;
+  width: 50%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.input {
+  height: 40px;
+  border-radius: var(--radius-m);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.textarea {
+  height: 80px;
+  border-radius: var(--radius-m);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
+}
+
+.button {
+  height: 40px;
+  width: 100px;
+  border-radius: var(--radius-m);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}

@@ -1,0 +1,42 @@
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-m);
+  border-radius: var(--radius-l);
+  padding: var(--padding-s);
+  border: 1px solid var(--border-divider);
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  flex: 1;
+}
+
+.name {
+  height: 14px;
+  width: 70%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}

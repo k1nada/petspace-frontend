@@ -32,8 +32,14 @@
 }
 
 .breed {
-  font-size: var(--font-s);
-  color: var(--text-secondary);
+  align-self: flex-start;
+  margin-top: var(--gap-xs);
+  padding: 2px var(--gap-s);
+  border-radius: var(--radius-m);
+  background: var(--bg-tag);
+  color: var(--text-tag);
+  font-size: var(--font-xs);
+  font-weight: 600;
 }
 
 .menu {

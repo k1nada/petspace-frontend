@@ -1,0 +1,27 @@
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-m);
+  border-radius: var(--radius-m);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-card);
+}
+
+.link {
+  height: 14px;
+  width: 60%;
+  margin: var(--padding-m) 0;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}

@@ -15,6 +15,8 @@ import { AchievementsModal } from "../../modals/AchievementsModal/AchievementsMo
 import { useUserStore } from "@/app/hooks/useUserStore";
 import { BannerInfo } from "@/types";
 import { ProfileBannerSkeleton } from "./ProfileBannerSkeleton";
+import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
+import { Divider } from "@/app/uikit/layout/Divider/Divider";
 import { addFriend as addFriendAPI, deleteFriend } from "@/app/api/friends";
 import { getRelationshipStatus } from "@/utils/friends";
 import { toast } from "react-toastify";
@@ -45,7 +47,6 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
   );
 
   const currentUser = useUserStore((state) => state.currentUser);
-  const isLoading = useUserStore((state) => state.isLoading);
   const fetchCurrentUser = useUserStore((state) => state.fetchCurrentUser);
   const { isFriend, isPending, isFollowing } = getRelationshipStatus(
     currentUser,
@@ -82,158 +83,158 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     }
   };
 
-  if (isLoading && !currentUser) return <ProfileBannerSkeleton />;
-
   return (
-    <div className={styles.banner}>
-      <div className={styles.avatarWrapper}>
-        <AvatarEdit
-          src={avatarUrl}
-          name={bannerInfo.name}
-          size={140}
-          avatarPhotos={bannerInfo.avatarPhotos}
-          onAvatarChange={(url) => setAvatarUrl(url)}
-          isEditable={isOwner}
-        />
-      </div>
-      <div className={styles.container}>
-        <div className={styles.info}>
-          <div className={styles.nameWrapper}>
-            <h1 className={styles.name}>{bannerInfo.name}</h1>
-            <div className={styles.username}>@{bannerInfo.username} </div>
-          </div>
-          {(bannerInfo.city || hasMoreInfo) && (
-            <div className={styles.details}>
-              {bannerInfo.city && (
-                <div className={styles.city}>
-                  <FaMapMarkerAlt size={18} className={styles.icon} />
-                  {bannerInfo.city}
-                </div>
-              )}
-              {hasMoreInfo && (
-                <div
-                  className={styles.moreInfo}
-                  onClick={() => setIsInfoOpen(true)}
-                >
-                  {t("profileBanner.info")}
-                </div>
-              )}
+    <AuthLoader fallback={<ProfileBannerSkeleton />}>
+      <div className={styles.banner}>
+        <div className={styles.avatarWrapper}>
+          <AvatarEdit
+            src={avatarUrl}
+            name={bannerInfo.name}
+            size={140}
+            avatarPhotos={bannerInfo.avatarPhotos}
+            onAvatarChange={(url) => setAvatarUrl(url)}
+            isEditable={isOwner}
+          />
+        </div>
+        <div className={styles.container}>
+          <div className={styles.info}>
+            <div className={styles.nameWrapper}>
+              <h1 className={styles.name}>{bannerInfo.name}</h1>
+              <div className={styles.username}>@{bannerInfo.username} </div>
             </div>
+            {(bannerInfo.city || hasMoreInfo) && (
+              <div className={styles.details}>
+                {bannerInfo.city && (
+                  <div className={styles.city}>
+                    <FaMapMarkerAlt size={18} className={styles.icon} />
+                    {bannerInfo.city}
+                  </div>
+                )}
+                {hasMoreInfo && (
+                  <div
+                    className={styles.moreInfo}
+                    onClick={() => setIsInfoOpen(true)}
+                  >
+                    {t("profileBanner.info")}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+          {bannerInfo.bio && <div className={styles.bio}>{bannerInfo.bio}</div>}
+          <Divider />
+          <div className={styles.stats}>
+            <div className={styles.stat}>
+              <Link
+                href={ROUTES.friends(bannerInfo.username)}
+                appearance="secondary"
+              >
+                <FaPaw size={18} />
+                <span className={styles.statValue}>{friendsCount}</span>
+                <span className={styles.statLabel}>
+                  {t("profileBanner.friends")}
+                </span>
+              </Link>
+            </div>
+            <div className={styles.stat}>
+              <Link
+                href={ROUTES.photos(bannerInfo.username)}
+                appearance="secondary"
+              >
+                <FaCamera size={18} />
+                <span className={styles.statValue}>{photosCount}</span>
+                <span className={styles.statLabel}>
+                  {t("profileBanner.photos")}
+                </span>
+              </Link>
+            </div>
+            <div className={styles.stat}>
+              <Link
+                href={ROUTES.familyTree(bannerInfo.username)}
+                appearance="secondary"
+              >
+                <FaTree size={18} />
+                <span className={styles.statLabel}>
+                  {t("profileBanner.familyTree")}
+                </span>
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className={styles.actions}>
+          <Button
+            appearance="secondary"
+            onClick={() => setIsAchievementsOpen(true)}
+          >
+            <FaTrophy size={16} />
+          </Button>
+          {isOwner ? (
+            <Button appearance="primary" onClick={editProfile}>
+              {t("profileBanner.editProfile")}
+            </Button>
+          ) : isFriend ? (
+            <>
+              <Button appearance="secondary">
+                <FaPaw size={16} />
+              </Button>
+              <Button
+                appearance="primary"
+                onClick={() => goToMessages(bannerInfo.username)}
+              >
+                {t("profileBanner.message")}
+              </Button>
+            </>
+          ) : isPending ? (
+            <>
+              <Button
+                appearance="secondary"
+                onClick={() => goToMessages(bannerInfo.username)}
+              >
+                <FaMessage size={16} />
+              </Button>
+              <Button appearance="primary" onClick={cancelRequest}>
+                {t("profileBanner.requestSent")}
+              </Button>
+            </>
+          ) : isFollowing ? (
+            <>
+              <Button
+                appearance="secondary"
+                onClick={() => goToMessages(bannerInfo.username)}
+              >
+                <FaMessage size={16} />
+              </Button>
+              <Button appearance="secondary" disabled>
+                {t("profileBanner.following")}
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                appearance="secondary"
+                onClick={() => goToMessages(bannerInfo.username)}
+              >
+                <FaMessage size={16} />
+              </Button>
+              <Button appearance="primary" onClick={addFriend}>
+                {t("profileBanner.addFriend")}
+              </Button>
+            </>
           )}
         </div>
-        {bannerInfo.bio && <div className={styles.bio}>{bannerInfo.bio}</div>}
-        <div className={styles.divider}></div>
-        <div className={styles.stats}>
-          <div className={styles.stat}>
-            <Link
-              href={ROUTES.friends(bannerInfo.username)}
-              appearance="secondary"
-            >
-              <FaPaw size={18} />
-              <span className={styles.statValue}>{friendsCount}</span>
-              <span className={styles.statLabel}>
-                {t("profileBanner.friends")}
-              </span>
-            </Link>
-          </div>
-          <div className={styles.stat}>
-            <Link
-              href={ROUTES.photos(bannerInfo.username)}
-              appearance="secondary"
-            >
-              <FaCamera size={18} />
-              <span className={styles.statValue}>{photosCount}</span>
-              <span className={styles.statLabel}>
-                {t("profileBanner.photos")}
-              </span>
-            </Link>
-          </div>
-          <div className={styles.stat}>
-            <Link
-              href={ROUTES.familyTree(bannerInfo.username)}
-              appearance="secondary"
-            >
-              <FaTree size={18} />
-              <span className={styles.statLabel}>
-                {t("profileBanner.familyTree")}
-              </span>
-            </Link>
-          </div>
-        </div>
-      </div>
-      <div className={styles.actions}>
-        <Button
-          appearance="secondary"
-          onClick={() => setIsAchievementsOpen(true)}
-        >
-          <FaTrophy size={16} />
-        </Button>
-        {isOwner ? (
-          <Button appearance="primary" onClick={editProfile}>
-            {t("profileBanner.editProfile")}
-          </Button>
-        ) : isFriend ? (
-          <>
-            <Button appearance="secondary">
-              <FaPaw size={16} />
-            </Button>
-            <Button
-              appearance="primary"
-              onClick={() => goToMessages(bannerInfo.username)}
-            >
-              {t("profileBanner.message")}
-            </Button>
-          </>
-        ) : isPending ? (
-          <>
-            <Button
-              appearance="secondary"
-              onClick={() => goToMessages(bannerInfo.username)}
-            >
-              <FaMessage size={16} />
-            </Button>
-            <Button appearance="primary" onClick={cancelRequest}>
-              {t("profileBanner.requestSent")}
-            </Button>
-          </>
-        ) : isFollowing ? (
-          <>
-            <Button
-              appearance="secondary"
-              onClick={() => goToMessages(bannerInfo.username)}
-            >
-              <FaMessage size={16} />
-            </Button>
-            <Button appearance="secondary" disabled>
-              {t("profileBanner.following")}
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button
-              appearance="secondary"
-              onClick={() => goToMessages(bannerInfo.username)}
-            >
-              <FaMessage size={16} />
-            </Button>
-            <Button appearance="primary" onClick={addFriend}>
-              {t("profileBanner.addFriend")}
-            </Button>
-          </>
-        )}
-      </div>
 
-      <AchievementsModal
-        isOpen={isAchievementsOpen}
-        onClose={() => setIsAchievementsOpen(false)}
-        achievements={bannerInfo.achievements}
-      />
+        <AchievementsModal
+          isOpen={isAchievementsOpen}
+          onClose={() => setIsAchievementsOpen(false)}
+          achievements={bannerInfo.achievements}
+        />
 
-      <ProfileInfoModal
-        isOpen={isInfoOpen}
-        onClose={() => setIsInfoOpen(false)}
-        user={bannerInfo}
-      />
-    </div>
+        <ProfileInfoModal
+          isOpen={isInfoOpen}
+          onClose={() => setIsInfoOpen(false)}
+          user={bannerInfo}
+        />
+      </div>
+    </AuthLoader>
   );
 };

@@ -67,12 +67,8 @@
   gap: var(--gap-m);
   color: var(--text-secondary);
   font-size: var(--font-m);
+}
 
-  &::before,
-  &::after {
-    content: "";
-    flex: 1;
-    height: 2px;
-    background: var(--border-divider);
-  }
+.line {
+  flex: 1;
 }

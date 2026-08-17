@@ -3,13 +3,14 @@ import { persist } from "zustand/middleware";
 import api from "@/config/axios";
 import { getPendingRequests } from "@/app/api/friends";
 import { FriendRequest, User } from "@/types";
+import { withMinDelay } from "@/utils/withMinDelay";
 
 interface UserStore {
   currentUser: User | null;
-  isLoading: boolean;
+  isAuthChecked: boolean;
   requestCount: number;
   requests: FriendRequest[];
-  fetchCurrentUser: () => Promise<void>;
+  fetchCurrentUser: (options?: { withDelay?: boolean }) => Promise<void>;
   setRequestCount: (count: number) => void;
   setRequests: (requests: FriendRequest[]) => void;
 }
@@ -18,23 +19,24 @@ export const useUserStore = create<UserStore>()(
   persist(
     (set) => ({
       currentUser: null,
-      isLoading: true,
+      isAuthChecked: false,
       requestCount: 0,
       requests: [],
 
-      fetchCurrentUser: async () => {
-        set({ isLoading: true });
-
+      fetchCurrentUser: async (options) => {
         let user: User;
         try {
-          const { data } = await api.get<User>("/me");
+          const request = api.get<User>("/me");
+          const { data } = await (options?.withDelay
+            ? withMinDelay(request)
+            : request);
           user = data;
         } catch {
-          set({ currentUser: null, isLoading: false });
+          set({ currentUser: null, isAuthChecked: true });
           return;
         }
 
-        set({ currentUser: user, isLoading: false });
+        set({ currentUser: user, isAuthChecked: true });
 
         try {
           const requests = await getPendingRequests(user.username);

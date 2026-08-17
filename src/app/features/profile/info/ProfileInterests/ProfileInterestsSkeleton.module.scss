@@ -1,0 +1,68 @@
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.container {
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-l);
+  padding: var(--padding-xl);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-card);
+}
+
+.title {
+  height: 24px;
+  width: 150px;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap-m) var(--gap-xl);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+}
+
+.label {
+  height: 14px;
+  width: 40%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.textarea {
+  height: 140px;
+  border-radius: var(--radius-m);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
+}
+
+.button {
+  height: 40px;
+  width: 100px;
+  border-radius: var(--radius-m);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}

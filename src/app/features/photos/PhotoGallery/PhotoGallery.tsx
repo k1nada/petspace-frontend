@@ -12,9 +12,9 @@ import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
 import api from "@/config/axios";
 import { getPhotoUrl } from "@/utils/photo";
 import { Photo } from "@/types";
-import { useUserStore } from "@/app/hooks/useUserStore";
 import { PhotoGallerySkeleton } from "./PhotoGallerySkeleton";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
+import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 
 interface PhotoGalleryProps {
   photos: Photo[];
@@ -28,11 +28,6 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
     usePhotoNavigation(localPhotos);
-
-  const isLoading = useUserStore((state) => state.isLoading);
-  const currentUser = useUserStore((state) => state.currentUser);
-
-  if (isLoading && !currentUser) return <PhotoGallerySkeleton />;
 
   const uploadFile = async (file: File) => {
     const formData = new FormData();
@@ -72,57 +67,59 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
   const isEmpty = localPhotos.length === 0;
 
   return (
-    <section className={styles.container}>
-      <div className={styles.header}>
-        <h1 className={styles.title}>
-          {t("photoGallery.title")}
-          <span className={styles.count}>{localPhotos.length}</span>
-        </h1>
-        <Button appearance="primary" onClick={() => setIsUploadOpen(true)}>
-          {t("photoGallery.addPhoto")}
-        </Button>
-      </div>
+    <AuthLoader fallback={<PhotoGallerySkeleton />}>
+      <section className={styles.container}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>
+            {t("photoGallery.title")}
+            <span className={styles.count}>{localPhotos.length}</span>
+          </h1>
+          <Button appearance="primary" onClick={() => setIsUploadOpen(true)}>
+            {t("photoGallery.addPhoto")}
+          </Button>
+        </div>
 
-      {isEmpty ? (
-        <EmptyState
-          compact
-          title={t("photoGallery.emptyPhotosTitle")}
-          text={t("photoGallery.emptyPhotosText")}
+        {isEmpty ? (
+          <EmptyState
+            compact
+            title={t("photoGallery.emptyPhotosTitle")}
+            text={t("photoGallery.emptyPhotosText")}
+          />
+        ) : (
+          <ul className={styles.gallery}>
+            {localPhotos.map((photo, index) => (
+              <li key={photo.publicId} className={styles.photo}>
+                <Image
+                  onClick={() => setSelectedIndex(index)}
+                  src={getPhotoUrl(photo)}
+                  alt={t("photoGallery.photoAlt", { name })}
+                  fill
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {selectedPhoto && (
+          <PhotoModal
+            photo={selectedPhoto}
+            avatar={avatar}
+            name={name}
+            currentIndex={selectedIndex ?? 0}
+            photosCount={localPhotos.length}
+            onClose={() => setSelectedIndex(null)}
+            onPrev={handlePrev}
+            onNext={handleNext}
+            onDelete={() => deletePhoto(selectedPhoto.id)}
+          />
+        )}
+
+        <PhotoUploadModal
+          isOpen={isUploadOpen}
+          onClose={() => setIsUploadOpen(false)}
+          onUpload={addPhoto}
         />
-      ) : (
-        <ul className={styles.gallery}>
-          {localPhotos.map((photo, index) => (
-            <li key={photo.publicId} className={styles.photo}>
-              <Image
-                onClick={() => setSelectedIndex(index)}
-                src={getPhotoUrl(photo)}
-                alt={t("photoGallery.photoAlt", { name })}
-                fill
-              />
-            </li>
-          ))}
-        </ul>
-      )}
-
-      {selectedPhoto && (
-        <PhotoModal
-          photo={selectedPhoto}
-          avatar={avatar}
-          name={name}
-          currentIndex={selectedIndex ?? 0}
-          photosCount={localPhotos.length}
-          onClose={() => setSelectedIndex(null)}
-          onPrev={handlePrev}
-          onNext={handleNext}
-          onDelete={() => deletePhoto(selectedPhoto.id)}
-        />
-      )}
-
-      <PhotoUploadModal
-        isOpen={isUploadOpen}
-        onClose={() => setIsUploadOpen(false)}
-        onUpload={addPhoto}
-      />
-    </section>
+      </section>
+    </AuthLoader>
   );
 };

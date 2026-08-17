@@ -10,6 +10,7 @@ export const FriendsSkeleton = () => (
         <div key={i} className={styles.tab} />
       ))}
     </div>
+    <div className={styles.search} />
     <ul className={styles.list}>
       {Array.from({ length: ROWS_COUNT }, (_, i) => (
         <li key={i} className={styles.row}>
@@ -19,6 +20,7 @@ export const FriendsSkeleton = () => (
             <div className={styles.status} />
           </div>
           <div className={styles.button} />
+          <div className={styles.menu} />
         </li>
       ))}
     </ul>

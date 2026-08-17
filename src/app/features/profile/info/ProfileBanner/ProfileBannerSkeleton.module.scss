@@ -1,3 +1,13 @@
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 .banner {
   background: var(--bg-card);
   border-radius: var(--radius-m);
@@ -13,6 +23,7 @@
   height: 140px;
   border-radius: var(--radius-full);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
   flex-shrink: 0;
 }
 
@@ -41,6 +52,7 @@
   width: 100px;
   border-radius: var(--radius-s);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .username {
@@ -48,6 +60,7 @@
   width: 90px;
   border-radius: var(--radius-s);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .city {
@@ -55,6 +68,7 @@
   width: 120px;
   border-radius: var(--radius-s);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .bio {
@@ -62,11 +76,7 @@
   width: 65%;
   border-radius: var(--radius-s);
   background: var(--bg-input);
-}
-
-.divider {
-  height: 1.5px;
-  background: var(--border-divider);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .stats {
@@ -80,20 +90,21 @@
   width: 90px;
   border-radius: var(--radius-s);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .actions {
   display: flex;
   align-items: center;
   gap: var(--gap-s);
-  align-self: flex-start;
 }
 
 .buttonSmall {
   width: 48px;
-  height: 44px;
+  height: 40px;
   border-radius: var(--radius-m);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .buttonLarge {
@@ -101,4 +112,5 @@
   height: 40px;
   border-radius: var(--radius-m);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }

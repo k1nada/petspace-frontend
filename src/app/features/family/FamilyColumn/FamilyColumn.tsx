@@ -15,8 +15,8 @@ interface FamilyColumnProps {
   members: FamilyMember[];
   isOwner: boolean;
   breeds: string[];
-  onAdd: (member: NewFamilyMember) => void;
-  onRemove: (id: string) => void;
+  onAdd: (member: NewFamilyMember) => Promise<void>;
+  onRemove: (id: string) => Promise<void>;
 }
 
 export const FamilyColumn = ({
@@ -33,8 +33,8 @@ export const FamilyColumn = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const closeModal = () => setIsModalOpen(false);
 
-  const addMember = (member: NewFamilyMember) => {
-    onAdd(member);
+  const addMember = async (member: NewFamilyMember) => {
+    await onAdd(member);
     closeModal();
   };
 
