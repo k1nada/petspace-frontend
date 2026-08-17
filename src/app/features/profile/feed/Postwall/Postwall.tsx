@@ -11,9 +11,17 @@ interface PostwallProps {
   posts: PostType[];
   loading?: boolean;
   onRefresh: () => void;
+  emptyTitle?: string;
+  emptyText?: string;
 }
 
-export const Postwall = ({ posts, loading, onRefresh }: PostwallProps) => {
+export const Postwall = ({
+  posts,
+  loading,
+  onRefresh,
+  emptyTitle,
+  emptyText,
+}: PostwallProps) => {
   const t = useTranslations();
 
   if (loading) return <PostwallSkeleton />;
@@ -29,7 +37,11 @@ export const Postwall = ({ posts, loading, onRefresh }: PostwallProps) => {
           ))}
         </ul>
       ) : (
-        <EmptyState compact title={t("feed.title")} text={t("feed.text")} />
+        <EmptyState
+          compact
+          title={emptyTitle ?? t("feed.title")}
+          text={emptyText ?? t("feed.text")}
+        />
       )}
     </div>
   );

@@ -3,6 +3,8 @@ import { ProfileLayout } from "@/app/features/profile/ProfileLayout/ProfileLayou
 import { getUser } from "@/app/api/user";
 import { notFound } from "next/navigation";
 import { getPostwall } from "@/app/api/postwall";
+import { getPosts } from "@/app/api/post";
+import { withMinDelay } from "@/utils/withMinDelay";
 
 interface ProfilePageProps {
   params: Promise<{ username: string }>;
@@ -11,18 +13,23 @@ interface ProfilePageProps {
 const ProfilePage = async ({ params }: ProfilePageProps) => {
   const awaitedParams = await params;
 
-  const [userData, postwallData] = await Promise.all([
-    getUser(awaitedParams.username),
-    getPostwall(awaitedParams.username),
-  ]);
+  const [userData, postwallData] = await withMinDelay(
+    Promise.all([
+      getUser(awaitedParams.username),
+      getPostwall(awaitedParams.username),
+    ]),
+  );
 
   if (!userData) notFound();
+
+  const posts = postwallData?._id ? await getPosts(postwallData._id) : [];
 
   return (
     <>
       <Header />
       <main>
         <ProfileLayout
+          initialPosts={posts ?? []}
           bannerInfo={{
             id: userData.id,
             name: userData.name,
@@ -37,7 +44,7 @@ const ProfilePage = async ({ params }: ProfilePageProps) => {
             interests: userData.interests,
             photos: userData.photos,
             friends: userData.friends,
-            postwallId: postwallData._id,
+            postwallId: postwallData?._id,
             achievements: userData.achievements,
           }}
         />

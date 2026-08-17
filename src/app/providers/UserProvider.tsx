@@ -7,7 +7,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const fetchCurrentUser = useUserStore((state) => state.fetchCurrentUser);
 
   useEffect(() => {
-    fetchCurrentUser();
+    fetchCurrentUser({ withDelay: true });
   }, []);
 
   return <>{children}</>;

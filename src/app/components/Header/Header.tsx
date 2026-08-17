@@ -14,49 +14,49 @@ import { useSearch } from "@/app/hooks/useSearch";
 import { HeaderSkeleton } from "./HeaderSkeleton";
 import { UserSearchDropdown } from "@/app/uikit/navigation/UserSearchDropdown/UserSearchDropdown";
 import { NotificationsDropdown } from "@/app/uikit/overlays/NotificationsDropdown/NotificationsDropdown";
+import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 
 export const Header = () => {
   const currentUser = useUserStore((state) => state.currentUser);
   const { query, results, search, select } = useSearch();
-  const isLoading = useUserStore((state) => state.isLoading);
-
-  if (isLoading && !currentUser) return <HeaderSkeleton />;
 
   return (
-    <header className={styles.header}>
-      <div className={styles.container}>
-        <div className={styles.wrapper}>
-          <Link href={ROUTES.feed} className={styles.logo}>
-            <Logo />
-            <span className={styles.logoTitle}>Petspace</span>
-          </Link>
+    <AuthLoader fallback={<HeaderSkeleton />}>
+      <header className={styles.header}>
+        <div className={styles.container}>
+          <div className={styles.wrapper}>
+            <Link href={ROUTES.feed} className={styles.logo}>
+              <Logo />
+              <span className={styles.logoTitle}>Petspace</span>
+            </Link>
+          </div>
+          {currentUser && (
+            <>
+              <div className={styles.search}>
+                <SearchBar value={query} onChange={search} />
+                <UserSearchDropdown results={results} onSelect={select} />
+              </div>
+              <nav className={styles.actions}>
+                <LocaleSwitcher className={styles.icon} />
+                <ThemeToggle className={styles.icon} />
+                <NotificationsDropdown />
+                <Link
+                  href={ROUTES.messages(currentUser.username)}
+                  className={styles.icon}
+                >
+                  <BiSolidMessage size={20} />
+                </Link>
+                <Link
+                  href={ROUTES.profile(currentUser.username)}
+                  className={styles.icon}
+                >
+                  <IoHomeSharp size={20} />
+                </Link>
+              </nav>
+            </>
+          )}
         </div>
-        {currentUser && (
-          <>
-            <div className={styles.search}>
-              <SearchBar value={query} onChange={search} />
-              <UserSearchDropdown results={results} onSelect={select} />
-            </div>
-            <nav className={styles.actions}>
-              <LocaleSwitcher className={styles.icon} />
-              <ThemeToggle className={styles.icon} />
-              <NotificationsDropdown />
-              <Link
-                href={ROUTES.messages(currentUser.username)}
-                className={styles.icon}
-              >
-                <BiSolidMessage size={20} />
-              </Link>
-              <Link
-                href={ROUTES.profile(currentUser.username)}
-                className={styles.icon}
-              >
-                <IoHomeSharp size={20} />
-              </Link>
-            </nav>
-          </>
-        )}
-      </div>
-    </header>
+      </header>
+    </AuthLoader>
   );
 };

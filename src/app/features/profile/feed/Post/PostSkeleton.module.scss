@@ -1,0 +1,94 @@
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.wrapper {
+  display: flex;
+  gap: var(--gap-s);
+  align-items: center;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: var(--radius-full);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.name {
+  height: 14px;
+  width: 30%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.time {
+  height: 12px;
+  width: 20%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.dropdown {
+  height: 20px;
+  width: 20px;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+.textLines {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  padding: var(--padding-xs) 0;
+}
+
+.line {
+  height: 14px;
+  width: 90%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.lineShort {
+  height: 14px;
+  width: 55%;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.stats {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap-l);
+}
+
+.stat {
+  height: 16px;
+  width: 40px;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}

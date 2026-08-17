@@ -1,0 +1,91 @@
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.userInfo {
+  padding: var(--padding-m);
+  border-bottom: 1px solid var(--border-divider);
+  flex-shrink: 0;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-m);
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: var(--radius-full);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+}
+
+.name {
+  height: 14px;
+  width: 100px;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.status {
+  height: 12px;
+  width: 60px;
+  border-radius: var(--radius-s);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--padding-s);
+  gap: var(--gap-m);
+}
+
+.message {
+  display: flex;
+}
+
+.bubble {
+  height: 36px;
+  width: 220px;
+  max-width: 60%;
+  border-radius: var(--radius-m);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.inputBar {
+  padding: var(--padding-m);
+  border-top: 1px solid var(--border-divider);
+}
+
+.input {
+  height: 44px;
+  border-radius: var(--radius-m);
+  background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}

@@ -10,6 +10,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import api from "@/config/axios";
 import { useUserStore } from "@/app/hooks/useUserStore";
+import { Divider } from "@/app/uikit/layout/Divider/Divider";
 
 export const RegistrationStepsAvatar = () => {
   const router = useRouter();
@@ -42,7 +43,7 @@ export const RegistrationStepsAvatar = () => {
         <p className={styles.subtitle}>
           {t("registrationStepsAvatar.subtitle")}
         </p>
-        <div className={styles.formDivider}></div>
+        <Divider />
       </div>
       <div className={styles.avatar}>
         <AvatarUploadModal size={120} onChange={setAvatarFile} />

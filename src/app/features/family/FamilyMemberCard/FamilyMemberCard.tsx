@@ -2,6 +2,7 @@
 
 import styles from "./FamilyMemberCard.module.scss";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
@@ -14,7 +15,7 @@ import { FamilyMember } from "@/types";
 interface FamilyMemberCardProps {
   member: FamilyMember;
   isOwner: boolean;
-  onRemove: () => void;
+  onRemove: () => Promise<void>;
 }
 
 export const FamilyMemberCard = ({
@@ -29,9 +30,13 @@ export const FamilyMemberCard = ({
   const openConfirm = () => setIsConfirmOpen(true);
   const closeConfirm = () => setIsConfirmOpen(false);
 
-  const handleRemove = () => {
-    onRemove();
-    closeConfirm();
+  const handleRemove = async () => {
+    try {
+      await onRemove();
+      closeConfirm();
+    } catch {
+      toast.error(t("toasts.error"));
+    }
   };
 
   const menuItems = [

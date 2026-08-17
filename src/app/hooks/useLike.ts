@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
 
 interface UseLikeProps {
   initialLiked: boolean;
@@ -8,6 +10,7 @@ interface UseLikeProps {
 }
 
 export const useLike = ({ initialLiked, initialCount, onLike, id }: UseLikeProps) => {
+  const t = useTranslations();
   const [liked, setLiked] = useState(initialLiked);
   const [likesCount, setLikesCount] = useState(initialCount);
   const [likeLoading, setLikeLoading] = useState(false);
@@ -20,6 +23,8 @@ export const useLike = ({ initialLiked, initialCount, onLike, id }: UseLikeProps
       const { liked: newLiked, count } = await onLike(id);
       setLiked(newLiked);
       setLikesCount(count);
+    } catch {
+      toast.error(t("toasts.error"));
     } finally {
       setLikeLoading(false);
     }

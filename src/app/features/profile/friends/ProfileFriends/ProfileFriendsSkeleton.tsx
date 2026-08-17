@@ -9,10 +9,7 @@ export const ProfileFriendsSkeleton = () => (
       {Array.from({ length: FRIENDS_COUNT }, (_, i) => (
         <li key={i} className={styles.friend}>
           <div className={styles.avatar} />
-          <div className={styles.info}>
-            <div className={styles.name} />
-            <div className={styles.breed} />
-          </div>
+          <div className={styles.name} />
         </li>
       ))}
     </ul>

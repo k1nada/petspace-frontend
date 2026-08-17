@@ -13,6 +13,8 @@ import { ChatMessage } from "../ChatMessage/ChatMessage";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { formatTime } from "@/utils/dateFormatters";
 import { useLocale } from "next-intl";
+import { ChatSkeleton } from "./ChatSkeleton";
+import { withMinDelay } from "@/utils/withMinDelay";
 
 interface ChatProps {
   conversations: ChatContact[];
@@ -31,6 +33,7 @@ export const Chat = ({
   const locale = useLocale();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [messagesLoading, setMessagesLoading] = useState(!!selectedChat);
   const [online, setOnline] = useState(selectedChat?.isOnline ?? false);
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -47,9 +50,9 @@ export const Chat = ({
   useEffect(() => {
     if (!roomId) return;
 
-    fetch(`${API_URL}/chat/${roomId}`)
-      .then((res) => res.json())
-      .then((msgs) => setMessages(msgs));
+    withMinDelay(fetch(`${API_URL}/chat/${roomId}`).then((res) => res.json()))
+      .then((msgs) => setMessages(msgs))
+      .finally(() => setMessagesLoading(false));
 
     socket.emit("join", roomId);
 
@@ -84,6 +87,8 @@ export const Chat = ({
     socket.emit("message", { roomId, text: message });
     setMessage("");
   };
+
+  if (selectedChat && messagesLoading) return <ChatSkeleton />;
 
   return (
     <section className={styles.container}>

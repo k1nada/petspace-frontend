@@ -1,3 +1,13 @@
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 .container {
   background: var(--bg-card);
   display: flex;
@@ -19,6 +29,7 @@
   width: 140px;
   border-radius: var(--radius-s);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .button {
@@ -26,6 +37,7 @@
   width: 130px;
   border-radius: var(--radius-m);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .gallery {
@@ -40,4 +52,5 @@
   max-height: 400px;
   border-radius: var(--radius-s);
   background: var(--bg-input);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
