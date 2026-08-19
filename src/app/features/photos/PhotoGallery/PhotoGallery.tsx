@@ -2,65 +2,44 @@
 
 import { Button } from "@/app/uikit/form/Button/Button";
 import styles from "./PhotoGallery.module.scss";
-import Image from "next/image";
-import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { toast } from "react-toastify";
 import { PhotoModal } from "../PhotoModal/PhotoModal";
 import { PhotoUploadModal } from "../PhotoUploadModal/PhotoUploadModal";
 import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
-import api from "@/config/axios";
-import { getPhotoUrl } from "@/utils/photo";
+import { usePhotoGallery } from "@/app/hooks/usePhotoGallery";
 import { Photo } from "@/types";
 import { PhotoGallerySkeleton } from "./PhotoGallerySkeleton";
+import { PhotoGrid } from "../PhotoGrid/PhotoGrid";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
 interface PhotoGalleryProps {
   photos: Photo[];
   avatar?: string;
   name: string;
+  username: string;
 }
 
-export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
+export const PhotoGallery = ({
+  photos,
+  avatar,
+  name,
+  username,
+}: PhotoGalleryProps) => {
   const t = useTranslations();
-  const [localPhotos, setLocalPhotos] = useState<Photo[]>(photos);
-  const [isUploadOpen, setIsUploadOpen] = useState(false);
+  const currentUser = useUserStore((state) => state.currentUser);
+  const isOwner = currentUser?.username === username;
+  const {
+    localPhotos,
+    isUploadOpen,
+    setIsUploadOpen,
+    addPhoto,
+    deletePhoto,
+    handleLikeChange,
+  } = usePhotoGallery(photos, username);
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
     usePhotoNavigation(localPhotos);
-
-  const uploadFile = async (file: File) => {
-    const formData = new FormData();
-    formData.append("image", file);
-    const { data } = await api.post("/api/upload/photo", formData);
-    return {
-      id: data.data._id,
-      publicId: data.data.public_id,
-      createdAt: data.data.createdAt,
-      liked: false,
-      likesCount: 0,
-    };
-  };
-
-  const addPhoto = async (files: File[]) => {
-    try {
-      const uploaded = await Promise.all(files.map(uploadFile));
-      setLocalPhotos((prev) => [...prev, ...uploaded]);
-      setIsUploadOpen(false);
-    } catch {
-      toast.error(t("toasts.error"));
-    }
-  };
-
-  const deletePhoto = async (photoId: string) => {
-    try {
-      await api.delete(`/api/upload/photo/${photoId}`);
-      setLocalPhotos((prev) => prev.filter((p) => p.id !== photoId));
-      setSelectedIndex(null);
-    } catch {
-      toast.error(t("toasts.error"));
-    }
-  };
 
   const selectedPhoto =
     selectedIndex !== null ? localPhotos[selectedIndex] : null;
@@ -74,9 +53,11 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
             {t("photoGallery.title")}
             <span className={styles.count}>{localPhotos.length}</span>
           </h1>
-          <Button appearance="primary" onClick={() => setIsUploadOpen(true)}>
-            {t("photoGallery.addPhoto")}
-          </Button>
+          {isOwner && (
+            <Button appearance="primary" onClick={() => setIsUploadOpen(true)}>
+              {t("photoGallery.addPhoto")}
+            </Button>
+          )}
         </div>
 
         {isEmpty ? (
@@ -86,18 +67,11 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
             text={t("photoGallery.emptyPhotosText")}
           />
         ) : (
-          <ul className={styles.gallery}>
-            {localPhotos.map((photo, index) => (
-              <li key={photo.publicId} className={styles.photo}>
-                <Image
-                  onClick={() => setSelectedIndex(index)}
-                  src={getPhotoUrl(photo)}
-                  alt={t("photoGallery.photoAlt", { name })}
-                  fill
-                />
-              </li>
-            ))}
-          </ul>
+          <PhotoGrid
+            photos={localPhotos}
+            name={name}
+            onSelect={setSelectedIndex}
+          />
         )}
 
         {selectedPhoto && (
@@ -107,10 +81,14 @@ export const PhotoGallery = ({ photos, avatar, name }: PhotoGalleryProps) => {
             name={name}
             currentIndex={selectedIndex ?? 0}
             photosCount={localPhotos.length}
+            isOwner={isOwner}
             onClose={() => setSelectedIndex(null)}
             onPrev={handlePrev}
             onNext={handleNext}
-            onDelete={() => deletePhoto(selectedPhoto.id)}
+            onDelete={() =>
+              deletePhoto(selectedPhoto.id, () => setSelectedIndex(null))
+            }
+            onLikeChange={handleLikeChange}
           />
         )}
 

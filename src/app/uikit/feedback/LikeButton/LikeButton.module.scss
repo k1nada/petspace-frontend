@@ -1,0 +1,8 @@
+button.heart:hover {
+  color: var(--text-error);
+  background: transparent;
+}
+
+.heart.liked {
+  color: var(--text-liked);
+}

@@ -10,6 +10,11 @@ export const likeComment = async (commentId: string) => {
   return data;
 };
 
+export const likePhoto = async (photoId: string) => {
+  const { data } = await api.post(`/likes/photo/${photoId}`);
+  return data;
+};
+
 export const getPostLikeStatus = async (postId: string) => {
   const { data } = await api.get(`/likes/post/${postId}/status`);
   return data;

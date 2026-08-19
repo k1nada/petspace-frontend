@@ -1,14 +1,18 @@
 import { ROUTES } from "@/routes/routes";
 import styles from "./ProfilePhotos.module.scss";
 import Image from "next/image";
+import { useState } from "react";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { useTranslations } from "next-intl";
 import { getPhotoUrl } from "@/utils/photo";
 import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
+import { usePhotoLikeSync } from "@/app/hooks/usePhotoLikeSync";
+import { usePhotoLikeRefresh } from "@/app/hooks/usePhotoLikeRefresh";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Photo } from "@/types";
 import { ProfilePhotosSkeleton } from "./ProfilePhotosSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
+import { useUserStore } from "@/app/hooks/useUserStore";
 
 interface ProfilePhotosProps {
   photos: Photo[];
@@ -26,21 +30,27 @@ export const ProfilePhotos = ({
   name,
 }: ProfilePhotosProps) => {
   const t = useTranslations();
+  const currentUser = useUserStore((state) => state.currentUser);
+  const isOwner = currentUser?.username === username;
+  const [localPhotos, setLocalPhotos] = useState<Photo[]>(photos);
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
-    usePhotoNavigation(photos);
+    usePhotoNavigation(localPhotos);
+
+  const handleLikeChange = usePhotoLikeSync(setLocalPhotos);
+  usePhotoLikeRefresh(username, setLocalPhotos);
 
   return (
     <AuthLoader fallback={<ProfilePhotosSkeleton />}>
       <section className={styles.container}>
         <Link href={ROUTES.photos(username)} className={styles.titleLink}>
           <h3 className={styles.title}>{t("profilePhotos.title")}</h3>
-          <span className={styles.count}>{photos.length}</span>
+          <span className={styles.count}>{localPhotos.length}</span>
         </Link>
-        {photos.length === 0 ? (
+        {localPhotos.length === 0 ? (
           <div className={styles.empty}>{t("profilePhotos.empty")}</div>
         ) : (
           <ul className={styles.gallery}>
-            {photos.slice(0, MAX_VISIBLE_PHOTOS).map((photo, index) => (
+            {localPhotos.slice(0, MAX_VISIBLE_PHOTOS).map((photo, index) => (
               <li key={photo.publicId} className={styles.photo}>
                 <Image
                   onClick={() => setSelectedIndex(index)}
@@ -54,14 +64,16 @@ export const ProfilePhotos = ({
         )}
 
         <PhotoModal
-          photo={selectedIndex !== null ? photos[selectedIndex] : null}
+          photo={selectedIndex !== null ? localPhotos[selectedIndex] : null}
           avatar={avatar}
           name={name}
           currentIndex={selectedIndex ?? 0}
-          photosCount={photos.length}
+          photosCount={localPhotos.length}
+          isOwner={isOwner}
           onClose={() => setSelectedIndex(null)}
           onPrev={handlePrev}
           onNext={handleNext}
+          onLikeChange={handleLikeChange}
         />
       </section>
     </AuthLoader>

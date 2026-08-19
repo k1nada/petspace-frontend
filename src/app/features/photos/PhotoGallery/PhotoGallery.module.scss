@@ -27,29 +27,3 @@
   font-weight: 600;
   margin-left: var(--gap-xs);
 }
-
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: var(--gap-s);
-}
-
-.photo {
-  position: relative;
-  aspect-ratio: 1;
-  max-width: 400px;
-  max-height: 400px;
-  background: var(--bg-secondary);
-  border-radius: var(--radius-s);
-  overflow: hidden;
-  cursor: pointer;
-
-  img {
-    object-fit: cover;
-    transition: filter 0.3s ease;
-  }
-
-  &:hover img {
-    filter: brightness(0.7);
-  }
-}
