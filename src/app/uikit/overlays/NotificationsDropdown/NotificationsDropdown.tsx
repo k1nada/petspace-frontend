@@ -2,56 +2,20 @@
 
 import styles from "./NotificationsDropdown.module.scss";
 import { useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { BsBellFill } from "react-icons/bs";
-import { FaHeart, FaUserPlus, FaTrophy } from "react-icons/fa";
-import { FaComment } from "react-icons/fa6";
-import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
-import dayjs from "@/utils/dayjs";
-import { AppNotification, NotificationType } from "@/types";
-import { mockNotifications } from "./mockNotifications";
 import { Button } from "../../form/Button/Button";
-
-const typeIcons: Record<NotificationType, React.ReactNode> = {
-  like: <FaHeart />,
-  comment: <FaComment />,
-  friendRequest: <FaUserPlus />,
-  achievement: <FaTrophy />,
-};
+import { useUserStore } from "@/app/hooks/useUserStore";
+import { useNotifications } from "@/app/hooks/useNotifications";
+import { NotificationItem } from "@/app/uikit/overlays/NotificationItem/NotificationItem";
 
 export const NotificationsDropdown = () => {
   const t = useTranslations();
-  const locale = useLocale();
   const [isOpen, setIsOpen] = useState(false);
-  const [notifications, setNotifications] =
-    useState<AppNotification[]>(mockNotifications);
-
-  const unreadCount = notifications.filter((n) => !n.read).length;
-
-  const markAllAsRead = () => {
-    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-  };
-
-  const markAsRead = (id: string) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, read: true } : n)),
-    );
-  };
-
-  const getMessage = (notification: AppNotification) => {
-    const name = notification.user?.name ?? "";
-    switch (notification.type) {
-      case "like":
-        return t("notifications.liked", { name });
-      case "comment":
-        return t("notifications.commented", { name });
-      case "friendRequest":
-        return t("notifications.friendRequest", { name });
-      case "achievement":
-        return t("notifications.achievement");
-    }
-  };
+  const currentUser = useUserStore((state) => state.currentUser);
+  const { notifications, unreadCount, markAllAsRead, markAsRead } =
+    useNotifications(currentUser);
 
   return (
     <div className={styles.wrapper}>
@@ -65,8 +29,8 @@ export const NotificationsDropdown = () => {
       >
         <BsBellFill size={20} />
         {unreadCount > 0 && (
-          <span className={styles.badge}>
-            {unreadCount > 9 ? "9+" : unreadCount}
+          <span className={styles.counter}>
+            {unreadCount > 99 ? "99+" : unreadCount}
           </span>
         )}
       </Button>
@@ -91,35 +55,11 @@ export const NotificationsDropdown = () => {
           ) : (
             <ul className={styles.list}>
               {notifications.map((notification) => (
-                <li
+                <NotificationItem
                   key={notification.id}
-                  className={`${styles.item} ${
-                    !notification.read ? styles.unread : ""
-                  }`}
-                  onClick={() => markAsRead(notification.id)}
-                >
-                  <div className={styles.avatarWrapper}>
-                    <Avatar src={notification.user?.avatar} size={40} />
-                    <span
-                      className={`${styles.typeIcon} ${
-                        styles[notification.type]
-                      }`}
-                    >
-                      {typeIcons[notification.type]}
-                    </span>
-                  </div>
-                  <div className={styles.info}>
-                    <span className={styles.message}>
-                      {getMessage(notification)}
-                    </span>
-                    <time className={styles.time}>
-                      {dayjs(notification.createdAt).locale(locale).fromNow()}
-                    </time>
-                  </div>
-                  {!notification.read && (
-                    <span className={styles.dot} aria-hidden />
-                  )}
-                </li>
+                  notification={notification}
+                  onRead={markAsRead}
+                />
               ))}
             </ul>
           )}
