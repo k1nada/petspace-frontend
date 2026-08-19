@@ -1,0 +1,73 @@
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-m);
+  padding: var(--padding-s) var(--padding-m);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: var(--button-ghost-hover);
+  }
+}
+
+.unread {
+  background: var(--bg-nested);
+
+  &:hover {
+    background: var(--bg-nested-hover);
+  }
+}
+
+.avatarWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.icon {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--text-on-color);
+  font-size: var(--font-xs);
+  border: 2px solid var(--bg-elevated);
+
+  &.like {
+    background: var(--border-error);
+  }
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.message {
+  color: var(--text-primary);
+  font-size: var(--font-m);
+  overflow-wrap: break-word;
+}
+
+.time {
+  color: var(--text-secondary);
+  font-size: var(--font-s);
+}
+
+.unreadNotifications {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--primary);
+}
