@@ -7,15 +7,29 @@ interface UseLikeProps {
   initialCount: number;
   onLike: (id: string) => Promise<{ liked: boolean; count: number }>;
   id: string;
+  onChange?: (liked: boolean, count: number) => void;
 }
 
-export const useLike = ({ initialLiked, initialCount, onLike, id }: UseLikeProps) => {
+export const useLike = ({
+  initialLiked,
+  initialCount,
+  onLike,
+  id,
+  onChange,
+}: UseLikeProps) => {
   const t = useTranslations();
   const [liked, setLiked] = useState(initialLiked);
   const [likesCount, setLikesCount] = useState(initialCount);
   const [likeLoading, setLikeLoading] = useState(false);
+  const [prevId, setPrevId] = useState(id);
 
-  const handleLike = async () => {
+  if (id !== prevId) {
+    setPrevId(id);
+    setLiked(initialLiked);
+    setLikesCount(initialCount);
+  }
+
+  const toggleLike = async () => {
     if (likeLoading) return;
     setLikeLoading(true);
 
@@ -23,6 +37,7 @@ export const useLike = ({ initialLiked, initialCount, onLike, id }: UseLikeProps
       const { liked: newLiked, count } = await onLike(id);
       setLiked(newLiked);
       setLikesCount(count);
+      onChange?.(newLiked, count);
     } catch {
       toast.error(t("toasts.error"));
     } finally {
@@ -32,5 +47,5 @@ export const useLike = ({ initialLiked, initialCount, onLike, id }: UseLikeProps
 
   const displayCount = likesCount > 0 ? likesCount : null;
 
-  return { liked, displayCount, likeLoading, handleLike };
+  return { liked, displayCount, likeLoading, toggleLike };
 };
