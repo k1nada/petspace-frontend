@@ -4,9 +4,6 @@ import { toast } from "react-toastify";
 import { getSuggestedFriends, addFriend } from "@/app/api/friends";
 import { User } from "@/types";
 import { useUserStore } from "@/app/hooks/useUserStore";
-import { withMinDelay } from "@/utils/withMinDelay";
-
-const SKELETON_MIN_DELAY_MS = 200;
 
 const SUGGESTIONS_COUNT = 3;
 
@@ -21,10 +18,7 @@ export const useSuggestedFriends = (currentUser: User | null) => {
   useEffect(() => {
     if (!currentUser) return;
 
-    withMinDelay(
-      getSuggestedFriends(currentUser.username),
-      SKELETON_MIN_DELAY_MS,
-    ).then((users) => {
+    getSuggestedFriends(currentUser.username).then((users) => {
       setSuggestions(
         [...users].sort(() => Math.random() - 0.5).slice(0, SUGGESTIONS_COUNT),
       );

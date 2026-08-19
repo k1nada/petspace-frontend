@@ -3,7 +3,6 @@ import { getUser } from "@/app/api/user";
 import { Header } from "@/app/components/Header/Header";
 import { PhotoGalleryLayout } from "@/app/features/photos/PhotoGalleryLayout/PhotoGalleryLayout";
 import { Photo } from "@/types";
-import { withMinDelay } from "@/utils/withMinDelay";
 
 interface PhotosPageProps {
   params: Promise<{ username: string }>;
@@ -24,8 +23,8 @@ const loadPageData = async (username: string) => {
 
 const PhotosPage = async ({ params }: PhotosPageProps) => {
   const awaitedParams = await params;
-  const { userData, photosWithComments } = await withMinDelay(
-    loadPageData(awaitedParams.username),
+  const { userData, photosWithComments } = await loadPageData(
+    awaitedParams.username,
   );
 
   return (
@@ -36,6 +35,7 @@ const PhotosPage = async ({ params }: PhotosPageProps) => {
           name={userData.name}
           photos={photosWithComments}
           avatar={userData.avatar}
+          username={userData.username}
         />
       </main>
     </>

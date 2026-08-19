@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import { getFriendsFeed } from "@/app/api/post";
 import { useUserStore } from "@/app/hooks/useUserStore";
 import { Post } from "@/types";
-import { withMinDelay } from "@/utils/withMinDelay";
 
 export const FeedLayout = () => {
   const t = useTranslations();
@@ -23,7 +22,7 @@ export const FeedLayout = () => {
 
   const triggerRefresh = () => {
     if (!currentUser) return;
-    withMinDelay(getFriendsFeed(currentUser.username)).then((data) => {
+    getFriendsFeed(currentUser.username).then((data) => {
       setPosts(data ?? []);
       setLoadingState(false);
     });

@@ -1,7 +1,6 @@
 import { Header } from "@/app/components/Header/Header";
 import { getUser } from "@/app/api/user";
 import { ProfileInterestsLayout } from "@/app/features/profile/info/ProfileInterestsLayout/ProfileInterestsLayout";
-import { withMinDelay } from "@/utils/withMinDelay";
 
 interface ProfileInterestsPageProps {
   params: Promise<{ username: string }>;
@@ -9,7 +8,7 @@ interface ProfileInterestsPageProps {
 
 const ProfileInterestsPage = async ({ params }: ProfileInterestsPageProps) => {
   const { username } = await params;
-  const userData = await withMinDelay(getUser(username));
+  const userData = await getUser(username);
 
   return (
     <>

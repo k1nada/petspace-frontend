@@ -4,7 +4,6 @@ import { getUser } from "@/app/api/user";
 import { getBreeds } from "@/app/api/breeds";
 import { getFamilyMembers } from "@/app/api/family";
 import { notFound } from "next/navigation";
-import { withMinDelay } from "@/utils/withMinDelay";
 
 interface FamilyPageProps {
   params: Promise<{ username: string }>;
@@ -12,9 +11,11 @@ interface FamilyPageProps {
 
 const FamilyPage = async ({ params }: FamilyPageProps) => {
   const { username } = await params;
-  const [userData, breeds, familyMembers] = await withMinDelay(
-    Promise.all([getUser(username), getBreeds(), getFamilyMembers(username)]),
-  );
+  const [userData, breeds, familyMembers] = await Promise.all([
+    getUser(username),
+    getBreeds(),
+    getFamilyMembers(username),
+  ]);
 
   if (!userData) notFound();
 
