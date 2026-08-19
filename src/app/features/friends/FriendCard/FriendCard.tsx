@@ -1,9 +1,9 @@
 "use client";
 
-import cn from "classnames";
 import styles from "./FriendCard.module.scss";
 import { Button } from "@/app/uikit/form/Button/Button";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import dayjs from "@/utils/dayjs";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
 import { MdDeleteSweep } from "react-icons/md";
@@ -31,6 +31,7 @@ export const FriendCard = ({
   onFriendDeleted,
 }: FriendCardProps) => {
   const t = useTranslations();
+  const locale = useLocale();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const currentUserData = useUserStore((state) => state.currentUser);
   const fetchCurrentUser = useUserStore((state) => state.fetchCurrentUser);
@@ -77,11 +78,15 @@ export const FriendCard = ({
         <Link href={ROUTES.profile(friend.username)}>
           <div className={styles.name}>{friend.name}</div>
         </Link>
-        <div
-          className={cn(styles.status, { [styles.online]: friend.isOnline })}
-        >
-          {friend.isOnline ? t("common.online") : t("common.offline")}
-        </div>
+        {!friend.isOnline && (
+          <div className={styles.status}>
+            {friend.lastSeen
+              ? t("friends.lastSeen", {
+                  time: dayjs(friend.lastSeen).locale(locale).fromNow(),
+                })
+              : t("common.offline")}
+          </div>
+        )}
       </div>
 
       <div className={styles.actions}>

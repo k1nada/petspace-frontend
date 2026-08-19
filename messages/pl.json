@@ -224,11 +224,13 @@
     "unfollow": "Przestań obserwować",
     "emptyFriendsTitle": "Brak znajomych",
     "emptyFriendsText": "Ale każda legenda zaczyna w pojedynkę. Idź i znajdź swoją sforę!",
+    "noSearchResults": "Nie znaleziono znajomych",
     "emptyFollowersTitle": "Brak obserwujących",
     "emptyFollowersText": "Udostępnij swój profil i patrz, jak rośnie twoja sfora!",
     "emptyFollowingTitle": "Nikogo jeszcze nie obserwujesz",
     "emptyFollowingText": "Przeglądaj profile i obserwuj psy, które lubisz!",
-    "delete": "Usuń"
+    "delete": "Usuń",
+    "lastSeen": "Ostatnio widziano {time}"
   },
   "friendRequest": {
     "title": "Brak zaproszeń",

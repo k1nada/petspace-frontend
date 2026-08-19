@@ -224,11 +224,13 @@
     "unfollow": "Unfollow",
     "emptyFriendsTitle": "No friends yet",
     "emptyFriendsText": "Every legend starts alone. Go find your pack!",
+    "noSearchResults": "No friends found",
     "emptyFollowersTitle": "No followers yet",
     "emptyFollowersText": "Share your profile and watch the pack grow!",
     "emptyFollowingTitle": "Not following anyone yet",
     "emptyFollowingText": "Explore profiles and follow dogs you like!",
-    "delete": "Delete"
+    "delete": "Delete",
+    "lastSeen": "Last seen {time}"
   },
   "friendRequest": {
     "title": "No requests yet",
