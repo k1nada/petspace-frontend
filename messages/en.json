@@ -320,5 +320,9 @@
     "commented": "{name} commented on your post",
     "friendRequest": "{name} wants to be friends",
     "achievement": "You unlocked a new achievement"
+  },
+  "footer": {
+    "privacyPolicy": "Privacy Policy",
+    "copyright": "© {year} Petspace"
   }
 }

@@ -1,0 +1,21 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-m);
+  padding: var(--padding-l);
+  font-size: var(--font-s);
+  color: var(--text-secondary);
+}
+
+.copyright {
+  white-space: nowrap;
+}
+
+.link {
+  font-size: var(--font-s);
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
