@@ -1,5 +1,4 @@
 import styles from "./ProfileBannerSkeleton.module.scss";
-import { Divider } from "@/app/uikit/layout/Divider/Divider";
 
 export const ProfileBannerSkeleton = () => (
   <div className={styles.banner}>
@@ -13,7 +12,7 @@ export const ProfileBannerSkeleton = () => (
         <div className={styles.city} />
       </div>
       <div className={styles.bio} />
-      <Divider />
+      <div className={styles.divider} />
       <div className={styles.stats}>
         <div className={styles.stat} />
         <div className={styles.stat} />

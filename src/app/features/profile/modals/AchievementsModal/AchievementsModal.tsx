@@ -1,5 +1,6 @@
 import styles from "./AchievementsModal.module.scss";
 import { useTranslations } from "next-intl";
+import cn from "classnames";
 import { FaDog, FaLock } from "react-icons/fa";
 import { BiSolidBone } from "react-icons/bi";
 import { ACHIEVEMENT_KEYS } from "@/app/uikit/constants/achievements";
@@ -25,7 +26,10 @@ export const AchievementsModal = ({ isOpen, onClose, achievements }: Props) => {
             return (
               <div
                 key={key}
-                className={`${styles.item} ${unlocked ? styles.unlocked : styles.locked}`}
+                className={cn(styles.item, {
+                  [styles.unlocked]: unlocked,
+                  [styles.locked]: !unlocked,
+                })}
               >
                 {unlocked ? <FaDog size={25} /> : <FaLock size={18} />}
                 <div className={styles.content}>

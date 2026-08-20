@@ -9,7 +9,6 @@ import { useUserStore } from "@/app/hooks/useUserStore";
 import { useFamilyTree } from "@/app/hooks/useFamilyTree";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
-import { Divider } from "@/app/uikit/layout/Divider/Divider";
 
 interface FamilyProps {
   user: User;
@@ -44,7 +43,7 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
           />
         </div>
 
-        <Divider style={{ width: 30, height: 2 }} />
+        <div className={styles.divider} />
 
         <Link href={ROUTES.profile(username)} className={styles.user}>
           <Avatar src={avatar} size={96} />
@@ -52,7 +51,7 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
           {breed && <span className={styles.breed}>{breed}</span>}
         </Link>
 
-        <Divider style={{ width: 30, height: 2 }} />
+        <div className={styles.divider} />
 
         <div className={styles.childrenColumn}>
           <FamilyColumn

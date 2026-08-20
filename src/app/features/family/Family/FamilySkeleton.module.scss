@@ -56,3 +56,10 @@
   background: var(--bg-input);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
+
+.divider {
+  width: 30px;
+  height: 2px;
+  background: var(--border-divider);
+  flex-shrink: 0;
+}
