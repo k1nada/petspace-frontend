@@ -27,9 +27,12 @@
   height: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  padding-left: var(--padding-l);
+  padding-right: var(--padding-l);
 }
 
 .wrapper {
+  grid-column: 1;
   justify-self: start;
 }
 
@@ -46,6 +49,7 @@
 }
 
 .search {
+  grid-column: 2;
   width: 300px;
   height: 40px;
   border-radius: var(--radius-m);
@@ -54,6 +58,7 @@
 }
 
 .list {
+  grid-column: 3;
   justify-self: end;
   display: flex;
   align-items: center;

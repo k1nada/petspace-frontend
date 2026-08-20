@@ -43,7 +43,7 @@
 
 .passwordButton {
   position: absolute;
-  right: 0.5rem;
+  right: 1rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-placeholder);
@@ -71,4 +71,6 @@
 
 .line {
   flex: 1;
+  height: 1px;
+  background: var(--border-divider);
 }
