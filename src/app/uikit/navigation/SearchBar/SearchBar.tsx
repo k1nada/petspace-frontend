@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./SearchBar.module.scss";
+import cn from "classnames";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import { Input } from "../../form/Input/Input";
@@ -38,7 +39,11 @@ export const SearchBar = ({
 
   return (
     <search
-      className={`${styles.wrapper} ${fullWidth ? styles.fullWidth : ""} ${className ?? ""}`}
+      className={cn(
+        styles.wrapper,
+        { [styles.fullWidth]: fullWidth },
+        className,
+      )}
     >
       <FaSearch className={styles.icon} />
       <Input

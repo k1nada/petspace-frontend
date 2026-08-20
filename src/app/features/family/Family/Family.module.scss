@@ -49,3 +49,10 @@
   font-size: var(--font-xs);
   font-weight: 600;
 }
+
+.divider {
+  width: 30px;
+  height: 2px;
+  background: var(--border-divider);
+  flex-shrink: 0;
+}

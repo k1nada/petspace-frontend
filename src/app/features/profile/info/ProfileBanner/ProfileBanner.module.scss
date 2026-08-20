@@ -75,6 +75,13 @@
   overflow-wrap: break-word;
 }
 
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border-divider);
+  flex-shrink: 0;
+}
+
 .stats {
   display: flex;
   align-items: center;

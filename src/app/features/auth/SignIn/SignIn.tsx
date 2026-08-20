@@ -23,7 +23,6 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import api from "@/config/axios";
 import { useUserStore } from "@/app/hooks/useUserStore";
-import { Divider } from "@/app/uikit/layout/Divider/Divider";
 
 export const SignIn = () => {
   const t = useTranslations();
@@ -118,13 +117,9 @@ export const SignIn = () => {
         {t("signin.forgotPassword")}
       </Link>
       <div className={styles.formDivider}>
-        <div className={styles.line}>
-          <Divider />
-        </div>
+        <div className={styles.line} />
         <span>{t("common.or")}</span>
-        <div className={styles.line}>
-          <Divider />
-        </div>
+        <div className={styles.line} />
       </div>
       <Button type="button" appearance="secondary" onClick={goToSignUp}>
         {t("signin.createAccount")}

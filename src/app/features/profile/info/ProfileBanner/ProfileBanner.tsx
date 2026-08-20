@@ -16,7 +16,6 @@ import { useUserStore } from "@/app/hooks/useUserStore";
 import { BannerInfo } from "@/types";
 import { ProfileBannerSkeleton } from "./ProfileBannerSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
-import { Divider } from "@/app/uikit/layout/Divider/Divider";
 import { addFriend as addFriendAPI, deleteFriend } from "@/app/api/friends";
 import { getRelationshipStatus } from "@/utils/friends";
 import { toast } from "react-toastify";
@@ -122,7 +121,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
             )}
           </div>
           {bannerInfo.bio && <div className={styles.bio}>{bannerInfo.bio}</div>}
-          <Divider />
+          <div className={styles.divider} />
           <div className={styles.stats}>
             <div className={styles.stat}>
               <Link

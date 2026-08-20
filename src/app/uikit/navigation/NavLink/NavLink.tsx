@@ -12,7 +12,9 @@ export const NavLink = ({ href, children, count }: NavLinkProps) => {
   return (
     <Link href={href} className={styles.navLink}>
       {children}
-      {count ? <span className={styles.counter}>{count}</span> : null}
+      {count ? (
+        <span className={styles.counter}>{count > 99 ? "99+" : count}</span>
+      ) : null}
     </Link>
   );
 };

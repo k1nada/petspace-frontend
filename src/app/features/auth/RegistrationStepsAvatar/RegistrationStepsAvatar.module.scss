@@ -30,6 +30,13 @@
   color: var(--text-secondary);
 }
 
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border-divider);
+  flex-shrink: 0;
+}
+
 .avatar {
   justify-items: center;
 }

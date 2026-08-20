@@ -1,5 +1,6 @@
 import styles from "./Modal.module.scss";
 import { ReactNode } from "react";
+import cn from "classnames";
 
 interface ModalProps {
   className?: string;
@@ -14,7 +15,7 @@ export const Modal = ({ className, isOpen, onClose, children }: ModalProps) => {
   return (
     <div className={styles.container} onClick={onClose}>
       <div
-        className={`${styles.modal} ${className ?? ""}`}
+        className={cn(styles.modal, className)}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
