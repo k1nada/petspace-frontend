@@ -4,6 +4,10 @@
   align-items: baseline;
   gap: 2px;
   padding-bottom: var(--gap-xs);
+
+  &:hover {
+    background: transparent !important;
+  }
 }
 
 .tab {

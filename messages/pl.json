@@ -146,7 +146,7 @@
   },
   "profileFriends": {
     "title": "Znajomi",
-    "empty": "Brak członków sfory"
+    "empty": "Brak znajomych"
   },
   "avatarEdit": {
     "open": "Otwórz zdjęcie",
@@ -160,8 +160,8 @@
     "deleteModalDescription": "Czy na pewno chcesz usunąć swoje zdjęcie?"
   },
   "feed": {
-    "title": "Wciąż węszymy w poszukiwaniu postów",
-    "text": "Nie ma tu jeszcze żadnych kości do gryzienia. Bądź pierwszy i zostaw ślad!",
+    "title": "Brak postów",
+    "text": "Bądź pierwszą osobą, która tu coś opublikuje!",
     "friendsEmptyTitle": "Brak nowości od znajomych",
     "friendsEmptyText": "Nikt z Twojej paczki nic jeszcze nie opublikował. Zajrzyj tu później albo dodaj kilku znajomych."
   },
@@ -196,7 +196,7 @@
   },
   "profilePhotos": {
     "title": "Zdjęcia",
-    "empty": "Brak chwil merdania ogonem"
+    "empty": "Brak zdjęć"
   },
   "photoModal": {
     "counter": "{current} / {total}",
@@ -223,10 +223,10 @@
     "remove": "Usuń",
     "unfollow": "Przestań obserwować",
     "emptyFriendsTitle": "Brak znajomych",
-    "emptyFriendsText": "Ale każda legenda zaczyna w pojedynkę. Idź i znajdź swoją sforę!",
+    "emptyFriendsText": "Znajdź jakieś psy i wyślij im zaproszenie do znajomych!",
     "noSearchResults": "Nie znaleziono znajomych",
     "emptyFollowersTitle": "Brak obserwujących",
-    "emptyFollowersText": "Udostępnij swój profil i patrz, jak rośnie twoja sfora!",
+    "emptyFollowersText": "Udostępnij swój profil, żeby więcej psów mogło cię znaleźć!",
     "emptyFollowingTitle": "Nikogo jeszcze nie obserwujesz",
     "emptyFollowingText": "Przeglądaj profile i obserwuj psy, które lubisz!",
     "delete": "Usuń",
@@ -237,7 +237,7 @@
     "accept": "Akceptuj",
     "decline": "Odrzuć",
     "wantsToBeFriends": "Chce zostać znajomym",
-    "empty": "Jeszcze nic tu nie ma — czas poznać nowych znajomych!",
+    "empty": "Brak zaproszeń w tej chwili. Zajrzyj tu później!",
     "acceptedSuccess": "Zaproszenie zaakceptowane",
     "rejectedSuccess": "Zaproszenie odrzucone"
   },
