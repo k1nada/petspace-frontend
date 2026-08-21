@@ -146,7 +146,7 @@
   },
   "profileFriends": {
     "title": "Friends",
-    "empty": "No pack members yet"
+    "empty": "No friends yet"
   },
   "avatarEdit": {
     "open": "Open photo",
@@ -160,8 +160,8 @@
     "deleteModalDescription": "Are you sure you want to delete your photo?"
   },
   "feed": {
-    "title": "Still sniffing around for posts",
-    "text": "No bones to fetch here yet. Be the first to leave a mark!",
+    "title": "No posts yet",
+    "text": "Be the first to post something here!",
     "friendsEmptyTitle": "No news from your friends yet",
     "friendsEmptyText": "Nobody in your pack has posted anything. Check back later or add a few more friends."
   },
@@ -196,7 +196,7 @@
   },
   "profilePhotos": {
     "title": "Photos",
-    "empty": "No tail-wagging moments yet"
+    "empty": "No photos yet"
   },
   "photoModal": {
     "counter": "{current} / {total}",
@@ -223,10 +223,10 @@
     "remove": "Remove",
     "unfollow": "Unfollow",
     "emptyFriendsTitle": "No friends yet",
-    "emptyFriendsText": "Every legend starts alone. Go find your pack!",
+    "emptyFriendsText": "Find some dogs and send them a friend request!",
     "noSearchResults": "No friends found",
     "emptyFollowersTitle": "No followers yet",
-    "emptyFollowersText": "Share your profile and watch the pack grow!",
+    "emptyFollowersText": "Share your profile so more dogs can find you!",
     "emptyFollowingTitle": "Not following anyone yet",
     "emptyFollowingText": "Explore profiles and follow dogs you like!",
     "delete": "Delete",
@@ -237,7 +237,7 @@
     "accept": "Accept",
     "decline": "Decline",
     "wantsToBeFriends": "Wants to be friends",
-    "empty": "Nothing here yet — go make some new friends!",
+    "empty": "No friend requests right now. Check back later!",
     "acceptedSuccess": "Friend request accepted",
     "rejectedSuccess": "Friend request declined"
   },

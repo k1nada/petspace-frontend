@@ -21,33 +21,8 @@
   gap: var(--gap-m);
 }
 
-.search {
-  width: 100%;
-}
-
 .list {
   display: flex;
   flex-direction: column;
   gap: var(--gap-s);
-}
-
-.emptyFriends {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-l);
-  text-align: center;
-  padding: 70px 0;
-}
-
-.emptyTitle {
-  margin: 0;
-  font-weight: 600;
-  color: var(--text-primary);
-  font-size: var(--font-l);
-}
-
-.emptyText {
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: var(--font-m);
 }
