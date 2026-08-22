@@ -9,6 +9,8 @@ interface ConfirmModalProps {
   isOpen: boolean;
   title: string;
   description: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
   onConfirm: () => void;
   onClose: () => void;
 }
@@ -17,6 +19,8 @@ export const ConfirmModal = ({
   isOpen,
   title,
   description,
+  confirmLabel,
+  cancelLabel,
   onConfirm,
   onClose,
 }: ConfirmModalProps) => {
@@ -28,10 +32,10 @@ export const ConfirmModal = ({
       <p className={styles.description}>{description}</p>
       <div className={styles.actions}>
         <Button appearance="secondary" onClick={onClose}>
-          {t("common.cancel")}
+          {cancelLabel ?? t("common.cancel")}
         </Button>
         <Button appearance="primary" onClick={onConfirm}>
-          {t("common.delete")}
+          {confirmLabel ?? t("common.delete")}
         </Button>
       </div>
     </Modal>

@@ -13,6 +13,7 @@ interface UserStore {
   fetchCurrentUser: (options?: { withDelay?: boolean }) => Promise<void>;
   setRequestCount: (count: number) => void;
   setRequests: (requests: FriendRequest[]) => void;
+  signOut: () => void;
 }
 
 export const useUserStore = create<UserStore>()(
@@ -47,6 +48,12 @@ export const useUserStore = create<UserStore>()(
       setRequestCount: (count) => set({ requestCount: count }),
       setRequests: (requests) =>
         set({ requests, requestCount: requests.length }),
+      signOut: () =>
+        set({
+          currentUser: null,
+          requests: [],
+          requestCount: 0,
+        }),
     }),
     {
       name: "user",
