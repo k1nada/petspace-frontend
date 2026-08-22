@@ -179,6 +179,12 @@
     "modalTitle": "Usuń post",
     "modalDescription": "Czy na pewno chcesz usunąć ten post?"
   },
+  "signOut": {
+    "modalTitle": "Wyloguj się",
+    "modalDescription": "Już wychodzisz? Sfora będzie tęsknić.",
+    "stay": "Zostań",
+    "leave": "Wyjdź"
+  },
   "comment": {
     "reply": "Odpowiedz",
     "deleteModalTitle": "Usuń komentarz",

@@ -179,6 +179,12 @@
     "modalTitle": "Delete post",
     "modalDescription": "Are you sure you want to delete this post?"
   },
+  "signOut": {
+    "modalTitle": "Sign out",
+    "modalDescription": "Already leaving? The pack will miss you.",
+    "stay": "Stay",
+    "leave": "Leave"
+  },
   "comment": {
     "reply": "Reply",
     "deleteModalTitle": "Delete comment",

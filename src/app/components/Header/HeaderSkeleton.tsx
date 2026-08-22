@@ -1,7 +1,7 @@
 import { Logo } from "@/app/uikit/brand/Logo/Logo";
 import styles from "./HeaderSkeleton.module.scss";
 
-const HEADER_LINKS_COUNT = 4;
+const HEADER_LINKS_COUNT = 5;
 
 export const HeaderSkeleton = () => (
   <header className={styles.header}>
