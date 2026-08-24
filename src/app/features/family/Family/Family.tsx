@@ -5,7 +5,7 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { FamilyColumn } from "../FamilyColumn/FamilyColumn";
 import { FamilyMember, User } from "@/types";
 import { useTranslations } from "next-intl";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { useFamilyTree } from "@/app/hooks/useFamilyTree";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
@@ -19,7 +19,7 @@ interface FamilyProps {
 export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
   const { username, name, breed, avatar } = user;
   const t = useTranslations();
-  const currentUser = useUserStore((state) => state.currentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
   const isOwner = currentUser?.username === username;
   const { parents, children, addMember, removeMember } =
     useFamilyTree(familyMembers);

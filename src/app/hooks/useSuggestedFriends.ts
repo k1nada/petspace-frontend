@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { getSuggestedFriends, addFriend } from "@/app/api/friends";
 import { User } from "@/types";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 const SUGGESTIONS_COUNT = 3;
 
@@ -12,7 +12,7 @@ export const useSuggestedFriends = (currentUser: User | null) => {
   const [suggestions, setSuggestions] = useState<User[]>([]);
   const [requestedIds, setRequestedIds] = useState<string[]>([]);
   const [loadingState, setLoadingState] = useState(true);
-  const isAuthChecked = useUserStore((state) => state.isAuthChecked);
+  const isAuthChecked = useAuthStore((state) => state.isAuthChecked);
   const loading = loadingState && !(isAuthChecked && !currentUser);
 
   useEffect(() => {

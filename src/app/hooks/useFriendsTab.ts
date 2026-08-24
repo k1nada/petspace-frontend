@@ -1,6 +1,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useFriendRequestsStore } from "@/app/hooks/useFriendRequestsStore";
 
 export type FriendsTab = "friends" | "requests" | "followers" | "following";
 
@@ -22,7 +22,7 @@ export const useFriendsTab = ({
   const searchParams = useSearchParams();
   const activeTab = (searchParams.get("tab") as FriendsTab) || "friends";
 
-  const requestsCount = useUserStore((state) => state.requestCount);
+  const requestsCount = useFriendRequestsStore((state) => state.requestCount);
 
   const goToTab = (tab: FriendsTab) => router.push(`?tab=${tab}`);
 

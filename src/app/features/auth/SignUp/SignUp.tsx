@@ -23,7 +23,7 @@ import { toast } from "react-toastify";
 import { FormField } from "@/app/uikit/form/FormField/FormField";
 import api from "@/config/axios";
 import { SignUpData } from "@/types";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 export const SignUp = () => {
   const t = useTranslations();
@@ -62,7 +62,7 @@ export const SignUp = () => {
       }
 
       localStorage.setItem("token", token);
-      useUserStore.getState().fetchCurrentUser();
+      useAuthStore.getState().fetchCurrentUser();
       router.push(ROUTES.registrationSteps);
     } catch (e) {
       handleError(e);

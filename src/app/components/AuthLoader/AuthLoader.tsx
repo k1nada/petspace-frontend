@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 interface AuthLoaderProps {
   fallback: ReactNode;
@@ -9,7 +9,7 @@ interface AuthLoaderProps {
 }
 
 export const AuthLoader = ({ fallback, children }: AuthLoaderProps) => {
-  const isAuthChecked = useUserStore((state) => state.isAuthChecked);
+  const isAuthChecked = useAuthStore((state) => state.isAuthChecked);
 
   if (!isAuthChecked) return <>{fallback}</>;
 

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { createComment } from "@/app/api/comment";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SubmitTextarea";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { toast } from "react-toastify";
 
 interface CommentCreatorProps {
@@ -20,7 +20,7 @@ export const CommentCreator = ({
 }: CommentCreatorProps) => {
   const t = useTranslations();
   const [content, setContent] = useState("");
-  const currentUser = useUserStore((state) => state.currentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
 
   const handleSubmit = async () => {
     if (!content) return;

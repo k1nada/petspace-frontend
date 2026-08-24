@@ -12,7 +12,7 @@ import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Photo } from "@/types";
 import { ProfilePhotosSkeleton } from "./ProfilePhotosSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 interface ProfilePhotosProps {
   photos: Photo[];
@@ -30,7 +30,7 @@ export const ProfilePhotos = ({
   name,
 }: ProfilePhotosProps) => {
   const t = useTranslations();
-  const currentUser = useUserStore((state) => state.currentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
   const isOwner = currentUser?.username === username;
   const [localPhotos, setLocalPhotos] = useState<Photo[]>(photos);
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =

@@ -22,7 +22,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import api from "@/config/axios";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 export const SignIn = () => {
   const t = useTranslations();
@@ -47,7 +47,7 @@ export const SignIn = () => {
       }
 
       localStorage.setItem("token", token);
-      useUserStore.getState().fetchCurrentUser();
+      useAuthStore.getState().fetchCurrentUser();
       router.push(ROUTES.profile(user.username));
     } catch {
       toast.error(t("errors.INVALID_CREDENTIALS"));

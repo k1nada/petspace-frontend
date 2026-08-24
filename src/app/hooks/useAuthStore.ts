@@ -2,27 +2,22 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import api from "@/config/axios";
 import { getPendingRequests } from "@/app/api/friends";
-import { FriendRequest, User } from "@/types";
+import { useFriendRequestsStore } from "@/app/hooks/useFriendRequestsStore";
+import { User } from "@/types";
 import { withMinDelay } from "@/utils/withMinDelay";
 
-interface UserStore {
+interface AuthStore {
   currentUser: User | null;
   isAuthChecked: boolean;
-  requestCount: number;
-  requests: FriendRequest[];
   fetchCurrentUser: (options?: { withDelay?: boolean }) => Promise<void>;
-  setRequestCount: (count: number) => void;
-  setRequests: (requests: FriendRequest[]) => void;
   signOut: () => void;
 }
 
-export const useUserStore = create<UserStore>()(
+export const useAuthStore = create<AuthStore>()(
   persist(
     (set) => ({
       currentUser: null,
       isAuthChecked: false,
-      requestCount: 0,
-      requests: [],
 
       fetchCurrentUser: async (options) => {
         let user: User;
@@ -41,19 +36,14 @@ export const useUserStore = create<UserStore>()(
 
         try {
           const requests = await getPendingRequests(user.username);
-          set({ requests, requestCount: requests.length });
+          useFriendRequestsStore.getState().setRequests(requests);
         } catch {}
       },
 
-      setRequestCount: (count) => set({ requestCount: count }),
-      setRequests: (requests) =>
-        set({ requests, requestCount: requests.length }),
-      signOut: () =>
-        set({
-          currentUser: null,
-          requests: [],
-          requestCount: 0,
-        }),
+      signOut: () => {
+        set({ currentUser: null });
+        useFriendRequestsStore.getState().reset();
+      },
     }),
     {
       name: "user",
