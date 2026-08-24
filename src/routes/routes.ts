@@ -1,7 +1,6 @@
 export const ROUTES = {
   signup: "/signup",
   signin: "/signin",
-  forgotPassword: "/forgot-password",
   registrationSteps: "/registration-steps",
   registrationStepsAvatar: "/registration-steps/avatar",
   profile: (username: string) => `/${username}`,
@@ -9,9 +8,7 @@ export const ROUTES = {
   editInterests: (username: string) => `/${username}/interests`,
   feed: "/feed",
   friends: (username: string) => `/${username}/friends`,
-  friendRequests: (username: string) => `/${username}/requests`,
   photos: (username: string) => `/${username}/photos`,
-  places: "/places",
   messages: (currentUsername: string, targetUsername?: string) =>
     targetUsername
       ? `/${currentUsername}/messages?user=${targetUsername}`
