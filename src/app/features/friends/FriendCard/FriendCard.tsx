@@ -13,7 +13,7 @@ import { ROUTES } from "@/routes/routes";
 import { useState } from "react";
 import { addFriend as addFriendAPI, deleteFriend } from "@/app/api/friends";
 import { toast } from "react-toastify";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { getRelationshipStatus } from "@/utils/friends";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 
@@ -33,8 +33,8 @@ export const FriendCard = ({
   const t = useTranslations();
   const locale = useLocale();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const currentUserData = useUserStore((state) => state.currentUser);
-  const fetchCurrentUser = useUserStore((state) => state.fetchCurrentUser);
+  const currentUserData = useAuthStore((state) => state.currentUser);
+  const fetchCurrentUser = useAuthStore((state) => state.fetchCurrentUser);
   const { isFriend, isPending, isFollowing } = getRelationshipStatus(
     currentUserData,
     friend.id,

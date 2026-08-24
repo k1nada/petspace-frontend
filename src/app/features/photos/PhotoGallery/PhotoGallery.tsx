@@ -12,7 +12,7 @@ import { PhotoGallerySkeleton } from "./PhotoGallerySkeleton";
 import { PhotoGrid } from "../PhotoGrid/PhotoGrid";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 interface PhotoGalleryProps {
   photos: Photo[];
@@ -28,7 +28,7 @@ export const PhotoGallery = ({
   username,
 }: PhotoGalleryProps) => {
   const t = useTranslations();
-  const currentUser = useUserStore((state) => state.currentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
   const isOwner = currentUser?.username === username;
   const {
     localPhotos,

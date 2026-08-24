@@ -9,15 +9,15 @@ import { Postwall } from "@/app/features/profile/feed/Postwall/Postwall";
 import { SuggestedFriends } from "@/app/features/feed/SuggestedFriends/SuggestedFriends";
 import { useEffect, useState } from "react";
 import { getFriendsFeed } from "@/app/api/post";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { Post } from "@/types";
 
 export const FeedLayout = () => {
   const t = useTranslations();
   const [posts, setPosts] = useState<Post[]>([]);
   const [loadingState, setLoadingState] = useState(true);
-  const currentUser = useUserStore((state) => state.currentUser);
-  const isAuthChecked = useUserStore((state) => state.isAuthChecked);
+  const currentUser = useAuthStore((state) => state.currentUser);
+  const isAuthChecked = useAuthStore((state) => state.isAuthChecked);
   const loading = loadingState && !(isAuthChecked && !currentUser);
 
   const triggerRefresh = () => {

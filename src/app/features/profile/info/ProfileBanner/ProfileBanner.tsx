@@ -12,7 +12,7 @@ import { AvatarEdit } from "@/app/uikit/user/AvatarEdit/AvatarEdit";
 import { useState } from "react";
 import { ProfileInfoModal } from "../../modals/ProfileInfoModal/ProfileInfoModal";
 import { AchievementsModal } from "../../modals/AchievementsModal/AchievementsModal";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { BannerInfo } from "@/types";
 import { ProfileBannerSkeleton } from "./ProfileBannerSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
@@ -45,8 +45,8 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     (bannerInfo.interests && Object.values(bannerInfo.interests).some(Boolean))
   );
 
-  const currentUser = useUserStore((state) => state.currentUser);
-  const fetchCurrentUser = useUserStore((state) => state.fetchCurrentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
+  const fetchCurrentUser = useAuthStore((state) => state.fetchCurrentUser);
   const { isFriend, isPending, isFollowing } = getRelationshipStatus(
     currentUser,
     bannerInfo.id,

@@ -6,14 +6,14 @@ import { useTranslations } from "next-intl";
 import { BsBellFill } from "react-icons/bs";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { Button } from "../../form/Button/Button";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { useNotifications } from "@/app/hooks/useNotifications";
 import { NotificationItem } from "@/app/uikit/overlays/NotificationItem/NotificationItem";
 
 export const NotificationsDropdown = () => {
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
-  const currentUser = useUserStore((state) => state.currentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
   const { notifications, unreadCount, markAllAsRead, markAsRead } =
     useNotifications(currentUser);
 

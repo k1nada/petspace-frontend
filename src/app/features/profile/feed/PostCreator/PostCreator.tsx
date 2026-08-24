@@ -8,7 +8,7 @@ import { createPost, uploadPostPhoto } from "@/app/api/post";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { useTextareaSubmit } from "@/app/hooks/useTextareaSubmit";
 import { toast } from "react-toastify";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 interface PostCreatorProps {
   avatar?: string;
@@ -29,7 +29,7 @@ export const PostCreator = ({
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isPublishing, setIsPublishing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const currentUser = useUserStore((state) => state.currentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

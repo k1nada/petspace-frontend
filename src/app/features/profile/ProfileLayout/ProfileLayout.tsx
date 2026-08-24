@@ -9,7 +9,7 @@ import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import { ProfilePhotos } from "../photos/ProfilePhotos/ProfilePhotos";
 import { useState } from "react";
 import { getPosts } from "@/app/api/post";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { BannerInfo } from "@/types";
 import { Post } from "@/types";
 
@@ -23,7 +23,7 @@ export const ProfileLayout = ({
   initialPosts,
 }: ProfileLayoutProps) => {
   const [posts, setPosts] = useState<Post[]>(initialPosts);
-  const currentUser = useUserStore((state) => state.currentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
   const isOwner = currentUser?.username === bannerInfo.username;
   const postwallId = bannerInfo.postwallId;
 

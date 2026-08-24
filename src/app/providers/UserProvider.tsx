@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import { useUserStore } from "../hooks/useUserStore";
+import { useAuthStore } from "../hooks/useAuthStore";
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const fetchCurrentUser = useUserStore((state) => state.fetchCurrentUser);
+  const fetchCurrentUser = useAuthStore((state) => state.fetchCurrentUser);
 
   useEffect(() => {
     fetchCurrentUser();

@@ -6,12 +6,12 @@ import { toast } from "react-toastify";
 import { acceptFriendRequest, rejectFriendRequest } from "@/app/api/friends";
 import { FriendRequestCard } from "../FriendRequestCard/FriendRequestCard";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useFriendRequestsStore } from "@/app/hooks/useFriendRequestsStore";
 
 export const FriendRequest = () => {
   const t = useTranslations();
-  const requests = useUserStore((state) => state.requests);
-  const setRequests = useUserStore((state) => state.setRequests);
+  const requests = useFriendRequestsStore((state) => state.requests);
+  const setRequests = useFriendRequestsStore((state) => state.setRequests);
 
   const removeRequest = (requestId: string) => {
     setRequests(requests.filter((r) => r.id !== requestId));

@@ -15,7 +15,7 @@ import api from "@/config/axios";
 import socket from "@/services/socket";
 import { SearchBar } from "../../uikit/navigation/SearchBar/SearchBar";
 import { ThemeToggle } from "@/app/uikit/brand/ThemeToggle/ThemeToggle";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { LocaleSwitcher } from "@/app/uikit/brand/LocaleSwitcher/LocaleSwitcher";
 import { useSearch } from "@/app/hooks/useSearch";
 import { HeaderSkeleton } from "./HeaderSkeleton";
@@ -26,8 +26,8 @@ import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 export const Header = () => {
   const t = useTranslations();
   const router = useRouter();
-  const currentUser = useUserStore((state) => state.currentUser);
-  const isAuthChecked = useUserStore((state) => state.isAuthChecked);
+  const currentUser = useAuthStore((state) => state.currentUser);
+  const isAuthChecked = useAuthStore((state) => state.isAuthChecked);
   const { query, results, search, select } = useSearch();
   const [isSignOutOpen, setIsSignOutOpen] = useState(false);
 
@@ -38,7 +38,7 @@ export const Header = () => {
     } catch {}
     localStorage.removeItem("token");
     socket.disconnect();
-    useUserStore.getState().signOut();
+    useAuthStore.getState().signOut();
     router.push(ROUTES.signin);
   };
 

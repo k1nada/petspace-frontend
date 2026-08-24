@@ -2,10 +2,10 @@
 
 import RegistrationSteps from "@/app/features/auth/RegistrationSteps/RegistrationSteps";
 import styles from "./page.module.scss";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 const RegistrationStepsPage = () => {
-  const currentUser = useUserStore((state) => state.currentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
 
   if (!currentUser) return null;
 

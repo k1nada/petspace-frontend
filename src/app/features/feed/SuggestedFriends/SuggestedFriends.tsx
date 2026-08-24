@@ -6,14 +6,14 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { useSuggestedFriends } from "@/app/hooks/useSuggestedFriends";
 import { getRelationshipStatus } from "@/utils/friends";
 import { SuggestedFriendsSkeleton } from "./SuggestedFriendsSkeleton";
 
 export const SuggestedFriends = () => {
   const t = useTranslations();
-  const currentUser = useUserStore((state) => state.currentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
   const { suggestions, requestedIds, loading, requestFriend } =
     useSuggestedFriends(currentUser);
 

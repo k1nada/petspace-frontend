@@ -8,14 +8,15 @@ import styles from "./Sidebar.module.scss";
 import { ROUTES } from "@/routes/routes";
 import { NavLink } from "@/app/uikit/navigation/NavLink/NavLink";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useFriendRequestsStore } from "@/app/hooks/useFriendRequestsStore";
 import { SidebarSkeleton } from "./SidebarSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 
 export const Sidebar = () => {
   const t = useTranslations();
-  const currentUser = useUserStore((state) => state.currentUser);
-  const requestCount = useUserStore((state) => state.requestCount);
+  const currentUser = useAuthStore((state) => state.currentUser);
+  const requestCount = useFriendRequestsStore((state) => state.requestCount);
   const tips = t.raw("dailyTip.tips") as string[];
   const tip = tips[new Date().getDay()];
 

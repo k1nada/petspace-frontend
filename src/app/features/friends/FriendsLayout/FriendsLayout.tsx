@@ -4,7 +4,7 @@ import styles from "./FriendsLayout.module.scss";
 import { useTranslations } from "next-intl";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
-import { useUserStore } from "@/app/hooks/useUserStore";
+import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { FollowUser, Friend } from "@/types";
 import { Friends } from "../Friends/Friends";
 import { SuggestedFriends } from "@/app/features/feed/SuggestedFriends/SuggestedFriends";
@@ -23,7 +23,7 @@ export const FriendsLayout = ({
   following,
 }: FriendsLayoutProps) => {
   const t = useTranslations();
-  const currentUser = useUserStore((state) => state.currentUser);
+  const currentUser = useAuthStore((state) => state.currentUser);
   const isMyProfile = currentUser?.username === username;
 
   return (
