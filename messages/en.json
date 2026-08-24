@@ -12,7 +12,13 @@
     "online": "Online",
     "offline": "Offline",
     "avatar": "Avatar",
-    "preview": "Preview"
+    "preview": "Preview",
+    "profile": "Profile",
+    "messages": "Messages",
+    "friends": "Friends",
+    "photos": "Photos",
+    "familyTree": "Family tree",
+    "noFriendsText": "You don't have any friends yet."
   },
   "validations": {
     "minLength": "Must be at least {min} characters",
@@ -68,12 +74,7 @@
     "subtitle": "Join the pack — show who you are"
   },
   "sidebar": {
-    "profile": "Profile",
-    "feed": "Feed",
-    "messages": "Messages",
-    "friends": "Friends",
-    "photos": "Photos",
-    "familyTree": "Family tree"
+    "feed": "Feed"
   },
   "searchBar": {
     "search": "Search"
@@ -295,16 +296,16 @@
     "add": "Add"
   },
   "contactList": {
-    "title": "Messages",
-    "emptyTitle": "You don't have any friends yet.",
     "emptyText": "Find other dogs to start chatting!",
-    "findFriends": "Find friends"
+    "findFriends": "Find friends",
+    "sharedPost": "Shared a post"
   },
   "chat": {
     "placeholder": "Write a message...",
     "selectFriend": "Select a friend to start chatting",
     "noBarks": "No barks yet",
-    "emptyInbox": "Your inbox is quieter than a sleeping puppy."
+    "emptyInbox": "Your inbox is quieter than a sleeping puppy.",
+    "deletedPost": "Post deleted"
   },
   "achievements": {
     "title": "Achievements",
