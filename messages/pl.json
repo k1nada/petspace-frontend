@@ -18,7 +18,18 @@
     "friends": "Znajomi",
     "photos": "Zdjęcia",
     "familyTree": "Drzewo rodzinne",
-    "noFriendsText": "Nie masz jeszcze żadnych znajomych."
+    "noFriendsText": "Nie masz jeszcze żadnych znajomych.",
+    "email": "E-mail",
+    "password": "Hasło",
+    "createAccount": "Utwórz konto",
+    "editProfile": "Edytuj profil"
+  },
+  "fields": {
+    "birthday": "Urodziny:",
+    "sex": "Płeć:",
+    "country": "Kraj:",
+    "city": "Miasto:",
+    "breed": "Rasa:"
   },
   "validations": {
     "minLength": "Musi zawierać co najmniej {min} znaków",
@@ -40,11 +51,7 @@
   "signin": {
     "title": "Petspace",
     "subtitle": "Witaj z powrotem w sforze",
-    "email": "E-mail",
-    "password": "Hasło",
-    "submit": "Zaloguj się",
-    "forgotPassword": "Zapomniałeś hasła?",
-    "createAccount": "Utwórz konto"
+    "submit": "Zaloguj się"
   },
   "signUp": {
     "title": "Rejestracja",
@@ -53,20 +60,12 @@
     "displayNameHint": "Tak zobaczą Cię inni",
     "username": "Nazwa użytkownika",
     "displayUsernameHint": "Twój @identyfikator",
-    "email": "E-mail",
-    "password": "Hasło",
-    "createAccount": "Utwórz konto",
     "haveAccount": "Masz już konto?"
   },
   "registrationSteps": {
     "step": "KROK 1 Z 2",
     "title": "Zanim zaczniemy...",
-    "subtitle": "Każda wielka sfora zaczyna się od przedstawienia",
-    "birthday": "Urodziny:",
-    "sex": "Płeć:",
-    "country": "Kraj:",
-    "city": "Miasto:",
-    "breed": "Rasa:"
+    "subtitle": "Każda wielka sfora zaczyna się od przedstawienia"
   },
   "registrationStepsAvatar": {
     "step": "KROK 2 Z 2",
@@ -112,14 +111,8 @@
     "following": "Obserwujesz"
   },
   "profileEditor": {
-    "title": "Edytuj profil",
     "bio": "O sobie:",
     "name": "Imię:",
-    "birthday": "Urodziny:",
-    "sex": "Płeć:",
-    "country": "Kraj:",
-    "city": "Miasto:",
-    "breed": "Rasa:",
     "about": "Hau! Pochwal się wszystkim, jaki jestem grzeczny"
   },
   "profileInformation": {

@@ -18,7 +18,18 @@
     "friends": "Friends",
     "photos": "Photos",
     "familyTree": "Family tree",
-    "noFriendsText": "You don't have any friends yet."
+    "noFriendsText": "You don't have any friends yet.",
+    "email": "Email",
+    "password": "Password",
+    "createAccount": "Create Account",
+    "editProfile": "Edit profile"
+  },
+  "fields": {
+    "birthday": "Birthday:",
+    "sex": "Sex:",
+    "country": "Country:",
+    "city": "City:",
+    "breed": "Breed:"
   },
   "validations": {
     "minLength": "Must be at least {min} characters",
@@ -40,11 +51,7 @@
   "signin": {
     "title": "Petspace",
     "subtitle": "Welcome back to the pack",
-    "email": "Email",
-    "password": "Password",
-    "submit": "Sign In",
-    "forgotPassword": "Forgot password?",
-    "createAccount": "Create Account"
+    "submit": "Sign In"
   },
   "signUp": {
     "title": "Sign Up",
@@ -53,20 +60,12 @@
     "displayNameHint": "How others will see you",
     "username": "Username",
     "displayUsernameHint": "Your unique @handle",
-    "email": "Email",
-    "password": "Password",
-    "createAccount": "Create Account",
     "haveAccount": "Already have an account?"
   },
   "registrationSteps": {
     "step": "STEP 1 OF 2",
     "title": "Before we begin...",
-    "subtitle": "Every great pack starts with an introduction",
-    "birthday": "Birthday:",
-    "sex": "Sex:",
-    "country": "Country:",
-    "city": "City:",
-    "breed": "Breed:"
+    "subtitle": "Every great pack starts with an introduction"
   },
   "registrationStepsAvatar": {
     "step": "STEP 2 OF 2",
@@ -112,14 +111,8 @@
     "following": "Following"
   },
   "profileEditor": {
-    "title": "Edit profile",
     "bio": "About:",
     "name": "Name:",
-    "birthday": "Birthday:",
-    "sex": "Sex:",
-    "country": "Country:",
-    "city": "City:",
-    "breed": "Breed:",
     "about": "Woof! Tell everyone what a good boy I am"
   },
   "profileInformation": {

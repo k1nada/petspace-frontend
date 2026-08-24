@@ -1,7 +1,14 @@
 .page {
   display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+}
+
+.content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 60px);
   overflow-y: auto;
 }

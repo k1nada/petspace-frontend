@@ -22,6 +22,7 @@ import { isAxiosError } from "axios";
 import { toast } from "react-toastify";
 import { FormField } from "@/app/uikit/form/FormField/FormField";
 import api from "@/config/axios";
+import { reconnectSocket } from "@/services/socket";
 import { SignUpData } from "@/types";
 import { useAuthStore } from "@/app/hooks/useAuthStore";
 
@@ -62,6 +63,7 @@ export const SignUp = () => {
       }
 
       localStorage.setItem("token", token);
+      reconnectSocket();
       useAuthStore.getState().fetchCurrentUser();
       router.push(ROUTES.registrationSteps);
     } catch (e) {
@@ -118,7 +120,7 @@ export const SignUp = () => {
 
         <FormField
           id="email"
-          label={t("signUp.email")}
+          label={t("common.email")}
           error={errors.email?.message}
         >
           <Input
@@ -135,7 +137,7 @@ export const SignUp = () => {
 
         <FormField
           id="password"
-          label={t("signUp.password")}
+          label={t("common.password")}
           error={errors.password?.message}
         >
           <Input
@@ -153,7 +155,7 @@ export const SignUp = () => {
 
         <div className={styles.buttons}>
           <Button type="submit" appearance="primary">
-            {t("signUp.createAccount")}
+            {t("common.createAccount")}
           </Button>
           <Button type="button" appearance="secondary" onClick={onSignIn}>
             {t("signUp.haveAccount")}
