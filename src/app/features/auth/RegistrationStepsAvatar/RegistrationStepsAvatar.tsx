@@ -21,6 +21,13 @@ export const RegistrationStepsAvatar = () => {
     if (currentUser) router.push(ROUTES.profile(currentUser.username));
   };
 
+  const finishRegistration = async () => {
+    try {
+      await api.patch("/registration-steps", { onboardingCompleted: true });
+    } catch {}
+    navigateToProfile();
+  };
+
   const saveAvatar = async () => {
     try {
       if (avatarFile) {
@@ -28,7 +35,7 @@ export const RegistrationStepsAvatar = () => {
         formData.append("image", avatarFile);
         await api.post("/api/upload/avatar", formData);
       }
-      navigateToProfile();
+      await finishRegistration();
     } catch {
       toast.error(t("toasts.error"));
     }
@@ -51,7 +58,7 @@ export const RegistrationStepsAvatar = () => {
         <Button appearance="primary" onClick={saveAvatar}>
           {t("common.continue")}
         </Button>
-        <Button appearance="secondary" onClick={navigateToProfile}>
+        <Button appearance="secondary" onClick={finishRegistration}>
           {t("common.skip")}
         </Button>
       </div>
