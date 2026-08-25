@@ -23,11 +23,11 @@ export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
     <AuthLoader fallback={<ProfileFriendsSkeleton />}>
       <section className={styles.container}>
         <Link href={ROUTES.friends(username)} className={styles.titleLink}>
-          <h3 className={styles.title}>{t("profileFriends.title")}</h3>
+          <h3 className={styles.title}>{t("common.friends")}</h3>
           <span className={styles.count}>{friends.length}</span>
         </Link>
         {friends.length === 0 ? (
-          <p className={styles.empty}>{t("profileFriends.empty")}</p>
+          <p className={styles.empty}>{t("common.noFriendsYet")}</p>
         ) : (
           <ul className={styles.friends}>
             {visibleFriends.map((friend) => (

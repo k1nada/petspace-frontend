@@ -154,7 +154,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
               >
                 <FaTree size={18} />
                 <span className={styles.statLabel}>
-                  {t("profileBanner.familyTree")}
+                  {t("common.familyTree")}
                 </span>
               </Link>
             </div>
@@ -169,7 +169,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
           </Button>
           {isOwner ? (
             <Button appearance="primary" onClick={editProfile}>
-              {t("profileBanner.editProfile")}
+              {t("common.editProfile")}
             </Button>
           ) : isFriend ? (
             <>
@@ -180,7 +180,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
                 appearance="primary"
                 onClick={() => goToMessages(bannerInfo.username)}
               >
-                {t("profileBanner.message")}
+                {t("common.message")}
               </Button>
             </>
           ) : isPending ? (
@@ -204,7 +204,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
                 <FaMessage size={16} />
               </Button>
               <Button appearance="secondary" disabled>
-                {t("profileBanner.following")}
+                {t("common.following")}
               </Button>
             </>
           ) : (
@@ -216,7 +216,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
                 <FaMessage size={16} />
               </Button>
               <Button appearance="primary" onClick={addFriend}>
-                {t("profileBanner.addFriend")}
+                {t("common.addFriend")}
               </Button>
             </>
           )}

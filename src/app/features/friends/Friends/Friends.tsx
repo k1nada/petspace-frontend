@@ -109,7 +109,7 @@ export const Friends = ({
             </>
           ) : (
             <EmptyState
-              title={t("friends.emptyFriendsTitle")}
+              title={t("common.noFriendsYet")}
               text={t("friends.emptyFriendsText")}
             />
           ))}

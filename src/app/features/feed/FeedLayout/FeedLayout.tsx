@@ -50,7 +50,7 @@ export const FeedLayout = () => {
           <TipSkeleton />
         ) : (
           <Tip
-            title={t("feedTip.title")}
+            title={t("common.didYouKnow")}
             text={t("feedTip.text")}
             appearance="secondary"
           />

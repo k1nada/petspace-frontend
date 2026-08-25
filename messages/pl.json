@@ -15,11 +15,21 @@
     "preview": "Podgląd",
     "profile": "Profil",
     "messages": "Wiadomości",
+    "message": "Wiadomość",
     "friends": "Znajomi",
+    "addFriend": "Dodaj znajomego",
+    "following": "Obserwujesz",
+    "remove": "Usuń",
     "photos": "Zdjęcia",
+    "addPhoto": "Dodaj nowe zdjęcie",
+    "deletePhoto": "Usuń zdjęcie",
+    "noPhotosYet": "Brak zdjęć",
+    "imageFormats": "JPG, PNG, GIF, WEBP",
     "familyTree": "Drzewo rodzinne",
     "didYouKnow": "Czy wiesz, że...?",
     "noFriendsText": "Nie masz jeszcze żadnych znajomych.",
+    "noFriendsYet": "Brak znajomych",
+    "edit": "Edytuj",
     "email": "E-mail",
     "password": "Hasło",
     "createAccount": "Utwórz konto",
@@ -172,7 +182,12 @@
   "post": {
     "image": "Zdjęcie posta",
     "modalTitle": "Usuń post",
-    "modalDescription": "Czy na pewno chcesz usunąć ten post?"
+    "modalDescription": "Czy na pewno chcesz usunąć ten post?",
+    "repostedBy": "Udostępnione przez {name}"
+  },
+  "sharePostModal": {
+    "title": "Udostępnij post",
+    "sent": "Wysłano post!"
   },
   "signOut": {
     "modalTitle": "Wyloguj się",

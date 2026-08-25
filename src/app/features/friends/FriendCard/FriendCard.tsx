@@ -92,12 +92,12 @@ export const FriendCard = ({
       <div className={styles.actions}>
         {isOwner ? (
           <Link href={ROUTES.messages(currentUser, friend.username)}>
-            <Button appearance="primary">{t("friends.message")}</Button>
+            <Button appearance="primary">{t("common.message")}</Button>
           </Link>
         ) : (
           <>
             <Link href={ROUTES.messages(currentUser, friend.username)}>
-              <Button appearance="secondary">{t("friends.message")}</Button>
+              <Button appearance="secondary">{t("common.message")}</Button>
             </Link>
             {!isFriend &&
               (isPending ? (
@@ -106,11 +106,11 @@ export const FriendCard = ({
                 </Button>
               ) : isFollowing ? (
                 <Button appearance="secondary" disabled>
-                  {t("friends.following")}
+                  {t("common.following")}
                 </Button>
               ) : (
                 <Button appearance="primary" onClick={handleAddFriend}>
-                  {t("friends.addFriend")}
+                  {t("common.addFriend")}
                 </Button>
               ))}
           </>
@@ -122,7 +122,7 @@ export const FriendCard = ({
           <DropdownMenu
             items={[
               {
-                label: t("friends.delete"),
+                label: t("common.delete"),
                 onClick: () => setIsDeleteOpen(true),
                 icon: <MdDeleteSweep size={20} />,
               },

@@ -104,7 +104,7 @@ export const AvatarEdit = ({
         {src && (
           <Button appearance="secondary" onClick={() => setIsDeleteOpen(true)}>
             <MdDeleteSweep size={20} />
-            {t("avatarEdit.delete")}
+            {t("common.deletePhoto")}
           </Button>
         )}
       </div>
@@ -127,7 +127,7 @@ export const AvatarEdit = ({
       <Modal isOpen={isChangeOpen} onClose={() => setIsChangeOpen(false)}>
         <h2 className={styles.modalTitle}>{t("avatarEdit.modalTitle")}</h2>
         <p className={styles.description}>{t("avatarEdit.modalDescription")}</p>
-        <p className={styles.hint}>{t("avatarEdit.modalFormats")}</p>
+        <p className={styles.hint}>{t("common.imageFormats")}</p>
         <div className={styles.upload}>
           <AvatarUploadModal onChange={setFile} profileAvatar={src} />
         </div>
@@ -141,7 +141,7 @@ export const AvatarEdit = ({
 
       <ConfirmModal
         isOpen={isDeleteOpen}
-        title={t("avatarEdit.deleteModalTitle")}
+        title={t("common.deletePhoto")}
         description={t("avatarEdit.deleteModalDescription")}
         onConfirm={deleteAvatar}
         onClose={() => setIsDeleteOpen(false)}

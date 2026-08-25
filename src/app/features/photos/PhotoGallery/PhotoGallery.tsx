@@ -55,7 +55,7 @@ export const PhotoGallery = ({
           </h1>
           {isOwner && (
             <Button appearance="primary" onClick={() => setIsUploadOpen(true)}>
-              {t("photoGallery.addPhoto")}
+              {t("common.addPhoto")}
             </Button>
           )}
         </div>
@@ -63,7 +63,7 @@ export const PhotoGallery = ({
         {isEmpty ? (
           <EmptyState
             compact
-            title={t("photoGallery.emptyPhotosTitle")}
+            title={t("common.noPhotosYet")}
             text={t("photoGallery.emptyPhotosText")}
           />
         ) : (
