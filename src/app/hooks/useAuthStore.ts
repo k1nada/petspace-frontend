@@ -29,8 +29,7 @@ export const useAuthStore = create<AuthStore>()(
             const response = await api.get<User>("/me");
             user = response.data;
             gotUser = true;
-          } catch (error) {
-            console.log(error);
+          } catch {
             gotUser = false;
           }
 
@@ -44,8 +43,7 @@ export const useAuthStore = create<AuthStore>()(
           let requests: FriendRequest[] = [];
           try {
             requests = await getPendingRequests(user.username);
-          } catch (error) {
-            console.log(error);
+          } catch {
             requests = [];
           }
           useFriendRequestsStore.getState().setRequests(requests);
@@ -53,8 +51,7 @@ export const useAuthStore = create<AuthStore>()(
           let conversations: ChatContact[] = [];
           try {
             conversations = await getConversations(user.username);
-          } catch (error) {
-            console.log(error);
+          } catch {
             conversations = [];
           }
 
