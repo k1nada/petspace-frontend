@@ -44,7 +44,7 @@ export const SuggestedFriends = () => {
                 disabled={isPending}
                 onClick={() => requestFriend(friend.username)}
               >
-                {isPending ? t("friends.sent") : t("friends.addFriend")}
+                {isPending ? t("friends.sent") : t("common.addFriend")}
               </Button>
             </li>
           );

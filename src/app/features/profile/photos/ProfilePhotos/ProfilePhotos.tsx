@@ -43,11 +43,11 @@ export const ProfilePhotos = ({
     <AuthLoader fallback={<ProfilePhotosSkeleton />}>
       <section className={styles.container}>
         <Link href={ROUTES.photos(username)} className={styles.titleLink}>
-          <h3 className={styles.title}>{t("profilePhotos.title")}</h3>
+          <h3 className={styles.title}>{t("common.photos")}</h3>
           <span className={styles.count}>{localPhotos.length}</span>
         </Link>
         {localPhotos.length === 0 ? (
-          <div className={styles.empty}>{t("profilePhotos.empty")}</div>
+          <div className={styles.empty}>{t("common.noPhotosYet")}</div>
         ) : (
           <ul className={styles.gallery}>
             {localPhotos.slice(0, MAX_VISIBLE_PHOTOS).map((photo, index) => (

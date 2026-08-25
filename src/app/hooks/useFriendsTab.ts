@@ -27,7 +27,7 @@ export const useFriendsTab = ({
   const goToTab = (tab: FriendsTab) => router.push(`?tab=${tab}`);
 
   const tabs = [
-    { key: "friends", label: t("friends.friendsTitle"), count: friendsCount },
+    { key: "friends", label: t("common.friends"), count: friendsCount },
     {
       key: "requests",
       label: t("friends.requestsTitle"),

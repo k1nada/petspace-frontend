@@ -32,7 +32,7 @@ export const FollowCard = ({
   const canManage = isOwner && !isSelf;
 
   const actionLabel =
-    type === "followers" ? t("friends.remove") : t("friends.unfollow");
+    type === "followers" ? t("common.remove") : t("friends.unfollow");
   const modalDescription = t(
     type === "followers"
       ? "followCard.removeModalDescription"

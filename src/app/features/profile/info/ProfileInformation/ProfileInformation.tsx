@@ -15,7 +15,7 @@ const ProfileInformation = ({ username }: ProfileInformationProps) => {
   return (
     <nav className={styles.container}>
       <NavLink href={ROUTES.editProfile(username)}>
-        {t("profileInformation.profile")}
+        {t("common.profile")}
       </NavLink>
       <NavLink href={ROUTES.editInterests(username)}>
         {t("profileInformation.interests")}

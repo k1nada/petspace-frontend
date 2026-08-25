@@ -56,14 +56,19 @@ export const PhotoUploadModal = ({
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose}>
-      <h3 className={styles.title}>{t("photoUploadModal.addPhoto")}</h3>
+      <h3 className={styles.title}>{t("common.addPhoto")}</h3>
 
       <div {...getRootProps()} className={styles.dropzone}>
         <input {...getInputProps()} />
         {previews.length > 0 ? (
           <div className={styles.previews}>
             {previews.map((src, i) => (
-              <img key={i} src={src} alt={t("common.preview")} className={styles.preview} />
+              <img
+                key={i}
+                src={src}
+                alt={t("common.preview")}
+                className={styles.preview}
+              />
             ))}
           </div>
         ) : (
@@ -72,9 +77,7 @@ export const PhotoUploadModal = ({
             <p className={styles.dropzoneText}>
               {t("photoUploadModal.dragAndDrop")}
             </p>
-            <p className={styles.dropzoneHint}>
-              {t("photoUploadModal.modalFormats")}
-            </p>
+            <p className={styles.dropzoneHint}>{t("common.imageFormats")}</p>
           </div>
         )}
         <div className={styles.overlay}></div>
