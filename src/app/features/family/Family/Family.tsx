@@ -26,7 +26,7 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
 
   return (
     <section className={styles.container}>
-      <h1 className={styles.title}>{t("familyTree.title")}</h1>
+      <h1 className={styles.title}>{t("common.familyTree")}</h1>
 
       <div className={styles.content}>
         <div className={styles.parentsColumn}>

@@ -41,7 +41,7 @@ export const FamilyMemberCard = ({
 
   const menuItems = [
     {
-      label: t("familyTree.remove"),
+      label: t("common.remove"),
       onClick: openConfirm,
       icon: <MdDeleteSweep size={20} />,
     },

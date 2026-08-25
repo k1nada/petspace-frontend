@@ -30,7 +30,7 @@ export const FamilyLayout = ({
       </div>
       <div className={styles.rightColumn}>
         <Tip
-          title={t("familyTip.title")}
+          title={t("common.didYouKnow")}
           text={t("familyTip.text")}
           appearance="secondary"
         />
