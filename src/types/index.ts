@@ -115,28 +115,17 @@ export interface Comment {
   createdAt: Date;
 }
 
-export interface SharedPost {
-  id: string;
-  content: string;
-  image?: string;
-  createdAt: string;
-  user: User;
-}
-
 export interface Message {
   id: string;
-  roomId: string;
   text: string;
   createdAt: string;
   sender: User;
-  post?: SharedPost | null;
 }
 
 export interface ConversationMessage {
   id: string;
   text: string;
   createdAt: string;
-  hasPost?: boolean;
 }
 
 export interface ChatContact {

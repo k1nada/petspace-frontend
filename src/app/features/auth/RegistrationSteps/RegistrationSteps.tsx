@@ -14,6 +14,7 @@ import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Select } from "@/app/uikit/form/Select/Select";
 
 interface RegistrationStepsProps {
+  username: string;
   birthDate?: number;
   sex?: string;
   country?: string;
@@ -22,6 +23,7 @@ interface RegistrationStepsProps {
 }
 
 const RegistrationSteps = ({
+  username,
   birthDate,
   sex,
   country,
@@ -53,7 +55,7 @@ const RegistrationSteps = ({
 
   const saveChanges = async () => {
     try {
-      await api.patch("/registration-steps", {
+      await api.put(`/user/${username}`, {
         sex: sexValue,
         birthDate: selectedAge?.valueOf(),
         country: selectedCountry,
@@ -77,7 +79,7 @@ const RegistrationSteps = ({
           <p className={styles.subtitle}>{t("registrationSteps.subtitle")}</p>
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("fields.sex")}</label>
+          <label className={styles.label}>{t("registrationSteps.sex")}</label>
           <Select
             value={sexValue}
             onChange={setsexValue}
@@ -89,14 +91,18 @@ const RegistrationSteps = ({
           ></Select>
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("fields.birthday")}</label>
+          <label className={styles.label}>
+            {t("registrationSteps.birthday")}
+          </label>
           <DatePicker
             value={selectedAge}
             onChange={setSelectedAge}
           ></DatePicker>
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("fields.country")}</label>
+          <label className={styles.label}>
+            {t("registrationSteps.country")}
+          </label>
           <Combobox
             value={selectedCountry}
             onChange={handleCountryChange}
@@ -105,7 +111,7 @@ const RegistrationSteps = ({
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("fields.city")}</label>
+          <label className={styles.label}>{t("registrationSteps.city")}</label>
           <Combobox
             value={selectedCity}
             onChange={setSelectedCity}
@@ -114,7 +120,7 @@ const RegistrationSteps = ({
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("fields.breed")}</label>
+          <label className={styles.label}>{t("registrationSteps.breed")}</label>
           <Combobox
             value={selectedBreed}
             onChange={setSelectedBreed}

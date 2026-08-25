@@ -10,7 +10,6 @@ import { NavLink } from "@/app/uikit/navigation/NavLink/NavLink";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
 import { useAuthStore } from "@/app/hooks/useAuthStore";
 import { useFriendRequestsStore } from "@/app/hooks/useFriendRequestsStore";
-import { useMessagesStore } from "@/app/hooks/useMessagesStore";
 import { SidebarSkeleton } from "./SidebarSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 
@@ -18,9 +17,6 @@ export const Sidebar = () => {
   const t = useTranslations();
   const currentUser = useAuthStore((state) => state.currentUser);
   const requestCount = useFriendRequestsStore((state) => state.requestCount);
-  const unreadMessagesCount = useMessagesStore(
-    (state) => state.unreadMessagesCount,
-  );
   const tips = t.raw("dailyTip.tips") as string[];
   const tip = tips[new Date().getDay()];
 
@@ -31,33 +27,30 @@ export const Sidebar = () => {
           <div className={styles.list}>
             <NavLink href={ROUTES.profile(currentUser.username)}>
               <FaDog size={20} />
-              {t("common.profile")}
+              {t("sidebar.profile")}
             </NavLink>
             <NavLink href={ROUTES.feed}>
               <FaBone size={20} />
               {t("sidebar.feed")}
             </NavLink>
-            <NavLink
-              href={ROUTES.messages(currentUser.username)}
-              count={unreadMessagesCount}
-            >
+            <NavLink href={ROUTES.messages(currentUser.username)}>
               <BiSolidMessage size={20} />
-              {t("common.messages")}
+              {t("sidebar.messages")}
             </NavLink>
             <NavLink
               href={ROUTES.friends(currentUser.username)}
               count={requestCount}
             >
               <FaPaw size={20} />
-              {t("common.friends")}
+              {t("sidebar.friends")}
             </NavLink>
             <NavLink href={ROUTES.photos(currentUser.username)}>
               <FaCamera size={20} />
-              {t("common.photos")}
+              {t("sidebar.photos")}
             </NavLink>
             <NavLink href={ROUTES.familyTree(currentUser.username)}>
               <FaTree size={20} />
-              {t("common.familyTree")}
+              {t("sidebar.familyTree")}
             </NavLink>
           </div>
           <Tip title={t("dailyTip.title")} text={tip} appearance="secondary" />

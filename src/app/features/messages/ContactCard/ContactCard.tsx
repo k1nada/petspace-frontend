@@ -1,7 +1,7 @@
 import { Button } from "@/app/uikit/form/Button/Button";
 import styles from "./ContactCard.module.scss";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { formatTime } from "@/utils/dateFormatters";
 import { ChatContact } from "@/types";
 
@@ -12,12 +12,6 @@ interface ContactCardProps {
 
 export const ContactCard = ({ contact, onClick }: ContactCardProps) => {
   const locale = useLocale();
-  const t = useTranslations();
-
-  const lastMessageText = contact.lastMessage
-    ? contact.lastMessage.text ||
-      (contact.lastMessage.hasPost ? t("contactList.sharedPost") : "")
-    : "";
 
   return (
     <li className={styles.card}>
@@ -25,7 +19,7 @@ export const ContactCard = ({ contact, onClick }: ContactCardProps) => {
         <Avatar src={contact.avatar} isOnline={contact.isOnline} />
         <div className={styles.info}>
           <span className={styles.name}>{contact.name}</span>
-          <span className={styles.text}>{lastMessageText}</span>
+          <span className={styles.text}>{contact.lastMessage?.text}</span>
         </div>
         <div className={styles.message}>
           <time className={styles.time}>

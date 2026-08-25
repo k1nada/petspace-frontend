@@ -32,7 +32,7 @@ export const ContactList = ({
     <div className={styles.container}>
       <div className={styles.toolbar}>
         <div className={styles.header}>
-          <h1 className={styles.title}>{t("common.messages")}</h1>
+          <h1 className={styles.title}>{t("contactList.title")}</h1>
         </div>
         <SearchBar />
       </div>
@@ -50,7 +50,7 @@ export const ContactList = ({
             center
             text={
               <>
-                {t("common.noFriendsText")}
+                {t("contactList.emptyTitle")}
                 <br />
                 {t("contactList.emptyText")}
               </>

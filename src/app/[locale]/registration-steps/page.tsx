@@ -2,7 +2,6 @@
 
 import RegistrationSteps from "@/app/features/auth/RegistrationSteps/RegistrationSteps";
 import styles from "./page.module.scss";
-import { Footer } from "@/app/components/Footer/Footer";
 import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 const RegistrationStepsPage = () => {
@@ -12,10 +11,7 @@ const RegistrationStepsPage = () => {
 
   return (
     <main className={styles.page}>
-      <div className={styles.content}>
-        <RegistrationSteps />
-      </div>
-      <Footer />
+      <RegistrationSteps username={currentUser.username} />
     </main>
   );
 };

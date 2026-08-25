@@ -12,24 +12,7 @@
     "online": "Online",
     "offline": "Offline",
     "avatar": "Avatar",
-    "preview": "Preview",
-    "profile": "Profile",
-    "messages": "Messages",
-    "friends": "Friends",
-    "photos": "Photos",
-    "familyTree": "Family tree",
-    "noFriendsText": "You don't have any friends yet.",
-    "email": "Email",
-    "password": "Password",
-    "createAccount": "Create Account",
-    "editProfile": "Edit profile"
-  },
-  "fields": {
-    "birthday": "Birthday:",
-    "sex": "Sex:",
-    "country": "Country:",
-    "city": "City:",
-    "breed": "Breed:"
+    "preview": "Preview"
   },
   "validations": {
     "minLength": "Must be at least {min} characters",
@@ -51,7 +34,11 @@
   "signin": {
     "title": "Petspace",
     "subtitle": "Welcome back to the pack",
-    "submit": "Sign In"
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign In",
+    "forgotPassword": "Forgot password?",
+    "createAccount": "Create Account"
   },
   "signUp": {
     "title": "Sign Up",
@@ -60,12 +47,20 @@
     "displayNameHint": "How others will see you",
     "username": "Username",
     "displayUsernameHint": "Your unique @handle",
+    "email": "Email",
+    "password": "Password",
+    "createAccount": "Create Account",
     "haveAccount": "Already have an account?"
   },
   "registrationSteps": {
     "step": "STEP 1 OF 2",
     "title": "Before we begin...",
-    "subtitle": "Every great pack starts with an introduction"
+    "subtitle": "Every great pack starts with an introduction",
+    "birthday": "Birthday:",
+    "sex": "Sex:",
+    "country": "Country:",
+    "city": "City:",
+    "breed": "Breed:"
   },
   "registrationStepsAvatar": {
     "step": "STEP 2 OF 2",
@@ -73,7 +68,12 @@
     "subtitle": "Join the pack — show who you are"
   },
   "sidebar": {
-    "feed": "Feed"
+    "profile": "Profile",
+    "feed": "Feed",
+    "messages": "Messages",
+    "friends": "Friends",
+    "photos": "Photos",
+    "familyTree": "Family tree"
   },
   "searchBar": {
     "search": "Search"
@@ -111,8 +111,14 @@
     "following": "Following"
   },
   "profileEditor": {
+    "title": "Edit profile",
     "bio": "About:",
     "name": "Name:",
+    "birthday": "Birthday:",
+    "sex": "Sex:",
+    "country": "Country:",
+    "city": "City:",
+    "breed": "Breed:",
     "about": "Woof! Tell everyone what a good boy I am"
   },
   "profileInformation": {
@@ -289,16 +295,16 @@
     "add": "Add"
   },
   "contactList": {
+    "title": "Messages",
+    "emptyTitle": "You don't have any friends yet.",
     "emptyText": "Find other dogs to start chatting!",
-    "findFriends": "Find friends",
-    "sharedPost": "Shared a post"
+    "findFriends": "Find friends"
   },
   "chat": {
     "placeholder": "Write a message...",
     "selectFriend": "Select a friend to start chatting",
     "noBarks": "No barks yet",
-    "emptyInbox": "Your inbox is quieter than a sleeping puppy.",
-    "deletedPost": "Post deleted"
+    "emptyInbox": "Your inbox is quieter than a sleeping puppy."
   },
   "achievements": {
     "title": "Achievements",

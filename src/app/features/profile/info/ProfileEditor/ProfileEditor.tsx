@@ -68,7 +68,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
 
   return (
     <form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-      <h1 className={styles.title}>{t("common.editProfile")}</h1>
+      <h1 className={styles.title}>{t("profileEditor.title")}</h1>
       <div className={styles.profileContent}>
         <div className={styles.avatarSection}>
           <AvatarEdit
@@ -93,7 +93,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("fields.birthday")}</label>
+          <label className={styles.label}>{t("profileEditor.birthday")}</label>
           <Controller
             name="birthDate"
             control={control}
@@ -106,7 +106,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("fields.sex")}</label>
+          <label className={styles.label}>{t("profileEditor.sex")}</label>
           <Controller
             name="sex"
             control={control}
@@ -124,7 +124,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("fields.country")}</label>
+          <label className={styles.label}>{t("profileEditor.country")}</label>
           <Controller
             name="country"
             control={control}
@@ -142,7 +142,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("fields.city")}</label>
+          <label className={styles.label}>{t("profileEditor.city")}</label>
           <Controller
             control={control}
             name="city"
@@ -158,7 +158,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
           />
         </div>
         <div className={styles.field}>
-          <label className={styles.label}>{t("fields.breed")}</label>
+          <label className={styles.label}>{t("profileEditor.breed")}</label>
           <Controller
             control={control}
             name="breed"
@@ -180,12 +180,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
           name="bio"
           control={control}
           render={({ field }) => (
-            <Textarea
-              appearance="third"
-              {...field}
-              maxLength={150}
-              placeholder={t("profileEditor.about")}
-            />
+            <Textarea appearance="third" {...field} maxLength={150} placeholder={t("profileEditor.about")}/>
           )}
         />
       </div>

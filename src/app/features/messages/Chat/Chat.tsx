@@ -7,14 +7,14 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SubmitTextarea";
 import { useTranslations } from "next-intl";
 import { ROUTES } from "@/routes/routes";
+import { API_URL } from "@/config/env";
 import { ChatContact, Message, User } from "@/types";
 import { ChatMessage } from "../ChatMessage/ChatMessage";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { formatTime } from "@/utils/dateFormatters";
 import { useLocale } from "next-intl";
 import { ChatSkeleton } from "./ChatSkeleton";
-import { getMessages, markMessagesRead } from "@/app/api/conversations";
-import { useMessagesStore } from "@/app/hooks/useMessagesStore";
+import { withMinDelay } from "@/utils/withMinDelay";
 
 interface ChatProps {
   conversations: ChatContact[];
@@ -36,10 +36,6 @@ export const Chat = ({
   const [messagesLoading, setMessagesLoading] = useState(!!selectedChat);
   const [online, setOnline] = useState(selectedChat?.isOnline ?? false);
   const listRef = useRef<HTMLUListElement>(null);
-  const setUnreadMessagesCount = useMessagesStore(
-    (state) => state.setUnreadMessagesCount,
-  );
-  const setActiveRoomId = useMessagesStore((state) => state.setActiveRoomId);
 
   const roomId = selectedChat
     ? [user.id, selectedChat.id].sort().join("_")
@@ -54,27 +50,14 @@ export const Chat = ({
   useEffect(() => {
     if (!roomId) return;
 
-    setActiveRoomId(roomId);
-
-    getMessages(roomId)
+    withMinDelay(fetch(`${API_URL}/chat/${roomId}`).then((res) => res.json()))
       .then((msgs) => setMessages(msgs))
       .finally(() => setMessagesLoading(false));
-
-    if (selectedChat?.unreadCount && user.id) {
-      markMessagesRead(roomId);
-      const currentCount = useMessagesStore.getState().unreadMessagesCount;
-      setUnreadMessagesCount(
-        Math.max(0, currentCount - selectedChat.unreadCount),
-      );
-    }
 
     socket.emit("join", roomId);
 
     const handleMessage = (msg: Message) => {
       setMessages((prev) => [...prev, msg]);
-      if (msg.sender?.id !== user.id) {
-        markMessagesRead(roomId);
-      }
       if (selectedChat && onMessageUpdate) {
         onMessageUpdate(selectedChat.id, msg);
       }
@@ -94,19 +77,11 @@ export const Chat = ({
     socket.on("statusChange", handleStatus);
 
     return () => {
-      setActiveRoomId(null);
       socket.emit("leave", roomId);
       socket.off("message", handleMessage);
       socket.off("statusChange", handleStatus);
     };
-  }, [
-    roomId,
-    selectedChat,
-    onMessageUpdate,
-    user.id,
-    setUnreadMessagesCount,
-    setActiveRoomId,
-  ]);
+  }, [roomId, selectedChat, onMessageUpdate]);
 
   const handleSend = () => {
     socket.emit("message", { roomId, text: message });
@@ -137,7 +112,6 @@ export const Chat = ({
               <ChatMessage
                 key={msg.id}
                 text={msg.text}
-                post={msg.post}
                 time={formatTime(msg.createdAt, locale)}
                 isOwn={msg.sender?.id === user.id}
               />

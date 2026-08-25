@@ -32,40 +32,6 @@
   color: var(--text-secondary);
 }
 
-.postCard {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-xs);
-  background: var(--bg-input);
-  padding: var(--padding-s);
-  border-radius: var(--radius-m);
-  max-width: 400px;
-  color: var(--text-primary);
-  font-size: var(--font-m);
-}
-
-.postAuthor {
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.postImage {
-  position: relative;
-  width: 240px;
-  height: 160px;
-  border-radius: var(--radius-m);
-  overflow: hidden;
-
-  img {
-    object-fit: cover;
-  }
-}
-
-.postContent {
-  word-break: break-word;
-  white-space: pre-wrap;
-}
-
 .message.own .text {
   background: var(--primary);
   color: var(--text-primary);

@@ -14,6 +14,7 @@ import {
 import { ROUTES } from "@/routes/routes";
 import { useTranslations } from "next-intl";
 import { ErrorMessage } from "@/app/uikit/form/ErrorMessage/ErrorMessage";
+import { Link } from "@/app/uikit/navigation/Link/Link";
 import { Input } from "@/app/uikit/form/Input/Input";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { toast } from "react-toastify";
@@ -21,7 +22,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import api from "@/config/axios";
-import { reconnectSocket } from "@/services/socket";
 import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 export const SignIn = () => {
@@ -47,13 +47,8 @@ export const SignIn = () => {
       }
 
       localStorage.setItem("token", token);
-      reconnectSocket();
       useAuthStore.getState().fetchCurrentUser();
-      if (user.onboardingCompleted) {
-        router.push(ROUTES.profile(user.username));
-      } else {
-        router.push(ROUTES.registrationSteps);
-      }
+      router.push(ROUTES.profile(user.username));
     } catch {
       toast.error(t("errors.INVALID_CREDENTIALS"));
     }
@@ -75,7 +70,7 @@ export const SignIn = () => {
           })}
           type="text"
           appearance="primary"
-          placeholder={t("common.email")}
+          placeholder={t("signin.email")}
           autoComplete="email"
         />
 
@@ -93,7 +88,7 @@ export const SignIn = () => {
             type={showPassword ? "text" : "password"}
             appearance="primary"
             className={styles.passwordInput}
-            placeholder={t("common.password")}
+            placeholder={t("signin.password")}
             autoComplete="current-password"
           />
           <Button
@@ -114,13 +109,20 @@ export const SignIn = () => {
       <Button type="submit" appearance="primary">
         {t("signin.submit")}
       </Button>
+      <Link
+        href={ROUTES.forgotPassword}
+        appearance="primary"
+        className={styles.forgotPassword}
+      >
+        {t("signin.forgotPassword")}
+      </Link>
       <div className={styles.formDivider}>
         <div className={styles.line} />
         <span>{t("common.or")}</span>
         <div className={styles.line} />
       </div>
       <Button type="button" appearance="secondary" onClick={goToSignUp}>
-        {t("common.createAccount")}
+        {t("signin.createAccount")}
       </Button>
     </form>
   );
