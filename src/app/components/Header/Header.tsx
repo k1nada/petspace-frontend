@@ -27,7 +27,6 @@ export const Header = () => {
   const t = useTranslations();
   const router = useRouter();
   const currentUser = useAuthStore((state) => state.currentUser);
-  const isAuthChecked = useAuthStore((state) => state.isAuthChecked);
   const { query, results, search, select } = useSearch();
   const [isSignOutOpen, setIsSignOutOpen] = useState(false);
 
@@ -41,8 +40,6 @@ export const Header = () => {
     useAuthStore.getState().signOut();
     router.push(ROUTES.signin);
   };
-
-  if (isAuthChecked && !currentUser) return null;
 
   return (
     <AuthLoader fallback={<HeaderSkeleton />}>
