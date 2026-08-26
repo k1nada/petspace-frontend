@@ -191,7 +191,7 @@
   },
   "signOut": {
     "modalTitle": "Wyloguj się",
-    "modalDescription": "Już wychodzisz? Sfora będzie tęsknić.",
+    "modalDescription": "Już wychodzisz? {name} będzie tęsknić.",
     "stay": "Zostań",
     "leave": "Wyjdź"
   },

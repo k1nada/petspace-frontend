@@ -191,7 +191,7 @@
   },
   "signOut": {
     "modalTitle": "Sign out",
-    "modalDescription": "Already leaving? The pack will miss you.",
+    "modalDescription": "Already leaving? {name} will miss you.",
     "stay": "Stay",
     "leave": "Leave"
   },
