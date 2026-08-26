@@ -87,7 +87,9 @@ export const Header = () => {
         <ConfirmModal
           isOpen={isSignOutOpen}
           title={t("signOut.modalTitle")}
-          description={t("signOut.modalDescription")}
+          description={t("signOut.modalDescription", {
+            name: currentUser?.name ?? "",
+          })}
           confirmLabel={t("signOut.leave")}
           cancelLabel={t("signOut.stay")}
           onConfirm={handleSignOut}
