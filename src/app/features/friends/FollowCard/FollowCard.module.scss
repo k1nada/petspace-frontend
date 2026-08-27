@@ -11,9 +11,16 @@
 .info {
   display: flex;
   flex-direction: column;
+  gap: var(--gap-xs);
   justify-content: space-between;
   flex: 1;
   min-width: 0;
+}
+
+.link {
+  align-self: flex-start;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .name {
@@ -23,4 +30,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.followersCount {
+  font-size: var(--font-m);
+  color: var(--text-secondary);
 }

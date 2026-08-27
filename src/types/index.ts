@@ -56,6 +56,7 @@ export interface FollowUser {
   avatar?: string;
   isOnline?: boolean;
   lastSeen?: string;
+  followersCount: number;
 }
 
 export type FollowListType = "followers" | "following";
@@ -90,7 +91,6 @@ export interface Photo {
   likesCount: number;
   liked: boolean;
   comments?: Comment[];
-  reposts?: number;
 }
 
 export interface Post {
@@ -102,7 +102,20 @@ export interface Post {
   liked: boolean;
   comments?: Comment[];
   reposts?: number;
+  reposted?: boolean;
+  repostedBy?: {
+    name: string;
+    username: string;
+  };
+  repostedAt?: string;
   createdAt: Date;
+}
+
+export interface RepostState {
+  reposted: boolean;
+  count: number;
+  loading: boolean;
+  onToggle: () => void;
 }
 
 export interface Comment {
@@ -112,6 +125,7 @@ export interface Comment {
   image?: string;
   likesCount: number;
   liked: boolean;
+  parent?: string | null;
   createdAt: Date;
 }
 
