@@ -13,7 +13,7 @@ import { ROUTES } from "@/routes/routes";
 import { useState } from "react";
 import { addFriend as addFriendAPI, deleteFriend } from "@/app/api/friends";
 import { toast } from "react-toastify";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { getRelationshipStatus } from "@/utils/friends";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 

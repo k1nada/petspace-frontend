@@ -9,7 +9,7 @@ import { Postwall } from "@/app/features/profile/feed/Postwall/Postwall";
 import { SuggestedFriends } from "@/app/features/feed/SuggestedFriends/SuggestedFriends";
 import { useEffect, useState } from "react";
 import { getFriendsFeed } from "@/app/api/post";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { Post } from "@/types";
 
 export const FeedLayout = () => {

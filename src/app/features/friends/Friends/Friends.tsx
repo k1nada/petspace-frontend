@@ -13,9 +13,9 @@ import { FriendRequest } from "../FriendRequest/FriendRequest";
 import { FollowList } from "../FollowList/FollowList";
 import { FriendsSkeleton } from "./FriendsSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
-import { useFriendsTab } from "@/app/hooks/useFriendsTab";
-import { useFriendsList } from "@/app/hooks/useFriendsList";
-import { useFollowLists } from "@/app/hooks/useFollowLists";
+import { useFriendsTab } from "@/app/hooks/friends/useFriendsTab";
+import { useFriendsList } from "@/app/hooks/friends/useFriendsList";
+import { useFollowLists } from "@/app/hooks/friends/useFollowLists";
 
 interface FriendsProps {
   username: string;

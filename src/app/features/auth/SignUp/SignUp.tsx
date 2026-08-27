@@ -24,7 +24,7 @@ import { FormField } from "@/app/uikit/form/FormField/FormField";
 import api from "@/config/axios";
 import { reconnectSocket } from "@/services/socket";
 import { SignUpData } from "@/types";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
 export const SignUp = () => {
   const t = useTranslations();

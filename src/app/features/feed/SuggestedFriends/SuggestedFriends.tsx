@@ -6,8 +6,8 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
-import { useSuggestedFriends } from "@/app/hooks/useSuggestedFriends";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
+import { useSuggestedFriends } from "@/app/hooks/friends/useSuggestedFriends";
 import { getRelationshipStatus } from "@/utils/friends";
 import { SuggestedFriendsSkeleton } from "./SuggestedFriendsSkeleton";
 
