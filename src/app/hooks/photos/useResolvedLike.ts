@@ -1,4 +1,4 @@
-import { useLike } from "@/app/hooks/useLike";
+import { useLike } from "@/app/hooks/shared/useLike";
 import { likePhoto } from "@/app/api/likes";
 import { Photo } from "@/types";
 

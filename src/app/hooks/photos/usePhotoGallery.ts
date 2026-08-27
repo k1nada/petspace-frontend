@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
+import { isAxiosError } from "axios";
 import api from "@/config/axios";
 import { Photo } from "@/types";
-import { usePhotoLikeSync } from "@/app/hooks/usePhotoLikeSync";
-import { usePhotoLikeRefresh } from "@/app/hooks/usePhotoLikeRefresh";
+import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
+import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
 
 export const usePhotoGallery = (photos: Photo[], username: string) => {
   const t = useTranslations();
@@ -31,8 +32,12 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
       const uploaded = await Promise.all(files.map(uploadFile));
       setLocalPhotos((prev) => [...prev, ...uploaded]);
       setIsUploadOpen(false);
-    } catch {
-      toast.error(t("toasts.error"));
+    } catch (error) {
+      if (isAxiosError(error) && error.response?.data?.type === "PHOTO_LIMIT_REACHED") {
+        toast.error(t("errors.PHOTO_LIMIT_REACHED"));
+      } else {
+        toast.error(t("toasts.error"));
+      }
     }
   };
 

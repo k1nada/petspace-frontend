@@ -3,8 +3,8 @@ import { persist } from "zustand/middleware";
 import api from "@/config/axios";
 import { getPendingRequests } from "@/app/api/friends";
 import { getConversations } from "@/app/api/conversations";
-import { useFriendRequestsStore } from "@/app/hooks/useFriendRequestsStore";
-import { useMessagesStore } from "@/app/hooks/useMessagesStore";
+import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
+import { useMessagesStore } from "@/app/hooks/messages/useMessagesStore";
 import { ChatContact, FriendRequest, User } from "@/types";
 
 interface AuthStore {

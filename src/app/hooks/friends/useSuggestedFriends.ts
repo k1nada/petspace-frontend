@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { getSuggestedFriends, addFriend } from "@/app/api/friends";
 import { User } from "@/types";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
 const SUGGESTIONS_COUNT = 3;
 
