@@ -5,8 +5,8 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { FamilyColumn } from "../FamilyColumn/FamilyColumn";
 import { FamilyMember, User } from "@/types";
 import { useTranslations } from "next-intl";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
-import { useFamilyTree } from "@/app/hooks/useFamilyTree";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
+import { useFamilyTree } from "@/app/hooks/family/useFamilyTree";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
 

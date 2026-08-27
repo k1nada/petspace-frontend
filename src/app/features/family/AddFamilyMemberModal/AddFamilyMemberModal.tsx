@@ -10,7 +10,7 @@ import { Input } from "@/app/uikit/form/Input/Input";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { useSearch } from "@/app/hooks/useSearch";
+import { useSearch } from "@/app/hooks/shared/useSearch";
 import { FamilyRelation, NewFamilyMember, User } from "@/types";
 
 type Mode = "search" | "manual";

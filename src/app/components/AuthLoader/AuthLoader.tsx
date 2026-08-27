@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
 interface AuthLoaderProps {
   fallback: ReactNode;

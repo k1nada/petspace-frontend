@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useAuthStore } from "../hooks/useAuthStore";
-import { useMessagesStore } from "../hooks/useMessagesStore";
+import { useAuthStore } from "../hooks/auth/useAuthStore";
+import { useMessagesStore } from "../hooks/messages/useMessagesStore";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ROUTES } from "@/routes/routes";
 import socket from "@/services/socket";

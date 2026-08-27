@@ -4,7 +4,7 @@ import styles from "./FriendsLayout.module.scss";
 import { useTranslations } from "next-intl";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { FollowUser, Friend } from "@/types";
 import { Friends } from "../Friends/Friends";
 import { SuggestedFriends } from "@/app/features/feed/SuggestedFriends/SuggestedFriends";

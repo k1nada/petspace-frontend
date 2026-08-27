@@ -6,8 +6,8 @@ import { useTranslations } from "next-intl";
 import { BsBellFill } from "react-icons/bs";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { Button } from "../../form/Button/Button";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
-import { useNotifications } from "@/app/hooks/useNotifications";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
+import { useNotifications } from "@/app/hooks/shared/useNotifications";
 import { NotificationItem } from "@/app/uikit/overlays/NotificationItem/NotificationItem";
 
 export const NotificationsDropdown = () => {

@@ -22,7 +22,7 @@ import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import api from "@/config/axios";
 import { reconnectSocket } from "@/services/socket";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
 export const SignIn = () => {
   const t = useTranslations();

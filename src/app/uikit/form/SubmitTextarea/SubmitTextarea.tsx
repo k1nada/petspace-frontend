@@ -1,7 +1,7 @@
 import { FaAngleRight } from "react-icons/fa";
 import { Textarea } from "../Textarea/Textarea";
 import styles from "./SubmitTextarea.module.scss";
-import { useTextareaSubmit } from "@/app/hooks/useTextareaSubmit";
+import { useTextareaSubmit } from "@/app/hooks/shared/useTextareaSubmit";
 
 interface SubmitTextareaProps {
   value: string;

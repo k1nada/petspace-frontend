@@ -8,9 +8,9 @@ import styles from "./Sidebar.module.scss";
 import { ROUTES } from "@/routes/routes";
 import { NavLink } from "@/app/uikit/navigation/NavLink/NavLink";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
-import { useFriendRequestsStore } from "@/app/hooks/useFriendRequestsStore";
-import { useMessagesStore } from "@/app/hooks/useMessagesStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
+import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
+import { useMessagesStore } from "@/app/hooks/messages/useMessagesStore";
 import { SidebarSkeleton } from "./SidebarSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 
