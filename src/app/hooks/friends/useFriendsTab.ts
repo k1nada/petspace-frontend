@@ -1,6 +1,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useFriendRequestsStore } from "@/app/hooks/useFriendRequestsStore";
+import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
 
 export type FriendsTab = "friends" | "requests" | "followers" | "following";
 
