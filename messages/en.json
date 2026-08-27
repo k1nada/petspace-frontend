@@ -264,7 +264,8 @@
   "followCard": {
     "removeModalDescription": "{name} will no longer follow you.",
     "unfollowModalDescription": "You can always follow {name} again later.",
-    "unfollowAllModalDescription": "You won't follow anyone from this list anymore. You can always follow them again later."
+    "unfollowAllModalDescription": "You won't follow anyone from this list anymore. You can always follow them again later.",
+    "followersCount": "{count} followers"
   },
   "friendTip": {
     "title": "Did you know?",

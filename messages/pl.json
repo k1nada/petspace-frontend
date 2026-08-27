@@ -264,7 +264,8 @@
   "followCard": {
     "removeModalDescription": "{name} nie będzie już Cię obserwować.",
     "unfollowModalDescription": "Zawsze możesz ponownie zacząć obserwować {name}.",
-    "unfollowAllModalDescription": "Przestaniesz obserwować wszystkich z tej listy. Zawsze możesz zacząć ich obserwować ponownie później."
+    "unfollowAllModalDescription": "Przestaniesz obserwować wszystkich z tej listy. Zawsze możesz zacząć ich obserwować ponownie później.",
+    "followersCount": "{count} obserwujących"
   },
   "friendTip": {
     "title": "Czy wiesz, że...?",

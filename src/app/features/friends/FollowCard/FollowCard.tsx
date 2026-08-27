@@ -52,13 +52,16 @@ export const FollowCard = ({
       </Link>
 
       <div className={styles.info}>
-        <Link href={ROUTES.profile(user.username)}>
+        <Link href={ROUTES.profile(user.username)} className={styles.link}>
           <div className={styles.name}>{user.name}</div>
         </Link>
+        <div className={styles.followersCount}>
+          {t("followCard.followersCount", { count: user.followersCount })}
+        </div>
       </div>
 
       {canManage && (
-        <Button appearance="primary" onClick={() => setIsModalOpen(true)}>
+        <Button appearance="secondary" onClick={() => setIsModalOpen(true)}>
           {actionLabel}
         </Button>
       )}
