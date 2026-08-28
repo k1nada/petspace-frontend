@@ -1,8 +1,18 @@
 import api from "@/config/axios";
 
-export const createComment = async (content: string, postId?: string, photoId?: string) => {
+export const createComment = async (
+  content: string,
+  postId?: string,
+  photoId?: string,
+  replyCommentId?: string,
+) => {
   try {
-    const { data } = await api.post("/comments", { content, postId, photoId });
+    const { data } = await api.post("/comments", {
+      content,
+      postId,
+      photoId,
+      replyCommentId,
+    });
     return data;
   } catch {
     return null;
@@ -25,4 +35,15 @@ export const getPhotoComments = async (photoId: string) => {
   } catch {
     return null;
   }
+};
+
+export const deleteComment = async (commentId: string): Promise<void> => {
+  await api.delete(`/comments/${commentId}`);
+};
+
+export const updateComment = async (
+  commentId: string,
+  content: string,
+): Promise<void> => {
+  await api.put(`/comments/${commentId}`, { content });
 };

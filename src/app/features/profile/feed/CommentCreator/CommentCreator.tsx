@@ -4,27 +4,31 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { createComment } from "@/app/api/comment";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SubmitTextarea";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { toast } from "react-toastify";
 
 interface CommentCreatorProps {
   postId?: string;
   photoId?: string;
+  replyCommentId?: string;
+  initialContent?: string;
   onSuccess?: () => void;
 }
 
 export const CommentCreator = ({
   postId,
   photoId,
+  replyCommentId,
+  initialContent,
   onSuccess,
 }: CommentCreatorProps) => {
   const t = useTranslations();
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(initialContent ?? "");
   const currentUser = useAuthStore((state) => state.currentUser);
 
   const handleSubmit = async () => {
     if (!content) return;
-    const comment = await createComment(content, postId, photoId);
+    const comment = await createComment(content, postId, photoId, replyCommentId);
     if (!comment) {
       toast.error(t("toasts.error"));
       return;
