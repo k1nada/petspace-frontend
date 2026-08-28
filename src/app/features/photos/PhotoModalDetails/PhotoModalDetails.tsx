@@ -1,58 +1,93 @@
-import cn from "classnames";
+import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Comment as CommentType, Photo } from "@/types";
-import { Button } from "@/app/uikit/form/Button/Button";
+import { Photo, RepostState } from "@/types";
 import { LikeButton } from "@/app/uikit/feedback/LikeButton/LikeButton";
-import { FaReply } from "react-icons/fa";
+import { RepostButton } from "@/app/uikit/feedback/RepostButton/RepostButton";
+import { usePhotoComments } from "@/app/hooks/photos/usePhotoComments";
+import { useResolvedLike, LikeState } from "@/app/hooks/photos/useResolvedLike";
 import { Comment } from "../../profile/feed/Comment/Comment";
 import { CommentCreator } from "../../profile/feed/CommentCreator/CommentCreator";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
 import { MdDeleteSweep } from "react-icons/md";
 import { formatDate } from "@/utils/dateFormatters";
+import { Link } from "@/app/uikit/navigation/Link/Link";
+import { ROUTES } from "@/routes/routes";
 import styles from "./PhotoModalDetails.module.scss";
 
 interface PhotoModalDetailsProps {
   photo: Photo;
   avatar?: string;
   name: string;
+  username?: string;
   isOwner?: boolean;
   onDeleteRequest: () => void;
-  liked: boolean;
-  displayCount: number | null;
-  likeLoading: boolean;
-  onToggleLike: () => void;
-  comments: CommentType[];
-  onDeleteComment: (commentId: string) => void;
+  likeState?: LikeState;
+  onLikeChange?: (photoId: string, liked: boolean, likesCount: number) => void;
+  repostState?: RepostState;
   postId?: string;
-  onCommentSuccess: () => void;
+  onCommentsRefresh?: () => void;
 }
 
 export const PhotoModalDetails = ({
   photo,
   avatar,
   name,
+  username,
   isOwner,
   onDeleteRequest,
-  liked,
-  displayCount,
-  likeLoading,
-  onToggleLike,
-  comments,
-  onDeleteComment,
+  likeState,
+  onLikeChange,
+  repostState,
   postId,
-  onCommentSuccess,
+  onCommentsRefresh,
 }: PhotoModalDetailsProps) => {
   const t = useTranslations();
   const locale = useLocale();
+
+  const [replyTo, setReplyTo] = useState<{
+    commentId: string;
+    name: string;
+  } | null>(null);
+
+  const {
+    comments,
+    refreshComments,
+    deleteComment: onDeleteComment,
+    editComment: onEditComment,
+  } = usePhotoComments({ photo, postId, onCommentsRefresh });
+
+  const {
+    liked,
+    displayCount,
+    likeLoading,
+    toggleLike: onToggleLike,
+  } = useResolvedLike({ photo, postId, likeState, onLikeChange });
+
+  const rootComments = comments.filter((comment) => !comment.parent);
+  const repliesFor = (commentId: string) =>
+    comments.filter((comment) => comment.parent === commentId);
+  const commentPhotoId = postId ? undefined : photo.id;
+
+  const handleReply = (commentId: string, name: string) => {
+    setReplyTo((prev) =>
+      prev?.commentId === commentId ? null : { commentId, name },
+    );
+  };
 
   return (
     <div className={styles.details}>
       <div className={styles.detailsWrapper}>
         <div className={styles.author}>
-          <div className={styles.avatar}>
-            <Avatar src={avatar} />
-          </div>
+          {username ? (
+            <Link href={ROUTES.profile(username)} className={styles.avatar}>
+              <Avatar src={avatar} />
+            </Link>
+          ) : (
+            <div className={styles.avatar}>
+              <Avatar src={avatar} />
+            </div>
+          )}
           <div className={styles.info}>
             <div className={styles.name}>{name}</div>
             <time className={styles.time}>
@@ -81,22 +116,31 @@ export const PhotoModalDetails = ({
             onToggle={onToggleLike}
             className={styles.stat}
           />
-          <Button
-            appearance="ghost"
-            className={cn(styles.stat, styles.statRepost)}
-          >
-            <FaReply size={18} />
-            <span>{photo.reposts ?? ""}</span>
-          </Button>
+          {repostState && (
+            <RepostButton
+              reposted={repostState.reposted}
+              count={repostState.count}
+              loading={repostState.loading}
+              onToggle={repostState.onToggle}
+              className={styles.stat}
+            />
+          )}
         </div>
       </div>
       <ul className={styles.comments}>
-        {comments.length > 0 ? (
-          comments.map((comment) => (
+        {rootComments.length > 0 ? (
+          rootComments.map((comment) => (
             <li key={comment.id}>
               <Comment
                 comment={comment}
+                replies={repliesFor(comment.id)}
+                postId={postId}
+                photoId={commentPhotoId}
                 onDelete={() => onDeleteComment(comment.id)}
+                onEdit={(content) => onEditComment(comment.id, content)}
+                onDeleteReply={onDeleteComment}
+                onEditReply={onEditComment}
+                onReply={handleReply}
               />
             </li>
           ))
@@ -109,9 +153,15 @@ export const PhotoModalDetails = ({
       </ul>
       <div className={styles.detailsFooter}>
         <CommentCreator
+          key={replyTo?.commentId ?? "root"}
           postId={postId}
-          photoId={postId ? undefined : photo.id}
-          onSuccess={onCommentSuccess}
+          photoId={commentPhotoId}
+          replyCommentId={replyTo?.commentId}
+          initialContent={replyTo ? `${replyTo.name}, ` : undefined}
+          onSuccess={() => {
+            refreshComments();
+            setReplyTo(null);
+          }}
         />
       </div>
     </div>

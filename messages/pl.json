@@ -53,7 +53,8 @@
   "errors": {
     "EMAIL_ALREADY_EXISTS": "Ten e-mail jest już zarejestrowany",
     "USERNAME_ALREADY_EXISTS": "Ta nazwa użytkownika jest już zajęta",
-    "INVALID_CREDENTIALS": "Nieprawidłowy e-mail lub hasło"
+    "INVALID_CREDENTIALS": "Nieprawidłowy e-mail lub hasło",
+    "PHOTO_LIMIT_REACHED": "Osiągnięto limit 300 zdjęć. Usuń kilka zdjęć, aby dodać nowe."
   },
   "placeholder": {
     "noneSelected": "Nie wybrano",
@@ -74,12 +75,10 @@
     "haveAccount": "Masz już konto?"
   },
   "registrationSteps": {
-    "step": "KROK 1 Z 2",
     "title": "Zanim zaczniemy...",
     "subtitle": "Każda wielka sfora zaczyna się od przedstawienia"
   },
   "registrationStepsAvatar": {
-    "step": "KROK 2 Z 2",
     "title": "Dodaj zdjęcie",
     "subtitle": "Dołącz do sfory — pokaż kim jesteś"
   },
@@ -147,7 +146,8 @@
   },
   "profileInfoModal": {
     "title": "Moje informacje",
-    "interestsTitle": "Moje zainteresowania"
+    "interestsTitle": "Moje zainteresowania",
+    "followers": "obserwujących"
   },
   "profileFriends": {
     "title": "Znajomi",
@@ -167,8 +167,8 @@
   "feed": {
     "title": "Brak postów",
     "text": "Bądź pierwszą osobą, która tu coś opublikuje!",
-    "friendsEmptyTitle": "Brak nowości od znajomych",
-    "friendsEmptyText": "Nikt z Twojej paczki nic jeszcze nie opublikował. Zajrzyj tu później albo dodaj kilku znajomych."
+    "friendsEmptyTitle": "Brak nowości",
+    "friendsEmptyText": "Nikt z obserwowanych jeszcze nic nie opublikował. Zajrzyj tu później albo zacznij obserwować więcej piesków."
   },
   "suggestedFriends": {
     "title": "Psy, które możesz znać"
@@ -187,7 +187,9 @@
   },
   "sharePostModal": {
     "title": "Udostępnij post",
-    "sent": "Wysłano post!"
+    "sent": "Wysłano post!",
+    "shareToWall": "Udostępnij na swojej tablicy",
+    "sharedToWall": "Udostępniono na Twojej tablicy!"
   },
   "signOut": {
     "modalTitle": "Wyloguj się",
