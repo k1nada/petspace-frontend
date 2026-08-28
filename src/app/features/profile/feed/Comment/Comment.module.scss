@@ -1,11 +1,8 @@
 .container {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--gap-m);
   padding: var(--padding-xs) 0;
-
-  &:hover .delete {
-    opacity: 1;
-  }
 }
 
 .info {
@@ -38,6 +35,20 @@
   overflow-wrap: break-word;
   white-space: pre-wrap;
   word-break: break-word;
+  transition: none;
+}
+
+.editWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-s);
+  transition: none;
+}
+
+.editActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--gap-s);
 }
 
 .footer {
@@ -50,10 +61,22 @@
   font-size: var(--font-m);
   color: var(--text-secondary);
   cursor: pointer;
+  padding: 0;
+  background: none;
 
   &:hover {
     color: var(--text-primary);
+    background: none;
   }
+}
+
+.replies {
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  margin-top: var(--gap-xs);
+  padding-left: var(--padding-xxl);
 }
 
 .likes {
@@ -69,21 +92,13 @@
   }
 }
 
-.liked {
-  color: var(--text-primary);
-}
-
-.delete {
+.dropdown {
   margin-left: auto;
+  align-self: flex-start;
   opacity: 0;
-  transition: opacity 0.2s ease;
-}
+  transition: opacity 0.4s ease;
 
-.deleteButton {
-  color: var(--text-secondary);
-  transition: color 0.2s ease;
-
-  &:hover {
-    color: var(--text-primary);
+  &.visible {
+    opacity: 1;
   }
 }
