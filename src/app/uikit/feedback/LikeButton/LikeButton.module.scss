@@ -1,6 +1,10 @@
 button.heart:hover {
   color: var(--text-error);
-  background: transparent;
+}
+
+.count {
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
 }
 
 .heart.liked {

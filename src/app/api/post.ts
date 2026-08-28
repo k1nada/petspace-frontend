@@ -29,11 +29,29 @@ export const getPosts = async (postwallId: string) => {
   }
 };
 
-export const getFriendsFeed = async (username: string) => {
+export const getFeed = async (username: string) => {
   try {
     const { data } = await api.get(`/posts/feed/${username}`);
     return data;
   } catch {
     return null;
   }
+};
+
+export const deletePost = async (postId: string): Promise<void> => {
+  await api.delete(`/posts/${postId}`);
+};
+
+export const repostPost = async (
+  postId: string,
+): Promise<{ reposted: boolean; count: number }> => {
+  const { data } = await api.post(`/reposts/${postId}`);
+  return data;
+};
+
+export const updatePost = async (
+  postId: string,
+  content: string,
+): Promise<void> => {
+  await api.put(`/posts/${postId}`, { content });
 };

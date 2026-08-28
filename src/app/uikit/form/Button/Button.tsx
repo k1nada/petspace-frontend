@@ -6,7 +6,7 @@ interface ButtonProps extends DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 > {
-  appearance: "primary" | "secondary" | "tertiary" | "ghost";
+  appearance: "primary" | "secondary" | "tertiary" | "ghost" | "minimal";
 }
 
 export const Button = ({
@@ -24,6 +24,7 @@ export const Button = ({
         [styles.secondary]: appearance === "secondary",
         [styles.tertiary]: appearance === "tertiary",
         [styles.ghost]: appearance === "ghost",
+        [styles.minimal]: appearance === "minimal",
       })}
     >
       {children}

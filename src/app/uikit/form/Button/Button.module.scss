@@ -44,3 +44,12 @@
     background: var(--button-ghost-hover);
   }
 }
+
+.minimal {
+  background: transparent;
+  padding: 0;
+
+  &:hover {
+    background: transparent;
+  }
+}

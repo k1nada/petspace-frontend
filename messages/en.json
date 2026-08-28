@@ -53,7 +53,8 @@
   "errors": {
     "EMAIL_ALREADY_EXISTS": "This email is already registered",
     "USERNAME_ALREADY_EXISTS": "This username is already registered",
-    "INVALID_CREDENTIALS": "Invalid email or password"
+    "INVALID_CREDENTIALS": "Invalid email or password",
+    "PHOTO_LIMIT_REACHED": "You've reached the 300 photo limit. Delete some photos to add new ones."
   },
   "placeholder": {
     "noneSelected": "None selected",
@@ -74,12 +75,10 @@
     "haveAccount": "Already have an account?"
   },
   "registrationSteps": {
-    "step": "STEP 1 OF 2",
     "title": "Before we begin...",
     "subtitle": "Every great pack starts with an introduction"
   },
   "registrationStepsAvatar": {
-    "step": "STEP 2 OF 2",
     "title": "Upload a photo",
     "subtitle": "Join the pack — show who you are"
   },
@@ -147,7 +146,8 @@
   },
   "profileInfoModal": {
     "title": "My info",
-    "interestsTitle": "My interests"
+    "interestsTitle": "My interests",
+    "followers": "followers"
   },
   "profileFriends": {
     "title": "Friends",
@@ -167,8 +167,8 @@
   "feed": {
     "title": "No posts yet",
     "text": "Be the first to post something here!",
-    "friendsEmptyTitle": "No news from your friends yet",
-    "friendsEmptyText": "Nobody in your pack has posted anything. Check back later or add a few more friends."
+    "friendsEmptyTitle": "No news yet",
+    "friendsEmptyText": "Nobody you follow has posted anything. Check back later or follow a few more dogs."
   },
   "suggestedFriends": {
     "title": "Dogs you may know"
@@ -187,7 +187,9 @@
   },
   "sharePostModal": {
     "title": "Share post",
-    "sent": "Post sent!"
+    "sent": "Post sent!",
+    "shareToWall": "Share to your wall",
+    "sharedToWall": "Shared to your wall!"
   },
   "signOut": {
     "modalTitle": "Sign out",

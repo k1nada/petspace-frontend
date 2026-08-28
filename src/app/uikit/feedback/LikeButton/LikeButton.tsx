@@ -18,17 +18,18 @@ export const LikeButton = ({
   onToggle,
   className,
 }: LikeButtonProps) => {
-  const displayCount = count ?? "";
+  const displayCount = count ?? 0;
+  const showCount = displayCount > 0;
 
   return (
     <Button
-      appearance="ghost"
+      appearance="minimal"
       className={cn(className, styles.heart, { [styles.liked]: liked })}
       onClick={onToggle}
       disabled={loading}
     >
       <FaHeart size={16} />
-      <span>{displayCount}</span>
+      {showCount && <span className={styles.count}>{displayCount}</span>}
     </Button>
   );
 };

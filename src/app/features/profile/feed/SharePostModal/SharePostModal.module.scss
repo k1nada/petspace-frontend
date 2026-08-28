@@ -1,0 +1,42 @@
+.title {
+  margin: 0 0 var(--gap-m);
+  font-size: var(--font-l);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+button.wallOption {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
+  width: fit-content;
+  padding: var(--padding-xs) var(--padding-m);
+  border-radius: var(--radius-m);
+  margin-bottom: var(--gap-m);
+  color: var(--text-primary);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  max-height: 320px;
+  overflow-y: auto;
+  min-width: 280px;
+}
+
+button.friend {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
+  width: 100%;
+  padding: var(--padding-xs);
+  border-radius: var(--radius-m);
+}
+
+.name {
+  flex: 1;
+  text-align: left;
+  color: var(--text-primary);
+  font-size: var(--font-base);
+}
