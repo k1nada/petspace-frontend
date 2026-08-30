@@ -9,7 +9,7 @@ import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadMod
 import { useState } from "react";
 import { toast } from "react-toastify";
 import api from "@/config/axios";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
 export const RegistrationStepsAvatar = () => {
   const router = useRouter();
@@ -43,7 +43,6 @@ export const RegistrationStepsAvatar = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.tag}>{t("registrationStepsAvatar.step")}</div>
       <div>
         <h2 className={styles.title}>{t("registrationStepsAvatar.title")}</h2>
         <p className={styles.subtitle}>
