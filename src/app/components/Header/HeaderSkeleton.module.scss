@@ -40,6 +40,7 @@
   display: flex;
   align-items: center;
   gap: var(--gap-m);
+  padding-left: var(--padding-m);
 }
 
 .logoTitle {
@@ -66,9 +67,9 @@
 }
 
 .item {
-  width: 30px;
-  height: 30px;
-  margin: 5px;
+  width: 24px;
+  height: 24px;
+  margin: 8px;
   border-radius: var(--radius-full);
   background: var(--bg-input);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
