@@ -18,11 +18,14 @@ interface DropdownMenuProps {
 export const DropdownMenu = ({ items }: DropdownMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const close = () => {
+    setIsOpen(false);
+    (document.activeElement as HTMLElement | null)?.blur();
+  };
+
   return (
     <div className={styles.wrapper}>
-      {isOpen && (
-        <div className={styles.overlay} onClick={() => setIsOpen(false)} />
-      )}
+      {isOpen && <div className={styles.overlay} onClick={close} />}
       <Button
         appearance="ghost"
         className={styles.trigger}
@@ -38,7 +41,7 @@ export const DropdownMenu = ({ items }: DropdownMenuProps) => {
               className={styles.item}
               onClick={() => {
                 item.onClick();
-                setIsOpen(false);
+                close();
               }}
             >
               {item.icon}
