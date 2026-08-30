@@ -7,8 +7,8 @@ import { useTranslations } from "next-intl";
 import { DatePicker } from "@/app/uikit/form/DatePicker/DatePicker";
 import dayjs, { type Dayjs } from "@/utils/dayjs";
 import { toast } from "react-toastify";
-import { useBreeds } from "@/app/hooks/useBreeds";
-import { useCities, useCountries } from "@/app/hooks/useLocationOptions";
+import { useBreeds } from "@/app/hooks/shared/useBreeds";
+import { useCities, useCountries } from "@/app/hooks/shared/useLocationOptions";
 import api from "@/config/axios";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Select } from "@/app/uikit/form/Select/Select";
@@ -68,9 +68,6 @@ const RegistrationSteps = ({
 
   return (
     <form className={styles.form}>
-      <div>
-        <div className={styles.tag}>{t("registrationSteps.step")}</div>
-      </div>
       <div className={styles.fields}>
         <div>
           <h2 className={styles.title}>{t("registrationSteps.title")}</h2>
