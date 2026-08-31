@@ -109,6 +109,12 @@
     "description": "Ta strona zaginęła gdzieś głęboko w ogrodzie.\nJamnik jej szuka, ale jak dotąd bez powodzenia.",
     "goBack": "Wróć"
   },
+  "serverError": {
+    "text": "Ups! Ktoś przegryzł kabelki.",
+    "description": "Coś się zepsuło po naszej stronie.\nSfora już węszy, żeby to naprawić.",
+    "tryAgain": "Spróbuj ponownie",
+    "goBack": "Wróć"
+  },
   "profileBanner": {
     "info": "Więcej info",
     "friends": "znajomi",

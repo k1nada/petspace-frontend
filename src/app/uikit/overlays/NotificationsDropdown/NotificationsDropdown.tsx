@@ -59,6 +59,7 @@ export const NotificationsDropdown = () => {
                   key={notification.id}
                   notification={notification}
                   onRead={markAsRead}
+                  ownAvatar={currentUser?.avatar}
                 />
               ))}
             </ul>

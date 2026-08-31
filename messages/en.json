@@ -109,6 +109,12 @@
     "description": "This page got lost somewhere deep in the garden.\nThe dachshund is looking for it, but so far without success.",
     "goBack": "Go Back"
   },
+  "serverError": {
+    "text": "Uh-oh! Someone chewed through the wires.",
+    "description": "Something broke on our end.\nThe pack is already sniffing around to fix it.",
+    "tryAgain": "Try Again",
+    "goBack": "Go Back"
+  },
   "profileBanner": {
     "info": "More info",
     "friends": "friends",

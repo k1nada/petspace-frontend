@@ -29,6 +29,7 @@ export const Avatar = ({ src, size = 45, isOnline }: AvatarProps) => {
         alt={t("common.avatar")}
         className={styles.image}
         sizes={`${size}px`}
+        unoptimized
       />
       {isOnline && <span className={styles.online} />}
     </div>

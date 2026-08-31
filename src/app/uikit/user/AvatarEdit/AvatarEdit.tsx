@@ -6,20 +6,21 @@ import { MdDeleteSweep, MdModeEdit, MdPhotoCamera } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import defaultAvatar from "@/public/avatars/default.png";
 import { Avatar } from "../Avatar/Avatar";
-import { useState } from "react";
-import { Modal } from "../../overlays/Modal/Modal";
+import { useEffect, useState } from "react";
 import { ConfirmModal } from "../../overlays/ConfirmModal/ConfirmModal";
 import { toast } from "react-toastify";
-import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadModal/AvatarUploadModal";
+import { AvatarChangeModal } from "../AvatarChangeModal/AvatarChangeModal";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Photo } from "@/types";
 import { useRouter } from "next/navigation";
 import api from "@/config/axios";
+import { usePhotoNavigation } from "@/app/hooks/photos/usePhotoNavigation";
 
 interface AvatarEditProps {
   avatarPhotos?: Photo[];
   src?: string;
   name?: string;
+  username?: string;
   size?: number;
   onAvatarChange?: (url: string | undefined) => void;
   isEditable?: boolean;
@@ -29,35 +30,44 @@ export const AvatarEdit = ({
   avatarPhotos,
   src,
   name,
+  username,
   size,
   onAvatarChange,
   isEditable = true,
 }: AvatarEditProps) => {
   const t = useTranslations();
   const router = useRouter();
-  const [file, setFile] = useState<File | null>(null);
   const [isChangeOpen, setIsChangeOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isPhotoOpen, setIsPhotoOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [localAvatarPhotos, setLocalAvatarPhotos] = useState(avatarPhotos);
 
-  const openPhoto = () => {
-    setCurrentIndex((avatarPhotos?.length ?? 1) - 1);
-    setIsPhotoOpen(true);
+  useEffect(() => {
+    setLocalAvatarPhotos(avatarPhotos);
+  }, [avatarPhotos]);
+
+  const newestFirstPhotos = [...(localAvatarPhotos ?? [])].reverse();
+  const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
+    usePhotoNavigation(newestFirstPhotos);
+
+  const handleLikeChange = (
+    photoId: string,
+    liked: boolean,
+    likesCount: number,
+  ) => {
+    if (!localAvatarPhotos) return;
+
+    const updatedPhotos = localAvatarPhotos.map((photo) => {
+      if (photo.id !== photoId) return photo;
+      return { ...photo, liked, likesCount };
+    });
+
+    setLocalAvatarPhotos(updatedPhotos);
   };
 
-  const savePhoto = async () => {
+  const deleteAvatarPhoto = async (photoId: string) => {
     try {
-      if (!file) return;
-      const formData = new FormData();
-      formData.append("image", file);
-
-      const { data } = await api.post("/api/upload/avatar", formData);
-
-      onAvatarChange?.(data.data.url);
-      setFile(null);
-      setIsChangeOpen(false);
-      router.refresh();
+      await api.delete(`/api/upload/photo/${photoId}`);
+      window.location.reload();
     } catch {
       toast.error(t("toasts.error"));
     }
@@ -85,14 +95,19 @@ export const AvatarEdit = ({
     );
   }
 
+  const hasAvatar = Boolean(src);
+
+  const selectedPhoto =
+    selectedIndex === null ? null : (newestFirstPhotos[selectedIndex] ?? null);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.avatarWrapper}>
         <Avatar src={src ?? defaultAvatar} size={size} />
       </div>
       <div className={styles.overlay}>
-        {src && (
-          <Button appearance="secondary" onClick={openPhoto}>
+        {hasAvatar && (
+          <Button appearance="secondary" onClick={() => setSelectedIndex(0)}>
             <MdPhotoCamera size={20} />
             {t("avatarEdit.open")}
           </Button>
@@ -101,7 +116,7 @@ export const AvatarEdit = ({
           <MdModeEdit size={20} />
           {t("avatarEdit.change")}
         </Button>
-        {src && (
+        {hasAvatar && (
           <Button appearance="secondary" onClick={() => setIsDeleteOpen(true)}>
             <MdDeleteSweep size={20} />
             {t("common.deletePhoto")}
@@ -110,34 +125,29 @@ export const AvatarEdit = ({
       </div>
 
       <PhotoModal
-        photo={isPhotoOpen ? (avatarPhotos?.[currentIndex] ?? null) : null}
-        name={name ?? ""}
-        avatar={src}
-        photosCount={avatarPhotos?.length ?? 0}
-        currentIndex={(avatarPhotos?.length ?? 1) - 1 - currentIndex}
-        onClose={() => setIsPhotoOpen(false)}
-        onPrev={() =>
-          setCurrentIndex((i) =>
-            Math.min((avatarPhotos?.length ?? 1) - 1, i + 1),
-          )
-        }
-        onNext={() => setCurrentIndex((i) => Math.max(0, i - 1))}
+        photo={selectedPhoto}
+        author={{ name: name ?? "", username, avatar: src }}
+        navigation={{
+          photosCount: newestFirstPhotos.length,
+          currentIndex: selectedIndex ?? 0,
+          onPrev: handlePrev,
+          onNext: handleNext,
+        }}
+        isOwner
+        onClose={() => setSelectedIndex(null)}
+        onDelete={() => {
+          if (!selectedPhoto) return;
+          deleteAvatarPhoto(selectedPhoto.id);
+        }}
+        onLikeChange={handleLikeChange}
       />
 
-      <Modal isOpen={isChangeOpen} onClose={() => setIsChangeOpen(false)}>
-        <h2 className={styles.modalTitle}>{t("avatarEdit.modalTitle")}</h2>
-        <p className={styles.description}>{t("avatarEdit.modalDescription")}</p>
-        <p className={styles.hint}>{t("common.imageFormats")}</p>
-        <div className={styles.upload}>
-          <AvatarUploadModal onChange={setFile} profileAvatar={src} />
-        </div>
-        <p className={styles.hint}>{t("avatarEdit.choosePhoto")}</p>
-        <div className={styles.actions}>
-          <Button appearance="primary" onClick={savePhoto}>
-            {t("common.saveAndContinue")}
-          </Button>
-        </div>
-      </Modal>
+      <AvatarChangeModal
+        isOpen={isChangeOpen}
+        onClose={() => setIsChangeOpen(false)}
+        currentAvatarSrc={src}
+        onAvatarChange={onAvatarChange}
+      />
 
       <ConfirmModal
         isOpen={isDeleteOpen}
