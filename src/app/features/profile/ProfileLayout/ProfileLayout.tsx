@@ -7,30 +7,37 @@ import { ProfileBanner } from "../info/ProfileBanner/ProfileBanner";
 import styles from "./ProfileLayout.module.scss";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import { ProfilePhotos } from "../photos/ProfilePhotos/ProfilePhotos";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getPosts } from "@/app/api/post";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
+import { getRelationshipStatus } from "@/utils/friends";
 import { BannerInfo } from "@/types";
 import { Post } from "@/types";
 
 interface ProfileLayoutProps {
   bannerInfo: BannerInfo;
-  initialPosts: Post[];
 }
 
-export const ProfileLayout = ({
-  bannerInfo,
-  initialPosts,
-}: ProfileLayoutProps) => {
-  const [posts, setPosts] = useState<Post[]>(initialPosts);
+export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [postsLoading, setPostsLoading] = useState(!!bannerInfo.postwallId);
   const currentUser = useAuthStore((state) => state.currentUser);
   const isOwner = currentUser?.username === bannerInfo.username;
+  const { isFriend } = getRelationshipStatus(currentUser, bannerInfo.id);
   const postwallId = bannerInfo.postwallId;
 
   const triggerRefresh = () => {
     if (!postwallId) return;
     getPosts(postwallId).then((data) => setPosts(data ?? []));
   };
+
+  useEffect(() => {
+    if (!postwallId) return;
+    getPosts(postwallId).then((data) => {
+      setPosts(data ?? []);
+      setPostsLoading(false);
+    });
+  }, [postwallId]);
 
   const friends = bannerInfo.friends ?? [];
   const photos = bannerInfo.photos ?? [];
@@ -44,7 +51,7 @@ export const ProfileLayout = ({
         <ProfileBanner bannerInfo={bannerInfo} />
       </div>
       <div className={styles.feedContainer}>
-        {isOwner && (
+        {(isOwner || isFriend) && currentUser && (
           <PostCreator
             name={currentUser.name}
             avatar={currentUser.avatar}
@@ -52,7 +59,11 @@ export const ProfileLayout = ({
             onSuccess={triggerRefresh}
           />
         )}
-        <Postwall posts={posts} onRefresh={triggerRefresh} />
+        <Postwall
+          posts={posts}
+          loading={postsLoading}
+          onRefresh={triggerRefresh}
+        />
       </div>
       <div className={styles.rightColumn}>
         <div className={styles.photos}>

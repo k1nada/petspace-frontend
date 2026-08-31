@@ -12,7 +12,7 @@ import { AvatarEdit } from "@/app/uikit/user/AvatarEdit/AvatarEdit";
 import { useState } from "react";
 import { ProfileInfoModal } from "../../modals/ProfileInfoModal/ProfileInfoModal";
 import { AchievementsModal } from "../../modals/AchievementsModal/AchievementsModal";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { BannerInfo } from "@/types";
 import { ProfileBannerSkeleton } from "./ProfileBannerSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
@@ -42,6 +42,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     bannerInfo.birthDate ||
     bannerInfo.sex ||
     bannerInfo.bio ||
+    (bannerInfo.followers && bannerInfo.followers.length > 0) ||
     (bannerInfo.interests && Object.values(bannerInfo.interests).some(Boolean))
   );
 
@@ -66,7 +67,6 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     try {
       await addFriendAPI(currentUser.username, bannerInfo.username);
       await fetchCurrentUser();
-      toast.success(t("profileBanner.requestSent"));
     } catch {
       toast.error(t("toasts.error"));
     }
@@ -89,6 +89,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
           <AvatarEdit
             src={avatarUrl}
             name={bannerInfo.name}
+            username={bannerInfo.username}
             size={140}
             avatarPhotos={bannerInfo.avatarPhotos}
             onAvatarChange={(url) => setAvatarUrl(url)}
@@ -191,7 +192,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
               >
                 <FaMessage size={16} />
               </Button>
-              <Button appearance="primary" onClick={cancelRequest}>
+              <Button appearance="secondary" onClick={cancelRequest}>
                 {t("profileBanner.requestSent")}
               </Button>
             </>

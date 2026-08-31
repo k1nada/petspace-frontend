@@ -14,7 +14,7 @@ const loadPageData = async (username: string) => {
   const photosWithComments = await Promise.all(
     (userData.photos ?? []).map(async (photo: Photo) => ({
       ...photo,
-      comments: await getPhotoComments(photo.id),
+      comments: (await getPhotoComments(photo.id)) ?? [],
     })),
   );
 
