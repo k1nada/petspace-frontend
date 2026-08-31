@@ -5,14 +5,14 @@ import styles from "./PhotoGallery.module.scss";
 import { useTranslations } from "next-intl";
 import { PhotoModal } from "../PhotoModal/PhotoModal";
 import { PhotoUploadModal } from "../PhotoUploadModal/PhotoUploadModal";
-import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
-import { usePhotoGallery } from "@/app/hooks/usePhotoGallery";
+import { usePhotoNavigation } from "@/app/hooks/photos/usePhotoNavigation";
+import { usePhotoGallery } from "@/app/hooks/photos/usePhotoGallery";
 import { Photo } from "@/types";
 import { PhotoGallerySkeleton } from "./PhotoGallerySkeleton";
 import { PhotoGrid } from "../PhotoGrid/PhotoGrid";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
 interface PhotoGalleryProps {
   photos: Photo[];
@@ -77,14 +77,15 @@ export const PhotoGallery = ({
         {selectedPhoto && (
           <PhotoModal
             photo={selectedPhoto}
-            avatar={avatar}
-            name={name}
-            currentIndex={selectedIndex ?? 0}
-            photosCount={localPhotos.length}
+            author={{ avatar, name, username }}
+            navigation={{
+              currentIndex: selectedIndex ?? 0,
+              photosCount: localPhotos.length,
+              onPrev: handlePrev,
+              onNext: handleNext,
+            }}
             isOwner={isOwner}
             onClose={() => setSelectedIndex(null)}
-            onPrev={handlePrev}
-            onNext={handleNext}
             onDelete={() =>
               deletePhoto(selectedPhoto.id, () => setSelectedIndex(null))
             }

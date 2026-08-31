@@ -1,31 +1,40 @@
 import styles from "./PhotoModal.module.scss";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
-import { Photo } from "@/types";
+import { Photo, RepostState } from "@/types";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import { usePhotoKeyNavigation } from "@/app/hooks/usePhotoKeyNavigation";
-import { usePhotoComments } from "@/app/hooks/usePhotoComments";
-import { useResolvedLike, LikeState } from "@/app/hooks/useResolvedLike";
+import { usePhotoKeyNavigation } from "@/app/hooks/photos/usePhotoKeyNavigation";
+import { LikeState } from "@/app/hooks/photos/useResolvedLike";
 import { PhotoModalImage } from "../PhotoModalImage/PhotoModalImage";
 import { PhotoModalDetails } from "../PhotoModalDetails/PhotoModalDetails";
+
+interface PhotoModalAuthor {
+  avatar?: string;
+  name: string;
+  username?: string;
+}
+
+interface PhotoModalNavigation {
+  photosCount?: number;
+  currentIndex?: number;
+  onPrev?: () => void;
+  onNext?: () => void;
+}
 
 interface PhotoModalProps {
   photo: Photo | null;
   imageUrl?: string;
   postId?: string;
-  avatar?: string;
-  name: string;
-  photosCount?: number;
-  currentIndex?: number;
+  author: PhotoModalAuthor;
+  navigation?: PhotoModalNavigation;
   isOwner?: boolean;
   onClose: () => void;
-  onPrev?: () => void;
-  onNext?: () => void;
   onDelete?: () => void | Promise<void>;
   onLikeChange?: (photoId: string, liked: boolean, likesCount: number) => void;
   likeState?: LikeState;
+  repostState?: RepostState;
   onCommentsRefresh?: () => void;
 }
 
@@ -33,35 +42,22 @@ export const PhotoModal = ({
   photo,
   imageUrl,
   postId,
-  avatar,
-  name,
-  photosCount,
-  currentIndex,
+  author,
+  navigation,
   isOwner,
   onClose,
-  onPrev,
-  onNext,
   onDelete,
   onLikeChange,
   likeState,
+  repostState,
   onCommentsRefresh,
 }: PhotoModalProps) => {
   const t = useTranslations();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  const { handleKeyDown } = usePhotoKeyNavigation({ onPrev, onNext });
-
-  const { comments, refreshComments, deleteComment } = usePhotoComments({
-    photo,
-    postId,
-    onCommentsRefresh,
-  });
-
-  const { liked, displayCount, likeLoading, toggleLike } = useResolvedLike({
-    photo,
-    postId,
-    likeState,
-    onLikeChange,
+  const { handleKeyDown } = usePhotoKeyNavigation({
+    onPrev: navigation?.onPrev,
+    onNext: navigation?.onNext,
   });
 
   const handleDeletePhoto = async () => {
@@ -85,26 +81,24 @@ export const PhotoModal = ({
           <PhotoModalImage
             photo={photo}
             imageUrl={imageUrl}
-            currentIndex={currentIndex}
-            photosCount={photosCount}
-            onPrev={onPrev}
-            onNext={onNext}
+            currentIndex={navigation?.currentIndex}
+            photosCount={navigation?.photosCount}
+            onPrev={navigation?.onPrev}
+            onNext={navigation?.onNext}
           />
 
           <PhotoModalDetails
             photo={photo}
-            avatar={avatar}
-            name={name}
+            avatar={author.avatar}
+            name={author.name}
+            username={author.username}
             isOwner={isOwner}
             onDeleteRequest={() => setIsDeleteOpen(true)}
-            liked={liked}
-            displayCount={displayCount}
-            likeLoading={likeLoading}
-            onToggleLike={toggleLike}
-            comments={comments}
-            onDeleteComment={deleteComment}
+            likeState={likeState}
+            onLikeChange={onLikeChange}
+            repostState={repostState}
             postId={postId}
-            onCommentSuccess={refreshComments}
+            onCommentsRefresh={onCommentsRefresh}
           />
 
           <ConfirmModal

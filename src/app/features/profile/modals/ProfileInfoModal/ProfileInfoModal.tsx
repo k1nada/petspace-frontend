@@ -6,6 +6,7 @@ import {
   FaPaw,
   FaVenus,
   FaMapMarkerAlt,
+  FaDog,
 } from "react-icons/fa";
 import { useTranslations, useLocale } from "next-intl";
 import { BannerInfo } from "@/types";
@@ -24,8 +25,9 @@ export const ProfileInfoModal = ({
 }: ProfileInfoModalProps) => {
   const t = useTranslations();
   const locale = useLocale();
-  const { bio, breed, city, sex, birthDate, interests } = user;
+  const { bio, breed, city, sex, birthDate, interests, followers } = user;
   const hasInterests = interests && Object.values(interests).some(Boolean);
+  const followersCount = followers ? followers.length : 0;
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -44,6 +46,15 @@ export const ProfileInfoModal = ({
             <div className={styles.row}>
               <FaMapMarkerAlt size={16} className={styles.icon} />
               <span>{city}</span>
+            </div>
+          )}
+
+          {followersCount > 0 && (
+            <div className={styles.row}>
+              <FaDog size={16} className={styles.icon} />
+              <span>
+                {followersCount} {t("profileInfoModal.followers")}
+              </span>
             </div>
           )}
 

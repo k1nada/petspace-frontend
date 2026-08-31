@@ -31,7 +31,13 @@ export const Postwall = ({
       {posts.length > 0 ? (
         <ul className={styles.list}>
           {posts.map((post) => (
-            <li key={post.id}>
+            <li
+              key={
+                post.repostedBy
+                  ? `${post.id}-${post.repostedBy.username}`
+                  : post.id
+              }
+            >
               <Post post={post} onRefresh={onRefresh} />
             </li>
           ))}

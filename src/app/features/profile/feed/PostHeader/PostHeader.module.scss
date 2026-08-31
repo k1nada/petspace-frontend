@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  gap: var(--gap-s);
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.name {
+  font-weight: 500;
+  font-size: var(--font-base);
+  color: var(--text-primary);
+}
+
+.time {
+  font-size: var(--font-m);
+  color: var(--text-secondary);
+}
+
+.dropdown {
+  margin-left: auto;
+  align-self: flex-start;
+}

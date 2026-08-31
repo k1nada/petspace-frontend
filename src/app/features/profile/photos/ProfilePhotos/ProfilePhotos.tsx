@@ -5,14 +5,14 @@ import { useState } from "react";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { useTranslations } from "next-intl";
 import { getPhotoUrl } from "@/utils/photo";
-import { usePhotoNavigation } from "@/app/hooks/usePhotoNavigation";
-import { usePhotoLikeSync } from "@/app/hooks/usePhotoLikeSync";
-import { usePhotoLikeRefresh } from "@/app/hooks/usePhotoLikeRefresh";
+import { usePhotoNavigation } from "@/app/hooks/photos/usePhotoNavigation";
+import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
+import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Photo } from "@/types";
 import { ProfilePhotosSkeleton } from "./ProfilePhotosSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
 interface ProfilePhotosProps {
   photos: Photo[];
@@ -65,14 +65,15 @@ export const ProfilePhotos = ({
 
         <PhotoModal
           photo={selectedIndex !== null ? localPhotos[selectedIndex] : null}
-          avatar={avatar}
-          name={name}
-          currentIndex={selectedIndex ?? 0}
-          photosCount={localPhotos.length}
+          author={{ avatar, name, username }}
+          navigation={{
+            currentIndex: selectedIndex ?? 0,
+            photosCount: localPhotos.length,
+            onPrev: handlePrev,
+            onNext: handleNext,
+          }}
           isOwner={isOwner}
           onClose={() => setSelectedIndex(null)}
-          onPrev={handlePrev}
-          onNext={handleNext}
           onLikeChange={handleLikeChange}
         />
       </section>
