@@ -8,7 +8,7 @@ import styles from "./ProfileLayout.module.scss";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import { ProfilePhotos } from "../photos/ProfilePhotos/ProfilePhotos";
 import { useEffect, useState } from "react";
-import { getPosts } from "@/app/api/post";
+import { getPosts } from "@/services/api/post";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { getRelationshipStatus } from "@/utils/friends";
 import { BannerInfo } from "@/types";

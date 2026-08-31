@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { addFamilyMember, deleteFamilyMember } from "@/app/api/family";
+import { addFamilyMember, deleteFamilyMember } from "@/services/api/family";
 import { FamilyMember, FamilyRelation, NewFamilyMember } from "@/types";
 
 export const useFamilyTree = (initialMembers: FamilyMember[]) => {

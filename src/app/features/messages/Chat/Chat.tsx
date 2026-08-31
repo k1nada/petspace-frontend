@@ -13,7 +13,7 @@ import { Link } from "@/app/uikit/navigation/Link/Link";
 import { formatTime } from "@/utils/dateFormatters";
 import { useLocale } from "next-intl";
 import { ChatSkeleton } from "./ChatSkeleton";
-import { getMessages, markMessagesRead } from "@/app/api/conversations";
+import { getMessages, markMessagesRead } from "@/services/api/conversations";
 import { useMessagesStore } from "@/app/hooks/messages/useMessagesStore";
 
 interface ChatProps {

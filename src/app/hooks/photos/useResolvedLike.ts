@@ -1,5 +1,5 @@
 import { useLike } from "@/app/hooks/shared/useLike";
-import { likePhoto } from "@/app/api/likes";
+import { likePhoto } from "@/services/api/likes";
 import { Photo } from "@/types";
 
 export interface LikeState {

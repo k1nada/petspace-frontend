@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import { getSuggestedFriends, addFriend } from "@/app/api/friends";
+import { getSuggestedFriends, addFriend } from "@/services/api/friends";
 import { User } from "@/types";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 

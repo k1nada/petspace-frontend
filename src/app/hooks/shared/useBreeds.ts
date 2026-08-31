@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getBreeds } from "@/app/api/breeds";
+import { getBreeds } from "@/services/api/breeds";
 
 export const useBreeds = () => {
   const [breeds, setBreeds] = useState<string[]>([]);

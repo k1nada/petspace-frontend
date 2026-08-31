@@ -1,6 +1,6 @@
 import { Header } from "@/app/components/Header/Header";
 import { ProfileEditorLayout } from "@/app/features/profile/info/ProfileEditorLayout/ProfileEditorLayout";
-import { getUser } from "@/app/api/user";
+import { getUser } from "@/services/api/user";
 
 interface EditPageProps {
   params: Promise<{ username: string }>;

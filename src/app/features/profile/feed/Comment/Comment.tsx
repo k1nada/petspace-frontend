@@ -7,7 +7,7 @@ import { LikeButton } from "@/app/uikit/feedback/LikeButton/LikeButton";
 import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
 import { MdDeleteSweep, MdModeEdit } from "react-icons/md";
 import { useLocale, useTranslations } from "next-intl";
-import { likeComment } from "@/app/api/likes";
+import { likeComment } from "@/services/api/likes";
 import { useLike } from "@/app/hooks/shared/useLike";
 import { Comment as CommentType } from "@/types";
 import { ROUTES } from "@/routes/routes";

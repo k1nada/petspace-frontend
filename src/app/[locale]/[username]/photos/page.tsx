@@ -1,5 +1,5 @@
-import { getPhotoComments } from "@/app/api/comment";
-import { getUser } from "@/app/api/user";
+import { getPhotoComments } from "@/services/api/comment";
+import { getUser } from "@/services/api/user";
 import { Header } from "@/app/components/Header/Header";
 import { PhotoGalleryLayout } from "@/app/features/photos/PhotoGalleryLayout/PhotoGalleryLayout";
 import { Photo } from "@/types";

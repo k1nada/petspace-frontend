@@ -6,7 +6,7 @@ import styles from "./MessagesLayout.module.scss";
 import { Chat } from "../Chat/Chat";
 import { ChatContact, Message, User } from "@/types";
 import { ContactList } from "../ContactList/ContactList";
-import { getConversations } from "@/app/api/conversations";
+import { getConversations } from "@/services/api/conversations";
 import socket from "@/services/socket";
 
 interface MessagesLayoutProps {
