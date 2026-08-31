@@ -1,14 +1,14 @@
 import styles from "./PostCreator.module.scss";
+import Image from "next/image";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { FaCamera, FaTimes } from "react-icons/fa";
 import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPost, uploadPostPhoto } from "@/services/api/post";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
-import { useTextareaSubmit } from "@/app/hooks/useTextareaSubmit";
+import { useTextareaSubmit } from "@/app/hooks/shared/useTextareaSubmit";
 import { toast } from "react-toastify";
-import { useAuthStore } from "@/app/hooks/useAuthStore";
 
 interface PostCreatorProps {
   avatar?: string;
@@ -29,7 +29,12 @@ export const PostCreator = ({
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isPublishing, setIsPublishing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const currentUser = useAuthStore((state) => state.currentUser);
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) URL.revokeObjectURL(imagePreview);
+    };
+  }, [imagePreview]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -47,11 +52,12 @@ export const PostCreator = ({
   };
 
   const publishPost = async () => {
-    if (!content && !imagePreview) return;
+    const trimmedContent = content.trim();
+    if (isPublishing || (!trimmedContent && !imagePreview)) return;
     setIsPublishing(true);
     try {
       const image = imageFile ? await uploadPostPhoto(imageFile) : undefined;
-      const post = await createPost(content, postwallId, image);
+      const post = await createPost(trimmedContent, postwallId, image);
       if (!post) {
         toast.error(t("toasts.error"));
         return;
@@ -84,19 +90,21 @@ export const PostCreator = ({
       </div>
       {imagePreview && (
         <div className={styles.imagePreviewWrapper}>
-          <img
+          <Image
             src={imagePreview}
             alt={t("postCreator.photo")}
             className={styles.imagePreview}
+            fill
+            unoptimized
           />
-          <button
-            type="button"
+          <Button
+            appearance="ghost"
             className={styles.removeImage}
             onClick={removeImage}
             aria-label={t("postCreator.removePhoto")}
           >
             <FaTimes size={14} />
-          </button>
+          </Button>
         </div>
       )}
       <div className={styles.actions}>
@@ -108,19 +116,18 @@ export const PostCreator = ({
             hidden
             onChange={handleFileChange}
           />
-          <button
-            type="button"
+          <Button
+            appearance="ghost"
             className={styles.attachmentItem}
             onClick={() => fileInputRef.current?.click()}
           >
             <FaCamera size={16} />
             {t("postCreator.photo")}
-          </button>
+          </Button>
         </div>
         <Button
           appearance="primary"
           onClick={publishPost}
-          disabled={isPublishing || (!content && !imagePreview)}
         >
           {t("postCreator.publish")}
         </Button>
