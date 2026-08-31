@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import { repostPost } from "@/app/api/post";
+import { repostPost } from "@/services/api/post";
 
 interface UsePostRepostProps {
   postId: string;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCities, getCountries } from "@/app/api/locations";
+import { getCities, getCountries } from "@/services/api/locations";
 
 export const useCountries = () => {
   const [countries, setCountries] = useState<string[]>([]);

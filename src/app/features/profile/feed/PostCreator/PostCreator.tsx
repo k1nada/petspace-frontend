@@ -4,7 +4,7 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { FaCamera, FaTimes } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
-import { createPost, uploadPostPhoto } from "@/app/api/post";
+import { createPost, uploadPostPhoto } from "@/services/api/post";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { useTextareaSubmit } from "@/app/hooks/useTextareaSubmit";
 import { toast } from "react-toastify";

@@ -1,8 +1,8 @@
 import { Header } from "@/app/components/Header/Header";
 import { ProfileLayout } from "@/app/features/profile/ProfileLayout/ProfileLayout";
-import { getUser } from "@/app/api/user";
+import { getUser } from "@/services/api/user";
 import { notFound } from "next/navigation";
-import { getPostwall } from "@/app/api/postwall";
+import { getPostwall } from "@/services/api/postwall";
 
 interface ProfilePageProps {
   params: Promise<{ username: string }>;

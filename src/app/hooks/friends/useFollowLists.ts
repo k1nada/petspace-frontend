@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { FollowUser } from "@/types";
-import { unfollowUser } from "@/app/api/follows";
+import { unfollowUser } from "@/services/api/follows";
 
 interface UseFollowListsParams {
   username: string;

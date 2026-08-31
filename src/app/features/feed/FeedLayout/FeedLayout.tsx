@@ -8,7 +8,7 @@ import { TipSkeleton } from "@/app/uikit/feedback/Tip/TipSkeleton";
 import { Postwall } from "@/app/features/profile/feed/Postwall/Postwall";
 import { SuggestedFriends } from "@/app/features/feed/SuggestedFriends/SuggestedFriends";
 import { useEffect, useState } from "react";
-import { getFeed } from "@/app/api/post";
+import { getFeed } from "@/services/api/post";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { Post } from "@/types";
 

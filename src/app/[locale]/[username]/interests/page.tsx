@@ -1,5 +1,5 @@
 import { Header } from "@/app/components/Header/Header";
-import { getUser } from "@/app/api/user";
+import { getUser } from "@/services/api/user";
 import { ProfileInterestsLayout } from "@/app/features/profile/info/ProfileInterestsLayout/ProfileInterestsLayout";
 
 interface ProfileInterestsPageProps {

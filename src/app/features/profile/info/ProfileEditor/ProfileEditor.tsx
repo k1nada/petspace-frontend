@@ -6,7 +6,7 @@ import { AvatarEdit } from "@/app/uikit/user/AvatarEdit/AvatarEdit";
 import { toast } from "react-toastify";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
-import { updateProfile } from "@/app/api/profile";
+import { updateProfile } from "@/services/api/profile";
 import { useBreeds } from "@/app/hooks/shared/useBreeds";
 import { useCities, useCountries } from "@/app/hooks/shared/useLocationOptions";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";

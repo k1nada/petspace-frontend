@@ -1,8 +1,8 @@
 import { Header } from "@/app/components/Header/Header";
 import { FamilyLayout } from "@/app/features/family/FamilyLayout/FamilyLayout";
-import { getUser } from "@/app/api/user";
-import { getBreeds } from "@/app/api/breeds";
-import { getFamilyMembers } from "@/app/api/family";
+import { getUser } from "@/services/api/user";
+import { getBreeds } from "@/services/api/breeds";
+import { getFamilyMembers } from "@/services/api/family";
 import { notFound } from "next/navigation";
 
 interface FamilyPageProps {

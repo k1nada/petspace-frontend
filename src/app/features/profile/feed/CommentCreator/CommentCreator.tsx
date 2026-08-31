@@ -2,7 +2,7 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import styles from "./CommentCreator.module.scss";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { createComment } from "@/app/api/comment";
+import { createComment } from "@/services/api/comment";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SubmitTextarea";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { toast } from "react-toastify";

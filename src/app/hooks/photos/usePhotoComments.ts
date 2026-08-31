@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import api from "@/config/axios";
-import { getPhotoComments, updateComment } from "@/app/api/comment";
+import { getPhotoComments, updateComment } from "@/services/api/comment";
 import { Comment as CommentType, Photo } from "@/types";
 
 interface UsePhotoCommentsProps {

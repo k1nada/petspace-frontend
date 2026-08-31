@@ -1,6 +1,6 @@
-import { getFollowers, getFollowing } from "@/app/api/follows";
-import { getFriends } from "@/app/api/friends";
-import { getUser } from "@/app/api/user";
+import { getFollowers, getFollowing } from "@/services/api/follows";
+import { getFriends } from "@/services/api/friends";
+import { getUser } from "@/services/api/user";
 import { Header } from "@/app/components/Header/Header";
 import { FriendsLayout } from "@/app/features/friends/FriendsLayout/FriendsLayout";
 

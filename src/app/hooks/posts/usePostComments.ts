@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   deleteComment as deleteCommentRequest,
   updateComment as updateCommentRequest,
-} from "@/app/api/comment";
+} from "@/services/api/comment";
 import { Comment as CommentType } from "@/types";
 
 interface UsePostCommentsProps {

@@ -3,7 +3,7 @@ import {
   getNotifications,
   markAllNotificationsRead,
   markNotificationRead,
-} from "@/app/api/notifications";
+} from "@/services/api/notifications";
 import { AppNotification, User } from "@/types";
 import socket from "@/services/socket";
 

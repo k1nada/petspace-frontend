@@ -1,4 +1,4 @@
-import { getUser } from "@/app/api/user";
+import { getUser } from "@/services/api/user";
 import { Header } from "@/app/components/Header/Header";
 import { MessagesLayout } from "@/app/features/messages/MessagesLayout/MessagesLayout";
 import { ChatContact } from "@/types";

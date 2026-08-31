@@ -3,7 +3,7 @@
 import styles from "./FollowList.module.scss";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import { unfollowUser, removeFollower } from "@/app/api/follows";
+import { unfollowUser, removeFollower } from "@/services/api/follows";
 import { FollowCard } from "../FollowCard/FollowCard";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { FollowUser, FollowListType } from "@/types";
