@@ -1,4 +1,4 @@
-.banner {
+﻿.banner {
   background: var(--bg-card);
   border-radius: var(--radius-m);
   box-shadow: var(--shadow-card);
@@ -51,7 +51,7 @@
 .city {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: var(--gap-2xs);
 }
 
 .icon {

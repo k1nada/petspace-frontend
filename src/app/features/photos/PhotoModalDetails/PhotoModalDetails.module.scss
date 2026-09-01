@@ -1,4 +1,4 @@
-.details {
+﻿.details {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -20,7 +20,7 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--gap-2xs);
 }
 
 .name {

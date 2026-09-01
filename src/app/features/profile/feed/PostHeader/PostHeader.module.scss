@@ -1,4 +1,4 @@
-.wrapper {
+﻿.wrapper {
   display: flex;
   gap: var(--gap-s);
   align-items: center;
@@ -7,7 +7,7 @@
 .info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--gap-2xs);
 }
 
 .name {

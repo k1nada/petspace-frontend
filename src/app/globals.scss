@@ -2,9 +2,7 @@
   --bg-page: #f2f2f2;
   --bg-input: #f5f4f3;
   --bg-card: #ffffff;
-  --bg-error: #ffdddd;
   --bg-primary: #f2e4d2;
-  --bg-primary-hover: #e6d0b4;
 
   --bg-nested: #f0efec;
   --bg-nested-hover: #e6e5e4;
@@ -15,19 +13,12 @@
 
   --bg-secondary: var(--bg-nested);
   --bg-hover: var(--button-secondary-hover);
-  --bg-tag: var(--bg-primary);
-  --text-tag: var(--primary);
 
   --primary: #b07d58;
   --primary-hover: #9c6a48;
-  --primary-light: #cca384;
 
-  --border-primary: #b07d58;
-  --border-primary-hover: #9c6a48;
   --border-secondary: #c4beb8;
   --border-secondary-hover: #a89f97;
-  --border-tertiary: #e2dfdc;
-  --border-tertiary-hover: #d2ceca;
 
   --border-divider: #e2dfdc;
   --border-error: #d1503f;
@@ -40,7 +31,6 @@
   --text-tertiary: #8a8680;
   --text-placeholder: #787470;
   --text-error: #c62828;
-  --text-tip: #8a4a1a;
   --text-liked: #c62828;
 
   --link: #b07d58;
@@ -59,15 +49,14 @@
 
   --z-dropdown: 10;
   --z-modal: 100;
-  --z-tooltip: 200;
   --z-photo-overlay: 5;
 
   --radius-s: 8px;
   --radius-m: 12px;
   --radius-l: 16px;
-  --radius-xl: 20px;
   --radius-full: 50%;
 
+  --gap-2xs: 2px;
   --gap-xs: 4px;
   --gap-s: 8px;
   --gap-m: 12px;
@@ -81,9 +70,6 @@
   --padding-l: 20px;
   --padding-xl: 24px;
   --padding-xxl: 32px;
-  --padding-3xl: 48px;
-  --padding-4xl: 64px;
-  --padding-5xl: 80px;
 
   --font-xs: 10px;
   --font-s: 12px;
@@ -93,8 +79,6 @@
   --font-xl: 20px;
   --font-2xl: 24px;
   --font-3xl: 28px;
-  --font-4xl: 32px;
-  --font-5xl: 36px;
 
   --font-sans:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
@@ -107,9 +91,7 @@
   --bg-card: #242424;
   --bg-page: #1a1a1c;
   --bg-input: #2e2e30;
-  --bg-error: #3a1818;
   --bg-primary: #40301f;
-  --bg-primary-hover: #4d3a26;
 
   --bg-nested: #2c2c2e;
   --bg-nested-hover: #363638;
@@ -119,16 +101,9 @@
 
   --primary: #b07d58;
   --primary-hover: #c49070;
-  --primary-light: #d4a688;
 
-  --text-tag: var(--primary-light);
-
-  --border-primary: #b07d58;
-  --border-primary-hover: #c49070;
   --border-secondary: #484850;
   --border-secondary-hover: #5a5a62;
-  --border-tertiary: #333336;
-  --border-tertiary-hover: #444448;
 
   --border-divider: #333336;
   --border-card: #333336;
@@ -139,7 +114,6 @@
   --text-tertiary: #909090;
   --text-placeholder: #787878;
   --text-error: #ff6b6b;
-  --text-tip: #d4905a;
   --text-liked: #ff6b6b;
 
   --link: #b07d58;

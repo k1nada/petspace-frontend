@@ -1,7 +1,7 @@
-.title {
+﻿.title {
   margin: 0;
   color: var(--text-primary);
-  font-size: var(--font-xl);
+  font-size: var(--font-l);
 }
 
 .container {
@@ -50,7 +50,7 @@
 .interestItem {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--gap-2xs);
 }
 
 .interestLabel {

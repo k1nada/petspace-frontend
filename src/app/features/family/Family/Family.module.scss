@@ -42,12 +42,8 @@
 }
 
 .breed {
-  padding: 2px var(--gap-s);
-  border-radius: var(--radius-full);
-  background: var(--bg-tag);
-  color: var(--text-tag);
-  font-size: var(--font-xs);
-  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: var(--font-s);
 }
 
 .divider {

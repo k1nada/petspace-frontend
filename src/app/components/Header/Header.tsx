@@ -9,7 +9,6 @@ import { Link } from "../../uikit/navigation/Link/Link";
 import { Button } from "../../uikit/form/Button/Button";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { ROUTES } from "@/routes/routes";
-import { FaHouseChimney } from "react-icons/fa6";
 import { FaPowerOff } from "react-icons/fa";
 import api from "@/config/axios";
 import socket from "@/services/socket";
@@ -22,6 +21,7 @@ import { HeaderSkeleton } from "./HeaderSkeleton";
 import { UserSearchDropdown } from "@/app/uikit/navigation/UserSearchDropdown/UserSearchDropdown";
 import { NotificationsDropdown } from "@/app/uikit/overlays/NotificationsDropdown/NotificationsDropdown";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
+import { BsHouseDoorFill } from "react-icons/bs";
 
 export const Header = () => {
   const t = useTranslations();
@@ -66,7 +66,7 @@ export const Header = () => {
                 href={ROUTES.profile(currentUser.username)}
                 className={styles.icon}
               >
-                <FaHouseChimney size={20} />
+                <BsHouseDoorFill size={20} />
               </Link>
             )}
             {currentUser && (

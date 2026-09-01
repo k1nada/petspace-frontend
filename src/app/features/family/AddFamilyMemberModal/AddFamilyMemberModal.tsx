@@ -10,6 +10,7 @@ import { Input } from "@/app/uikit/form/Input/Input";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
+import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadModal/AvatarUploadModal";
 import { useSearch } from "@/app/hooks/shared/useSearch";
 import { FamilyRelation, NewFamilyMember, User } from "@/types";
 
@@ -79,6 +80,14 @@ export const AddFamilyMemberModal = ({
     toast.info(t("familyTree.generatePhotoComingSoon"));
   };
 
+  const handleFilePicked = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      setForm({ ...form, avatar: reader.result as string });
+    };
+    reader.readAsDataURL(file);
+  };
+
   const title = t(
     relation === "parent"
       ? "familyTree.addModalTitleParent"
@@ -88,14 +97,15 @@ export const AddFamilyMemberModal = ({
   const showNoResults = query.trim() && results.length === 0;
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose}>
+    <Modal isOpen={isOpen} onClose={handleClose} className={styles.modal}>
       <h2 className={styles.title}>{title}</h2>
+      <p className={styles.description}>{t("familyTree.addModalDescription")}</p>
 
       <div className={styles.tabs}>
         {TABS.map((tab) => (
           <Button
             key={tab}
-            appearance={mode === tab ? "secondary" : "tertiary"}
+            appearance={mode === tab ? "primary" : "tertiary"}
             onClick={() => setMode(tab)}
           >
             {t(`familyTree.${tab}Tab`)}
@@ -163,15 +173,17 @@ export const AddFamilyMemberModal = ({
               {t("familyTree.avatarLabel")}
             </label>
             <div className={styles.avatarField}>
-              <Input
-                appearance="wide"
-                value={form.avatar}
-                onChange={(e) => setForm({ ...form, avatar: e.target.value })}
-                placeholder={t("familyTree.avatarPlaceholder")}
+              <AvatarUploadModal
+                size={72}
+                profileAvatar={form.avatar || undefined}
+                onChange={handleFilePicked}
               />
-              <Button appearance="tertiary" onClick={generatePhoto}>
-                {t("familyTree.generatePhoto")}
-              </Button>
+              <div className={styles.avatarActions}>
+                <p className={styles.hint}>{t("avatarEdit.choosePhoto")}</p>
+                <Button appearance="tertiary" onClick={generatePhoto}>
+                  {t("familyTree.generatePhoto")}
+                </Button>
+              </div>
             </div>
           </div>
 

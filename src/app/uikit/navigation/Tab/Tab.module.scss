@@ -1,8 +1,8 @@
-.tab,
+﻿.tab,
 .tabActive {
   display: flex;
   align-items: baseline;
-  gap: 2px;
+  gap: var(--gap-2xs);
   padding-bottom: var(--gap-xs);
 
   &:hover {

@@ -300,6 +300,7 @@
     "modalDescription": "Are you sure you want to remove {name} from the family tree?",
     "addModalTitleParent": "Add a parent",
     "addModalTitleChild": "Add a puppy",
+    "addModalDescription": "Link an existing profile or add the details yourself",
     "searchTab": "Search",
     "manualTab": "Add manually",
     "searchPlaceholder": "Search by name or username",
@@ -307,8 +308,7 @@
     "nameLabel": "Name",
     "namePlaceholder": "Enter name",
     "breedLabel": "Breed",
-    "avatarLabel": "Photo URL",
-    "avatarPlaceholder": "https://...",
+    "avatarLabel": "Photo",
     "generatePhoto": "Generate photo",
     "generatePhotoComingSoon": "AI photo generation is coming soon!",
     "add": "Add"
