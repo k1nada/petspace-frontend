@@ -3,7 +3,10 @@
 import styles from "./FriendRequest.module.scss";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import { acceptFriendRequest, rejectFriendRequest } from "@/services/api/friends";
+import {
+  acceptFriendRequest,
+  rejectFriendRequest,
+} from "@/services/api/friends";
 import { FriendRequestCard } from "../FriendRequestCard/FriendRequestCard";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";

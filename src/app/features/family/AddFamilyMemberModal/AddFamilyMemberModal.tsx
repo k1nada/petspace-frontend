@@ -99,7 +99,9 @@ export const AddFamilyMemberModal = ({
   return (
     <Modal isOpen={isOpen} onClose={handleClose} className={styles.modal}>
       <h2 className={styles.title}>{title}</h2>
-      <p className={styles.description}>{t("familyTree.addModalDescription")}</p>
+      <p className={styles.description}>
+        {t("familyTree.addModalDescription")}
+      </p>
 
       <div className={styles.tabs}>
         {TABS.map((tab) => (

@@ -125,10 +125,7 @@ export const PostCreator = ({
             {t("postCreator.photo")}
           </Button>
         </div>
-        <Button
-          appearance="primary"
-          onClick={publishPost}
-        >
+        <Button appearance="primary" onClick={publishPost}>
           {t("postCreator.publish")}
         </Button>
       </div>

@@ -15,13 +15,15 @@ export const Avatar = ({ src, size = 45, isOnline }: AvatarProps) => {
   const t = useTranslations();
 
   return (
-    <div 
-      className={styles.avatar} 
-      style={{ 
-        width: size,
-        height: size,
-        '--avatar-size': `${size}px`
-      } as React.CSSProperties}
+    <div
+      className={styles.avatar}
+      style={
+        {
+          width: size,
+          height: size,
+          "--avatar-size": `${size}px`,
+        } as React.CSSProperties
+      }
     >
       <Image
         src={src ?? defaultAvatar}

@@ -13,7 +13,9 @@ export const Footer = () => {
 
   return (
     <footer className={styles.footer}>
-      <span className={styles.copyright}>{t("footer.copyright", { year })}</span>
+      <span className={styles.copyright}>
+        {t("footer.copyright", { year })}
+      </span>
       <Link
         href={PRIVACY_POLICY_URL}
         target="_blank"

@@ -14,7 +14,6 @@ export const useFriendRequestsStore = create<FriendRequestsStore>((set) => ({
   requests: [],
 
   setRequestCount: (count) => set({ requestCount: count }),
-  setRequests: (requests) =>
-    set({ requests, requestCount: requests.length }),
+  setRequests: (requests) => set({ requests, requestCount: requests.length }),
   reset: () => set({ requestCount: 0, requests: [] }),
 }));

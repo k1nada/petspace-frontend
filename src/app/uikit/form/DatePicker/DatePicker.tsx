@@ -59,7 +59,7 @@ export const DatePicker = ({
             toYear={new Date().getFullYear()}
             disabled={{ after: new Date() }}
             locale={isPolish ? pl : enUS}
-            components={{Dropdown: CalendarDropdown}}
+            components={{ Dropdown: CalendarDropdown }}
           />
         </div>
       )}

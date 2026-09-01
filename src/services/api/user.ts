@@ -1,16 +1,21 @@
 import axios from "axios";
+import { unstable_cache } from "next/cache";
 import { API_URL } from "@/config/env";
 import api from "@/config/axios";
 import { Photo } from "@/types";
 
-export const getUser = async (username: string) => {
-  try {
-    const { data } = await axios.get(`${API_URL}/user/${username}`);
-    return data;
-  } catch {
-    return null;
-  }
-};
+export const getUser = unstable_cache(
+  async (username: string) => {
+    try {
+      const { data } = await axios.get(`${API_URL}/user/${username}`);
+      return data;
+    } catch {
+      return null;
+    }
+  },
+  ["get-user"],
+  { revalidate: 30 },
+);
 
 export const getUserPhotos = async (
   username: string,

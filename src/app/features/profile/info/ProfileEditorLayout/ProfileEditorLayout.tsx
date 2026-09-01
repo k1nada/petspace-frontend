@@ -13,7 +13,7 @@ export const ProfileEditorLayout = ({ user }: ProfileEditorLayoutProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.sidebar}>
-        <Sidebar/>
+        <Sidebar />
       </div>
       <div className={styles.content}>
         <ProfileEditor user={user} />

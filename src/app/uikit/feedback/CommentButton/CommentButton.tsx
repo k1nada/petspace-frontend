@@ -17,7 +17,11 @@ export const CommentButton = ({
   const showCount = count > 0;
 
   return (
-    <Button appearance="minimal" className={cn(className, styles.comment)} onClick={onClick}>
+    <Button
+      appearance="minimal"
+      className={cn(className, styles.comment)}
+      onClick={onClick}
+    >
       <FaComment size={16} />
       {showCount && <span className={styles.count}>{count}</span>}
     </Button>

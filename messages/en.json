@@ -90,15 +90,15 @@
   },
   "dailyTip": {
     "title": "Tip of the day",
-  "tips": [
-    "I still need my 30 minutes outside today. Grab the leash.",
-    "My water bowl's empty again. Fill it up before I start complaining.",
-    "Feed me at the same time every day, my stomach keeps better track than you do.",
-    "If I get bored I chew things. Buy me a puzzle toy and save your shoes.",
-    "Brush me for a bit, I love it more than I let on.",
-    "Take me somewhere with other dogs, I've been cooped up too long.",
-    "I have a vet appointment coming up. Bring treats and I'll forgive you faster."
-  ]
+    "tips": [
+      "I still need my 30 minutes outside today. Grab the leash.",
+      "My water bowl's empty again. Fill it up before I start complaining.",
+      "Feed me at the same time every day, my stomach keeps better track than you do.",
+      "If I get bored I chew things. Buy me a puzzle toy and save your shoes.",
+      "Brush me for a bit, I love it more than I let on.",
+      "Take me somewhere with other dogs, I've been cooped up too long.",
+      "I have a vet appointment coming up. Bring treats and I'll forgive you faster."
+    ]
   },
   "toasts": {
     "saved": "Changes saved successfully",

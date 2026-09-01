@@ -2,7 +2,11 @@ import styles from "./CalendarDropdown.module.scss";
 import type { DropdownProps } from "react-day-picker";
 import { Select } from "../Select/Select";
 
-export const CalendarDropdown = ({ options, value, onChange }: DropdownProps) => {
+export const CalendarDropdown = ({
+  options,
+  value,
+  onChange,
+}: DropdownProps) => {
   const maxLabelLength = Math.max(
     1,
     ...(options ?? []).map((o) => o.label.length),

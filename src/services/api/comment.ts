@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import api from "@/config/axios";
 
 export const createComment = async (
@@ -28,14 +29,18 @@ export const getComments = async (postId: string) => {
   }
 };
 
-export const getPhotoComments = async (photoId: string) => {
-  try {
-    const { data } = await api.get(`/comments/photo/${photoId}`);
-    return data;
-  } catch {
-    return null;
-  }
-};
+export const getPhotoComments = unstable_cache(
+  async (photoId: string) => {
+    try {
+      const { data } = await api.get(`/comments/photo/${photoId}`);
+      return data;
+    } catch {
+      return null;
+    }
+  },
+  ["get-photo-comments"],
+  { revalidate: 30 },
+);
 
 export const deleteComment = async (commentId: string): Promise<void> => {
   await api.delete(`/comments/${commentId}`);

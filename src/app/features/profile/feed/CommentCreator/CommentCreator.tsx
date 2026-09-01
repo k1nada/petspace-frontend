@@ -28,7 +28,12 @@ export const CommentCreator = ({
 
   const handleSubmit = async () => {
     if (!content) return;
-    const comment = await createComment(content, postId, photoId, replyCommentId);
+    const comment = await createComment(
+      content,
+      postId,
+      photoId,
+      replyCommentId,
+    );
     if (!comment) {
       toast.error(t("toasts.error"));
       return;
