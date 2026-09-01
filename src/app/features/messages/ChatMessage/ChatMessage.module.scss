@@ -1,4 +1,4 @@
-.message {
+﻿.message {
   display: flex;
   margin-bottom: var(--gap-m);
 }
@@ -10,7 +10,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--gap-2xs);
 }
 
 .message.own .content {

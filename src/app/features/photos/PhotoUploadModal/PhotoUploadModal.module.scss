@@ -1,5 +1,6 @@
 .title {
   margin: 0 0 var(--gap-s) 0;
+  font-size: var(--font-l);
 }
 
 .dropzone {
@@ -56,5 +57,5 @@
   display: flex;
   gap: var(--gap-s);
   margin: var(--gap-s) 0 0 0;
-  justify-content: flex-end;
+  justify-content: center;
 }

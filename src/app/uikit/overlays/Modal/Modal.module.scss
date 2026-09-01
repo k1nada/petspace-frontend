@@ -5,6 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  padding: var(--padding-l) 0;
   z-index: var(--z-modal);
   cursor: default;
 }
@@ -24,9 +26,8 @@
   position: relative;
   background: var(--bg-card);
   width: min(500px, 90vw);
-  max-height: 95vh;
+  margin: auto;
   padding: var(--padding-l);
   border-radius: var(--radius-s);
-  overflow-y: auto;
   color: var(--text-primary);
 }
