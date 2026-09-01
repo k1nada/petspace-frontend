@@ -33,7 +33,10 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
       setLocalPhotos((prev) => [...prev, ...uploaded]);
       setIsUploadOpen(false);
     } catch (error) {
-      if (isAxiosError(error) && error.response?.data?.type === "PHOTO_LIMIT_REACHED") {
+      if (
+        isAxiosError(error) &&
+        error.response?.data?.type === "PHOTO_LIMIT_REACHED"
+      ) {
         toast.error(t("errors.PHOTO_LIMIT_REACHED"));
       } else {
         toast.error(t("toasts.error"));

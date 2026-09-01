@@ -1,14 +1,23 @@
 import axios from "axios";
+import { unstable_cache } from "next/cache";
 import api from "@/config/axios";
 import { API_URL } from "@/config/env";
 import { Friend, FriendRequest, User } from "@/types";
 
-export const getFriends = async (username: string): Promise<Friend[]> => {
-  const { data } = await axios.get<Friend[]>(`${API_URL}/friends/${username}`);
-  return data;
-};
+export const getFriends = unstable_cache(
+  async (username: string): Promise<Friend[]> => {
+    const { data } = await axios.get<Friend[]>(
+      `${API_URL}/friends/${username}`,
+    );
+    return data;
+  },
+  ["get-friends"],
+  { revalidate: 30 },
+);
 
-export const getSuggestedFriends = async (username: string): Promise<User[]> => {
+export const getSuggestedFriends = async (
+  username: string,
+): Promise<User[]> => {
   const { data } = await api.get<User[]>(`/friends/${username}/suggestions`);
   return data;
 };

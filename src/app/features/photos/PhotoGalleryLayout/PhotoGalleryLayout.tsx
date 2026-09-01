@@ -19,10 +19,15 @@ export const PhotoGalleryLayout = ({
   return (
     <div className={styles.layout}>
       <div className={styles.sidebar}>
-        <Sidebar/>
+        <Sidebar />
       </div>
       <div className={styles.content}>
-        <PhotoGallery photos={photos} avatar={avatar} name={name} username={username} />
+        <PhotoGallery
+          photos={photos}
+          avatar={avatar}
+          name={name}
+          username={username}
+        />
       </div>
     </div>
   );

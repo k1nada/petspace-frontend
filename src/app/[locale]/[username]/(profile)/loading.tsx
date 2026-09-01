@@ -1,10 +1,10 @@
+import styles from "@/app/features/profile/ProfileLayout/ProfileLayout.module.scss";
 import { HeaderSkeleton } from "@/app/components/Header/HeaderSkeleton";
 import { SidebarSkeleton } from "@/app/components/Sidebar/SidebarSkeleton";
 import { ProfileBannerSkeleton } from "@/app/features/profile/info/ProfileBanner/ProfileBannerSkeleton";
 import { PostwallSkeleton } from "@/app/features/profile/feed/Postwall/PostwallSkeleton";
 import { ProfilePhotosSkeleton } from "@/app/features/profile/photos/ProfilePhotos/ProfilePhotosSkeleton";
 import { ProfileFriendsSkeleton } from "@/app/features/profile/friends/ProfileFriends/ProfileFriendsSkeleton";
-import styles from "@/app/features/profile/ProfileLayout/ProfileLayout.module.scss";
 
 const ProfileLoading = () => (
   <>

@@ -1,15 +1,24 @@
+import { unstable_cache } from "next/cache";
 import api from "@/config/axios";
 import { FollowUser } from "@/types";
 
-export const getFollowers = async (username: string): Promise<FollowUser[]> => {
-  const { data } = await api.get<FollowUser[]>(`/followers/${username}`);
-  return data;
-};
+export const getFollowers = unstable_cache(
+  async (username: string): Promise<FollowUser[]> => {
+    const { data } = await api.get<FollowUser[]>(`/followers/${username}`);
+    return data;
+  },
+  ["get-followers"],
+  { revalidate: 30 },
+);
 
-export const getFollowing = async (username: string): Promise<FollowUser[]> => {
-  const { data } = await api.get<FollowUser[]>(`/following/${username}`);
-  return data;
-};
+export const getFollowing = unstable_cache(
+  async (username: string): Promise<FollowUser[]> => {
+    const { data } = await api.get<FollowUser[]>(`/following/${username}`);
+    return data;
+  },
+  ["get-following"],
+  { revalidate: 30 },
+);
 
 export const followUser = async (
   username: string,

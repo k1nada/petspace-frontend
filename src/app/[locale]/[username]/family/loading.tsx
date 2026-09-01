@@ -1,8 +1,8 @@
+import styles from "@/app/features/family/FamilyLayout/FamilyLayout.module.scss";
 import { HeaderSkeleton } from "@/app/components/Header/HeaderSkeleton";
 import { SidebarSkeleton } from "@/app/components/Sidebar/SidebarSkeleton";
 import { FamilySkeleton } from "@/app/features/family/Family/FamilySkeleton";
 import { TipSkeleton } from "@/app/uikit/feedback/Tip/TipSkeleton";
-import styles from "@/app/features/family/FamilyLayout/FamilyLayout.module.scss";
 
 const FamilyLoading = () => (
   <>

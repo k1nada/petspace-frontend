@@ -1,9 +1,9 @@
+import styles from "@/app/features/friends/FriendsLayout/FriendsLayout.module.scss";
 import { HeaderSkeleton } from "@/app/components/Header/HeaderSkeleton";
 import { SidebarSkeleton } from "@/app/components/Sidebar/SidebarSkeleton";
 import { FriendsSkeleton } from "@/app/features/friends/Friends/FriendsSkeleton";
 import { SuggestedFriendsSkeleton } from "@/app/features/feed/SuggestedFriends/SuggestedFriendsSkeleton";
 import { TipSkeleton } from "@/app/uikit/feedback/Tip/TipSkeleton";
-import styles from "@/app/features/friends/FriendsLayout/FriendsLayout.module.scss";
 
 const FriendsLoading = () => (
   <>

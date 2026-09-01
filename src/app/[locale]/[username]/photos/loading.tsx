@@ -1,7 +1,7 @@
+import styles from "@/app/features/photos/PhotoGalleryLayout/PhotoGalleryLayout.module.scss";
 import { HeaderSkeleton } from "@/app/components/Header/HeaderSkeleton";
 import { SidebarSkeleton } from "@/app/components/Sidebar/SidebarSkeleton";
 import { PhotoGallerySkeleton } from "@/app/features/photos/PhotoGallery/PhotoGallerySkeleton";
-import styles from "@/app/features/photos/PhotoGalleryLayout/PhotoGalleryLayout.module.scss";
 
 const PhotosLoading = () => (
   <>

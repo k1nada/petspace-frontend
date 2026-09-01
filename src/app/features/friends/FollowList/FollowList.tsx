@@ -44,10 +44,14 @@ export const FollowList = ({
     return (
       <EmptyState
         title={t(
-          isFollowers ? "friends.emptyFollowersTitle" : "friends.emptyFollowingTitle",
+          isFollowers
+            ? "friends.emptyFollowersTitle"
+            : "friends.emptyFollowingTitle",
         )}
         text={t(
-          isFollowers ? "friends.emptyFollowersText" : "friends.emptyFollowingText",
+          isFollowers
+            ? "friends.emptyFollowersText"
+            : "friends.emptyFollowingText",
         )}
       />
     );

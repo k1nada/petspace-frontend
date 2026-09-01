@@ -1,4 +1,3 @@
-
 import { Photo } from "@/types";
 import { useState } from "react";
 

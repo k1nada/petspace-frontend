@@ -16,7 +16,10 @@ import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { BannerInfo } from "@/types";
 import { ProfileBannerSkeleton } from "./ProfileBannerSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
-import { addFriend as addFriendAPI, deleteFriend } from "@/services/api/friends";
+import {
+  addFriend as addFriendAPI,
+  deleteFriend,
+} from "@/services/api/friends";
 import { getRelationshipStatus } from "@/utils/friends";
 import { toast } from "react-toastify";
 

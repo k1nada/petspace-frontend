@@ -39,7 +39,10 @@ export const AvatarChangeModal = ({
       onClose();
       window.location.reload();
     } catch (error) {
-      if (isAxiosError(error) && error.response?.data?.type === "PHOTO_LIMIT_REACHED") {
+      if (
+        isAxiosError(error) &&
+        error.response?.data?.type === "PHOTO_LIMIT_REACHED"
+      ) {
         toast.error(t("errors.PHOTO_LIMIT_REACHED"));
       } else {
         toast.error(t("toasts.error"));
@@ -53,7 +56,10 @@ export const AvatarChangeModal = ({
       <p className={styles.description}>{t("avatarEdit.modalDescription")}</p>
       <p className={styles.hint}>{t("common.imageFormats")}</p>
       <div className={styles.upload}>
-        <AvatarUploadModal onChange={setFile} profileAvatar={currentAvatarSrc} />
+        <AvatarUploadModal
+          onChange={setFile}
+          profileAvatar={currentAvatarSrc}
+        />
       </div>
       <p className={styles.hint}>{t("avatarEdit.choosePhoto")}</p>
       <div className={styles.actions}>

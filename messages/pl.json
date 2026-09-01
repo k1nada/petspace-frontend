@@ -89,16 +89,16 @@
     "search": "Szukaj"
   },
   "dailyTip": {
-  "title": "Porada dnia",
-  "tips": [
-    "Wciąż potrzebuję dzisiaj moich 30 minut na dworze. Bierz smycz.",
-    "Miska znowu pusta. Napełnij ją, zanim zacznę narzekać.",
-    "Karm mnie o tej samej porze każdego dnia, mój brzuch pilnuje tego lepiej niż ty.",
-    "Jak się nudzę, to gryzę. Kup mi zabawkę logiczną i ratuj swoje buty.",
-    "Wyczesz mnie chwilę, lubię to bardziej, niż okazuję.",
-    "Zabierz mnie gdzieś, gdzie są inne psy, za długo siedzę w czterech ścianach.",
-    "Mam wkrótce wizytę u weterynarza. Przynieś smakołyki, szybciej ci wybaczę."
-  ]
+    "title": "Porada dnia",
+    "tips": [
+      "Wciąż potrzebuję dzisiaj moich 30 minut na dworze. Bierz smycz.",
+      "Miska znowu pusta. Napełnij ją, zanim zacznę narzekać.",
+      "Karm mnie o tej samej porze każdego dnia, mój brzuch pilnuje tego lepiej niż ty.",
+      "Jak się nudzę, to gryzę. Kup mi zabawkę logiczną i ratuj swoje buty.",
+      "Wyczesz mnie chwilę, lubię to bardziej, niż okazuję.",
+      "Zabierz mnie gdzieś, gdzie są inne psy, za długo siedzę w czterech ścianach.",
+      "Mam wkrótce wizytę u weterynarza. Przynieś smakołyki, szybciej ci wybaczę."
+    ]
   },
   "toasts": {
     "saved": "Zmiany zostały zapisane pomyślnie",

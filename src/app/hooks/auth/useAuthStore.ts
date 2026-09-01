@@ -21,24 +21,17 @@ export const useAuthStore = create<AuthStore>()(
         currentUser: null,
         isAuthChecked: false,
 
-        fetchCurrentUser: async function () {
+        fetchCurrentUser: async () => {
           let user: User | null = null;
-          let gotUser = false;
-
           try {
             const response = await api.get<User>("/me");
             user = response.data;
-            gotUser = true;
           } catch {
-            gotUser = false;
-          }
-
-          if (gotUser === false || user === null) {
-            set({ currentUser: null, isAuthChecked: true });
-            return;
+            user = null;
           }
 
           set({ currentUser: user, isAuthChecked: true });
+          if (!user) return;
 
           let requests: FriendRequest[] = [];
           try {
@@ -55,17 +48,14 @@ export const useAuthStore = create<AuthStore>()(
             conversations = [];
           }
 
-          let totalUnread = 0;
-          for (let i = 0; i < conversations.length; i++) {
-            const conversation = conversations[i];
-            if (conversation.unreadCount) {
-              totalUnread = totalUnread + conversation.unreadCount;
-            }
-          }
+          const totalUnread = conversations.reduce(
+            (sum, conversation) => sum + (conversation.unreadCount ?? 0),
+            0,
+          );
           useMessagesStore.getState().setUnreadMessagesCount(totalUnread);
         },
 
-        signOut: function () {
+        signOut: () => {
           set({ currentUser: null });
           useFriendRequestsStore.getState().reset();
           useMessagesStore.getState().reset();
