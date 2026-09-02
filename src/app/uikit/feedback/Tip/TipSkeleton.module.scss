@@ -22,14 +22,14 @@
   height: 16px;
   width: 90px;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .line {
   height: 12px;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
@@ -37,6 +37,6 @@
   height: 12px;
   width: 60%;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }

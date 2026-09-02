@@ -33,7 +33,7 @@
   width: 20px;
   height: 20px;
   border-radius: var(--radius-full);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
   flex-shrink: 0;
 }
@@ -42,13 +42,13 @@
   height: 20px;
   width: 90%;
   border-radius: var(--radius-m);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
 .tip {
   height: 80px;
   border-radius: var(--radius-m);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }

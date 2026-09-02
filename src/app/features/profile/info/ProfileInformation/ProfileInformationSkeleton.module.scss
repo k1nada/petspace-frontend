@@ -19,9 +19,9 @@
 
 .link {
   height: 14px;
-  width: 60%;
-  margin: var(--padding-m) 0;
+  width: 50%;
+  margin: var(--padding-m);
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }

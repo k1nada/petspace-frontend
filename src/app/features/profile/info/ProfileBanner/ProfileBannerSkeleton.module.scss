@@ -22,7 +22,7 @@
   width: 140px;
   height: 140px;
   border-radius: var(--radius-full);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
   flex-shrink: 0;
 }
@@ -51,7 +51,7 @@
   height: 30px;
   width: 100px;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
@@ -59,7 +59,7 @@
   height: 20px;
   width: 90px;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
@@ -67,7 +67,7 @@
   height: 20px;
   width: 120px;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
@@ -75,7 +75,7 @@
   height: 16px;
   width: 65%;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
@@ -96,7 +96,7 @@
   height: 20px;
   width: 90px;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
@@ -110,7 +110,7 @@
   width: 48px;
   height: 40px;
   border-radius: var(--radius-m);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
@@ -118,6 +118,6 @@
   width: 130px;
   height: 40px;
   border-radius: var(--radius-m);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }

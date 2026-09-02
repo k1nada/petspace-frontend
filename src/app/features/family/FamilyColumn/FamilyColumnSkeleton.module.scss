@@ -13,7 +13,7 @@
   flex-direction: column;
   align-self: start;
   gap: var(--gap-m);
-  padding: 20px 0;
+  padding: var(--padding-l) 0;
 }
 
 .title {
@@ -21,7 +21,7 @@
   height: 18px;
   width: 80px;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
