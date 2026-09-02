@@ -19,6 +19,7 @@
 
 .chat {
   grid-area: chat;
+  min-width: 0;
   display: flex;
   background: var(--bg-card);
   border-radius: var(--radius-m);

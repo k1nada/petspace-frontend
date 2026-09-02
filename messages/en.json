@@ -33,7 +33,8 @@
     "email": "Email",
     "password": "Password",
     "createAccount": "Create Account",
-    "editProfile": "Edit profile"
+    "editProfile": "Edit profile",
+    "loading": "Loading..."
   },
   "fields": {
     "birthday": "Birthday:",
@@ -183,6 +184,7 @@
     "photo": "Photo",
     "removePhoto": "Remove photo",
     "publish": "Add post",
+    "publishing": "Posting...",
     "placeholder": "What's new, "
   },
   "post": {
@@ -349,5 +351,59 @@
   "footer": {
     "privacyPolicy": "Privacy Policy",
     "copyright": "© {year} Petspace"
+  },
+  "metadata": {
+    "home": {
+      "title": "Petspace — a social network for dogs",
+      "description": "Connect your dog with other dogs, share photos and posts, and build their family tree on Petspace."
+    },
+    "feed": {
+      "title": "Feed",
+      "description": "See the latest posts from your dog's friends on Petspace."
+    },
+    "signin": {
+      "title": "Sign in",
+      "description": "Sign in to your Petspace account."
+    },
+    "signup": {
+      "title": "Sign up",
+      "description": "Create a Petspace account for your dog."
+    },
+    "registrationSteps": {
+      "title": "Complete your profile",
+      "description": "Tell us more about your dog to finish setting up the profile."
+    },
+    "registrationStepsAvatar": {
+      "title": "Add a photo",
+      "description": "Add a profile photo for your dog."
+    },
+    "profile": {
+      "title": "{username}",
+      "description": "@{username}'s profile on Petspace."
+    },
+    "edit": {
+      "title": "Edit profile",
+      "description": "Edit your dog's profile on Petspace."
+    },
+    "family": {
+      "title": "Family tree",
+      "description": "See @{username}'s family tree on Petspace."
+    },
+    "friends": {
+      "title": "Friends",
+      "description": "See @{username}'s friends and followers on Petspace."
+    },
+    "interests": {
+      "title": "Edit interests",
+      "description": "Edit your dog's interests on Petspace."
+    },
+    "messages": {
+      "title": "Messages",
+      "description": "Chat with your dog's friends on Petspace."
+    },
+    "photos": {
+      "title": "Photos",
+      "description": "See @{username}'s photos on Petspace."
+    }
   }
 }

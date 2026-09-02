@@ -55,6 +55,7 @@ export const CommentCreator = ({
           onChange={setContent}
           onSubmit={handleSubmit}
           placeholder={t("commentCreator.placeholder")}
+          maxLength={1000}
         />
       </div>
     </div>

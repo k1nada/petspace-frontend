@@ -102,6 +102,7 @@ export const Comment = ({
               value={editContent}
               onChange={(e) => setEditContent(e.target.value)}
               autoFocus
+              maxLength={1000}
             />
             <div className={styles.editActions}>
               <Button

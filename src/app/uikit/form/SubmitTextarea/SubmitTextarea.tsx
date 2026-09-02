@@ -8,6 +8,7 @@ interface SubmitTextareaProps {
   onChange: (value: string) => void;
   onSubmit: () => void;
   placeholder?: string;
+  maxLength?: number;
 }
 
 export const SubmitTextarea = ({
@@ -15,6 +16,7 @@ export const SubmitTextarea = ({
   onChange,
   onSubmit,
   placeholder,
+  maxLength,
 }: SubmitTextareaProps) => {
   const { handleKeyDown } = useTextareaSubmit({ onSubmit });
 
@@ -26,6 +28,7 @@ export const SubmitTextarea = ({
         onKeyDown={handleKeyDown}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        maxLength={maxLength}
       />
       <FaAngleRight size={30} className={styles.arrow} onClick={onSubmit} />
     </div>

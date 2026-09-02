@@ -87,6 +87,7 @@ export const PostCreator = ({
             onKeyDown={handleKeyDown}
             onChange={(e) => setContent(e.target.value)}
             placeholder={t("postCreator.placeholder") + name + "?"}
+            maxLength={3000}
           />
         </div>
       </div>

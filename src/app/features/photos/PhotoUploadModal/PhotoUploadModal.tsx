@@ -2,6 +2,7 @@
 
 import { useDropzone } from "react-dropzone";
 import { useState } from "react";
+import Image from "next/image";
 import { MdPhotoCamera } from "react-icons/md";
 import styles from "./PhotoUploadModal.module.scss";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
@@ -63,12 +64,15 @@ export const PhotoUploadModal = ({
         {previews.length > 0 ? (
           <div className={styles.previews}>
             {previews.map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={t("common.preview")}
-                className={styles.preview}
-              />
+              <div key={i} className={styles.previewItem}>
+                <Image
+                  src={src}
+                  alt={t("common.preview")}
+                  fill
+                  unoptimized
+                  className={styles.preview}
+                />
+              </div>
             ))}
           </div>
         ) : (
