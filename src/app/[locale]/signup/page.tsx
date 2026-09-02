@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "./page.module.scss";
 import { SignUp } from "@/app/features/auth/SignUp/SignUp";
 import { Footer } from "@/app/components/Footer/Footer";

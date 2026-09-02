@@ -21,7 +21,7 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { isAxiosError } from "axios";
 import { toast } from "react-toastify";
 import { FormField } from "@/app/uikit/form/FormField/FormField";
-import api from "@/config/axios";
+import { signUp } from "@/services/api/auth";
 import { reconnectSocket } from "@/services/socket";
 import { SignUpData } from "@/types";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
@@ -53,9 +53,7 @@ export const SignUp = () => {
 
   const onSubmit = async (data: SignUpData) => {
     try {
-      const {
-        data: { token, user },
-      } = await api.post("/signup", data);
+      const { token, user } = await signUp(data);
 
       if (!user?.username) {
         toast.error(t("toasts.error"));

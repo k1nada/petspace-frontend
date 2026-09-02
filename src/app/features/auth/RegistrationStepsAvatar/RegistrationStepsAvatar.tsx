@@ -9,6 +9,7 @@ import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadMod
 import { useState } from "react";
 import { toast } from "react-toastify";
 import api from "@/config/axios";
+import { updateRegistrationSteps } from "@/services/api/auth";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
 export const RegistrationStepsAvatar = () => {
@@ -23,7 +24,7 @@ export const RegistrationStepsAvatar = () => {
 
   const finishRegistration = async () => {
     try {
-      await api.patch("/registration-steps", { onboardingCompleted: true });
+      await updateRegistrationSteps({ onboardingCompleted: true });
     } catch {}
     navigateToProfile();
   };
