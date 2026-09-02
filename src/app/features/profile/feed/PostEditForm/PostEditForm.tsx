@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";

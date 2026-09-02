@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import cn from "classnames";
 import { useTranslations } from "next-intl";

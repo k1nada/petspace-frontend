@@ -2,7 +2,7 @@ import { ROUTES } from "@/routes/routes";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { User as UserType } from "@/types/index";
-import api from "@/config/axios";
+import { searchUsers } from "@/services/api/user";
 
 export const useSearch = () => {
   const router = useRouter();
@@ -19,9 +19,7 @@ export const useSearch = () => {
       return;
     }
 
-    const { data } = await api.get(
-      `/users/search?query=${encodeURIComponent(value)}`,
-    );
+    const data = await searchUsers(value);
 
     if (latestQuery.current === value) {
       setResults(data);

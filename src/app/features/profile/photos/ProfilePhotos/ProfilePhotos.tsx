@@ -1,3 +1,5 @@
+"use client";
+
 import { ROUTES } from "@/routes/routes";
 import styles from "./ProfilePhotos.module.scss";
 import Image from "next/image";

@@ -1,3 +1,5 @@
+"use client";
+
 import { Input } from "../Input/Input";
 import styles from "./Combobox.module.scss";
 import { useState } from "react";

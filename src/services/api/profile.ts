@@ -15,3 +15,19 @@ export const updateProfile = (username: string, data: UpdateProfileData) => {
     ...data,
   });
 };
+
+interface UpdateInterestsData {
+  favoriteToys: string;
+  favoriteTreats: string;
+  favoriteActivities: string;
+  crimes: string;
+  guiltyHabits: string;
+  humans: string;
+}
+
+export const updateInterests = async (
+  username: string,
+  interests: UpdateInterestsData,
+): Promise<void> => {
+  await api.put(`/user/${username}`, { interests });
+};

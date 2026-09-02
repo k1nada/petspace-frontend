@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./PhotoModal.module.scss";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { Photo, RepostState } from "@/types";

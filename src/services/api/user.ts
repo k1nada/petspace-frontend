@@ -2,7 +2,7 @@ import axios from "axios";
 import { unstable_cache } from "next/cache";
 import { API_URL } from "@/config/env";
 import api from "@/config/axios";
-import { Photo } from "@/types";
+import { Photo, User } from "@/types";
 
 export const getUser = unstable_cache(
   async (username: string) => {
@@ -26,4 +26,9 @@ export const getUserPhotos = async (
   } catch {
     return null;
   }
+};
+
+export const searchUsers = async (query: string): Promise<User[]> => {
+  const { data } = await api.get(`/users/search?query=${encodeURIComponent(query)}`);
+  return data;
 };

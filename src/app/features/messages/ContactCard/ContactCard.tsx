@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/app/uikit/form/Button/Button";
 import styles from "./ContactCard.module.scss";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
@@ -32,7 +34,7 @@ export const ContactCard = ({ contact, onClick }: ContactCardProps) => {
             {contact.lastMessage?.createdAt &&
               formatTime(contact.lastMessage.createdAt, locale)}
           </time>
-          {contact.unreadCount && contact.unreadCount > 0 && (
+          {contact.unreadCount !== undefined && contact.unreadCount > 0 && (
             <span className={styles.count}>{contact.unreadCount}</span>
           )}
         </div>

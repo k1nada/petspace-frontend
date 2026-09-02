@@ -1,4 +1,5 @@
 import api from "@/config/axios";
+import { uploadPhoto } from "@/services/api/upload";
 
 export const createPost = async (
   content: string,
@@ -13,11 +14,9 @@ export const createPost = async (
   }
 };
 
-export const uploadPostPhoto = async (file: File) => {
-  const formData = new FormData();
-  formData.append("image", file);
-  const { data } = await api.post("/api/upload/photo", formData);
-  return data.data.url as string;
+export const uploadPostPhoto = async (file: File): Promise<string> => {
+  const photo = await uploadPhoto(file);
+  return photo.url;
 };
 
 export const getPosts = async (postwallId: string) => {

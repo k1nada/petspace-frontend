@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import api from "@/config/axios";
-import { getPhotoComments, updateComment } from "@/services/api/comment";
+import {
+  getPhotoComments,
+  updateComment,
+  deleteComment as deleteCommentApi,
+} from "@/services/api/comment";
 import { Comment as CommentType, Photo } from "@/types";
 
 interface UsePhotoCommentsProps {
@@ -41,7 +44,7 @@ export const usePhotoComments = ({
 
   const deleteComment = async (commentId: string) => {
     try {
-      await api.delete(`/comments/${commentId}`);
+      await deleteCommentApi(commentId);
       refreshComments();
     } catch {
       toast.error(t("toasts.error"));

@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./PostCreator.module.scss";
 import Image from "next/image";
 import { Button } from "@/app/uikit/form/Button/Button";

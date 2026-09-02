@@ -13,7 +13,10 @@ import { AvatarChangeModal } from "../AvatarChangeModal/AvatarChangeModal";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Photo } from "@/types";
 import { useRouter } from "next/navigation";
-import api from "@/config/axios";
+import {
+  deletePhoto as deletePhotoApi,
+  deleteAvatar as deleteAvatarApi,
+} from "@/services/api/upload";
 import { usePhotoNavigation } from "@/app/hooks/photos/usePhotoNavigation";
 
 interface AvatarEditProps {
@@ -66,7 +69,7 @@ export const AvatarEdit = ({
 
   const deleteAvatarPhoto = async (photoId: string) => {
     try {
-      await api.delete(`/api/upload/photo/${photoId}`);
+      await deletePhotoApi(photoId);
       window.location.reload();
     } catch {
       toast.error(t("toasts.error"));
@@ -75,7 +78,7 @@ export const AvatarEdit = ({
 
   const deleteAvatar = async () => {
     try {
-      await api.delete("/api/upload/avatar");
+      await deleteAvatarApi();
 
       onAvatarChange?.(undefined);
       setIsDeleteOpen(false);
