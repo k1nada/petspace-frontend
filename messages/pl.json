@@ -33,7 +33,8 @@
     "email": "E-mail",
     "password": "Hasło",
     "createAccount": "Utwórz konto",
-    "editProfile": "Edytuj profil"
+    "editProfile": "Edytuj profil",
+    "loading": "Wczytywanie..."
   },
   "fields": {
     "birthday": "Urodziny:",
@@ -183,6 +184,7 @@
     "photo": "Zdjęcie",
     "removePhoto": "Usuń zdjęcie",
     "publish": "Opublikuj post",
+    "publishing": "Publikowanie...",
     "placeholder": "Co nowego, "
   },
   "post": {
@@ -349,5 +351,59 @@
   "footer": {
     "privacyPolicy": "Polityka prywatności",
     "copyright": "© {year} Petspace"
+  },
+  "metadata": {
+    "home": {
+      "title": "Petspace — sieć społecznościowa dla psów",
+      "description": "Połącz swojego psa z innymi, dziel się zdjęciami i postami oraz twórz drzewo rodzinne na Petspace."
+    },
+    "feed": {
+      "title": "Aktualności",
+      "description": "Zobacz najnowsze posty znajomych swojego psa na Petspace."
+    },
+    "signin": {
+      "title": "Zaloguj się",
+      "description": "Zaloguj się do swojego konta Petspace."
+    },
+    "signup": {
+      "title": "Zarejestruj się",
+      "description": "Załóż konto Petspace dla swojego psa."
+    },
+    "registrationSteps": {
+      "title": "Uzupełnij profil",
+      "description": "Opowiedz nam więcej o swoim psie, aby dokończyć tworzenie profilu."
+    },
+    "registrationStepsAvatar": {
+      "title": "Dodaj zdjęcie",
+      "description": "Dodaj zdjęcie profilowe swojego psa."
+    },
+    "profile": {
+      "title": "{username}",
+      "description": "Profil @{username} na Petspace."
+    },
+    "edit": {
+      "title": "Edytuj profil",
+      "description": "Edytuj profil swojego psa na Petspace."
+    },
+    "family": {
+      "title": "Drzewo rodzinne",
+      "description": "Zobacz drzewo rodzinne @{username} na Petspace."
+    },
+    "friends": {
+      "title": "Znajomi",
+      "description": "Zobacz znajomych i obserwujących @{username} na Petspace."
+    },
+    "interests": {
+      "title": "Edytuj zainteresowania",
+      "description": "Edytuj zainteresowania swojego psa na Petspace."
+    },
+    "messages": {
+      "title": "Wiadomości",
+      "description": "Rozmawiaj ze znajomymi swojego psa na Petspace."
+    },
+    "photos": {
+      "title": "Zdjęcia",
+      "description": "Zobacz zdjęcia @{username} na Petspace."
+    }
   }
 }

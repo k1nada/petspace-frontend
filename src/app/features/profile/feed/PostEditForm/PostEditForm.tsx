@@ -27,6 +27,7 @@ export const PostEditForm = ({
         value={content}
         onChange={(e) => onChange(e.target.value)}
         autoFocus
+        maxLength={3000}
       />
       <div className={styles.editActions}>
         <Button appearance="secondary" onClick={onCancel}>

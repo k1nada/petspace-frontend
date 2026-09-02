@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { getPhotoComments } from "@/services/api/comment";
 import { getUser } from "@/services/api/user";
 import { Header } from "@/app/components/Header/Header";
@@ -5,8 +7,19 @@ import { PhotoGalleryLayout } from "@/app/features/photos/PhotoGalleryLayout/Pho
 import { Photo } from "@/types";
 
 interface PhotosPageProps {
-  params: Promise<{ username: string }>;
+  params: Promise<{ locale: string; username: string }>;
 }
+
+export const generateMetadata = async ({
+  params,
+}: PhotosPageProps): Promise<Metadata> => {
+  const { locale, username } = await params;
+  const t = await getTranslations({ locale });
+  return {
+    title: t("metadata.photos.title", { username }),
+    description: t("metadata.photos.description", { username }),
+  };
+};
 
 const loadPageData = async (username: string) => {
   const userData = await getUser(username);
