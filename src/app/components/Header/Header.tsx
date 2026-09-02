@@ -10,7 +10,7 @@ import { Button } from "../../uikit/form/Button/Button";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { ROUTES } from "@/routes/routes";
 import { FaPowerOff } from "react-icons/fa";
-import api from "@/config/axios";
+import { signOut } from "@/services/api/auth";
 import socket from "@/services/socket";
 import { SearchBar } from "../../uikit/navigation/SearchBar/SearchBar";
 import { ThemeToggle } from "@/app/uikit/brand/ThemeToggle/ThemeToggle";
@@ -33,7 +33,7 @@ export const Header = () => {
   const handleSignOut = async () => {
     setIsSignOutOpen(false);
     try {
-      await api.post("/signout");
+      await signOut();
     } catch {}
     localStorage.removeItem("token");
     socket.disconnect();

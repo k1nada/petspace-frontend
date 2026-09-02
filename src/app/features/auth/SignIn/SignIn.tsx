@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import api from "@/config/axios";
+import { signIn } from "@/services/api/auth";
 import { reconnectSocket } from "@/services/socket";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
@@ -38,8 +38,7 @@ export const SignIn = () => {
 
   const onSubmit = async (data: SignInData) => {
     try {
-      const response = await api.post("/signin", data);
-      const { token, user } = response.data;
+      const { token, user } = await signIn(data);
 
       if (!user?.username) {
         toast.error(t("toasts.error"));

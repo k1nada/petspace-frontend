@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/app/uikit/form/Button/Button";
 import styles from "./RegistrationSteps.module.scss";
 import { ROUTES } from "@/routes/routes";
@@ -9,7 +11,7 @@ import dayjs, { type Dayjs } from "@/utils/dayjs";
 import { toast } from "react-toastify";
 import { useBreeds } from "@/app/hooks/shared/useBreeds";
 import { useCities, useCountries } from "@/app/hooks/shared/useLocationOptions";
-import api from "@/config/axios";
+import { updateRegistrationSteps } from "@/services/api/auth";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Select } from "@/app/uikit/form/Select/Select";
 
@@ -53,7 +55,7 @@ const RegistrationSteps = ({
 
   const saveChanges = async () => {
     try {
-      await api.patch("/registration-steps", {
+      await updateRegistrationSteps({
         sex: sexValue,
         birthDate: selectedAge?.valueOf(),
         country: selectedCountry,
