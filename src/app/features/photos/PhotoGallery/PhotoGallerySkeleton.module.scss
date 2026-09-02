@@ -28,7 +28,7 @@
   height: 24px;
   width: 140px;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
@@ -36,7 +36,7 @@
   height: 40px;
   width: 130px;
   border-radius: var(--radius-m);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
 
@@ -51,6 +51,6 @@
   max-width: 400px;
   max-height: 400px;
   border-radius: var(--radius-s);
-  background: var(--bg-input);
+  background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
 }
