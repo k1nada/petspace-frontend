@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";

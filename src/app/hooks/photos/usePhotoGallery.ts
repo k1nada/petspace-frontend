@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
-import api from "@/config/axios";
+import { uploadPhoto, deletePhoto as deletePhotoApi } from "@/services/api/upload";
 import { Photo } from "@/types";
 import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
 import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
@@ -15,13 +15,11 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
   usePhotoLikeRefresh(username, setLocalPhotos);
 
   const uploadFile = async (file: File): Promise<Photo> => {
-    const formData = new FormData();
-    formData.append("image", file);
-    const { data } = await api.post("/api/upload/photo", formData);
+    const data = await uploadPhoto(file);
     return {
-      id: data.data._id,
-      publicId: data.data.public_id,
-      createdAt: data.data.createdAt,
+      id: data._id,
+      publicId: data.public_id,
+      createdAt: data.createdAt,
       liked: false,
       likesCount: 0,
     };
@@ -46,7 +44,7 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
 
   const deletePhoto = async (photoId: string, onSuccess?: () => void) => {
     try {
-      await api.delete(`/api/upload/photo/${photoId}`);
+      await deletePhotoApi(photoId);
       setLocalPhotos((prev) => prev.filter((p) => p.id !== photoId));
       onSuccess?.();
     } catch {

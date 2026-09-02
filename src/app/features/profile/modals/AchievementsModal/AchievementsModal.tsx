@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./AchievementsModal.module.scss";
 import { useTranslations } from "next-intl";
 import cn from "classnames";

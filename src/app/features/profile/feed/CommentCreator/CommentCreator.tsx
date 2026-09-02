@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import styles from "./CommentCreator.module.scss";
 import { useState } from "react";

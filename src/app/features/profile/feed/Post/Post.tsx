@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./Post.module.scss";
 import Image from "next/image";
 import { FaReply } from "react-icons/fa";

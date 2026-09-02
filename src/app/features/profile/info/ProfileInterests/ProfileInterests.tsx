@@ -6,7 +6,7 @@ import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
-import api from "@/config/axios";
+import { updateInterests } from "@/services/api/profile";
 import { BannerInfo } from "@/types";
 
 interface ProfileInterestsProps {
@@ -38,15 +38,13 @@ export const ProfileInterests = ({ user }: ProfileInterestsProps) => {
 
   const onSubmit = async (data: InterestsForm) => {
     try {
-      await api.put(`/user/${user.username}`, {
-        interests: {
-          favoriteToys: data.toys,
-          favoriteTreats: data.treats,
-          favoriteActivities: data.activities,
-          crimes: data.crimes,
-          guiltyHabits: data.habits,
-          humans: data.humans,
-        },
+      await updateInterests(user.username, {
+        favoriteToys: data.toys,
+        favoriteTreats: data.treats,
+        favoriteActivities: data.activities,
+        crimes: data.crimes,
+        guiltyHabits: data.habits,
+        humans: data.humans,
       });
       toast.success(t("toasts.saved"));
     } catch {

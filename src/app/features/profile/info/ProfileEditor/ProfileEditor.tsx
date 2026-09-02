@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./ProfileEditor.module.scss";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";

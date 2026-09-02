@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./ProfileFriends.module.scss";
 import { ROUTES } from "@/routes/routes";

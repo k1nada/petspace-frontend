@@ -8,7 +8,7 @@ import { ROUTES } from "@/routes/routes";
 import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadModal/AvatarUploadModal";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import api from "@/config/axios";
+import { uploadAvatar } from "@/services/api/upload";
 import { updateRegistrationSteps } from "@/services/api/auth";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
@@ -32,9 +32,7 @@ export const RegistrationStepsAvatar = () => {
   const saveAvatar = async () => {
     try {
       if (avatarFile) {
-        const formData = new FormData();
-        formData.append("image", avatarFile);
-        await api.post("/api/upload/avatar", formData);
+        await uploadAvatar(avatarFile);
       }
       await finishRegistration();
     } catch {

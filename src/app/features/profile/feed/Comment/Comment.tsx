@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./Comment.module.scss";
 import cn from "classnames";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
-import api from "@/config/axios";
+import { uploadAvatar } from "@/services/api/upload";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadModal/AvatarUploadModal";
@@ -29,12 +29,9 @@ export const AvatarChangeModal = ({
   const savePhoto = async () => {
     try {
       if (!file) return;
-      const formData = new FormData();
-      formData.append("image", file);
+      const avatar = await uploadAvatar(file);
 
-      const { data } = await api.post("/api/upload/avatar", formData);
-
-      onAvatarChange?.(data.data.url);
+      onAvatarChange?.(avatar.url);
       setFile(null);
       onClose();
       window.location.reload();

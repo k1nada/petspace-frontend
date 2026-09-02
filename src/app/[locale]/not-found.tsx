@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./not-found.module.scss";
 import Link from "next/link";
 import { Button } from "../uikit/form/Button/Button";
