@@ -14,6 +14,7 @@ interface SearchBarProps {
   onChange?: (value: string) => void;
   className?: string;
   fullWidth?: boolean;
+  disabled?: boolean;
 }
 
 export const SearchBar = ({
@@ -22,6 +23,7 @@ export const SearchBar = ({
   onChange,
   className,
   fullWidth,
+  disabled,
 }: SearchBarProps) => {
   const t = useTranslations();
   const [valueState, setValueState] = useState("");
@@ -52,12 +54,14 @@ export const SearchBar = ({
         appearance="search"
         value={value}
         onChange={handleChange}
+        disabled={disabled}
       />
       {value && (
         <Button
           appearance="ghost"
           className={styles.delete}
           onClick={handleClear}
+          disabled={disabled}
         >
           <FaTimes />
         </Button>
