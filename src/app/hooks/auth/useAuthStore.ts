@@ -5,6 +5,7 @@ import { getPendingRequests } from "@/services/api/friends";
 import { getConversations } from "@/services/api/conversations";
 import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
 import { useMessagesStore } from "@/app/hooks/messages/useMessagesStore";
+import { useSuggestedFriendsStore } from "@/app/hooks/friends/useSuggestedFriendsStore";
 import { ChatContact, FriendRequest, User } from "@/types";
 
 interface AuthStore {
@@ -59,6 +60,7 @@ export const useAuthStore = create<AuthStore>()(
           set({ currentUser: null });
           useFriendRequestsStore.getState().reset();
           useMessagesStore.getState().reset();
+          useSuggestedFriendsStore.getState().reset();
         },
       };
     },
