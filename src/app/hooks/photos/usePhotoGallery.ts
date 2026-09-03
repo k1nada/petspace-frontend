@@ -2,7 +2,10 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
-import { uploadPhoto, deletePhoto as deletePhotoApi } from "@/services/api/upload";
+import {
+  uploadPhoto,
+  deletePhoto as deletePhotoApi,
+} from "@/services/api/upload";
 import { Photo } from "@/types";
 import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
 import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
@@ -47,6 +50,7 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
       await deletePhotoApi(photoId);
       setLocalPhotos((prev) => prev.filter((p) => p.id !== photoId));
       onSuccess?.();
+      window.location.reload();
     } catch {
       toast.error(t("toasts.error"));
     }
