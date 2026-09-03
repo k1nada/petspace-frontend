@@ -9,6 +9,7 @@ interface SubmitTextareaProps {
   onSubmit: () => void;
   placeholder?: string;
   maxLength?: number;
+  disabled?: boolean;
 }
 
 export const SubmitTextarea = ({
@@ -17,6 +18,7 @@ export const SubmitTextarea = ({
   onSubmit,
   placeholder,
   maxLength,
+  disabled,
 }: SubmitTextareaProps) => {
   const { handleKeyDown } = useTextareaSubmit({ onSubmit });
 
@@ -25,12 +27,17 @@ export const SubmitTextarea = ({
       <Textarea
         appearance="secondary"
         value={value}
-        onKeyDown={handleKeyDown}
+        onKeyDown={disabled ? undefined : handleKeyDown}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         maxLength={maxLength}
+        disabled={disabled}
       />
-      <FaAngleRight size={30} className={styles.arrow} onClick={onSubmit} />
+      <FaAngleRight
+        size={30}
+        className={styles.arrow}
+        onClick={disabled ? undefined : onSubmit}
+      />
     </div>
   );
 };

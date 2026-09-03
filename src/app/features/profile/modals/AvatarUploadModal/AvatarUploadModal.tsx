@@ -10,12 +10,14 @@ interface AvatarUploadModalProps {
   size?: number;
   onChange?: (file: File) => void;
   profileAvatar?: string;
+  disabled?: boolean;
 }
 
 export const AvatarUploadModal = ({
   size = 120,
   onChange,
   profileAvatar,
+  disabled,
 }: AvatarUploadModalProps) => {
   const [preview, setPreview] = useState(profileAvatar);
 
@@ -34,6 +36,7 @@ export const AvatarUploadModal = ({
       "image/gif": [],
       "image/webp": [],
     },
+    disabled,
     onDrop: (files) => {
       const file = files[0];
       const fileUrl = URL.createObjectURL(file);
@@ -46,7 +49,7 @@ export const AvatarUploadModal = ({
     <div
       {...getRootProps()}
       className={styles.wrapper}
-      style={{ width: size, height: size }}
+      style={{ width: size, height: size, opacity: disabled ? 0.6 : 1 }}
     >
       <input {...getInputProps()} />
       <Avatar size={size} src={preview} />

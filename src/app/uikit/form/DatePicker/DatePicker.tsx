@@ -14,12 +14,14 @@ interface DatePickerProps {
   value: string | Date | Dayjs | undefined;
   onChange: (date: Dayjs | undefined) => void;
   fromYear?: number;
+  disabled?: boolean;
 }
 
 export const DatePicker = ({
   value,
   onChange,
   fromYear = 2000,
+  disabled,
 }: DatePickerProps) => {
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
@@ -37,14 +39,15 @@ export const DatePicker = ({
         appearance="wide"
         placeholder={t("placeholder.chooseDate")}
         readOnly
+        disabled={disabled}
         value={
           dateValue
             ? dateValue.locale(isPolish ? "pl" : "en").format("D MMMM YYYY")
             : ""
         }
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => !disabled && setIsOpen(!isOpen)}
       />
-      {isOpen && (
+      {isOpen && !disabled && (
         <div className={styles.dropdown}>
           <DayPicker
             className={styles.picker}

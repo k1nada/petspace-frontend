@@ -42,10 +42,10 @@ export const Combobox = ({
         <FaAngleDown
           className={styles.arrowIcon}
           size={20}
-          onClick={() => setOpen(!open)}
+          onClick={() => !disabled && setOpen(!open)}
         />
       </div>
-      {open && (
+      {open && !disabled && (
         <ul className={styles.dropdown}>
           {options
             .filter((o) => o.toLowerCase().includes(value.toLowerCase()))

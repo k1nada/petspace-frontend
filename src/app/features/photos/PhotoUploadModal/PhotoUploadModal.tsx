@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 interface PhotoUploadModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onUpload: (files: File[]) => void;
+  onUpload: (files: File[]) => Promise<void>;
 }
 
 export const PhotoUploadModal = ({
@@ -23,6 +23,7 @@ export const PhotoUploadModal = ({
   const t = useTranslations();
   const [previews, setPreviews] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -32,6 +33,7 @@ export const PhotoUploadModal = ({
       "image/webp": [],
     },
     multiple: true,
+    disabled: isUploading,
     onDrop: (dropped) => {
       previews.forEach((url) => URL.revokeObjectURL(url));
       setFiles(dropped);
@@ -40,19 +42,21 @@ export const PhotoUploadModal = ({
   });
 
   const handleClose = () => {
+    if (isUploading) return;
     previews.forEach((url) => URL.revokeObjectURL(url));
     setFiles([]);
     setPreviews([]);
     onClose();
   };
 
-  const handleUpload = () => {
-    if (!files.length) return;
-    onUpload(files);
+  const handleUpload = async () => {
+    if (!files.length || isUploading) return;
+    setIsUploading(true);
+    await onUpload(files);
     previews.forEach((url) => URL.revokeObjectURL(url));
     setFiles([]);
     setPreviews([]);
-    onClose();
+    setIsUploading(false);
   };
 
   return (
@@ -88,13 +92,17 @@ export const PhotoUploadModal = ({
       </div>
 
       <div className={styles.actions}>
-        <Button appearance="secondary" onClick={handleClose}>
+        <Button
+          appearance="secondary"
+          onClick={handleClose}
+          disabled={isUploading}
+        >
           {t("common.cancel")}
         </Button>
         <Button
           appearance="primary"
           onClick={handleUpload}
-          disabled={!files.length}
+          disabled={!files.length || isUploading}
         >
           {t("common.upload")} {files.length > 1 && `(${files.length})`}
         </Button>

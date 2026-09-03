@@ -10,6 +10,7 @@ interface SelectProps {
   onChange: (value: string) => void;
   options: { label: string; value: string }[];
   placeholder?: string;
+  disabled?: boolean;
 }
 
 export const Select = ({
@@ -17,10 +18,11 @@ export const Select = ({
   onChange,
   options,
   placeholder,
+  disabled,
 }: SelectProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const selected = options.find((o) => o.value === value);
-  const toggle = () => setIsOpen((p) => !p);
+  const toggle = () => !disabled && setIsOpen((p) => !p);
 
   return (
     <div className={styles.wrapper}>
@@ -34,11 +36,12 @@ export const Select = ({
           value={selected?.label ?? ""}
           placeholder={placeholder}
           readOnly
+          disabled={disabled}
           onClick={toggle}
         />
         <FaAngleDown className={styles.arrowIcon} size={20} onClick={toggle} />
       </div>
-      {isOpen && (
+      {isOpen && !disabled && (
         <ul className={styles.dropdown}>
           {placeholder && (
             <li

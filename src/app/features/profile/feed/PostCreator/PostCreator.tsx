@@ -62,14 +62,15 @@ export const PostCreator = ({
       const post = await createPost(trimmedContent, postwallId, image);
       if (!post) {
         toast.error(t("toasts.error"));
+        setIsPublishing(false);
         return;
       }
       setContent("");
       removeImage();
       onSuccess?.();
+      setIsPublishing(false);
     } catch {
       toast.error(t("toasts.error"));
-    } finally {
       setIsPublishing(false);
     }
   };
@@ -88,6 +89,7 @@ export const PostCreator = ({
             onChange={(e) => setContent(e.target.value)}
             placeholder={t("postCreator.placeholder") + name + "?"}
             maxLength={3000}
+            disabled={isPublishing}
           />
         </div>
       </div>
@@ -104,6 +106,7 @@ export const PostCreator = ({
             appearance="ghost"
             className={styles.removeImage}
             onClick={removeImage}
+            disabled={isPublishing}
             aria-label={t("postCreator.removePhoto")}
           >
             <FaTimes size={14} />
@@ -123,12 +126,17 @@ export const PostCreator = ({
             appearance="ghost"
             className={styles.attachmentItem}
             onClick={() => fileInputRef.current?.click()}
+            disabled={isPublishing}
           >
             <FaCamera size={16} />
             {t("postCreator.photo")}
           </Button>
         </div>
-        <Button appearance="primary" onClick={publishPost}>
+        <Button
+          appearance="primary"
+          onClick={publishPost}
+          disabled={isPublishing}
+        >
           {t("postCreator.publish")}
         </Button>
       </div>
