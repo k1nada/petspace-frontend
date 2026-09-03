@@ -11,11 +11,25 @@ import { useSuggestedFriends } from "@/app/hooks/friends/useSuggestedFriends";
 import { getRelationshipStatus } from "@/utils/friends";
 import { SuggestedFriendsSkeleton } from "./SuggestedFriendsSkeleton";
 
-export const SuggestedFriends = () => {
+interface SuggestedFriendsProps {
+  profileUsername?: string;
+}
+
+export const SuggestedFriends = ({
+  profileUsername,
+}: SuggestedFriendsProps) => {
   const t = useTranslations();
   const currentUser = useAuthStore((state) => state.currentUser);
-  const { suggestions, requestedIds, loading, requestFriend } =
+  const { suggestions, requestedIds, loading, requestFriend, cancelRequest } =
     useSuggestedFriends(currentUser);
+
+  if (
+    profileUsername &&
+    currentUser &&
+    currentUser.username !== profileUsername
+  ) {
+    return null;
+  }
 
   if (loading) return <SuggestedFriendsSkeleton />;
   if (!suggestions.length) return null;
@@ -41,8 +55,11 @@ export const SuggestedFriends = () => {
               <Button
                 className={styles.button}
                 appearance={isPending ? "secondary" : "primary"}
-                disabled={isPending}
-                onClick={() => requestFriend(friend.username)}
+                onClick={() =>
+                  isPending
+                    ? cancelRequest(friend.username)
+                    : requestFriend(friend.username)
+                }
               >
                 {isPending ? t("friends.sent") : t("common.addFriend")}
               </Button>

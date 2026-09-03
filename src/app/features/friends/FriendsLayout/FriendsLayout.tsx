@@ -42,7 +42,7 @@ export const FriendsLayout = ({
         />
       </div>
       <div className={styles.rightColumn}>
-        {isMyProfile && <SuggestedFriends />}
+        <SuggestedFriends profileUsername={username} />
         <Tip
           title={t("common.didYouKnow")}
           text={t("friendTip.text")}
