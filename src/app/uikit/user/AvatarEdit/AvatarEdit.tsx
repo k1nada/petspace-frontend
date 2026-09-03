@@ -12,7 +12,6 @@ import { toast } from "react-toastify";
 import { AvatarChangeModal } from "../AvatarChangeModal/AvatarChangeModal";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Photo } from "@/types";
-import { useRouter } from "next/navigation";
 import {
   deletePhoto as deletePhotoApi,
   deleteAvatar as deleteAvatarApi,
@@ -39,7 +38,6 @@ export const AvatarEdit = ({
   isEditable = true,
 }: AvatarEditProps) => {
   const t = useTranslations();
-  const router = useRouter();
   const [isChangeOpen, setIsChangeOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [localAvatarPhotos, setLocalAvatarPhotos] = useState(avatarPhotos);
@@ -82,7 +80,7 @@ export const AvatarEdit = ({
 
       onAvatarChange?.(undefined);
       setIsDeleteOpen(false);
-      router.refresh();
+      window.location.reload();
     } catch {
       toast.error(t("toasts.error"));
     }
