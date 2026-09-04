@@ -1,51 +1,48 @@
-import { _Translator } from "next-intl";
+import { useTranslations } from "next-intl";
 
-export const signInValidationMin = (t: _Translator) => ({
-  value: 3,
-  message: t("validations.minLength", { min: 3 }),
-});
+type Translator = ReturnType<typeof useTranslations>;
 
-export const signInValidationMax = (t: _Translator) => ({
-  value: 30,
-  message: t("validations.maxLength", { max: 30 }),
-});
-
-export const passwordValidationMin = (t: _Translator) => ({
+export const passwordValidationMin = (t: Translator) => ({
   value: 8,
   message: t("validations.minLength", { min: 8 }),
 });
 
-export const passwordValidationMax = (t: _Translator) => ({
+export const passwordValidationMax = (t: Translator) => ({
   value: 64,
   message: t("validations.maxLength", { max: 64 }),
 });
 
-export const usernameValidationMin = (t: _Translator) => ({
+export const usernameValidationMin = (t: Translator) => ({
   value: 3,
   message: t("validations.minLength", { min: 3 }),
 });
 
-export const usernameValidationMax = (t: _Translator) => ({
+export const usernameValidationMax = (t: Translator) => ({
   value: 20,
   message: t("validations.maxLength", { max: 20 }),
 });
 
-export const usernameValidationPattern = (t: _Translator) => ({
+export const usernameValidationPattern = (t: Translator) => ({
   value: /^[a-zA-Z0-9_]+$/,
   message: t("validations.usernamePattern"),
 });
 
-export const emailValidationMax = (t: _Translator) => ({
+export const nameValidationPattern = (t: Translator) => ({
+  value: /^[\p{L}\p{N} ]+$/u,
+  message: t("validations.namePattern"),
+});
+
+export const emailValidationMax = (t: Translator) => ({
   value: 254,
   message: t("validations.maxLength", { max: 254 }),
 });
 
-export const emailValidationPattern = (t: _Translator) => ({
+export const emailValidationPattern = (t: Translator) => ({
   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   message: t("validations.emailPattern"),
 });
 
-export const passwordValidationPattern = (t: _Translator) => ({
+export const passwordValidationPattern = (t: Translator) => ({
   value: /^(?=.*[A-Za-z])(?=.*\d).{8,}$/,
   message: t("validations.passwordPattern"),
 });
