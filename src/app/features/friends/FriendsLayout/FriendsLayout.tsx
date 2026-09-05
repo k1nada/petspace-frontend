@@ -7,6 +7,8 @@ import { Tip } from "@/app/uikit/feedback/Tip/Tip";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { FollowUser, Friend } from "@/types";
 import { Friends } from "../Friends/Friends";
+import { FriendsSkeleton } from "../Friends/FriendsSkeleton";
+import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 import { SuggestedFriends } from "@/app/features/feed/SuggestedFriends/SuggestedFriends";
 
 interface FriendsLayoutProps {
@@ -32,14 +34,16 @@ export const FriendsLayout = ({
         <Sidebar />
       </div>
       <div className={styles.content}>
-        <Friends
-          username={username}
-          friends={friends}
-          followers={followers}
-          following={following}
-          currentUser={currentUser?.username || ""}
-          isMyProfile={isMyProfile}
-        />
+        <AuthLoader fallback={<FriendsSkeleton />}>
+          <Friends
+            username={username}
+            friends={friends}
+            followers={followers}
+            following={following}
+            currentUser={currentUser?.username || ""}
+            isMyProfile={isMyProfile}
+          />
+        </AuthLoader>
       </div>
       <div className={styles.rightColumn}>
         <SuggestedFriends profileUsername={username} />

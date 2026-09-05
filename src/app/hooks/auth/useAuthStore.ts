@@ -1,11 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { isAxiosError } from "axios";
 import api from "@/config/axios";
 import { getPendingRequests } from "@/services/api/friends";
 import { getConversations } from "@/services/api/conversations";
 import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
 import { useMessagesStore } from "@/app/hooks/messages/useMessagesStore";
 import { useSuggestedFriendsStore } from "@/app/hooks/friends/useSuggestedFriendsStore";
+import { useFeedStore } from "@/app/hooks/feed/useFeedStore";
+import { useConversationsStore } from "@/app/hooks/messages/useConversationsStore";
 import { ChatContact, FriendRequest, User } from "@/types";
 
 interface AuthStore {
@@ -27,7 +30,11 @@ export const useAuthStore = create<AuthStore>()(
           try {
             const response = await api.get<User>("/me");
             user = response.data;
-          } catch {
+          } catch (error) {
+            if (isAxiosError(error) && error.response?.status !== 401) {
+              set({ isAuthChecked: true });
+              return;
+            }
             user = null;
           }
 
@@ -61,6 +68,8 @@ export const useAuthStore = create<AuthStore>()(
           useFriendRequestsStore.getState().reset();
           useMessagesStore.getState().reset();
           useSuggestedFriendsStore.getState().reset();
+          useFeedStore.getState().reset();
+          useConversationsStore.getState().reset();
         },
       };
     },

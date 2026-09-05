@@ -24,12 +24,16 @@ export const generateMetadata = async ({
 const ProfilePage = async ({ params }: ProfilePageProps) => {
   const awaitedParams = await params;
 
-  const [userData, postwallData] = await Promise.all([
-    getUser(awaitedParams.username),
-    getPostwall(awaitedParams.username),
-  ]);
+  const userData = await getUser(awaitedParams.username);
 
   if (!userData) notFound();
+
+  let postwallData = null;
+  try {
+    postwallData = await getPostwall(awaitedParams.username);
+  } catch (error) {
+    postwallData = null;
+  }
 
   return (
     <>
