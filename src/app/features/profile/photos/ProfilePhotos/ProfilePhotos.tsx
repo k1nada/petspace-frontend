@@ -4,9 +4,11 @@ import { ROUTES } from "@/routes/routes";
 import styles from "./ProfilePhotos.module.scss";
 import Image from "next/image";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { useTranslations } from "next-intl";
 import { getPhotoUrl } from "@/utils/photo";
+import { deletePhoto as deletePhotoApi } from "@/services/api/upload";
 import { usePhotoNavigation } from "@/app/hooks/photos/usePhotoNavigation";
 import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
 import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
@@ -40,6 +42,19 @@ export const ProfilePhotos = ({
 
   const handleLikeChange = usePhotoLikeSync(setLocalPhotos);
   usePhotoLikeRefresh(username, setLocalPhotos);
+
+  const handleDeletePhoto = async () => {
+    const selectedPhoto =
+      selectedIndex !== null ? localPhotos[selectedIndex] : null;
+    if (!selectedPhoto) return;
+    try {
+      await deletePhotoApi(selectedPhoto.id);
+      setSelectedIndex(null);
+      window.location.reload();
+    } catch {
+      toast.error(t("toasts.error"));
+    }
+  };
 
   return (
     <AuthLoader fallback={<ProfilePhotosSkeleton />}>
@@ -75,6 +90,7 @@ export const ProfilePhotos = ({
             onNext: handleNext,
           }}
           isOwner={isOwner}
+          onDelete={handleDeletePhoto}
           onClose={() => setSelectedIndex(null)}
           onLikeChange={handleLikeChange}
         />
