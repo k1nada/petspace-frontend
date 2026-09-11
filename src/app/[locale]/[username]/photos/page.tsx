@@ -1,10 +1,9 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { getPhotoComments } from "@/services/api/comment";
 import { getUser } from "@/services/api/user";
 import { Header } from "@/app/components/Header/Header";
 import { PhotoGalleryLayout } from "@/app/features/photos/PhotoGalleryLayout/PhotoGalleryLayout";
-import { Photo } from "@/types";
+import { notFound } from "next/navigation";
 
 interface PhotosPageProps {
   params: Promise<{ locale: string; username: string }>;
@@ -21,24 +20,11 @@ export const generateMetadata = async ({
   };
 };
 
-const loadPageData = async (username: string) => {
-  const userData = await getUser(username);
-
-  const photosWithComments = await Promise.all(
-    (userData.photos ?? []).map(async (photo: Photo) => ({
-      ...photo,
-      comments: (await getPhotoComments(photo.id)) ?? [],
-    })),
-  );
-
-  return { userData, photosWithComments };
-};
-
 const PhotosPage = async ({ params }: PhotosPageProps) => {
   const awaitedParams = await params;
-  const { userData, photosWithComments } = await loadPageData(
-    awaitedParams.username,
-  );
+  const userData = await getUser(awaitedParams.username);
+
+  if (!userData) notFound();
 
   return (
     <>
@@ -46,7 +32,7 @@ const PhotosPage = async ({ params }: PhotosPageProps) => {
       <main>
         <PhotoGalleryLayout
           name={userData.name}
-          photos={photosWithComments}
+          photos={userData.photos ?? []}
           avatar={userData.avatar}
           username={userData.username}
         />

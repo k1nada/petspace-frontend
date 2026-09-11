@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Header } from "@/app/components/Header/Header";
 import { ProfileEditorLayout } from "@/app/features/profile/info/ProfileEditorLayout/ProfileEditorLayout";
 import { getUser } from "@/services/api/user";
+import { notFound } from "next/navigation";
 
 interface EditPageProps {
   params: Promise<{ locale: string; username: string }>;
@@ -22,6 +23,8 @@ export const generateMetadata = async ({
 const EditPage = async ({ params }: EditPageProps) => {
   const awaitedParams = await params;
   const userData = await getUser(awaitedParams.username);
+
+  if (!userData) notFound();
 
   return (
     <>

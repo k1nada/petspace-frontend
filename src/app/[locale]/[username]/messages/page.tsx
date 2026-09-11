@@ -4,6 +4,7 @@ import { getUser } from "@/services/api/user";
 import { Header } from "@/app/components/Header/Header";
 import { MessagesLayout } from "@/app/features/messages/MessagesLayout/MessagesLayout";
 import { ChatContact } from "@/types";
+import { notFound } from "next/navigation";
 
 interface MessagesPageProps {
   params: Promise<{ locale: string; username: string }>;
@@ -29,6 +30,8 @@ const MessagesPage = async ({ params, searchParams }: MessagesPageProps) => {
     getUser(username),
     targetUsername ? getUser(targetUsername) : Promise.resolve(null),
   ]);
+
+  if (!userData) notFound();
 
   const initialSelectedChat: ChatContact | undefined = targetUser
     ? {

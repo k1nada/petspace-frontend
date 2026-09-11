@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Header } from "@/app/components/Header/Header";
 import { getUser } from "@/services/api/user";
 import { ProfileInterestsLayout } from "@/app/features/profile/info/ProfileInterestsLayout/ProfileInterestsLayout";
+import { notFound } from "next/navigation";
 
 interface ProfileInterestsPageProps {
   params: Promise<{ locale: string; username: string }>;
@@ -22,6 +23,8 @@ export const generateMetadata = async ({
 const ProfileInterestsPage = async ({ params }: ProfileInterestsPageProps) => {
   const { username } = await params;
   const userData = await getUser(username);
+
+  if (!userData) notFound();
 
   return (
     <>

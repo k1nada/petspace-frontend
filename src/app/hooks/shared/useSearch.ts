@@ -2,7 +2,7 @@ import { ROUTES } from "@/routes/routes";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { User as UserType } from "@/types/index";
-import { searchUsers } from "@/services/api/user";
+import { searchUsers } from "@/services/api/userClient";
 
 export const useSearch = () => {
   const router = useRouter();

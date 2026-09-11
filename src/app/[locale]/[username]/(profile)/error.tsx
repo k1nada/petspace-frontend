@@ -1,10 +1,10 @@
 "use client";
 
-import styles from "./error.module.scss";
+import styles from "../../error.module.scss";
 import Link from "next/link";
-import { Button } from "../uikit/form/Button/Button";
-import { Header } from "../components/Header/Header";
-import { ROUTES } from "../../routes/routes";
+import { Button } from "../../../uikit/form/Button/Button";
+import { Header } from "../../../components/Header/Header";
+import { ROUTES } from "../../../../routes/routes";
 import { useTranslations } from "next-intl";
 
 interface ErrorPageProps {
@@ -12,7 +12,7 @@ interface ErrorPageProps {
   reset: () => void;
 }
 
-export default function ErrorPage({ reset }: ErrorPageProps) {
+export default function ProfileErrorPage({ reset }: ErrorPageProps) {
   const t = useTranslations();
 
   return (
