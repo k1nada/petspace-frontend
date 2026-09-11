@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { Photo } from "@/types";
-import { getUserPhotos } from "@/services/api/user";
+import { getUserPhotos } from "@/services/api/userClient";
 
 export const usePhotoLikeRefresh = (
   username: string,

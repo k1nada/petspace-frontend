@@ -19,4 +19,32 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+const AUTH_ENDPOINTS = ["/signin", "/signup"];
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const isAuthEndpoint = AUTH_ENDPOINTS.some((endpoint) =>
+      error.config?.url?.includes(endpoint),
+    );
+
+    if (
+      typeof window !== "undefined" &&
+      error.response?.status === 401 &&
+      !isAuthEndpoint
+    ) {
+      localStorage.removeItem("token");
+      import("@/services/socket").then(({ default: socket }) =>
+        socket.disconnect(),
+      );
+      import("@/app/hooks/auth/useAuthStore").then(({ useAuthStore }) =>
+        useAuthStore.getState().signOut(),
+      );
+      window.location.href = "/signin";
+    }
+
+    return Promise.reject(error);
+  },
+);
+
 export default api;

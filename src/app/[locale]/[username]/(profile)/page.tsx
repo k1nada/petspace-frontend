@@ -32,6 +32,7 @@ const ProfilePage = async ({ params }: ProfilePageProps) => {
   try {
     postwallData = await getPostwall(awaitedParams.username);
   } catch (error) {
+    console.error(error);
     postwallData = null;
   }
 

@@ -5,6 +5,7 @@ import { getFriends } from "@/services/api/friends";
 import { getUser } from "@/services/api/user";
 import { Header } from "@/app/components/Header/Header";
 import { FriendsLayout } from "@/app/features/friends/FriendsLayout/FriendsLayout";
+import { notFound } from "next/navigation";
 
 interface FriendsPageProps {
   params: Promise<{ locale: string; username: string }>;
@@ -30,6 +31,8 @@ const FriendsPage = async ({ params }: FriendsPageProps) => {
     getFollowers(username),
     getFollowing(username),
   ]);
+
+  if (!userData) notFound();
 
   return (
     <>

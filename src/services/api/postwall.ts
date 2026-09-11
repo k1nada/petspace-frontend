@@ -1,5 +1,5 @@
 import { API_URL } from "@/config/env";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import { unstable_cache } from "next/cache";
 
 export const getPostwall = unstable_cache(
@@ -7,8 +7,11 @@ export const getPostwall = unstable_cache(
     try {
       const { data } = await axios.get(`${API_URL}/postwall/${username}`);
       return data;
-    } catch {
-      return null;
+    } catch (error) {
+      if (isAxiosError(error) && error.response?.status === 404) {
+        return null;
+      }
+      throw error;
     }
   },
   ["get-postwall"],
