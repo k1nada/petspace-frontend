@@ -17,26 +17,36 @@ export const RegistrationStepsAvatar = () => {
   const t = useTranslations();
   const currentUser = useAuthStore((state) => state.currentUser);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
 
   const navigateToProfile = () => {
     if (currentUser) router.push(ROUTES.profile(currentUser.username));
   };
 
-  const finishRegistration = async () => {
+  const completeOnboarding = async () => {
     try {
-      await updateRegistrationSteps({ onboardingCompleted: true });
+      await updateRegistrationSteps({ registrationCompleted: true });
     } catch {}
     navigateToProfile();
   };
 
+  const finishRegistration = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
+    await completeOnboarding();
+  };
+
   const saveAvatar = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     try {
       if (avatarFile) {
         await uploadAvatar(avatarFile);
       }
-      await finishRegistration();
+      await completeOnboarding();
     } catch {
       toast.error(t("toasts.error"));
+      setIsSaving(false);
     }
   };
 
@@ -50,13 +60,21 @@ export const RegistrationStepsAvatar = () => {
         <div className={styles.divider} />
       </div>
       <div className={styles.avatar}>
-        <AvatarUploadModal size={120} onChange={setAvatarFile} />
+        <AvatarUploadModal
+          size={120}
+          onChange={setAvatarFile}
+          disabled={isSaving}
+        />
       </div>
       <div className={styles.actions}>
-        <Button appearance="primary" onClick={saveAvatar}>
+        <Button appearance="primary" onClick={saveAvatar} disabled={isSaving}>
           {t("common.continue")}
         </Button>
-        <Button appearance="secondary" onClick={finishRegistration}>
+        <Button
+          appearance="secondary"
+          onClick={finishRegistration}
+          disabled={isSaving}
+        >
           {t("common.skip")}
         </Button>
       </div>

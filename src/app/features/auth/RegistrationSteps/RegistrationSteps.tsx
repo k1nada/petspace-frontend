@@ -33,6 +33,7 @@ const RegistrationSteps = ({
   const t = useTranslations();
   const router = useRouter();
 
+  const [isSaving, setIsSaving] = useState(false);
   const [sexValue, setsexValue] = useState(sex ?? "");
   const [selectedAge, setSelectedAge] = useState<Dayjs | undefined>(
     birthDate ? dayjs(birthDate) : undefined,
@@ -54,6 +55,8 @@ const RegistrationSteps = ({
   };
 
   const saveChanges = async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     try {
       await updateRegistrationSteps({
         sex: sexValue,
@@ -65,6 +68,7 @@ const RegistrationSteps = ({
       router.push(ROUTES.registrationStepsAvatar);
     } catch {
       toast.error(t("toasts.error"));
+      setIsSaving(false);
     }
   };
 
@@ -85,6 +89,7 @@ const RegistrationSteps = ({
               { value: "female", label: t("sex.female") },
             ]}
             placeholder={t("placeholder.noneSelected")}
+            disabled={isSaving}
           ></Select>
         </div>
         <div className={styles.field}>
@@ -92,6 +97,7 @@ const RegistrationSteps = ({
           <DatePicker
             value={selectedAge}
             onChange={setSelectedAge}
+            disabled={isSaving}
           ></DatePicker>
         </div>
         <div className={styles.field}>
@@ -101,6 +107,7 @@ const RegistrationSteps = ({
             onChange={handleCountryChange}
             options={countries}
             placeholder={t("placeholder.noneSelected")}
+            disabled={isSaving}
           />
         </div>
         <div className={styles.field}>
@@ -110,6 +117,7 @@ const RegistrationSteps = ({
             onChange={setSelectedCity}
             options={cities}
             placeholder={t("placeholder.noneSelected")}
+            disabled={isSaving || !selectedCountry}
           />
         </div>
         <div className={styles.field}>
@@ -119,14 +127,25 @@ const RegistrationSteps = ({
             onChange={setSelectedBreed}
             options={breeds}
             placeholder={t("placeholder.noneSelected")}
+            disabled={isSaving}
           />
         </div>
       </div>
       <div className={styles.actions}>
-        <Button appearance="primary" type="button" onClick={saveChanges}>
+        <Button
+          appearance="primary"
+          type="button"
+          onClick={saveChanges}
+          disabled={isSaving}
+        >
           {t("common.continue")}
         </Button>
-        <Button appearance="secondary" type="button" onClick={skipRegistration}>
+        <Button
+          appearance="secondary"
+          type="button"
+          onClick={skipRegistration}
+          disabled={isSaving}
+        >
           {t("common.skip")}
         </Button>
       </div>
