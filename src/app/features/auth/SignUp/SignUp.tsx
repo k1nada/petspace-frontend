@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import {
   emailValidationMax,
   emailValidationPattern,
+  nameValidationPattern,
   passwordValidationMax,
   passwordValidationMin,
   passwordValidationPattern,
@@ -33,7 +34,7 @@ export const SignUp = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<SignUpData>();
 
   const handleError = (e: unknown) => {
@@ -89,11 +90,13 @@ export const SignUp = () => {
               required: t(requiredValidation),
               minLength: usernameValidationMin(t),
               maxLength: usernameValidationMax(t),
-              pattern: usernameValidationPattern(t),
+              pattern: nameValidationPattern(t),
             })}
             id="name"
             type="text"
             appearance="primary"
+            autoComplete="off"
+            disabled={isSubmitting}
           />
         </FormField>
 
@@ -113,6 +116,7 @@ export const SignUp = () => {
             id="username"
             type="text"
             appearance="primary"
+            disabled={isSubmitting}
           />
         </FormField>
 
@@ -130,6 +134,8 @@ export const SignUp = () => {
             id="email"
             type="email"
             appearance="primary"
+            autoComplete="username"
+            disabled={isSubmitting}
           />
         </FormField>
 
@@ -148,14 +154,21 @@ export const SignUp = () => {
             id="password"
             type="password"
             appearance="primary"
+            autoComplete="new-password"
+            disabled={isSubmitting}
           />
         </FormField>
 
         <div className={styles.buttons}>
-          <Button type="submit" appearance="primary">
+          <Button type="submit" appearance="primary" disabled={isSubmitting}>
             {t("common.createAccount")}
           </Button>
-          <Button type="button" appearance="secondary" onClick={onSignIn}>
+          <Button
+            type="button"
+            appearance="secondary"
+            onClick={onSignIn}
+            disabled={isSubmitting}
+          >
             {t("signUp.haveAccount")}
           </Button>
         </div>

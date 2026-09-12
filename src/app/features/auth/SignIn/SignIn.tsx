@@ -5,8 +5,7 @@ import styles from "./SignIn.module.scss";
 import { SignInData } from "@/types";
 import {
   emailValidationPattern,
-  signInValidationMax,
-  signInValidationMin,
+  emailValidationMax,
   passwordValidationMax,
   passwordValidationMin,
   requiredValidation,
@@ -30,7 +29,7 @@ export const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
   } = useForm<SignInData>();
 
@@ -48,7 +47,7 @@ export const SignIn = () => {
       localStorage.setItem("token", token);
       reconnectSocket();
       useAuthStore.getState().fetchCurrentUser();
-      if (user.onboardingCompleted) {
+      if (user.registrationCompleted) {
         router.push(ROUTES.profile(user.username));
       } else {
         router.push(ROUTES.registrationSteps);
@@ -68,14 +67,14 @@ export const SignIn = () => {
         <Input
           {...register("email", {
             required: t(requiredValidation),
-            minLength: signInValidationMin(t),
-            maxLength: signInValidationMax(t),
+            maxLength: emailValidationMax(t),
             pattern: emailValidationPattern(t),
           })}
           type="text"
           appearance="primary"
           placeholder={t("common.email")}
-          autoComplete="email"
+          autoComplete="username"
+          disabled={isSubmitting}
         />
 
         {errors.email?.message && (
@@ -94,6 +93,7 @@ export const SignIn = () => {
             className={styles.passwordInput}
             placeholder={t("common.password")}
             autoComplete="current-password"
+            disabled={isSubmitting}
           />
           <Button
             appearance="ghost"
@@ -110,7 +110,7 @@ export const SignIn = () => {
           <ErrorMessage message={errors.password?.message} />
         )}
       </div>
-      <Button type="submit" appearance="primary">
+      <Button type="submit" appearance="primary" disabled={isSubmitting}>
         {t("signin.submit")}
       </Button>
       <div className={styles.formDivider}>
@@ -118,7 +118,12 @@ export const SignIn = () => {
         <span>{t("common.or")}</span>
         <div className={styles.line} />
       </div>
-      <Button type="button" appearance="secondary" onClick={goToSignUp}>
+      <Button
+        type="button"
+        appearance="secondary"
+        onClick={goToSignUp}
+        disabled={isSubmitting}
+      >
         {t("common.createAccount")}
       </Button>
     </form>

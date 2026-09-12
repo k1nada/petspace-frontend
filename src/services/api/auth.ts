@@ -21,7 +21,7 @@ interface RegistrationStepsData {
   country?: string;
   city?: string;
   breed?: string;
-  onboardingCompleted?: boolean;
+  registrationCompleted?: boolean;
 }
 
 export const updateRegistrationSteps = async (
