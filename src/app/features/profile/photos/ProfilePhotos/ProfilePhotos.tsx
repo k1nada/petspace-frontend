@@ -9,6 +9,7 @@ import { Link } from "@/app/uikit/navigation/Link/Link";
 import { useTranslations } from "next-intl";
 import { getPhotoUrl } from "@/utils/photo";
 import { deletePhoto as deletePhotoApi } from "@/services/api/upload";
+import { revalidateUser } from "@/services/actions/revalidateUser";
 import { usePhotoNavigation } from "@/app/hooks/photos/usePhotoNavigation";
 import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
 import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
@@ -37,19 +38,21 @@ export const ProfilePhotos = ({
   const currentUser = useAuthStore((state) => state.currentUser);
   const isOwner = currentUser?.username === username;
   const [localPhotos, setLocalPhotos] = useState<Photo[]>(photos);
+  const newestFirstPhotos = [...localPhotos].reverse();
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
-    usePhotoNavigation(localPhotos);
+    usePhotoNavigation(newestFirstPhotos);
 
   const handleLikeChange = usePhotoLikeSync(setLocalPhotos);
   usePhotoLikeRefresh(username, setLocalPhotos);
 
   const handleDeletePhoto = async () => {
     const selectedPhoto =
-      selectedIndex !== null ? localPhotos[selectedIndex] : null;
+      selectedIndex !== null ? newestFirstPhotos[selectedIndex] : null;
     if (!selectedPhoto) return;
     try {
       await deletePhotoApi(selectedPhoto.id);
       setSelectedIndex(null);
+      await revalidateUser();
       window.location.reload();
     } catch {
       toast.error(t("toasts.error"));
@@ -67,7 +70,7 @@ export const ProfilePhotos = ({
           <div className={styles.empty}>{t("common.noPhotosYet")}</div>
         ) : (
           <ul className={styles.gallery}>
-            {localPhotos.slice(0, MAX_VISIBLE_PHOTOS).map((photo, index) => (
+            {newestFirstPhotos.slice(0, MAX_VISIBLE_PHOTOS).map((photo, index) => (
               <li key={photo.publicId} className={styles.photo}>
                 <Image
                   onClick={() => setSelectedIndex(index)}
@@ -81,11 +84,13 @@ export const ProfilePhotos = ({
         )}
 
         <PhotoModal
-          photo={selectedIndex !== null ? localPhotos[selectedIndex] : null}
+          photo={
+            selectedIndex !== null ? newestFirstPhotos[selectedIndex] : null
+          }
           author={{ avatar, name, username }}
           navigation={{
             currentIndex: selectedIndex ?? 0,
-            photosCount: localPhotos.length,
+            photosCount: newestFirstPhotos.length,
             onPrev: handlePrev,
             onNext: handleNext,
           }}

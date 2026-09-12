@@ -3,6 +3,7 @@
 import { useDropzone } from "react-dropzone";
 import { useState } from "react";
 import Image from "next/image";
+import cn from "classnames";
 import { MdPhotoCamera } from "react-icons/md";
 import styles from "./PhotoUploadModal.module.scss";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
@@ -63,7 +64,13 @@ export const PhotoUploadModal = ({
     <Modal isOpen={isOpen} onClose={handleClose}>
       <h3 className={styles.title}>{t("common.addPhoto")}</h3>
 
-      <div {...getRootProps()} className={styles.dropzone}>
+      <div
+        {...getRootProps()}
+        className={cn(styles.dropzone, {
+          [styles.uploading]: isUploading,
+          [styles.empty]: previews.length === 0,
+        })}
+      >
         <input {...getInputProps()} />
         {previews.length > 0 ? (
           <div className={styles.previews}>

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
 import { uploadAvatar } from "@/services/api/upload";
+import { revalidateUser } from "@/services/actions/revalidateUser";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadModal/AvatarUploadModal";
@@ -34,6 +35,7 @@ export const AvatarChangeModal = ({
       onAvatarChange?.(avatar.url);
       setFile(null);
       onClose();
+      await revalidateUser();
       window.location.reload();
     } catch (error) {
       if (

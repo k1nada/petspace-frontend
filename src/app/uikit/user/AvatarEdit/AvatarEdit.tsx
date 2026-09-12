@@ -16,6 +16,7 @@ import {
   deletePhoto as deletePhotoApi,
   deleteAvatar as deleteAvatarApi,
 } from "@/services/api/upload";
+import { revalidateUser } from "@/services/actions/revalidateUser";
 import { usePhotoNavigation } from "@/app/hooks/photos/usePhotoNavigation";
 
 interface AvatarEditProps {
@@ -68,6 +69,7 @@ export const AvatarEdit = ({
   const deleteAvatarPhoto = async (photoId: string) => {
     try {
       await deletePhotoApi(photoId);
+      await revalidateUser();
       window.location.reload();
     } catch {
       toast.error(t("toasts.error"));
@@ -80,6 +82,7 @@ export const AvatarEdit = ({
 
       onAvatarChange?.(undefined);
       setIsDeleteOpen(false);
+      await revalidateUser();
       window.location.reload();
     } catch {
       toast.error(t("toasts.error"));
