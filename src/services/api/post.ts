@@ -6,12 +6,8 @@ export const createPost = async (
   postwallId: string,
   image?: string,
 ) => {
-  try {
-    const { data } = await api.post("/posts", { content, postwallId, image });
-    return data;
-  } catch {
-    return null;
-  }
+  const { data } = await api.post("/posts", { content, postwallId, image });
+  return data;
 };
 
 export const uploadPostPhoto = async (file: File): Promise<string> => {
@@ -20,21 +16,13 @@ export const uploadPostPhoto = async (file: File): Promise<string> => {
 };
 
 export const getPosts = async (postwallId: string) => {
-  try {
-    const { data } = await api.get(`/posts/postwall/${postwallId}`);
-    return data;
-  } catch {
-    return null;
-  }
+  const { data } = await api.get(`/posts/postwall/${postwallId}`);
+  return data;
 };
 
 export const getFeed = async (username: string) => {
-  try {
-    const { data } = await api.get(`/posts/feed/${username}`);
-    return data;
-  } catch {
-    return null;
-  }
+  const { data } = await api.get(`/posts/feed/${username}`);
+  return data;
 };
 
 export const deletePost = async (postId: string): Promise<void> => {
