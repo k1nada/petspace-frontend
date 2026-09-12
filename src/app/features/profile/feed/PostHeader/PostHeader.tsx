@@ -14,6 +14,7 @@ export interface PostHeaderProps {
   post: PostType;
   locale: string;
   showActions: boolean;
+  canEdit: boolean;
   onEdit: () => void;
   onDelete: () => void;
 }
@@ -22,10 +23,25 @@ export const PostHeader = ({
   post,
   locale,
   showActions,
+  canEdit,
   onEdit,
   onDelete,
 }: PostHeaderProps) => {
   const t = useTranslations();
+
+  const menuItems = [];
+  if (canEdit) {
+    menuItems.push({
+      label: t("common.edit"),
+      icon: <MdModeEdit size={20} />,
+      onClick: onEdit,
+    });
+  }
+  menuItems.push({
+    label: t("common.delete"),
+    icon: <MdDeleteSweep size={20} />,
+    onClick: onDelete,
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -42,20 +58,7 @@ export const PostHeader = ({
       </div>
       {showActions && (
         <div className={styles.dropdown}>
-          <DropdownMenu
-            items={[
-              {
-                label: t("common.edit"),
-                icon: <MdModeEdit size={20} />,
-                onClick: onEdit,
-              },
-              {
-                label: t("common.delete"),
-                icon: <MdDeleteSweep size={20} />,
-                onClick: onDelete,
-              },
-            ]}
-          />
+          <DropdownMenu items={menuItems} />
         </div>
       )}
     </div>

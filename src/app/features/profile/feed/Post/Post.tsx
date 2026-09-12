@@ -10,6 +10,7 @@ import { SharePostModal } from "../SharePostModal/SharePostModal";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { toast } from "react-toastify";
 import { likePost } from "@/services/api/likes";
 import { deletePost, updatePost } from "@/services/api/post";
 import { useLike } from "@/app/hooks/shared/useLike";
@@ -33,8 +34,10 @@ export const Post = ({ post, onRefresh }: PostProps) => {
   const locale = useLocale();
   const currentUser = useAuthStore((state) => state.currentUser);
   const isOwner = currentUser?.username === post.user.username;
+  const isRepostOwner = currentUser?.username === post.repostedBy?.username;
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(post.content);
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isPhotoOpen, setIsPhotoOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
@@ -96,15 +99,34 @@ export const Post = ({ post, onRefresh }: PostProps) => {
 
   const handleSaveEditPost = async () => {
     const trimmedContent = editContent.trim();
-    if (!trimmedContent) return;
-    await updatePost(post.id, trimmedContent);
-    setIsEditing(false);
-    onRefresh();
+    if (!trimmedContent || isSavingEdit) return;
+    setIsSavingEdit(true);
+    try {
+      await updatePost(post.id, trimmedContent);
+      setIsEditing(false);
+      onRefresh();
+      setIsSavingEdit(false);
+    } catch {
+      toast.error(t("toasts.error"));
+      setIsSavingEdit(false);
+    }
   };
 
   const handleDeletePost = async () => {
-    await deletePost(post.id);
-    onRefresh();
+    if (isOwner) {
+      try {
+        await deletePost(post.id);
+        onRefresh();
+      } catch {
+        toast.error(t("toasts.error"));
+      }
+      return;
+    }
+
+    if (isRepostOwner) {
+      await handleToggleRepost();
+      onRefresh();
+    }
   };
 
   return (
@@ -122,7 +144,8 @@ export const Post = ({ post, onRefresh }: PostProps) => {
       <PostHeader
         post={post}
         locale={locale}
-        showActions={isOwner && !isEditing}
+        showActions={(isOwner || isRepostOwner) && !isEditing}
+        canEdit={isOwner}
         onEdit={handleStartEditPost}
         onDelete={() => setIsDeleteOpen(true)}
       />
@@ -134,6 +157,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
             onChange={setEditContent}
             onCancel={() => setIsEditing(false)}
             onSave={handleSaveEditPost}
+            disabled={isSavingEdit}
           />
         ) : (
           <div className={styles.content}>{post.content}</div>
