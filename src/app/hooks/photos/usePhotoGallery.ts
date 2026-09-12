@@ -6,6 +6,7 @@ import {
   uploadPhoto,
   deletePhoto as deletePhotoApi,
 } from "@/services/api/upload";
+import { revalidateUser } from "@/services/actions/revalidateUser";
 import { Photo } from "@/types";
 import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
 import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
@@ -29,19 +30,36 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
   };
 
   const addPhoto = async (files: File[]) => {
-    try {
-      const uploaded = await Promise.all(files.map(uploadFile));
-      setLocalPhotos((prev) => [...prev, ...uploaded]);
-      setIsUploadOpen(false);
-    } catch (error) {
-      if (
-        isAxiosError(error) &&
-        error.response?.data?.type === "PHOTO_LIMIT_REACHED"
-      ) {
-        toast.error(t("errors.PHOTO_LIMIT_REACHED"));
-      } else {
-        toast.error(t("toasts.error"));
+    const uploaded: Photo[] = [];
+    let hasError = false;
+    let photoLimitReached = false;
+
+    for (const file of files) {
+      try {
+        uploaded.push(await uploadFile(file));
+      } catch (error) {
+        hasError = true;
+        if (
+          isAxiosError(error) &&
+          error.response?.data?.type === "PHOTO_LIMIT_REACHED"
+        ) {
+          photoLimitReached = true;
+        }
       }
+    }
+
+    if (uploaded.length > 0) {
+      setLocalPhotos((prev) => [...prev, ...uploaded]);
+    }
+
+    if (hasError) {
+      toast.error(
+        photoLimitReached ? t("errors.PHOTO_LIMIT_REACHED") : t("toasts.error"),
+      );
+    } else {
+      setIsUploadOpen(false);
+      await revalidateUser();
+      window.location.reload();
     }
   };
 
@@ -50,6 +68,7 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
       await deletePhotoApi(photoId);
       setLocalPhotos((prev) => prev.filter((p) => p.id !== photoId));
       onSuccess?.();
+      await revalidateUser();
       window.location.reload();
     } catch {
       toast.error(t("toasts.error"));
