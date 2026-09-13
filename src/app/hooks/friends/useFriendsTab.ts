@@ -6,6 +6,7 @@ export type FriendsTab = "friends" | "requests" | "followers" | "following";
 
 interface UseFriendsTabParams {
   isMyProfile: boolean;
+  name: string;
   friendsCount: number;
   followersCount: number;
   followingCount: number;
@@ -13,6 +14,7 @@ interface UseFriendsTabParams {
 
 export const useFriendsTab = ({
   isMyProfile,
+  name,
   friendsCount,
   followersCount,
   followingCount,
@@ -26,8 +28,12 @@ export const useFriendsTab = ({
 
   const goToTab = (tab: FriendsTab) => router.push(`?tab=${tab}`);
 
+  const friendsLabel = isMyProfile
+    ? t("common.friends")
+    : t("friends.friendsTitleOther", { name });
+
   const tabs = [
-    { key: "friends", label: t("common.friends"), count: friendsCount },
+    { key: "friends", label: friendsLabel, count: friendsCount },
     {
       key: "requests",
       label: t("friends.requestsTitle"),
@@ -38,11 +44,13 @@ export const useFriendsTab = ({
       key: "followers",
       label: t("friends.followersTitle"),
       count: followersCount,
+      hidden: !isMyProfile,
     },
     {
       key: "following",
       label: t("friends.followingTitle"),
       count: followingCount,
+      hidden: !isMyProfile,
     },
   ] satisfies {
     key: FriendsTab;

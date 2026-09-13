@@ -17,6 +17,7 @@ import {
 } from "@/services/api/friends";
 import { toast } from "react-toastify";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
+import { revalidateFollows } from "@/services/actions/revalidateFollows";
 import { getRelationshipStatus } from "@/utils/friends";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 
@@ -36,6 +37,7 @@ export const FriendCard = ({
   const t = useTranslations();
   const locale = useLocale();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isRequestLoading, setIsRequestLoading] = useState(false);
   const currentUserData = useAuthStore((state) => state.currentUser);
   const fetchCurrentUser = useAuthStore((state) => state.fetchCurrentUser);
   const { isFriend, isPending, isFollowing } = getRelationshipStatus(
@@ -46,6 +48,7 @@ export const FriendCard = ({
   const handleDeleteFriend = async () => {
     try {
       await deleteFriend(currentUser, friend.username);
+      await revalidateFollows();
       onFriendDeleted?.(friend.username);
       setIsDeleteOpen(false);
     } catch {
@@ -54,20 +57,30 @@ export const FriendCard = ({
   };
 
   const handleAddFriend = async () => {
+    if (isRequestLoading) return;
+    setIsRequestLoading(true);
     try {
       await addFriendAPI(currentUser, friend.username);
+      await revalidateFollows();
       await fetchCurrentUser();
+      setIsRequestLoading(false);
     } catch {
       toast.error(t("toasts.error"));
+      setIsRequestLoading(false);
     }
   };
 
   const handleCancelRequest = async () => {
+    if (isRequestLoading) return;
+    setIsRequestLoading(true);
     try {
       await deleteFriend(currentUser, friend.username);
+      await revalidateFollows();
       await fetchCurrentUser();
+      setIsRequestLoading(false);
     } catch {
       toast.error(t("toasts.error"));
+      setIsRequestLoading(false);
     }
   };
 
@@ -104,7 +117,11 @@ export const FriendCard = ({
             </Link>
             {!isFriend &&
               (isPending ? (
-                <Button appearance="secondary" onClick={handleCancelRequest}>
+                <Button
+                  appearance="secondary"
+                  onClick={handleCancelRequest}
+                  disabled={isRequestLoading}
+                >
                   {t("friends.sent")}
                 </Button>
               ) : isFollowing ? (
@@ -112,7 +129,11 @@ export const FriendCard = ({
                   {t("common.following")}
                 </Button>
               ) : (
-                <Button appearance="primary" onClick={handleAddFriend}>
+                <Button
+                  appearance="primary"
+                  onClick={handleAddFriend}
+                  disabled={isRequestLoading}
+                >
                   {t("common.addFriend")}
                 </Button>
               ))}

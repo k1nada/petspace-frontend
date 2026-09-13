@@ -35,14 +35,14 @@ export const addFriend = async (
   username: string,
   friendUsername: string,
 ): Promise<void> => {
-  await api.post(`/friends/${username}/add/${friendUsername}`);
+  await api.post(`/friends/${username}/${friendUsername}`);
 };
 
 export const deleteFriend = async (
   username: string,
   friendUsername: string,
 ): Promise<void> => {
-  await api.delete(`/friends/${username}/delete/${friendUsername}`);
+  await api.delete(`/friends/${username}/${friendUsername}`);
 };
 
 export const acceptFriendRequest = async (requestId: string): Promise<void> => {

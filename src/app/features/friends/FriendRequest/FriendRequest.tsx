@@ -10,6 +10,7 @@ import {
 import { FriendRequestCard } from "../FriendRequestCard/FriendRequestCard";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
+import { revalidateFollows } from "@/services/actions/revalidateFollows";
 
 export const FriendRequest = () => {
   const t = useTranslations();
@@ -23,6 +24,7 @@ export const FriendRequest = () => {
   const acceptRequest = async (requestId: string) => {
     try {
       await acceptFriendRequest(requestId);
+      await revalidateFollows();
       removeRequest(requestId);
       toast.success(t("friendRequest.acceptedSuccess"));
     } catch {
@@ -33,6 +35,7 @@ export const FriendRequest = () => {
   const rejectRequest = async (requestId: string) => {
     try {
       await rejectFriendRequest(requestId);
+      await revalidateFollows();
       removeRequest(requestId);
       toast.success(t("friendRequest.rejectedSuccess"));
     } catch {

@@ -8,7 +8,7 @@ export const getFollowers = unstable_cache(
     return data;
   },
   ["get-followers"],
-  { revalidate: 30 },
+  { revalidate: 30, tags: ["follows"] },
 );
 
 export const getFollowing = unstable_cache(
@@ -17,26 +17,26 @@ export const getFollowing = unstable_cache(
     return data;
   },
   ["get-following"],
-  { revalidate: 30 },
+  { revalidate: 30, tags: ["follows"] },
 );
 
 export const followUser = async (
   username: string,
   targetUsername: string,
 ): Promise<void> => {
-  await api.post(`/followers/${username}/follow/${targetUsername}`);
+  await api.post(`/following/${username}/${targetUsername}`);
 };
 
 export const unfollowUser = async (
   username: string,
   targetUsername: string,
 ): Promise<void> => {
-  await api.delete(`/followers/${username}/unfollow/${targetUsername}`);
+  await api.delete(`/following/${username}/${targetUsername}`);
 };
 
 export const removeFollower = async (
   username: string,
   followerUsername: string,
 ): Promise<void> => {
-  await api.delete(`/followers/${username}/remove/${followerUsername}`);
+  await api.delete(`/followers/${username}/${followerUsername}`);
 };

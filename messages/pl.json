@@ -133,7 +133,7 @@
     "addFriend": "Dodaj znajomego",
     "message": "Wiadomość",
     "familyTree": "Drzewo rodzinne",
-    "requestSent": "Zaproszenie wysłane",
+    "requestSent": "Wysłano",
     "following": "Obserwujesz"
   },
   "profileEditor": {
@@ -223,6 +223,7 @@
   },
   "photoGallery": {
     "title": "Moje zdjęcia",
+    "titleOther": "Zdjęcia użytkownika {name}",
     "addPhoto": "Dodaj nowe zdjęcie",
     "photoAlt": "Zdjęcie {name}",
     "emptyPhotosTitle": "Brak zdjęć",
@@ -246,6 +247,7 @@
   },
   "friends": {
     "friendsTitle": "Znajomi",
+    "friendsTitleOther": "Znajomi użytkownika {name}",
     "requestsTitle": "Zaproszenia",
     "followersTitle": "Obserwujący",
     "followingTitle": "Obserwowani",
@@ -253,9 +255,9 @@
     "addFriend": "Dodaj znajomego",
     "following": "Obserwujesz",
     "sent": "Wysłano",
-    "unfollowAll": "Przestań obserwować wszystkich",
+    "unfollowAll": "Nie obserwuj nikogo",
     "remove": "Usuń",
-    "unfollow": "Przestań obserwować",
+    "unfollow": "Nie obserwuj",
     "emptyFriendsTitle": "Brak znajomych",
     "emptyFriendsText": "Znajdź jakieś psy i wyślij im zaproszenie do znajomych!",
     "noSearchResults": "Nie znaleziono znajomych",
@@ -299,6 +301,7 @@
   },
   "familyTree": {
     "title": "Drzewo rodzinne",
+    "titleOther": "Drzewo rodzinne użytkownika {name}",
     "parents": "Rodzice",
     "children": "Szczeniaki",
     "emptyParents": "Nie dodano jeszcze rodziców",
