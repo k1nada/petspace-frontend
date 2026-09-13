@@ -14,7 +14,7 @@ export const NotificationsDropdown = () => {
   const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
   const currentUser = useAuthStore((state) => state.currentUser);
-  const { notifications, unreadCount, markAllAsRead, markAsRead } =
+  const { notifications, unreadCount, loading, markAllAsRead, markAsRead } =
     useNotifications(currentUser);
 
   return (
@@ -50,7 +50,9 @@ export const NotificationsDropdown = () => {
             )}
           </div>
 
-          {notifications.length === 0 ? (
+          {loading ? (
+            <EmptyState text={t("common.loading")} compact />
+          ) : notifications.length === 0 ? (
             <EmptyState text={t("notifications.empty")} compact />
           ) : (
             <ul className={styles.list}>

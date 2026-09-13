@@ -19,10 +19,15 @@ export const useSearch = () => {
       return;
     }
 
-    const data = await searchUsers(value);
-
-    if (latestQuery.current === value) {
-      setResults(data);
+    try {
+      const data = await searchUsers(value);
+      if (latestQuery.current === value) {
+        setResults(data);
+      }
+    } catch {
+      if (latestQuery.current === value) {
+        setResults([]);
+      }
     }
   };
 
