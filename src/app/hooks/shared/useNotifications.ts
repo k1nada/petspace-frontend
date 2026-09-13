@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
 import {
   getNotifications,
   markAllNotificationsRead,
@@ -8,16 +10,24 @@ import { AppNotification, User } from "@/types";
 import socket from "@/services/socket";
 
 export const useNotifications = (currentUser: User | null) => {
+  const t = useTranslations();
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!currentUser) return;
 
-    getNotifications(currentUser.username).then((data) => {
-      setNotifications(data);
+    const loadNotifications = async () => {
+      try {
+        const data = await getNotifications(currentUser.username);
+        setNotifications(data);
+      } catch {
+        setNotifications([]);
+      }
       setLoading(false);
-    });
+    };
+
+    loadNotifications();
   }, [currentUser]);
 
   useEffect(() => {
@@ -38,7 +48,11 @@ export const useNotifications = (currentUser: User | null) => {
   const markAllAsRead = async () => {
     if (!currentUser) return;
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-    await markAllNotificationsRead(currentUser.username);
+    try {
+      await markAllNotificationsRead(currentUser.username);
+    } catch {
+      toast.error(t("toasts.error"));
+    }
   };
 
   const markAsRead = async (id: string) => {
@@ -48,7 +62,11 @@ export const useNotifications = (currentUser: User | null) => {
         return { ...n, read: true };
       }),
     );
-    await markNotificationRead(id);
+    try {
+      await markNotificationRead(id);
+    } catch {
+      toast.error(t("toasts.error"));
+    }
   };
 
   return { notifications, unreadCount, loading, markAllAsRead, markAsRead };

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { getBreeds } from "@/services/api/breeds";
+import { getBreedsClient } from "@/services/api/breeds";
 
 export const useBreeds = () => {
   const [breeds, setBreeds] = useState<string[]>([]);
 
   useEffect(() => {
-    getBreeds().then(setBreeds);
+    getBreedsClient().then(setBreeds);
   }, []);
 
   return breeds;
