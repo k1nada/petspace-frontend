@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
 import {
   deleteComment as deleteCommentRequest,
   updateComment as updateCommentRequest,
@@ -16,6 +18,7 @@ export const usePostComments = ({
   hasComments,
   onRefresh,
 }: UsePostCommentsProps) => {
+  const t = useTranslations();
   const [showCommentCreator, setShowCommentCreator] = useState(hasComments);
   const [replyTo, setReplyTo] = useState<{
     commentId: string;
@@ -34,13 +37,21 @@ export const usePostComments = ({
   };
 
   const deleteComment = async (commentId: string) => {
-    await deleteCommentRequest(commentId);
-    onRefresh();
+    try {
+      await deleteCommentRequest(commentId);
+      onRefresh();
+    } catch {
+      toast.error(t("toasts.commentDeleteError"));
+    }
   };
 
   const editComment = async (commentId: string, content: string) => {
-    await updateCommentRequest(commentId, content);
-    onRefresh();
+    try {
+      await updateCommentRequest(commentId, content);
+      onRefresh();
+    } catch {
+      toast.error(t("toasts.commentSaveError"));
+    }
   };
 
   const onCommentCreated = () => {

@@ -37,6 +37,7 @@ export const AddFamilyMemberModal = ({
   const [mode, setMode] = useState<Mode>("search");
   const { query, results, search } = useSearch();
   const [form, setForm] = useState(emptyForm);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const reset = () => {
     setMode("search");
@@ -45,11 +46,14 @@ export const AddFamilyMemberModal = ({
   };
 
   const handleClose = () => {
+    if (isSubmitting) return;
     reset();
     onClose();
   };
 
   const selectUser = async (user: User) => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     try {
       await onAdd({
         name: user.name,
@@ -58,12 +62,16 @@ export const AddFamilyMemberModal = ({
         username: user.username,
       });
       reset();
+      setIsSubmitting(false);
     } catch {
-      toast.error(t("toasts.error"));
+      toast.error(t("familyTree.addError"));
+      setIsSubmitting(false);
     }
   };
 
   const submitManual = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     try {
       await onAdd({
         name: form.name.trim(),
@@ -71,8 +79,10 @@ export const AddFamilyMemberModal = ({
         avatar: form.avatar.trim() || undefined,
       });
       reset();
+      setIsSubmitting(false);
     } catch {
-      toast.error(t("toasts.error"));
+      toast.error(t("familyTree.addError"));
+      setIsSubmitting(false);
     }
   };
 
@@ -109,6 +119,7 @@ export const AddFamilyMemberModal = ({
             key={tab}
             appearance={mode === tab ? "primary" : "tertiary"}
             onClick={() => setMode(tab)}
+            disabled={isSubmitting}
           >
             {t(`familyTree.${tab}Tab`)}
           </Button>
@@ -122,6 +133,7 @@ export const AddFamilyMemberModal = ({
             onChange={search}
             fullWidth
             placeholder={t("familyTree.searchPlaceholder")}
+            disabled={isSubmitting}
           />
 
           {results.length > 0 && (
@@ -130,7 +142,8 @@ export const AddFamilyMemberModal = ({
                 <li
                   key={user.username}
                   className={styles.resultItem}
-                  onClick={() => selectUser(user)}
+                  style={{ opacity: isSubmitting ? 0.6 : 1 }}
+                  onClick={() => !isSubmitting && selectUser(user)}
                 >
                   <Avatar src={user.avatar} size={40} />
                   <div className={styles.resultInfo}>
@@ -157,6 +170,7 @@ export const AddFamilyMemberModal = ({
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder={t("familyTree.namePlaceholder")}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -167,6 +181,7 @@ export const AddFamilyMemberModal = ({
               onChange={(breed) => setForm({ ...form, breed })}
               options={breeds}
               placeholder={t("placeholder.noneSelected")}
+              disabled={isSubmitting}
             />
           </div>
 
@@ -179,10 +194,15 @@ export const AddFamilyMemberModal = ({
                 size={72}
                 profileAvatar={form.avatar || undefined}
                 onChange={handleFilePicked}
+                disabled={isSubmitting}
               />
               <div className={styles.avatarActions}>
                 <p className={styles.hint}>{t("avatarEdit.choosePhoto")}</p>
-                <Button appearance="tertiary" onClick={generatePhoto}>
+                <Button
+                  appearance="tertiary"
+                  onClick={generatePhoto}
+                  disabled={isSubmitting}
+                >
                   {t("familyTree.generatePhoto")}
                 </Button>
               </div>
@@ -190,13 +210,17 @@ export const AddFamilyMemberModal = ({
           </div>
 
           <div className={styles.actions}>
-            <Button appearance="secondary" onClick={handleClose}>
+            <Button
+              appearance="secondary"
+              onClick={handleClose}
+              disabled={isSubmitting}
+            >
               {t("common.cancel")}
             </Button>
             <Button
               appearance="primary"
               onClick={submitManual}
-              disabled={!form.name.trim()}
+              disabled={!form.name.trim() || isSubmitting}
             >
               {t("familyTree.add")}
             </Button>

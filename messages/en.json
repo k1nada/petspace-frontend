@@ -49,6 +49,7 @@
     "required": "This field is required",
     "emailPattern": "Invalid email address",
     "usernamePattern": "Username can only contain letters, numbers, and underscores",
+    "namePattern": "Name can only contain letters, numbers, and spaces",
     "passwordPattern": "Password must contain at least one letter and one number"
   },
   "errors": {
@@ -103,7 +104,15 @@
   },
   "toasts": {
     "saved": "Changes saved successfully",
-    "error": "Error"
+    "error": "Error",
+    "commentPostError": "Failed to post comment",
+    "commentSaveError": "Failed to save comment",
+    "commentDeleteError": "Failed to delete comment",
+    "commentsLoadError": "Failed to load comments",
+    "postPublishError": "Failed to publish post",
+    "postSaveError": "Failed to save post",
+    "postDeleteError": "Failed to delete post",
+    "likeError": "Failed to update like"
   },
   "notFound": {
     "text": "Oops! The dachshund went to dig a little burrow...",
@@ -184,7 +193,7 @@
     "photo": "Photo",
     "removePhoto": "Remove photo",
     "publish": "Add post",
-    "placeholder": "What's new, "
+    "placeholder": "What's new, {name}?"
   },
   "post": {
     "image": "Post image",
@@ -312,7 +321,8 @@
     "avatarLabel": "Photo",
     "generatePhoto": "Generate photo",
     "generatePhotoComingSoon": "AI photo generation is coming soon!",
-    "add": "Add"
+    "add": "Add",
+    "addError": "Failed to add family member"
   },
   "contactList": {
     "emptyText": "Find other dogs to start chatting!",

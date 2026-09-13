@@ -107,7 +107,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
       onRefresh();
       setIsSavingEdit(false);
     } catch {
-      toast.error(t("toasts.error"));
+      toast.error(t("toasts.postSaveError"));
       setIsSavingEdit(false);
     }
   };
@@ -118,7 +118,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
         await deletePost(post.id);
         onRefresh();
       } catch {
-        toast.error(t("toasts.error"));
+        toast.error(t("toasts.postDeleteError"));
       }
       return;
     }
@@ -157,7 +157,6 @@ export const Post = ({ post, onRefresh }: PostProps) => {
             onChange={setEditContent}
             onCancel={() => setIsEditing(false)}
             onSave={handleSaveEditPost}
-            disabled={isSavingEdit}
           />
         ) : (
           <div className={styles.content}>{post.content}</div>

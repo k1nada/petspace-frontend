@@ -25,10 +25,10 @@ interface CommentProps {
   postId?: string;
   photoId?: string;
   avatarSize?: number;
-  onDelete: () => void;
-  onEdit: (content: string) => void;
-  onDeleteReply?: (commentId: string) => void;
-  onEditReply?: (commentId: string, content: string) => void;
+  onDelete: () => Promise<void>;
+  onEdit: (content: string) => Promise<void>;
+  onDeleteReply?: (commentId: string) => Promise<void>;
+  onEditReply?: (commentId: string, content: string) => Promise<void>;
   onReply?: (commentId: string, name: string) => void;
 }
 
@@ -52,6 +52,7 @@ export const Comment = ({
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(comment.content);
   const [isHovered, setIsHovered] = useState(false);
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
 
   const { liked, displayCount, likeLoading, toggleLike } = useLike({
     initialLiked: comment.liked,
@@ -60,8 +61,8 @@ export const Comment = ({
     id: comment.id,
   });
 
-  const handleDeleteComment = () => {
-    onDelete();
+  const handleDeleteComment = async () => {
+    await onDelete();
     setIsDeleteOpen(false);
   };
 
@@ -70,11 +71,13 @@ export const Comment = ({
     setIsEditing(true);
   };
 
-  const handleSaveEditComment = () => {
+  const handleSaveEditComment = async () => {
     const trimmedContent = editContent.trim();
-    if (!trimmedContent) return;
-    onEdit(trimmedContent);
+    if (!trimmedContent || isSavingEdit) return;
+    setIsSavingEdit(true);
+    await onEdit(trimmedContent);
     setIsEditing(false);
+    setIsSavingEdit(false);
   };
 
   return (
@@ -103,18 +106,20 @@ export const Comment = ({
               onChange={(e) => setEditContent(e.target.value)}
               autoFocus
               maxLength={1000}
+              disabled={isSavingEdit}
             />
             <div className={styles.editActions}>
               <Button
                 appearance="secondary"
                 onClick={() => setIsEditing(false)}
+                disabled={isSavingEdit}
               >
                 {t("common.cancel")}
               </Button>
               <Button
                 appearance="primary"
                 onClick={handleSaveEditComment}
-                disabled={!editContent.trim()}
+                disabled={!editContent.trim() || isSavingEdit}
               >
                 {t("common.save")}
               </Button>
@@ -172,8 +177,12 @@ export const Comment = ({
                 postId={postId}
                 photoId={photoId}
                 avatarSize={28}
-                onDelete={() => onDeleteReply?.(reply.id)}
-                onEdit={(content) => onEditReply?.(reply.id, content)}
+                onDelete={async () => {
+                  await onDeleteReply?.(reply.id);
+                }}
+                onEdit={async (content) => {
+                  await onEditReply?.(reply.id, content);
+                }}
                 onReply={onReply}
               />
             </li>

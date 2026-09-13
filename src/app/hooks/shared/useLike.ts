@@ -38,9 +38,9 @@ export const useLike = ({
       setLiked(newLiked);
       setLikesCount(count);
       onChange?.(newLiked, count);
+      setLikeLoading(false);
     } catch {
-      toast.error(t("toasts.error"));
-    } finally {
+      toast.error(t("toasts.likeError"));
       setLikeLoading(false);
     }
   };

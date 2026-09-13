@@ -32,9 +32,9 @@ export const usePhotoComments = ({
       return;
     }
     if (!photoId) return;
-    getPhotoComments(photoId).then((data) => {
-      if (data) setFetchedComments(data);
-    });
+    getPhotoComments(photoId)
+      .then((data) => setFetchedComments(data))
+      .catch(() => toast.error(t("toasts.commentsLoadError")));
   };
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export const usePhotoComments = ({
       await deleteCommentApi(commentId);
       refreshComments();
     } catch {
-      toast.error(t("toasts.error"));
+      toast.error(t("toasts.commentDeleteError"));
     }
   };
 
@@ -56,7 +56,7 @@ export const usePhotoComments = ({
       await updateComment(commentId, content);
       refreshComments();
     } catch {
-      toast.error(t("toasts.error"));
+      toast.error(t("toasts.commentSaveError"));
     }
   };
 

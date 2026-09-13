@@ -49,6 +49,7 @@
     "required": "To pole jest wymagane",
     "emailPattern": "Nieprawidłowy adres e-mail",
     "usernamePattern": "Nazwa użytkownika może zawierać tylko litery, cyfry i podkreślenia",
+    "namePattern": "Imię może zawierać tylko litery, cyfry i spacje",
     "passwordPattern": "Hasło musi zawierać co najmniej jedną literę i jedną cyfrę"
   },
   "errors": {
@@ -103,7 +104,15 @@
   },
   "toasts": {
     "saved": "Zmiany zostały zapisane pomyślnie",
-    "error": "Błąd"
+    "error": "Błąd",
+    "commentPostError": "Nie udało się dodać komentarza",
+    "commentSaveError": "Nie udało się zapisać komentarza",
+    "commentDeleteError": "Nie udało się usunąć komentarza",
+    "commentsLoadError": "Nie udało się wczytać komentarzy",
+    "postPublishError": "Nie udało się opublikować posta",
+    "postSaveError": "Nie udało się zapisać posta",
+    "postDeleteError": "Nie udało się usunąć posta",
+    "likeError": "Nie udało się zaktualizować polubienia"
   },
   "notFound": {
     "text": "Ups! Jamnik poszedł kopać sobie norkę...",
@@ -184,7 +193,7 @@
     "photo": "Zdjęcie",
     "removePhoto": "Usuń zdjęcie",
     "publish": "Opublikuj post",
-    "placeholder": "Co nowego, "
+    "placeholder": "Co nowego, {name}?"
   },
   "post": {
     "image": "Zdjęcie posta",
@@ -312,7 +321,8 @@
     "avatarLabel": "Zdjęcie",
     "generatePhoto": "Wygeneruj zdjęcie",
     "generatePhotoComingSoon": "Generowanie zdjęć przez AI wkrótce!",
-    "add": "Dodaj"
+    "add": "Dodaj",
+    "addError": "Nie udało się dodać członka rodziny"
   },
   "contactList": {
     "emptyText": "Znajdź inne psy i zacznij rozmawiać!",

@@ -59,18 +59,13 @@ export const PostCreator = ({
     setIsPublishing(true);
     try {
       const image = imageFile ? await uploadPostPhoto(imageFile) : undefined;
-      const post = await createPost(trimmedContent, postwallId, image);
-      if (!post) {
-        toast.error(t("toasts.error"));
-        setIsPublishing(false);
-        return;
-      }
+      await createPost(trimmedContent, postwallId, image);
       setContent("");
       removeImage();
       onSuccess?.();
       setIsPublishing(false);
     } catch {
-      toast.error(t("toasts.error"));
+      toast.error(t("toasts.postPublishError"));
       setIsPublishing(false);
     }
   };
@@ -87,7 +82,7 @@ export const PostCreator = ({
             value={content}
             onKeyDown={handleKeyDown}
             onChange={(e) => setContent(e.target.value)}
-            placeholder={t("postCreator.placeholder") + name + "?"}
+            placeholder={t("postCreator.placeholder", { name })}
             maxLength={3000}
             disabled={isPublishing}
           />

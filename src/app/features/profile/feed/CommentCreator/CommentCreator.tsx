@@ -26,22 +26,21 @@ export const CommentCreator = ({
 }: CommentCreatorProps) => {
   const t = useTranslations();
   const [content, setContent] = useState(initialContent ?? "");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const currentUser = useAuthStore((state) => state.currentUser);
 
   const handleSubmit = async () => {
-    if (!content) return;
-    const comment = await createComment(
-      content,
-      postId,
-      photoId,
-      replyCommentId,
-    );
-    if (!comment) {
-      toast.error(t("toasts.error"));
-      return;
+    if (!content || isSubmitting) return;
+    setIsSubmitting(true);
+    try {
+      await createComment(content, postId, photoId, replyCommentId);
+      setContent("");
+      onSuccess?.();
+      setIsSubmitting(false);
+    } catch {
+      toast.error(t("toasts.commentPostError"));
+      setIsSubmitting(false);
     }
-    setContent("");
-    onSuccess?.();
   };
 
   return (
@@ -56,6 +55,7 @@ export const CommentCreator = ({
           onSubmit={handleSubmit}
           placeholder={t("commentCreator.placeholder")}
           maxLength={1000}
+          disabled={isSubmitting}
         />
       </div>
     </div>
