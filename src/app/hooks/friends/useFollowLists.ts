@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { FollowUser } from "@/types";
 import { unfollowUser } from "@/services/api/follows";
+import { revalidateFollows } from "@/services/actions/revalidateFollows";
 
 interface UseFollowListsParams {
   username: string;
@@ -28,12 +29,17 @@ export const useFollowLists = ({
 
   const unfollowAll = async () => {
     setIsConfirmAllOpen(false);
-    try {
-      await Promise.all(
-        following.map((u) => unfollowUser(username, u.username)),
-      );
-      setFollowing([]);
-    } catch {
+    const stillFollowing: FollowUser[] = [];
+    for (const u of following) {
+      try {
+        await unfollowUser(username, u.username);
+      } catch {
+        stillFollowing.push(u);
+      }
+    }
+    setFollowing(stillFollowing);
+    await revalidateFollows();
+    if (stillFollowing.length > 0) {
       toast.error(t("toasts.error"));
     }
   };

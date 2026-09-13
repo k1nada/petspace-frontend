@@ -223,6 +223,7 @@
   },
   "photoGallery": {
     "title": "My photos",
+    "titleOther": "{name}'s photos",
     "addPhoto": "Add new photo",
     "photoAlt": "{name}'s photo",
     "emptyPhotosTitle": "No photos yet",
@@ -246,6 +247,7 @@
   },
   "friends": {
     "friendsTitle": "Friends",
+    "friendsTitleOther": "{name}'s friends",
     "requestsTitle": "Requests",
     "followersTitle": "Followers",
     "followingTitle": "Following",
@@ -299,6 +301,7 @@
   },
   "familyTree": {
     "title": "Family tree",
+    "titleOther": "{name}'s family tree",
     "parents": "Parents",
     "children": "Puppies",
     "emptyParents": "No parents added yet",

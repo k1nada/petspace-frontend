@@ -4,6 +4,7 @@ import styles from "./FollowList.module.scss";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { unfollowUser, removeFollower } from "@/services/api/follows";
+import { revalidateFollows } from "@/services/actions/revalidateFollows";
 import { FollowCard } from "../FollowCard/FollowCard";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { FollowUser, FollowListType } from "@/types";
@@ -34,6 +35,7 @@ export const FollowList = ({
         username,
         targetUsername,
       );
+      await revalidateFollows();
       onRemove(targetUsername);
     } catch {
       toast.error(t("toasts.error"));

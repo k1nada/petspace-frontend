@@ -20,6 +20,7 @@ import {
   addFriend as addFriendAPI,
   deleteFriend,
 } from "@/services/api/friends";
+import { revalidateFollows } from "@/services/actions/revalidateFollows";
 import { getRelationshipStatus } from "@/utils/friends";
 import { toast } from "react-toastify";
 
@@ -69,6 +70,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     if (!currentUser?.username) return;
     try {
       await addFriendAPI(currentUser.username, bannerInfo.username);
+      await revalidateFollows();
       await fetchCurrentUser();
     } catch {
       toast.error(t("toasts.error"));
@@ -79,6 +81,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     if (!currentUser?.username) return;
     try {
       await deleteFriend(currentUser.username, bannerInfo.username);
+      await revalidateFollows();
       await fetchCurrentUser();
     } catch {
       toast.error(t("toasts.error"));

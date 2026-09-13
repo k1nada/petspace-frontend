@@ -13,6 +13,7 @@ import { SuggestedFriends } from "@/app/features/feed/SuggestedFriends/Suggested
 
 interface FriendsLayoutProps {
   username: string;
+  name: string;
   friends: Friend[];
   followers: FollowUser[];
   following: FollowUser[];
@@ -20,6 +21,7 @@ interface FriendsLayoutProps {
 
 export const FriendsLayout = ({
   username,
+  name,
   friends,
   followers,
   following,
@@ -37,6 +39,7 @@ export const FriendsLayout = ({
         <AuthLoader fallback={<FriendsSkeleton />}>
           <Friends
             username={username}
+            name={name}
             friends={friends}
             followers={followers}
             following={following}

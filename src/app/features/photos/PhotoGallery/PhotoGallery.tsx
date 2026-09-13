@@ -50,7 +50,9 @@ export const PhotoGallery = ({
       <section className={styles.container}>
         <div className={styles.header}>
           <h1 className={styles.title}>
-            {t("photoGallery.title")}
+            {isOwner
+              ? t("photoGallery.title")
+              : t("photoGallery.titleOther", { name })}
             <span className={styles.count}>{localPhotos.length}</span>
           </h1>
           {isOwner && (

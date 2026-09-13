@@ -40,6 +40,7 @@ const FriendsPage = async ({ params }: FriendsPageProps) => {
       <main>
         <FriendsLayout
           username={userData.username}
+          name={userData.name}
           friends={friends}
           followers={followers}
           following={following}
