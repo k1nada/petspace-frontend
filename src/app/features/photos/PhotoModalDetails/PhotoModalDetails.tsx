@@ -7,6 +7,7 @@ import { LikeButton } from "@/app/uikit/feedback/LikeButton/LikeButton";
 import { RepostButton } from "@/app/uikit/feedback/RepostButton/RepostButton";
 import { usePhotoComments } from "@/app/hooks/photos/usePhotoComments";
 import { useResolvedLike, LikeState } from "@/app/hooks/photos/useResolvedLike";
+import { useResolvedRepost } from "@/app/hooks/photos/useResolvedRepost";
 import { Comment } from "../../profile/feed/Comment/Comment";
 import { CommentCreator } from "../../profile/feed/CommentCreator/CommentCreator";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
@@ -27,6 +28,7 @@ interface PhotoModalDetailsProps {
   likeState?: LikeState;
   onLikeChange?: (photoId: string, liked: boolean, likesCount: number) => void;
   repostState?: RepostState;
+  enableRepost?: boolean;
   postId?: string;
   onCommentsRefresh?: () => void;
 }
@@ -41,6 +43,7 @@ export const PhotoModalDetails = ({
   likeState,
   onLikeChange,
   repostState,
+  enableRepost,
   postId,
   onCommentsRefresh,
 }: PhotoModalDetailsProps) => {
@@ -65,6 +68,15 @@ export const PhotoModalDetails = ({
     likeLoading,
     toggleLike: onToggleLike,
   } = useResolvedLike({ photo, postId, likeState, onLikeChange });
+
+  const {
+    reposted,
+    displayCount: repostDisplayCount,
+    repostLoading,
+    toggleRepost: onToggleRepost,
+  } = useResolvedRepost({ photo, repostState });
+
+  const showRepost = Boolean(repostState) || enableRepost;
 
   const rootComments = comments.filter((comment) => !comment.parent);
   const repliesFor = (commentId: string) =>
@@ -118,12 +130,13 @@ export const PhotoModalDetails = ({
             onToggle={onToggleLike}
             className={styles.stat}
           />
-          {repostState && (
+          {showRepost && <span className={styles.divider} />}
+          {showRepost && (
             <RepostButton
-              reposted={repostState.reposted}
-              count={repostState.count}
-              loading={repostState.loading}
-              onToggle={repostState.onToggle}
+              reposted={reposted}
+              count={repostDisplayCount}
+              loading={repostLoading}
+              onToggle={onToggleRepost}
               className={styles.stat}
             />
           )}

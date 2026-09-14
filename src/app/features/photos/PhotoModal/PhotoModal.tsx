@@ -37,6 +37,7 @@ interface PhotoModalProps {
   onLikeChange?: (photoId: string, liked: boolean, likesCount: number) => void;
   likeState?: LikeState;
   repostState?: RepostState;
+  enableRepost?: boolean;
   onCommentsRefresh?: () => void;
 }
 
@@ -52,6 +53,7 @@ export const PhotoModal = ({
   onLikeChange,
   likeState,
   repostState,
+  enableRepost,
   onCommentsRefresh,
 }: PhotoModalProps) => {
   const t = useTranslations();
@@ -99,6 +101,7 @@ export const PhotoModal = ({
             likeState={likeState}
             onLikeChange={onLikeChange}
             repostState={repostState}
+            enableRepost={enableRepost}
             postId={postId}
             onCommentsRefresh={onCommentsRefresh}
           />

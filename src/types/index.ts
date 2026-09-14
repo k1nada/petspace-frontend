@@ -90,6 +90,8 @@ export interface Photo {
   createdAt: string;
   likesCount: number;
   liked: boolean;
+  repostsCount?: number;
+  reposted?: boolean;
   comments?: Comment[];
 }
 

@@ -3,7 +3,7 @@
 import { ROUTES } from "@/routes/routes";
 import styles from "./ProfilePhotos.module.scss";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { useTranslations } from "next-intl";
@@ -42,8 +42,9 @@ export const ProfilePhotos = ({
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
     usePhotoNavigation(newestFirstPhotos);
 
-  const handleLikeChange = usePhotoLikeSync(setLocalPhotos);
-  usePhotoLikeRefresh(username, setLocalPhotos);
+  const touchedPhotoIds = useRef<Set<string>>(new Set());
+  usePhotoLikeRefresh(username, setLocalPhotos, touchedPhotoIds);
+  const handleLikeChange = usePhotoLikeSync(setLocalPhotos, touchedPhotoIds);
 
   const handleDeletePhoto = async () => {
     const selectedPhoto =
@@ -70,16 +71,18 @@ export const ProfilePhotos = ({
           <div className={styles.empty}>{t("common.noPhotosYet")}</div>
         ) : (
           <ul className={styles.gallery}>
-            {newestFirstPhotos.slice(0, MAX_VISIBLE_PHOTOS).map((photo, index) => (
-              <li key={photo.publicId} className={styles.photo}>
-                <Image
-                  onClick={() => setSelectedIndex(index)}
-                  src={getPhotoUrl(photo)}
-                  alt={t("postCreator.photo")}
-                  fill
-                />
-              </li>
-            ))}
+            {newestFirstPhotos
+              .slice(0, MAX_VISIBLE_PHOTOS)
+              .map((photo, index) => (
+                <li key={photo.publicId} className={styles.photo}>
+                  <Image
+                    onClick={() => setSelectedIndex(index)}
+                    src={getPhotoUrl(photo)}
+                    alt={t("postCreator.photo")}
+                    fill
+                  />
+                </li>
+              ))}
           </ul>
         )}
 
@@ -98,6 +101,7 @@ export const ProfilePhotos = ({
           onDelete={handleDeletePhoto}
           onClose={() => setSelectedIndex(null)}
           onLikeChange={handleLikeChange}
+          enableRepost={!isOwner}
         />
       </section>
     </AuthLoader>

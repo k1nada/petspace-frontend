@@ -64,6 +64,12 @@
   font-size: var(--font-m);
 }
 
+.divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border-divider);
+}
+
 .stat {
   display: flex;
   align-items: center;
