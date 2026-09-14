@@ -92,6 +92,7 @@ export const PhotoGallery = ({
               deletePhoto(selectedPhoto.id, () => setSelectedIndex(null))
             }
             onLikeChange={handleLikeChange}
+            enableRepost={!isOwner}
           />
         )}
 

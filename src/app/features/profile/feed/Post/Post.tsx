@@ -84,13 +84,12 @@ export const Post = ({ post, onRefresh }: PostProps) => {
   };
   const postPhoto: Photo | null = post.image ? photoData : null;
 
-  const repostData: RepostState = {
+  const repostState: RepostState = {
     reposted,
     count: repostCount,
     loading: repostLoading,
-    onToggle: handleToggleRepost,
+    onToggle: () => setIsShareOpen(true),
   };
-  const repostState: RepostState | undefined = isOwner ? undefined : repostData;
 
   const handleStartEditPost = () => {
     setEditContent(post.content);
