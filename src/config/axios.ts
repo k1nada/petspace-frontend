@@ -19,7 +19,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-const AUTH_ENDPOINTS = ["/signin", "/signup"];
+const AUTH_ENDPOINTS = ["/signin", "/signup", "/me"];
 
 api.interceptors.response.use(
   (response) => response,

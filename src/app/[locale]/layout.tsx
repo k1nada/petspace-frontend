@@ -23,6 +23,8 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico?v=11" sizes="any" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
