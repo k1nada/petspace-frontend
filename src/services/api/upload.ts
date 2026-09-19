@@ -20,8 +20,14 @@ export const uploadPhoto = async (file: File): Promise<UploadedPhoto> => {
   return data.data;
 };
 
-export const deletePhoto = async (photoId: string): Promise<void> => {
-  await api.delete(`/api/upload/photo/${photoId}`);
+interface DeletedPhoto {
+  avatarChanged: boolean;
+  avatar: string | null;
+}
+
+export const deletePhoto = async (photoId: string): Promise<DeletedPhoto> => {
+  const { data } = await api.delete(`/api/upload/photo/${photoId}`);
+  return data.data;
 };
 
 export const uploadAvatar = async (file: File): Promise<UploadedAvatar> => {

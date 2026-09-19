@@ -68,9 +68,16 @@ export const AvatarEdit = ({
 
   const deleteAvatarPhoto = async (photoId: string) => {
     try {
-      await deletePhotoApi(photoId);
+      const { avatarChanged, avatar } = await deletePhotoApi(photoId);
+      setLocalAvatarPhotos((prev) => prev?.filter((p) => p.id !== photoId));
+      setSelectedIndex(null);
+
+      if (avatarChanged) {
+        onAvatarChange?.(avatar ?? undefined);
+      }
+
       await revalidateUser();
-      window.location.reload();
+      if (avatarChanged) window.location.reload();
     } catch {
       toast.error(t("toasts.error"));
     }
@@ -89,20 +96,40 @@ export const AvatarEdit = ({
     }
   };
 
-  if (!isEditable) {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.avatarWrapper}>
-          <Avatar src={src ?? defaultAvatar} size={size} />
-        </div>
-      </div>
-    );
-  }
-
   const hasAvatar = Boolean(src);
 
   const selectedPhoto =
     selectedIndex === null ? null : (newestFirstPhotos[selectedIndex] ?? null);
+
+  if (!isEditable) {
+    return (
+      <div className={styles.wrapper}>
+        <div
+          className={styles.avatarWrapper}
+          onClick={() => {
+            if (hasAvatar) setSelectedIndex(0);
+          }}
+        >
+          <Avatar src={src ?? defaultAvatar} size={size} />
+        </div>
+
+        <PhotoModal
+          photo={selectedPhoto}
+          author={{ name: name ?? "", username, avatar: src }}
+          navigation={{
+            photosCount: newestFirstPhotos.length,
+            currentIndex: selectedIndex ?? 0,
+            onPrev: handlePrev,
+            onNext: handleNext,
+          }}
+          isOwner={false}
+          onClose={() => setSelectedIndex(null)}
+          onLikeChange={handleLikeChange}
+          enableRepost
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={styles.wrapper}>
