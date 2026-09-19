@@ -26,10 +26,12 @@ export const AvatarChangeModal = ({
 }: AvatarChangeModalProps) => {
   const t = useTranslations();
   const [file, setFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const savePhoto = async () => {
+    if (!file || isSubmitting) return;
+    setIsSubmitting(true);
     try {
-      if (!file) return;
       const avatar = await uploadAvatar(file);
 
       onAvatarChange?.(avatar.url);
@@ -46,6 +48,8 @@ export const AvatarChangeModal = ({
       } else {
         toast.error(t("toasts.error"));
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -62,7 +66,11 @@ export const AvatarChangeModal = ({
       </div>
       <p className={styles.hint}>{t("avatarEdit.choosePhoto")}</p>
       <div className={styles.actions}>
-        <Button appearance="primary" onClick={savePhoto}>
+        <Button
+          appearance="primary"
+          onClick={savePhoto}
+          disabled={isSubmitting}
+        >
           {t("common.saveAndContinue")}
         </Button>
       </div>
