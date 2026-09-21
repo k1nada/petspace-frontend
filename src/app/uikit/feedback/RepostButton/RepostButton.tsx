@@ -14,7 +14,6 @@ interface RepostButtonProps {
 export const RepostButton = ({
   reposted,
   count,
-  loading,
   onToggle,
   className,
 }: RepostButtonProps) => {
@@ -25,7 +24,6 @@ export const RepostButton = ({
       appearance="minimal"
       className={cn(className, styles.repost, { [styles.reposted]: reposted })}
       onClick={onToggle}
-      disabled={loading}
     >
       <FaReply size={16} />
       {showCount && <span className={styles.count}>{count}</span>}

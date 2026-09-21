@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/app/uikit/form/Button/Button";
 import styles from "./PhotoGallery.module.scss";
 import { useTranslations } from "next-intl";
@@ -13,6 +14,7 @@ import { PhotoGrid } from "../PhotoGrid/PhotoGrid";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
+import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 
 interface PhotoGalleryProps {
   photos: Photo[];
@@ -36,10 +38,12 @@ export const PhotoGallery = ({
     setIsUploadOpen,
     addPhoto,
     deletePhoto,
+    deleteAllPhotos,
     handleLikeChange,
   } = usePhotoGallery(photos, username);
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
     usePhotoNavigation(localPhotos);
+  const [isDeleteAllOpen, setIsDeleteAllOpen] = useState(false);
 
   const selectedPhoto =
     selectedIndex !== null ? localPhotos[selectedIndex] : null;
@@ -56,9 +60,22 @@ export const PhotoGallery = ({
             <span className={styles.count}>{localPhotos.length}</span>
           </h1>
           {isOwner && (
-            <Button appearance="primary" onClick={() => setIsUploadOpen(true)}>
-              {t("common.addPhoto")}
-            </Button>
+            <div className={styles.actions}>
+              {!isEmpty && (
+                <Button
+                  appearance="secondary"
+                  onClick={() => setIsDeleteAllOpen(true)}
+                >
+                  {t("photoGallery.deleteAll")}
+                </Button>
+              )}
+              <Button
+                appearance="primary"
+                onClick={() => setIsUploadOpen(true)}
+              >
+                {t("common.addPhoto")}
+              </Button>
+            </div>
           )}
         </div>
 
@@ -92,7 +109,7 @@ export const PhotoGallery = ({
               deletePhoto(selectedPhoto.id, () => setSelectedIndex(null))
             }
             onLikeChange={handleLikeChange}
-            enableRepost={!isOwner}
+            enableRepost
           />
         )}
 
@@ -100,6 +117,14 @@ export const PhotoGallery = ({
           isOpen={isUploadOpen}
           onClose={() => setIsUploadOpen(false)}
           onUpload={addPhoto}
+        />
+
+        <ConfirmModal
+          isOpen={isDeleteAllOpen}
+          title={t("photoGallery.deleteAllModalTitle")}
+          description={t("photoGallery.deleteAllModalDescription")}
+          onConfirm={() => deleteAllPhotos(() => setIsDeleteAllOpen(false))}
+          onClose={() => setIsDeleteAllOpen(false)}
         />
       </section>
     </AuthLoader>

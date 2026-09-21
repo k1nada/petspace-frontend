@@ -225,6 +225,9 @@
     "title": "My photos",
     "titleOther": "{name}'s photos",
     "addPhoto": "Add new photo",
+    "deleteAll": "Delete all",
+    "deleteAllModalTitle": "Delete all photos",
+    "deleteAllModalDescription": "Are you sure you want to delete all your photos? This can't be undone.",
     "photoAlt": "{name}'s photo",
     "emptyPhotosTitle": "No photos yet",
     "emptyPhotosText": "Time to capture some tail-wagging moments!"

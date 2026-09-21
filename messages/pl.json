@@ -225,6 +225,9 @@
     "title": "Moje zdjęcia",
     "titleOther": "Zdjęcia użytkownika {name}",
     "addPhoto": "Dodaj nowe zdjęcie",
+    "deleteAll": "Usuń wszystkie",
+    "deleteAllModalTitle": "Usuń wszystkie zdjęcia",
+    "deleteAllModalDescription": "Czy na pewno chcesz usunąć wszystkie swoje zdjęcia? Tej operacji nie można cofnąć.",
     "photoAlt": "Zdjęcie {name}",
     "emptyPhotosTitle": "Brak zdjęć",
     "emptyPhotosText": "Czas uwiecznić chwile merdania ogonem!"

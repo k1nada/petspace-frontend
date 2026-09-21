@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
@@ -10,13 +10,16 @@ import { revalidateUser } from "@/services/actions/revalidateUser";
 import { Photo } from "@/types";
 import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
 import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
+import { useRouter } from "@/i18n/navigation";
 
 export const usePhotoGallery = (photos: Photo[], username: string) => {
   const t = useTranslations();
+  const router = useRouter();
   const [localPhotos, setLocalPhotos] = useState<Photo[]>(photos);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
 
-  usePhotoLikeRefresh(username, setLocalPhotos);
+  const hasLiked = useRef(false);
+  usePhotoLikeRefresh(username, setLocalPhotos, hasLiked);
 
   const uploadFile = async (file: File): Promise<Photo> => {
     const data = await uploadPhoto(file);
@@ -59,7 +62,7 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
     } else {
       setIsUploadOpen(false);
       await revalidateUser();
-      window.location.reload();
+      router.refresh();
     }
   };
 
@@ -69,13 +72,37 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
       setLocalPhotos((prev) => prev.filter((p) => p.id !== photoId));
       onSuccess?.();
       await revalidateUser();
-      window.location.reload();
+      router.refresh();
     } catch {
       toast.error(t("toasts.error"));
     }
   };
 
-  const handleLikeChange = usePhotoLikeSync(setLocalPhotos);
+  const deleteAllPhotos = async (onSuccess?: () => void) => {
+    let hasError = false;
+    const deletedIds: string[] = [];
+
+    for (const photo of localPhotos) {
+      try {
+        await deletePhotoApi(photo.id);
+        deletedIds.push(photo.id);
+      } catch {
+        hasError = true;
+      }
+    }
+
+    setLocalPhotos((prev) => prev.filter((p) => !deletedIds.includes(p.id)));
+
+    if (hasError) {
+      toast.error(t("toasts.error"));
+    }
+
+    onSuccess?.();
+    await revalidateUser();
+    router.refresh();
+  };
+
+  const handleLikeChange = usePhotoLikeSync(setLocalPhotos, hasLiked);
 
   return {
     localPhotos,
@@ -83,6 +110,7 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
     setIsUploadOpen,
     addPhoto,
     deletePhoto,
+    deleteAllPhotos,
     handleLikeChange,
   };
 };
