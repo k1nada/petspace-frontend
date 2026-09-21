@@ -15,17 +15,21 @@ import { Post } from "@/types";
 export const FeedLayout = () => {
   const t = useTranslations();
   const [posts, setPosts] = useState<Post[]>([]);
-  const [loadingState, setLoadingState] = useState(true);
+  const [feedLoading, setFeedLoading] = useState(true);
   const currentUser = useAuthStore((state) => state.currentUser);
   const isAuthChecked = useAuthStore((state) => state.isAuthChecked);
-  const loading = loadingState && !(isAuthChecked && !currentUser);
+  const loading = feedLoading && !(isAuthChecked && !currentUser);
 
   const triggerRefresh = () => {
     if (!currentUser) return;
-    getFeed(currentUser.username).then((data) => {
-      setPosts(data ?? []);
-      setLoadingState(false);
-    });
+    getFeed(currentUser.username)
+      .then((data) => {
+        setPosts(data ?? []);
+        setFeedLoading(false);
+      })
+      .catch(() => {
+        setFeedLoading(false);
+      });
   };
 
   useEffect(triggerRefresh, [currentUser]);
