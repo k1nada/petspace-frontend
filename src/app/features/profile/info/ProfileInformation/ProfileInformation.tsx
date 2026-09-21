@@ -9,7 +9,7 @@ interface ProfileInformationProps {
   username: string;
 }
 
-const ProfileInformation = ({ username }: ProfileInformationProps) => {
+export const ProfileInformation = ({ username }: ProfileInformationProps) => {
   const t = useTranslations();
 
   return (
@@ -23,5 +23,3 @@ const ProfileInformation = ({ username }: ProfileInformationProps) => {
     </nav>
   );
 };
-
-export default ProfileInformation;

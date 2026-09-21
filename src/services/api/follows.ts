@@ -8,7 +8,7 @@ export const getFollowers = unstable_cache(
     return data;
   },
   ["get-followers"],
-  { revalidate: 30, tags: ["follows"] },
+  { revalidate: 5, tags: ["follows"] },
 );
 
 export const getFollowing = unstable_cache(
@@ -17,7 +17,7 @@ export const getFollowing = unstable_cache(
     return data;
   },
   ["get-following"],
-  { revalidate: 30, tags: ["follows"] },
+  { revalidate: 5, tags: ["follows"] },
 );
 
 export const followUser = async (

@@ -139,6 +139,7 @@
   "profileEditor": {
     "bio": "O sobie:",
     "name": "Imię:",
+    "username": "Nazwa użytkownika:",
     "about": "Hau! Pochwal się wszystkim, jaki jestem grzeczny"
   },
   "profileInformation": {

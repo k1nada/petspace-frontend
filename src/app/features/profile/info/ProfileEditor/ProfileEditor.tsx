@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./ProfileEditor.module.scss";
+import { useState } from "react";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
 import { DatePicker } from "@/app/uikit/form/DatePicker/DatePicker";
@@ -9,12 +10,15 @@ import { toast } from "react-toastify";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { updateProfile } from "@/services/api/profile";
+import { revalidateUser } from "@/services/actions/revalidateUser";
 import { useBreeds } from "@/app/hooks/shared/useBreeds";
 import { useCities, useCountries } from "@/app/hooks/shared/useLocationOptions";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Select } from "@/app/uikit/form/Select/Select";
 import { BannerInfo } from "@/types";
 import { Input } from "@/app/uikit/form/Input/Input";
+import { ErrorMessage } from "@/app/uikit/form/ErrorMessage/ErrorMessage";
+import { requiredValidation } from "@/utils/validations";
 
 interface ProfileEditorProps {
   user: BannerInfo;
@@ -32,8 +36,15 @@ interface ProfileForm {
 
 export const ProfileEditor = ({ user }: ProfileEditorProps) => {
   const t = useTranslations();
+  const [avatarUrl, setAvatarUrl] = useState(user.avatar);
 
-  const { handleSubmit, control, setValue, reset } = useForm<ProfileForm>({
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm<ProfileForm>({
     defaultValues: {
       name: user.name,
       bio: user.bio ?? "",
@@ -54,7 +65,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
   const onSubmit = async (data: ProfileForm) => {
     try {
       await updateProfile(user.username, {
-        name: data.name,
+        name: data.name.trim(),
         bio: data.bio,
         sex: data.sex,
         birthDate: data.birthDate,
@@ -62,6 +73,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
         city: data.city,
         breed: data.breed,
       });
+      await revalidateUser();
       toast.success(t("toasts.saved"));
     } catch {
       toast.error(t("toasts.error"));
@@ -74,14 +86,17 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
       <div className={styles.profileContent}>
         <div className={styles.avatarSection}>
           <AvatarEdit
-            src={user.avatar}
+            src={avatarUrl}
             size={120}
             avatarPhotos={user.avatarPhotos}
+            onAvatarChange={setAvatarUrl}
           />
         </div>
         <div className={styles.userInfo}>
           <h2 className={styles.name}>{nameValue}</h2>
-          <div className={styles.username}>Username: @{user.username}</div>
+          <div className={styles.username}>
+            {t("profileEditor.username")} @{user.username}
+          </div>
         </div>
       </div>
 
@@ -91,8 +106,14 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
           <Controller
             name="name"
             control={control}
+            rules={{
+              required: t(requiredValidation),
+              validate: (value) =>
+                value.trim().length > 0 || t(requiredValidation),
+            }}
             render={({ field }) => <Input appearance="wide" {...field} />}
           />
+          <ErrorMessage message={errors.name?.message} />
         </div>
         <div className={styles.field}>
           <label className={styles.label}>{t("fields.birthday")}</label>

@@ -8,7 +8,7 @@ export const getFamilyMembers = unstable_cache(
     return data;
   },
   ["get-family-members"],
-  { revalidate: 30 },
+  { revalidate: 5 },
 );
 
 export const addFamilyMember = async (

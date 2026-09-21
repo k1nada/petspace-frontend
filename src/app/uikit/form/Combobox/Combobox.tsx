@@ -3,6 +3,7 @@
 import { Input } from "../Input/Input";
 import styles from "./Combobox.module.scss";
 import { useState } from "react";
+import cn from "classnames";
 import { FaAngleDown } from "react-icons/fa";
 
 interface ComboboxProps {
@@ -40,7 +41,7 @@ export const Combobox = ({
           onFocus={() => setOpen(true)}
         />
         <FaAngleDown
-          className={styles.arrowIcon}
+          className={cn(styles.arrowIcon, { [styles.arrowDisabled]: disabled })}
           size={20}
           onClick={() => !disabled && setOpen(!open)}
         />
