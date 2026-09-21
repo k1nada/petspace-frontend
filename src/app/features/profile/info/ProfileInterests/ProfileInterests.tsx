@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { updateInterests } from "@/services/api/profile";
+import { revalidateUser } from "@/services/actions/revalidateUser";
 import { BannerInfo } from "@/types";
 
 interface ProfileInterestsProps {
@@ -46,6 +47,7 @@ export const ProfileInterests = ({ user }: ProfileInterestsProps) => {
         guiltyHabits: data.habits,
         humans: data.humans,
       });
+      await revalidateUser();
       toast.success(t("toasts.saved"));
     } catch {
       toast.error(t("toasts.error"));

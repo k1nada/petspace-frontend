@@ -139,6 +139,7 @@
   "profileEditor": {
     "bio": "About:",
     "name": "Name:",
+    "username": "Username:",
     "about": "Woof! Tell everyone what a good boy I am"
   },
   "profileInformation": {

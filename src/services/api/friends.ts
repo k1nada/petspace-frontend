@@ -12,7 +12,7 @@ export const getFriends = unstable_cache(
     return data;
   },
   ["get-friends"],
-  { revalidate: 30 },
+  { revalidate: 5 },
 );
 
 export const getSuggestedFriends = async (

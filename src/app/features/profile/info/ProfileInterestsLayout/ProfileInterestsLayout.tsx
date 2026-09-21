@@ -4,17 +4,21 @@ import { useEffect } from "react";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import styles from "./ProfileInterestsLayout.module.scss";
 import { ProfileInterests } from "../ProfileInterests/ProfileInterests";
-import ProfileInformation from "../ProfileInformation/ProfileInformation";
+import { ProfileInformation } from "../ProfileInformation/ProfileInformation";
+import { ProfileInterestsSkeleton } from "../ProfileInterests/ProfileInterestsSkeleton";
+import { ProfileInformationSkeleton } from "../ProfileInformation/ProfileInformationSkeleton";
 import { BannerInfo } from "@/types";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useRouter } from "@/i18n/navigation";
 import { ROUTES } from "@/routes/routes";
 
-interface ProfileInterestLayout {
+interface ProfileInterestsLayoutProps {
   user: BannerInfo;
 }
 
-export const ProfileInterestsLayout = ({ user }: ProfileInterestLayout) => {
+export const ProfileInterestsLayout = ({
+  user,
+}: ProfileInterestsLayoutProps) => {
   const router = useRouter();
   const currentUser = useAuthStore((state) => state.currentUser);
   const isAuthChecked = useAuthStore((state) => state.isAuthChecked);
@@ -26,7 +30,21 @@ export const ProfileInterestsLayout = ({ user }: ProfileInterestLayout) => {
     }
   }, [isAuthChecked, isOwner, router, user.username]);
 
-  if (!isAuthChecked) return null;
+  if (!isAuthChecked) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.sidebar}>
+          <Sidebar />
+        </div>
+        <div className={styles.content}>
+          <ProfileInterestsSkeleton />
+        </div>
+        <div className={styles.information}>
+          <ProfileInformationSkeleton />
+        </div>
+      </div>
+    );
+  }
   if (!isOwner) return null;
 
   return (

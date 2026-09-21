@@ -3,7 +3,9 @@ import { useEffect } from "react";
 import { ProfileEditor } from "../ProfileEditor/ProfileEditor";
 import styles from "./ProfileEditorLayout.module.scss";
 import { Sidebar } from "@/app/components/Sidebar/Sidebar";
-import ProfileInformation from "../ProfileInformation/ProfileInformation";
+import { ProfileInformation } from "../ProfileInformation/ProfileInformation";
+import { ProfileEditorSkeleton } from "../ProfileEditor/ProfileEditorSkeleton";
+import { ProfileInformationSkeleton } from "../ProfileInformation/ProfileInformationSkeleton";
 import { BannerInfo } from "@/types";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useRouter } from "@/i18n/navigation";
@@ -25,7 +27,21 @@ export const ProfileEditorLayout = ({ user }: ProfileEditorLayoutProps) => {
     }
   }, [isAuthChecked, isOwner, router, user.username]);
 
-  if (!isAuthChecked) return null;
+  if (!isAuthChecked) {
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.sidebar}>
+          <Sidebar />
+        </div>
+        <div className={styles.content}>
+          <ProfileEditorSkeleton />
+        </div>
+        <div className={styles.information}>
+          <ProfileInformationSkeleton />
+        </div>
+      </div>
+    );
+  }
   if (!isOwner) return null;
 
   return (
