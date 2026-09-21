@@ -42,9 +42,9 @@ export const ProfilePhotos = ({
   const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
     usePhotoNavigation(newestFirstPhotos);
 
-  const touchedPhotoIds = useRef<Set<string>>(new Set());
-  usePhotoLikeRefresh(username, setLocalPhotos, touchedPhotoIds);
-  const handleLikeChange = usePhotoLikeSync(setLocalPhotos, touchedPhotoIds);
+  const hasLiked = useRef(false);
+  usePhotoLikeRefresh(username, setLocalPhotos, hasLiked);
+  const handleLikeChange = usePhotoLikeSync(setLocalPhotos, hasLiked);
 
   const handleDeletePhoto = async () => {
     const selectedPhoto =
@@ -101,7 +101,7 @@ export const ProfilePhotos = ({
           onDelete={handleDeletePhoto}
           onClose={() => setSelectedIndex(null)}
           onLikeChange={handleLikeChange}
-          enableRepost={!isOwner}
+          enableRepost
         />
       </section>
     </AuthLoader>

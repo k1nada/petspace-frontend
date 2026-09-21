@@ -14,7 +14,6 @@ interface LikeButtonProps {
 export const LikeButton = ({
   liked,
   count,
-  loading,
   onToggle,
   className,
 }: LikeButtonProps) => {
@@ -26,7 +25,6 @@ export const LikeButton = ({
       appearance="minimal"
       className={cn(className, styles.heart, { [styles.liked]: liked })}
       onClick={onToggle}
-      disabled={loading}
     >
       <FaHeart size={16} />
       {showCount && <span className={styles.count}>{displayCount}</span>}
