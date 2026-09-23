@@ -214,6 +214,11 @@
     "stay": "Zostań",
     "leave": "Wyjdź"
   },
+  "header": {
+    "language": "Język",
+    "theme": "Wygląd",
+    "signOut": "Wyloguj się"
+  },
   "comment": {
     "reply": "Odpowiedz",
     "deleteModalTitle": "Usuń komentarz",
@@ -326,6 +331,7 @@
     "namePlaceholder": "Wpisz imię",
     "breedLabel": "Rasa",
     "avatarLabel": "Zdjęcie",
+    "addPhotoLabel": "Zdjęcie (opcjonalnie)",
     "generatePhoto": "Wygeneruj zdjęcie",
     "generatePhotoComingSoon": "Generowanie zdjęć przez AI wkrótce!",
     "add": "Dodaj",
@@ -357,7 +363,7 @@
   },
   "notifications": {
     "title": "Powiadomienia",
-    "markAllRead": "Oznacz wszystkie jako przeczytane",
+    "markAllRead": "Przeczytaj wszystkie",
     "empty": "Brak powiadomień",
     "liked": "{name} polubił(a) Twój post",
     "commented": "{name} skomentował(a) Twój post",

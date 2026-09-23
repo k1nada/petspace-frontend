@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./DropdownMenu.module.scss";
+import cn from "classnames";
 import { ReactNode, useState } from "react";
 import { MdOutlineMoreHoriz } from "react-icons/md";
 import { Button } from "../../form/Button/Button";
@@ -13,9 +14,10 @@ interface DropdownItem {
 
 interface DropdownMenuProps {
   items: DropdownItem[];
+  className?: string;
 }
 
-export const DropdownMenu = ({ items }: DropdownMenuProps) => {
+export const DropdownMenu = ({ items, className }: DropdownMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const close = () => {
@@ -34,7 +36,7 @@ export const DropdownMenu = ({ items }: DropdownMenuProps) => {
         <MdOutlineMoreHoriz size={25} />
       </Button>
       {isOpen && (
-        <ul className={styles.dropdown}>
+        <ul className={cn(styles.dropdown, className)}>
           {items.map((item) => (
             <li
               key={item.label}

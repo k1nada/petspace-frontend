@@ -16,6 +16,12 @@
   padding: var(--padding-l);
 }
 
+@media (max-width: 768px) {
+  .container {
+    display: none;
+  }
+}
+
 .list {
   display: flex;
   flex-direction: column;

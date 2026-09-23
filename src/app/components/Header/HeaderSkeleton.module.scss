@@ -15,7 +15,7 @@
   left: 0;
   right: 0;
   height: 50px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-header);
   z-index: var(--z-modal);
 }
 
@@ -27,13 +27,15 @@
   height: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding-left: var(--padding-l);
-  padding-right: var(--padding-l);
+  padding: 0 var(--padding-l) 0 var(--padding-l);
 }
 
 .wrapper {
   grid-column: 1;
   justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-s);
 }
 
 .logo {
@@ -41,17 +43,24 @@
   align-items: center;
   gap: var(--gap-m);
   padding-left: var(--padding-m);
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .logoTitle {
   font-size: var(--font-2xl);
   font-weight: 700;
   color: var(--text-primary);
+  display: block;
 }
 
 .search {
   grid-column: 2;
   width: 300px;
+  min-width: 0;
   height: 40px;
   border-radius: var(--radius-m);
   background: var(--skeleton);
@@ -69,8 +78,80 @@
 .item {
   width: 24px;
   height: 24px;
-  margin: 8px;
+  margin: var(--gap-s);
   border-radius: var(--radius-full);
   background: var(--skeleton);
   animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.menuToggle {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--skeleton);
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: auto 1fr auto;
+    gap: var(--gap-s);
+    padding: 0 var(--padding-m) 0 var(--padding-m);
+  }
+
+  .logo {
+    padding-left: 0;
+  }
+
+  .logoTitle {
+    display: none;
+  }
+
+  .search {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .list {
+    gap: var(--gap-xs);
+  }
+
+  .itemDesktopOnly {
+    display: none;
+  }
+
+  .menuToggle {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    gap: var(--gap-m);
+    padding: 0 var(--padding-m) 0 var(--padding-m);
+  }
+
+  .wrapper {
+    gap: var(--gap-m);
+  }
+
+  .logo img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .search {
+    display: none;
+  }
+
+  .list {
+    gap: var(--gap-2xs);
+  }
+
+  .menuToggle {
+    width: 24px;
+    height: 24px;
+  }
 }

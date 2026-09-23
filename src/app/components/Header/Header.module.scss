@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   height: 50px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-header);
   z-index: var(--z-modal);
 }
 
@@ -17,13 +17,15 @@
   height: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding-left: var(--padding-l);
-  padding-right: var(--padding-l);
+  padding: 0 var(--padding-l);
 }
 
 .wrapper {
   grid-column: 1;
   justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
 }
 
 .logo {
@@ -32,6 +34,11 @@
   gap: var(--gap-m);
   padding-left: var(--padding-m);
   text-decoration: none;
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .logoTitle {
@@ -39,6 +46,7 @@
   font-size: var(--font-2xl);
   font-weight: 700;
   color: var(--text-primary);
+  display: block;
 }
 
 .search {
@@ -46,6 +54,7 @@
   position: relative;
   justify-self: center;
   width: 100%;
+  min-width: 0;
 }
 
 .actions {
@@ -65,8 +74,8 @@
   border-radius: var(--radius-full);
   color: var(--text-secondary);
   transition:
-    color 0.2s ease,
-    background-color 0.2s ease;
+    color var(--transition-fast),
+    background-color var(--transition-fast);
 
   &:hover {
     color: var(--text-primary);
@@ -76,5 +85,106 @@
   svg {
     width: 20px;
     height: 20px;
+  }
+}
+
+.menuToggle {
+  display: none;
+}
+
+.mobileMenu {
+  display: none;
+  align-items: center;
+}
+
+.desktopIcon {
+  display: flex;
+}
+
+.moreMenuDropdown {
+  right: var(--padding-m);
+}
+
+.desktopSearch {
+  display: block;
+}
+
+.mobileSearchToggle {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: auto 1fr auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    gap: var(--gap-s);
+    padding: 0 var(--padding-s);
+  }
+
+  .logo {
+    padding-left: 0;
+  }
+
+  .logoTitle {
+    display: none;
+  }
+
+  .actions {
+    gap: var(--gap-xs);
+  }
+
+  .menuToggle {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    gap: var(--gap-xs);
+    padding: 0 var(--padding-m) 0 var(--padding-xs);
+  }
+
+  .wrapper {
+    gap: var(--gap-2xs);
+  }
+
+  .logo img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .actions {
+    gap: var(--gap-2xs);
+  }
+
+  .mobileMenu {
+    display: flex;
+  }
+
+  .desktopIcon {
+    display: none;
+  }
+
+  .desktopSearch {
+    display: none;
+  }
+
+  .mobileSearchToggle {
+    display: flex;
+    align-items: center;
+  }
+
+  .menuToggle {
+    width: 36px;
+    height: 36px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
   }
 }

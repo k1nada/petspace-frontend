@@ -214,6 +214,11 @@
     "stay": "Stay",
     "leave": "Leave"
   },
+  "header": {
+    "language": "Language",
+    "theme": "Theme",
+    "signOut": "Sign out"
+  },
   "comment": {
     "reply": "Reply",
     "deleteModalTitle": "Delete comment",
@@ -326,6 +331,7 @@
     "namePlaceholder": "Enter name",
     "breedLabel": "Breed",
     "avatarLabel": "Photo",
+    "addPhotoLabel": "Photo (optional)",
     "generatePhoto": "Generate photo",
     "generatePhotoComingSoon": "AI photo generation is coming soon!",
     "add": "Add",

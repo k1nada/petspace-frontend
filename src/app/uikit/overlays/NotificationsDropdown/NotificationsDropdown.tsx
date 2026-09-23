@@ -51,9 +51,9 @@ export const NotificationsDropdown = () => {
           </div>
 
           {loading ? (
-            <EmptyState text={t("common.loading")} compact />
+            <EmptyState text={t("common.loading")} compact center />
           ) : notifications.length === 0 ? (
-            <EmptyState text={t("notifications.empty")} compact />
+            <EmptyState text={t("notifications.empty")} compact center />
           ) : (
             <ul className={styles.list}>
               {notifications.map((notification) => (
