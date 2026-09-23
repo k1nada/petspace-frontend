@@ -29,3 +29,13 @@
   color: var(--text-secondary);
   font-size: var(--font-m);
 }
+
+@media (max-width: 768px) {
+  .empty {
+    padding: 48px 0;
+  }
+
+  .compact {
+    padding: 32px 0;
+  }
+}

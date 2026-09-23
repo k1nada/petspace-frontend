@@ -1,22 +1,15 @@
 "use client";
 
-import { useLocale } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
 import { FaGlobe } from "react-icons/fa";
 import { Button } from "../../form/Button/Button";
+import { useToggleLocale } from "@/app/hooks/shared/useToggleLocale";
 
 interface LocaleSwitcherProps {
   className?: string;
 }
 
 export const LocaleSwitcher = ({ className }: LocaleSwitcherProps) => {
-  const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
-
-  const toggle = () => {
-    router.replace(pathname, { locale: locale === "en" ? "pl" : "en" });
-  };
+  const toggle = useToggleLocale();
 
   return (
     <Button appearance="ghost" onClick={toggle} className={className}>

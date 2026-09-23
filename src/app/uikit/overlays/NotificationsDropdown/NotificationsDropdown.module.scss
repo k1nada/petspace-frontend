@@ -6,6 +6,7 @@
   position: fixed;
   inset: 0;
   z-index: var(--z-dropdown);
+  background: none;
 }
 
 .trigger {
@@ -22,8 +23,8 @@
   cursor: pointer;
   color: var(--text-secondary);
   transition:
-    color 0.2s ease,
-    background-color 0.2s ease;
+    color var(--transition-fast),
+    background-color var(--transition-fast);
 
   &:hover {
     color: var(--text-primary);
@@ -38,7 +39,7 @@
   box-sizing: border-box;
   min-width: 16px;
   height: 16px;
-  padding: 0 4px;
+  padding: 0 var(--gap-xs);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,9 +61,10 @@
   z-index: var(--z-dropdown);
   width: 340px;
   max-width: 90vw;
+  min-height: 0;
   background: var(--bg-elevated);
   border-radius: var(--radius-m);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-dropdown);
   overflow: hidden;
 }
 
@@ -86,7 +88,7 @@
   background: transparent;
   padding: 0;
   color: var(--link);
-  font-size: var(--font-s);
+  font-size: var(--font-m);
   cursor: pointer;
 
   &:hover {
@@ -97,6 +99,34 @@
 .list {
   display: flex;
   flex-direction: column;
+  flex: 1;
   max-height: 380px;
   overflow-y: auto;
+}
+
+@media (max-width: 480px) {
+  .trigger {
+    width: 36px;
+    height: 36px;
+  }
+
+  .overlay {
+    background: var(--overlay-medium);
+  }
+
+  .dropdown {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin-top: 0;
+    width: auto;
+    max-width: none;
+    min-height: calc(100vh - 50px);
+    border-radius: 0;
+  }
+
+  .list {
+    max-height: calc(100vh - 110px);
+  }
 }

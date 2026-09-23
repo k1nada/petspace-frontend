@@ -1,3 +1,4 @@
+import cn from "classnames";
 import { Logo } from "@/app/uikit/brand/Logo/Logo";
 import styles from "./HeaderSkeleton.module.scss";
 
@@ -7,6 +8,7 @@ export const HeaderSkeleton = () => (
   <header className={styles.header}>
     <div className={styles.container}>
       <div className={styles.wrapper}>
+        <div className={styles.menuToggle} />
         <div className={styles.logo}>
           <Logo />
           <span className={styles.logoTitle}>Petspace</span>
@@ -15,7 +17,12 @@ export const HeaderSkeleton = () => (
       <div className={styles.search} />
       <div className={styles.list}>
         {Array.from({ length: HEADER_LINKS_COUNT }, (_, i) => (
-          <div key={i} className={styles.item} />
+          <div
+            key={i}
+            className={cn(styles.item, {
+              [styles.itemDesktopOnly]: i >= 3,
+            })}
+          />
         ))}
       </div>
     </div>

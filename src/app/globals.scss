@@ -44,7 +44,7 @@
   --button-tertiary-hover: #d4d4d2;
   --button-ghost-hover: #eceae8;
 
-  --skeleton: #dfdfdd;
+  --skeleton: #e9e9e7;
 
   --icon-on-primary: #686460;
   --text-on-color: #ffffff;
@@ -86,7 +86,48 @@
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif;
 
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.3s ease;
+
   --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-header: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-dropdown: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-popover: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow-auth-card: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow-drawer: 2px 0 8px rgba(0, 0, 0, 0.15);
+
+  --overlay-light: rgba(0, 0, 0, 0.35);
+  --overlay-medium: rgba(0, 0, 0, 0.4);
+  --overlay-backdrop: rgba(0, 0, 0, 0.5);
+  --overlay-strong: rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --gap-2xs: 2px;
+    --gap-xs: 4px;
+    --gap-s: 6px;
+    --gap-m: 10px;
+    --gap-l: 12px;
+    --gap-xl: 16px;
+    --gap-xxl: 18px;
+
+    --padding-xs: 6px;
+    --padding-s: 10px;
+    --padding-m: 12px;
+    --padding-l: 16px;
+    --padding-xl: 18px;
+    --padding-xxl: 24px;
+
+    --font-xs: 9px;
+    --font-s: 11px;
+    --font-m: 13px;
+    --font-base: 14px;
+    --font-l: 16px;
+    --font-xl: 18px;
+    --font-2xl: 20px;
+    --font-3xl: 24px;
+  }
 }
 
 [data-theme="dark"] {

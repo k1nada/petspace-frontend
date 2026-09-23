@@ -2,11 +2,46 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-xl);
-  height: 100vh;
   padding: var(--padding-l);
+  height: 100vh;
+  transition: transform var(--transition-base);
 }
 
 .list {
   display: flex;
   flex-direction: column;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  top: 50px;
+  background: var(--overlay-medium);
+  z-index: var(--z-modal);
+}
+
+@media (max-width: 768px) {
+  .container {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    // ширина 280px, но не больше 80% экрана на совсем узких устройствах
+    width: min(280px, 80%);
+    height: auto;
+    background: var(--bg-page);
+    box-shadow: var(--shadow-drawer);
+    transform: translateX(-100%);
+    z-index: var(--z-modal);
+    overflow-y: auto;
+  }
+
+  .containerOpen {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    display: block;
+  }
 }
