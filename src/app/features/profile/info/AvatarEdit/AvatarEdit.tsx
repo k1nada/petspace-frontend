@@ -1,13 +1,13 @@
 "use client";
 
 import styles from "./AvatarEdit.module.scss";
-import { Button } from "../../form/Button/Button";
+import { Button } from "@/app/uikit/form/Button/Button";
 import { MdDeleteSweep, MdModeEdit, MdPhotoCamera } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import defaultAvatar from "@/public/avatars/default.png";
-import { Avatar } from "../Avatar/Avatar";
+import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { useEffect, useState } from "react";
-import { ConfirmModal } from "../../overlays/ConfirmModal/ConfirmModal";
+import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { toast } from "react-toastify";
 import { AvatarChangeModal } from "../AvatarChangeModal/AvatarChangeModal";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
@@ -171,6 +171,7 @@ export const AvatarEdit = ({
           deleteAvatarPhoto(selectedPhoto.id);
         }}
         onLikeChange={handleLikeChange}
+        enableRepost
       />
 
       <AvatarChangeModal

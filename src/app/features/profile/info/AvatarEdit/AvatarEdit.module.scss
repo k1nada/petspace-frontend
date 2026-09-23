@@ -26,7 +26,7 @@
   transform: translateX(-50%);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s;
+  transition: opacity var(--transition-fast);
   z-index: var(--z-dropdown);
 
   display: flex;
@@ -46,10 +46,4 @@
       color: var(--text-primary);
     }
   }
-}
-
-.deleteDescription {
-  font-size: var(--font-m);
-  text-align: center;
-  margin: var(--gap-xs) 0 0;
 }
