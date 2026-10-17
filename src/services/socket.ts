@@ -1,11 +1,12 @@
 import { io } from "socket.io-client";
+import { API_URL } from "@/config/env";
 
-const socket = io(process.env.NEXT_PUBLIC_API_URL!, {
-  auth: (cb) => {
-    const token =
-      typeof window !== "undefined" ? localStorage.getItem("token") : null;
-    cb({ token });
-  },
+const getToken = () =>
+  typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+const socket = io(API_URL!, {
+  auth: (cb) => cb({ token: getToken() }),
+  autoConnect: !!getToken(),
 });
 
 export const reconnectSocket = () => {

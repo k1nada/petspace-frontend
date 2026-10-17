@@ -1,5 +1,7 @@
 import axios from "axios";
 import { API_URL } from "@/config/env";
+import { routing } from "@/i18n/routing";
+import { ROUTES } from "@/routes/routes";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -21,6 +23,14 @@ api.interceptors.request.use((config) => {
 
 const AUTH_ENDPOINTS = ["/signin", "/signup", "/me"];
 
+const getCurrentLocale = () => {
+  const firstSegment = window.location.pathname.split("/")[1];
+  const isKnownLocale = routing.locales.some(
+    (locale) => locale === firstSegment,
+  );
+  return isKnownLocale ? firstSegment : routing.defaultLocale;
+};
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -40,7 +50,7 @@ api.interceptors.response.use(
       import("@/app/hooks/auth/useAuthStore").then(({ useAuthStore }) =>
         useAuthStore.getState().signOut(),
       );
-      window.location.href = "/signin";
+      window.location.href = `/${getCurrentLocale()}${ROUTES.signin}`;
     }
 
     return Promise.reject(error);

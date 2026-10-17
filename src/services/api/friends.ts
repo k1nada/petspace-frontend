@@ -1,14 +1,10 @@
-import axios from "axios";
 import { unstable_cache } from "next/cache";
 import api from "@/config/axios";
-import { API_URL } from "@/config/env";
 import { Friend, FriendRequest, User } from "@/types";
 
 export const getFriends = unstable_cache(
   async (username: string): Promise<Friend[]> => {
-    const { data } = await axios.get<Friend[]>(
-      `${API_URL}/friends/${username}`,
-    );
+    const { data } = await api.get<Friend[]>(`/friends/${username}`);
     return data;
   },
   ["get-friends"],
@@ -46,9 +42,9 @@ export const deleteFriend = async (
 };
 
 export const acceptFriendRequest = async (requestId: string): Promise<void> => {
-  await api.post(`/friends/request/${requestId}/accept`);
+  await api.patch(`/friends/request/${requestId}`, { status: "accepted" });
 };
 
 export const rejectFriendRequest = async (requestId: string): Promise<void> => {
-  await api.post(`/friends/request/${requestId}/reject`);
+  await api.patch(`/friends/request/${requestId}`, { status: "rejected" });
 };
