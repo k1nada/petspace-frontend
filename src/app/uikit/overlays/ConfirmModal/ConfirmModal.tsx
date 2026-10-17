@@ -31,8 +31,11 @@ export const ConfirmModal = ({
   const handleConfirm = async () => {
     if (isConfirming) return;
     setIsConfirming(true);
-    await onConfirm();
-    setIsConfirming(false);
+    try {
+      await onConfirm();
+    } finally {
+      setIsConfirming(false);
+    }
   };
 
   return (
