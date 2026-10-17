@@ -11,10 +11,12 @@ import { Photo } from "@/types";
 import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
 import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
 import { useRouter } from "@/i18n/navigation";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
 export const usePhotoGallery = (photos: Photo[], username: string) => {
   const t = useTranslations();
   const router = useRouter();
+  const fetchCurrentUser = useAuthStore((state) => state.fetchCurrentUser);
   const [localPhotos, setLocalPhotos] = useState<Photo[]>(photos);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
 
@@ -32,16 +34,16 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
     };
   };
 
-  const addPhoto = async (files: File[]) => {
+  const addPhoto = async (files: File[]): Promise<File[]> => {
     const uploaded: Photo[] = [];
-    let hasError = false;
+    const failedFiles: File[] = [];
     let photoLimitReached = false;
 
     for (const file of files) {
       try {
         uploaded.push(await uploadFile(file));
       } catch (error) {
-        hasError = true;
+        failedFiles.push(file);
         if (
           isAxiosError(error) &&
           error.response?.data?.type === "PHOTO_LIMIT_REACHED"
@@ -51,26 +53,29 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
       }
     }
 
-    if (uploaded.length > 0) {
-      setLocalPhotos((prev) => [...prev, ...uploaded]);
-    }
-
-    if (hasError) {
+    if (failedFiles.length > 0) {
       toast.error(
         photoLimitReached ? t("errors.PHOTO_LIMIT_REACHED") : t("toasts.error"),
       );
     } else {
       setIsUploadOpen(false);
+    }
+
+    if (uploaded.length > 0) {
+      setLocalPhotos((prev) => [...prev, ...uploaded]);
       await revalidateUser();
       router.refresh();
     }
+
+    return failedFiles;
   };
 
   const deletePhoto = async (photoId: string, onSuccess?: () => void) => {
     try {
-      await deletePhotoApi(photoId);
+      const { avatarChanged } = await deletePhotoApi(photoId);
       setLocalPhotos((prev) => prev.filter((p) => p.id !== photoId));
       onSuccess?.();
+      if (avatarChanged) await fetchCurrentUser();
       await revalidateUser();
       router.refresh();
     } catch {
@@ -80,12 +85,14 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
 
   const deleteAllPhotos = async (onSuccess?: () => void) => {
     let hasError = false;
+    let avatarChanged = false;
     const deletedIds: string[] = [];
 
     for (const photo of localPhotos) {
       try {
-        await deletePhotoApi(photo.id);
+        const result = await deletePhotoApi(photo.id);
         deletedIds.push(photo.id);
+        if (result.avatarChanged) avatarChanged = true;
       } catch {
         hasError = true;
       }
@@ -98,6 +105,7 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
     }
 
     onSuccess?.();
+    if (avatarChanged) await fetchCurrentUser();
     await revalidateUser();
     router.refresh();
   };
