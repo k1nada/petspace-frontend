@@ -15,11 +15,6 @@ export const createComment = async (
   return data;
 };
 
-export const getComments = async (postId: string) => {
-  const { data } = await api.get(`/comments/post/${postId}`);
-  return data;
-};
-
 export const getPhotoComments = async (photoId: string) => {
   const { data } = await api.get(`/comments/photo/${photoId}`);
   return data;
