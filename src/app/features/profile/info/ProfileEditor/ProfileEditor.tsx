@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
 import { DatePicker } from "@/app/uikit/form/DatePicker/DatePicker";
-import { AvatarEdit } from "@/app/uikit/user/AvatarEdit/AvatarEdit";
+import { AvatarEdit } from "@/app/features/profile/info/AvatarEdit/AvatarEdit";
 import { toast } from "react-toastify";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
