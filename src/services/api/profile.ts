@@ -11,9 +11,7 @@ interface UpdateProfileData {
 }
 
 export const updateProfile = (username: string, data: UpdateProfileData) => {
-  return api.put(`/user/${username}`, {
-    ...data,
-  });
+  return api.put(`/user/${username}`, data);
 };
 
 interface UpdateInterestsData {
