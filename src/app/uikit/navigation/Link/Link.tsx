@@ -1,13 +1,9 @@
-import { AnchorHTMLAttributes } from "react";
-import { LinkProps as NextLinkProps } from "next/link";
+import { ComponentProps } from "react";
 import styles from "./Link.module.scss";
-import NextLink from "next/link";
+import { Link as IntlLink } from "@/i18n/navigation";
 import cn from "classnames";
 
-interface LinkProps
-  extends
-    Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof NextLinkProps>,
-    NextLinkProps {
+interface LinkProps extends ComponentProps<typeof IntlLink> {
   appearance?: "primary" | "secondary";
 }
 
@@ -18,7 +14,7 @@ export const Link = ({
   ...rest
 }: LinkProps) => {
   return (
-    <NextLink
+    <IntlLink
       {...rest}
       className={cn(
         styles.default,
@@ -30,6 +26,6 @@ export const Link = ({
       )}
     >
       {children}
-    </NextLink>
+    </IntlLink>
   );
 };
