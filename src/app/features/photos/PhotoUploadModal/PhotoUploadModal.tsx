@@ -13,7 +13,7 @@ import { useTranslations } from "next-intl";
 interface PhotoUploadModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onUpload: (files: File[]) => Promise<void>;
+  onUpload: (files: File[]) => Promise<File[]>;
 }
 
 export const PhotoUploadModal = ({
@@ -53,11 +53,18 @@ export const PhotoUploadModal = ({
   const handleUpload = async () => {
     if (!files.length || isUploading) return;
     setIsUploading(true);
-    await onUpload(files);
-    previews.forEach((url) => URL.revokeObjectURL(url));
-    setFiles([]);
-    setPreviews([]);
-    setIsUploading(false);
+    try {
+      const failedFiles = await onUpload(files);
+      const failedPreviews: string[] = [];
+      files.forEach((file, i) => {
+        if (failedFiles.includes(file)) failedPreviews.push(previews[i]);
+        else URL.revokeObjectURL(previews[i]);
+      });
+      setFiles(failedFiles);
+      setPreviews(failedPreviews);
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
@@ -95,7 +102,7 @@ export const PhotoUploadModal = ({
             <p className={styles.dropzoneHint}>{t("common.imageFormats")}</p>
           </div>
         )}
-        <div className={styles.overlay}></div>
+        <div className={styles.overlay} />
       </div>
 
       <div className={styles.actions}>
