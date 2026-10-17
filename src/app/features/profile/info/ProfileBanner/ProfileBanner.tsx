@@ -8,7 +8,7 @@ import { FaCamera, FaMessage } from "react-icons/fa6";
 import { ROUTES } from "@/routes/routes";
 import { Link } from "../../../../uikit/navigation/Link/Link";
 import { useRouter } from "next/navigation";
-import { AvatarEdit } from "@/app/uikit/user/AvatarEdit/AvatarEdit";
+import { AvatarEdit } from "@/app/features/profile/info/AvatarEdit/AvatarEdit";
 import { useState } from "react";
 import { ProfileInfoModal } from "../../modals/ProfileInfoModal/ProfileInfoModal";
 import { AchievementsModal } from "../../modals/AchievementsModal/AchievementsModal";

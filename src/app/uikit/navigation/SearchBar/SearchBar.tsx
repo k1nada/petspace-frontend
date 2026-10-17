@@ -15,6 +15,7 @@ interface SearchBarProps {
   className?: string;
   fullWidth?: boolean;
   disabled?: boolean;
+  autoFocus?: boolean;
 }
 
 export const SearchBar = ({
@@ -24,6 +25,7 @@ export const SearchBar = ({
   className,
   fullWidth,
   disabled,
+  autoFocus,
 }: SearchBarProps) => {
   const t = useTranslations();
   const [valueState, setValueState] = useState("");
@@ -55,6 +57,7 @@ export const SearchBar = ({
         value={value}
         onChange={handleChange}
         disabled={disabled}
+        autoFocus={autoFocus}
       />
       {value && (
         <Button
