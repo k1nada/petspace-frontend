@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "@/config/env";
+import { API_URL, INTERNAL_API_KEY } from "@/config/env";
 import { routing } from "@/i18n/routing";
 import { ROUTES } from "@/routes/routes";
 
@@ -9,6 +9,7 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
   if (typeof window === "undefined") {
+    if (INTERNAL_API_KEY) config.headers["x-internal-key"] = INTERNAL_API_KEY;
     return config;
   }
 
