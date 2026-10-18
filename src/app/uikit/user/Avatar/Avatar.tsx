@@ -3,7 +3,7 @@
 import Image, { StaticImageData } from "next/image";
 import { useTranslations } from "next-intl";
 import styles from "./Avatar.module.scss";
-import defaultAvatar from "@/public/avatars/default.png";
+import defaultAvatar from "@/assets/avatars/default.png";
 
 interface AvatarProps {
   src?: string | StaticImageData;

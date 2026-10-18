@@ -3,7 +3,7 @@ import { CommentButton } from "@/app/uikit/feedback/CommentButton/CommentButton"
 import { RepostButton } from "@/app/uikit/feedback/RepostButton/RepostButton";
 import styles from "./PostStats.module.scss";
 
-export interface PostStatsProps {
+interface PostStatsProps {
   liked: boolean;
   likeCount: number | null;
   likeLoading: boolean;

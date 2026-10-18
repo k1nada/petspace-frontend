@@ -12,7 +12,6 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@hookform/error-message": "2.0.1",
     "axios": "1.20.0",
     "classnames": "2.5.1",
     "dayjs": "1.11.19",
@@ -24,7 +23,6 @@
     "react-dropzone": "15.0.0",
     "react-hook-form": "7.71.0",
     "react-icons": "5.5.0",
-    "react-select": "5.10.2",
     "react-toastify": "11.0.5",
     "sass": "1.97.2",
     "socket.io-client": "4.8.3",

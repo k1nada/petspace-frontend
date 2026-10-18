@@ -7,7 +7,6 @@ import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import { usePhotoKeyNavigation } from "@/app/hooks/photos/usePhotoKeyNavigation";
 import { LikeState } from "@/app/hooks/photos/useResolvedLike";
 import { PhotoModalImage } from "../PhotoModalImage/PhotoModalImage";
 import { PhotoModalDetails } from "../PhotoModalDetails/PhotoModalDetails";
@@ -59,10 +58,10 @@ export const PhotoModal = ({
   const t = useTranslations();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  const { handleKeyDown } = usePhotoKeyNavigation({
-    onPrev: navigation?.onPrev,
-    onNext: navigation?.onNext,
-  });
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowLeft") navigation?.onPrev?.();
+    if (e.key === "ArrowRight") navigation?.onNext?.();
+  };
 
   const handleDeletePhoto = async () => {
     try {

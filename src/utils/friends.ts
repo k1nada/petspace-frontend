@@ -1,6 +1,6 @@
 import { User } from "@/types";
 
-export interface RelationshipStatus {
+interface RelationshipStatus {
   isFriend: boolean;
   isPending: boolean;
   isFollowing: boolean;

@@ -24,7 +24,7 @@ import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
-export interface PostProps {
+interface PostProps {
   post: PostType;
   onRefresh: () => void;
 }

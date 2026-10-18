@@ -5,7 +5,7 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { ROUTES } from "@/routes/routes";
-import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadModal/AvatarUploadModal";
+import { AvatarUploadModal } from "@/app/uikit/user/AvatarUploadModal/AvatarUploadModal";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { uploadAvatar } from "@/services/api/upload";

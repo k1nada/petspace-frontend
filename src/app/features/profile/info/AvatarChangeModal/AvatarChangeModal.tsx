@@ -8,10 +8,10 @@ import { uploadAvatar } from "@/services/api/upload";
 import { revalidateUser } from "@/services/actions/revalidateUser";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { Button } from "@/app/uikit/form/Button/Button";
-import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadModal/AvatarUploadModal";
+import { AvatarUploadModal } from "@/app/uikit/user/AvatarUploadModal/AvatarUploadModal";
 import styles from "./AvatarChangeModal.module.scss";
 
-export interface AvatarChangeModalProps {
+interface AvatarChangeModalProps {
   isOpen: boolean;
   onClose: () => void;
   currentAvatarSrc?: string;

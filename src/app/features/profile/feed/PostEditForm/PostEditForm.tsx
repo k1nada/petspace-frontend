@@ -5,7 +5,7 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import styles from "./PostEditForm.module.scss";
 
-export interface PostEditFormProps {
+interface PostEditFormProps {
   content: string;
   onChange: (content: string) => void;
   onCancel: () => void;

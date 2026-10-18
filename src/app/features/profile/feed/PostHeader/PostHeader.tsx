@@ -10,7 +10,7 @@ import { formatDate } from "@/utils/dateFormatters";
 import { Post as PostType } from "@/types";
 import styles from "./PostHeader.module.scss";
 
-export interface PostHeaderProps {
+interface PostHeaderProps {
   post: PostType;
   locale: string;
   showActions: boolean;

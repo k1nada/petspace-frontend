@@ -6,7 +6,6 @@
     "saveAndContinue": "Save & continue",
     "skip": "Skip",
     "upload": "Upload",
-    "select": "Select",
     "cancel": "Cancel",
     "or": "or",
     "online": "Online",
@@ -129,12 +128,7 @@
     "info": "More info",
     "friends": "friends",
     "photos": "photos",
-    "editProfile": "Edit profile",
-    "addFriend": "Add friend",
-    "message": "Message",
-    "familyTree": "Family tree",
-    "requestSent": "Request sent",
-    "following": "Following"
+    "requestSent": "Request sent"
   },
   "profileEditor": {
     "bio": "About:",
@@ -143,7 +137,6 @@
     "about": "Woof! Tell everyone what a good boy I am"
   },
   "profileInformation": {
-    "profile": "Profile",
     "interests": "Interests"
   },
   "profileInterests": {
@@ -166,19 +159,12 @@
     "interestsTitle": "My interests",
     "followers": "followers"
   },
-  "profileFriends": {
-    "title": "Friends",
-    "empty": "No friends yet"
-  },
   "avatarEdit": {
     "open": "Open photo",
     "change": "Change photo",
-    "delete": "Delete photo",
     "modalTitle": "Upload new photo",
     "modalDescription": "Show the pack who you are!",
-    "modalFormats": "JPG, PNG, GIF, WEBP",
     "choosePhoto": "Click to choose a photo",
-    "deleteModalTitle": "Delete photo",
     "deleteModalDescription": "Are you sure you want to delete your photo?"
   },
   "feed": {
@@ -230,51 +216,35 @@
   "photoGallery": {
     "title": "My photos",
     "titleOther": "{name}'s photos",
-    "addPhoto": "Add new photo",
     "deleteAll": "Delete all",
     "deleteAllModalTitle": "Delete all photos",
     "deleteAllModalDescription": "Are you sure you want to delete all your photos? This can't be undone.",
     "photoAlt": "{name}'s photo",
-    "emptyPhotosTitle": "No photos yet",
     "emptyPhotosText": "Time to capture some tail-wagging moments!"
-  },
-  "profilePhotos": {
-    "title": "Photos",
-    "empty": "No photos yet"
   },
   "photoModal": {
     "counter": "{current} / {total}",
     "commentsTitle": "No tail wags yet...",
     "commentsText": "Be the first!",
-    "modalTitle": "Delete photo",
     "modalDescription": "Are you sure you want to delete this photo?"
   },
   "photoUploadModal": {
-    "addPhoto": "Add new photo",
-    "dragAndDrop": "Drag & drop or click here",
-    "modalFormats": "JPG, PNG, GIF, WEBP"
+    "dragAndDrop": "Drag & drop or click here"
   },
   "friends": {
-    "friendsTitle": "Friends",
     "friendsTitleOther": "{name}'s friends",
     "requestsTitle": "Requests",
     "followersTitle": "Followers",
     "followingTitle": "Following",
-    "message": "Message",
-    "addFriend": "Add friend",
-    "following": "Following",
     "sent": "Sent",
     "unfollowAll": "Unfollow all",
-    "remove": "Remove",
     "unfollow": "Unfollow",
-    "emptyFriendsTitle": "No friends yet",
     "emptyFriendsText": "Find some dogs and send them a friend request!",
     "noSearchResults": "No friends found",
     "emptyFollowersTitle": "No followers yet",
     "emptyFollowersText": "Share your profile so more dogs can find you!",
     "emptyFollowingTitle": "Not following anyone yet",
     "emptyFollowingText": "Explore profiles and follow dogs you like!",
-    "delete": "Delete",
     "lastSeen": "Last seen {time}"
   },
   "friendRequest": {
@@ -297,15 +267,12 @@
     "followersCount": "{count} followers"
   },
   "friendTip": {
-    "title": "Did you know?",
     "text": "Dogs the same age and breed make the best friends. Fill in your profile and we'll find great matches nearby!"
   },
   "feedTip": {
-    "title": "Did you know?",
     "text": "Follow more dogs to fill your feed with fresh sniffs, walks and zoomies from friends nearby!"
   },
   "familyTip": {
-    "title": "Did you know?",
     "text": "Building out your family tree helps other dogs spot relatives and see shared traits across generations!"
   },
   "familyTree": {
@@ -375,10 +342,6 @@
     "copyright": "© {year} Petspace"
   },
   "metadata": {
-    "home": {
-      "title": "Petspace — a social network for dogs",
-      "description": "Connect your dog with other dogs, share photos and posts, and build their family tree on Petspace."
-    },
     "feed": {
       "title": "Feed",
       "description": "See the latest posts from your dog's friends on Petspace."

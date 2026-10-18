@@ -4,7 +4,7 @@ import styles from "./AvatarEdit.module.scss";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { MdDeleteSweep, MdModeEdit, MdPhotoCamera } from "react-icons/md";
 import { useTranslations } from "next-intl";
-import defaultAvatar from "@/public/avatars/default.png";
+import defaultAvatar from "@/assets/avatars/default.png";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { useEffect, useState } from "react";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
