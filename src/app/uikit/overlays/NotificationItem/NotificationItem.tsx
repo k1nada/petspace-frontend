@@ -3,10 +3,17 @@
 import styles from "./NotificationItem.module.scss";
 import { useLocale, useTranslations } from "next-intl";
 import cn from "classnames";
+import { FaHeart, FaPaw, FaTrophy, FaComment } from "react-icons/fa";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import dayjs from "@/utils/dayjs";
 import { AppNotification, NotificationType } from "@/types";
-import { NOTIFICATION_ICONS } from "@/app/uikit/constants/notificationIcons";
+
+const NOTIFICATION_ICONS: Record<NotificationType, React.ReactNode> = {
+  like: <FaHeart />,
+  comment: <FaComment />,
+  friendRequest: <FaPaw />,
+  achievement: <FaTrophy />,
+};
 
 const messageKeys: Record<NotificationType, string> = {
   like: "notifications.liked",

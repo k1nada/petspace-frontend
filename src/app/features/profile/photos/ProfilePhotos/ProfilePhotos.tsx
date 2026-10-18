@@ -11,7 +11,6 @@ import { getPhotoUrl } from "@/utils/photo";
 import { deletePhoto as deletePhotoApi } from "@/services/api/upload";
 import { revalidateUser } from "@/services/actions/revalidateUser";
 import { usePhotoNavigation } from "@/app/hooks/photos/usePhotoNavigation";
-import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
 import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Photo } from "@/types";
@@ -44,7 +43,16 @@ export const ProfilePhotos = ({
 
   const hasLiked = useRef(false);
   usePhotoLikeRefresh(username, setLocalPhotos, hasLiked);
-  const handleLikeChange = usePhotoLikeSync(setLocalPhotos, hasLiked);
+  const handleLikeChange = (
+    photoId: string,
+    liked: boolean,
+    likesCount: number,
+  ) => {
+    hasLiked.current = true;
+    setLocalPhotos((prev) =>
+      prev.map((p) => (p.id === photoId ? { ...p, liked, likesCount } : p)),
+    );
+  };
 
   const handleDeletePhoto = async () => {
     const selectedPhoto =

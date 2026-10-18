@@ -6,7 +6,7 @@ import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
 import { TipSkeleton } from "@/app/uikit/feedback/Tip/TipSkeleton";
 import { Postwall } from "@/app/features/profile/feed/Postwall/Postwall";
-import { SuggestedFriends } from "@/app/features/feed/SuggestedFriends/SuggestedFriends";
+import { SuggestedFriends } from "@/app/features/friends/SuggestedFriends/SuggestedFriends";
 import { useEffect, useState } from "react";
 import { getFeed } from "@/services/api/post";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";

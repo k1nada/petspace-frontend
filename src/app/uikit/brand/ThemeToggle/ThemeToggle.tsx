@@ -1,7 +1,7 @@
 "use client";
 
 import { useLayoutEffect } from "react";
-import { useThemeStore } from "../../../hooks/shared/useThemeStore";
+import { useThemeStore } from "@/app/hooks/shared/useThemeStore";
 import { Button } from "../../form/Button/Button";
 import { FaMoon } from "react-icons/fa";
 import { FaSun } from "react-icons/fa6";

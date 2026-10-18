@@ -8,7 +8,6 @@ import {
 } from "@/services/api/upload";
 import { revalidateUser } from "@/services/actions/revalidateUser";
 import { Photo } from "@/types";
-import { usePhotoLikeSync } from "@/app/hooks/photos/usePhotoLikeSync";
 import { usePhotoLikeRefresh } from "@/app/hooks/photos/usePhotoLikeRefresh";
 import { useRouter } from "@/i18n/navigation";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
@@ -110,7 +109,16 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
     router.refresh();
   };
 
-  const handleLikeChange = usePhotoLikeSync(setLocalPhotos, hasLiked);
+  const handleLikeChange = (
+    photoId: string,
+    liked: boolean,
+    likesCount: number,
+  ) => {
+    hasLiked.current = true;
+    setLocalPhotos((prev) =>
+      prev.map((p) => (p.id === photoId ? { ...p, liked, likesCount } : p)),
+    );
+  };
 
   return {
     localPhotos,

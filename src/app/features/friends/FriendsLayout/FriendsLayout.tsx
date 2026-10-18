@@ -9,7 +9,7 @@ import { FollowUser, Friend } from "@/types";
 import { Friends } from "../Friends/Friends";
 import { FriendsSkeleton } from "../Friends/FriendsSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
-import { SuggestedFriends } from "@/app/features/feed/SuggestedFriends/SuggestedFriends";
+import { SuggestedFriends } from "@/app/features/friends/SuggestedFriends/SuggestedFriends";
 
 interface FriendsLayoutProps {
   username: string;

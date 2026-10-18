@@ -56,10 +56,10 @@ export const useAuthStore = create<AuthStore>()(
             conversations = [];
           }
 
-          const totalUnread = conversations.reduce(
-            (sum, conversation) => sum + (conversation.unreadCount ?? 0),
-            0,
-          );
+          let totalUnread = 0;
+          for (const conversation of conversations) {
+            totalUnread += conversation.unreadCount ?? 0;
+          }
           useMessagesStore.getState().setUnreadMessagesCount(totalUnread);
         },
 

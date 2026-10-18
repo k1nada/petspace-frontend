@@ -5,9 +5,10 @@ import { useTranslations } from "next-intl";
 import cn from "classnames";
 import { FaDog, FaLock } from "react-icons/fa";
 import { BiSolidBone } from "react-icons/bi";
-import { ACHIEVEMENT_KEYS } from "@/app/uikit/constants/achievements";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { Achievements } from "@/types";
+
+const ACHIEVEMENT_KEYS: (keyof Achievements)[] = ["firstFriend", "firstPost"];
 
 interface Props {
   isOpen: boolean;

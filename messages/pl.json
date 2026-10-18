@@ -6,7 +6,6 @@
     "saveAndContinue": "Zapisz i kontynuuj",
     "skip": "Pomiń",
     "upload": "Prześlij",
-    "select": "Wybierz",
     "cancel": "Anuluj",
     "or": "lub",
     "online": "Online",
@@ -129,12 +128,7 @@
     "info": "Więcej info",
     "friends": "znajomi",
     "photos": "zdjęcia",
-    "editProfile": "Edytuj profil",
-    "addFriend": "Dodaj znajomego",
-    "message": "Wiadomość",
-    "familyTree": "Drzewo rodzinne",
-    "requestSent": "Wysłano",
-    "following": "Obserwujesz"
+    "requestSent": "Wysłano"
   },
   "profileEditor": {
     "bio": "O sobie:",
@@ -143,7 +137,6 @@
     "about": "Hau! Pochwal się wszystkim, jaki jestem grzeczny"
   },
   "profileInformation": {
-    "profile": "Profil",
     "interests": "Zainteresowania"
   },
   "profileInterests": {
@@ -166,19 +159,12 @@
     "interestsTitle": "Moje zainteresowania",
     "followers": "obserwujących"
   },
-  "profileFriends": {
-    "title": "Znajomi",
-    "empty": "Brak znajomych"
-  },
   "avatarEdit": {
     "open": "Otwórz zdjęcie",
     "change": "Zmień zdjęcie",
-    "delete": "Usuń zdjęcie",
     "modalTitle": "Prześlij nowe zdjęcie",
     "modalDescription": "Pokaż sforze kim jesteś!",
-    "modalFormats": "JPG, PNG, GIF, WEBP",
     "choosePhoto": "Kliknij, aby wybrać zdjęcie",
-    "deleteModalTitle": "Usuń zdjęcie",
     "deleteModalDescription": "Czy na pewno chcesz usunąć swoje zdjęcie?"
   },
   "feed": {
@@ -230,51 +216,35 @@
   "photoGallery": {
     "title": "Moje zdjęcia",
     "titleOther": "Zdjęcia użytkownika {name}",
-    "addPhoto": "Dodaj nowe zdjęcie",
     "deleteAll": "Usuń wszystkie",
     "deleteAllModalTitle": "Usuń wszystkie zdjęcia",
     "deleteAllModalDescription": "Czy na pewno chcesz usunąć wszystkie swoje zdjęcia? Tej operacji nie można cofnąć.",
     "photoAlt": "Zdjęcie {name}",
-    "emptyPhotosTitle": "Brak zdjęć",
     "emptyPhotosText": "Czas uwiecznić chwile merdania ogonem!"
-  },
-  "profilePhotos": {
-    "title": "Zdjęcia",
-    "empty": "Brak zdjęć"
   },
   "photoModal": {
     "counter": "{current} / {total}",
     "commentsTitle": "Jeszcze żadnych merdań ogonem...",
     "commentsText": "Bądź pierwszy!",
-    "modalTitle": "Usuń zdjęcie",
     "modalDescription": "Czy na pewno chcesz usunąć to zdjęcie?"
   },
   "photoUploadModal": {
-    "addPhoto": "Dodaj nowe zdjęcie",
-    "dragAndDrop": "Przeciągnij i upuść lub kliknij tutaj",
-    "modalFormats": "JPG, PNG, GIF, WEBP"
+    "dragAndDrop": "Przeciągnij i upuść lub kliknij tutaj"
   },
   "friends": {
-    "friendsTitle": "Znajomi",
     "friendsTitleOther": "Znajomi użytkownika {name}",
     "requestsTitle": "Zaproszenia",
     "followersTitle": "Obserwujący",
     "followingTitle": "Obserwowani",
-    "message": "Wiadomość",
-    "addFriend": "Dodaj znajomego",
-    "following": "Obserwujesz",
     "sent": "Wysłano",
     "unfollowAll": "Nie obserwuj nikogo",
-    "remove": "Usuń",
     "unfollow": "Nie obserwuj",
-    "emptyFriendsTitle": "Brak znajomych",
     "emptyFriendsText": "Znajdź jakieś psy i wyślij im zaproszenie do znajomych!",
     "noSearchResults": "Nie znaleziono znajomych",
     "emptyFollowersTitle": "Brak obserwujących",
     "emptyFollowersText": "Udostępnij swój profil, żeby więcej psów mogło cię znaleźć!",
     "emptyFollowingTitle": "Nikogo jeszcze nie obserwujesz",
     "emptyFollowingText": "Przeglądaj profile i obserwuj psy, które lubisz!",
-    "delete": "Usuń",
     "lastSeen": "Ostatnio widziano {time}"
   },
   "friendRequest": {
@@ -297,15 +267,12 @@
     "followersCount": "{count} obserwujących"
   },
   "friendTip": {
-    "title": "Czy wiesz, że...?",
     "text": "Psy w tym samym wieku i rasie najlepiej się dogadują. Uzupełnij swój profil, a znajdziemy świetnych znajomych w pobliżu!"
   },
   "feedTip": {
-    "title": "Czy wiesz, że...?",
     "text": "Obserwuj więcej psów, aby Twój feed wypełnił się świeżymi spacerami i zabawami znajomych z okolicy!"
   },
   "familyTip": {
-    "title": "Czy wiesz, że...?",
     "text": "Uzupełnianie drzewa rodzinnego pomaga innym psom odnaleźć krewnych i dostrzec wspólne cechy między pokoleniami!"
   },
   "familyTree": {
@@ -375,10 +342,6 @@
     "copyright": "© {year} Petspace"
   },
   "metadata": {
-    "home": {
-      "title": "Petspace — sieć społecznościowa dla psów",
-      "description": "Połącz swojego psa z innymi, dziel się zdjęciami i postami oraz twórz drzewo rodzinne na Petspace."
-    },
     "feed": {
       "title": "Aktualności",
       "description": "Zobacz najnowsze posty znajomych swojego psa na Petspace."

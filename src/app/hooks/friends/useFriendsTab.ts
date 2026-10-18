@@ -2,7 +2,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
 
-export type FriendsTab = "friends" | "requests" | "followers" | "following";
+type FriendsTab = "friends" | "requests" | "followers" | "following";
+
+interface FriendsTabItem {
+  key: FriendsTab;
+  label: string;
+  count: number;
+  hidden?: boolean;
+}
 
 interface UseFriendsTabParams {
   isMyProfile: boolean;
@@ -32,7 +39,7 @@ export const useFriendsTab = ({
     ? t("common.friends")
     : t("friends.friendsTitleOther", { name });
 
-  const tabs = [
+  const tabs: FriendsTabItem[] = [
     { key: "friends", label: friendsLabel, count: friendsCount },
     {
       key: "requests",
@@ -52,12 +59,7 @@ export const useFriendsTab = ({
       count: followingCount,
       hidden: !isMyProfile,
     },
-  ] satisfies {
-    key: FriendsTab;
-    label: string;
-    count: number;
-    hidden?: boolean;
-  }[];
+  ];
 
   return { activeTab, goToTab, tabs };
 };
