@@ -3,11 +3,11 @@
 import { Button } from "@/app/uikit/form/Button/Button";
 import styles from "./RegistrationSteps.module.scss";
 import { ROUTES } from "@/routes/routes";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { DatePicker } from "@/app/uikit/form/DatePicker/DatePicker";
-import dayjs, { type Dayjs } from "@/utils/dayjs";
+import { type Dayjs } from "@/utils/dayjs";
 import { toast } from "react-toastify";
 import { useBreeds } from "@/app/hooks/shared/useBreeds";
 import { useCities, useCountries } from "@/app/hooks/shared/useLocationOptions";
@@ -15,32 +15,16 @@ import { updateRegistrationSteps } from "@/services/api/auth";
 import { Combobox } from "@/app/uikit/form/Combobox/Combobox";
 import { Select } from "@/app/uikit/form/Select/Select";
 
-interface RegistrationStepsProps {
-  birthDate?: number;
-  sex?: string;
-  country?: string;
-  city?: string;
-  breed?: string;
-}
-
-const RegistrationSteps = ({
-  birthDate,
-  sex,
-  country,
-  city,
-  breed,
-}: RegistrationStepsProps) => {
+export const RegistrationSteps = () => {
   const t = useTranslations();
   const router = useRouter();
 
   const [isSaving, setIsSaving] = useState(false);
-  const [sexValue, setsexValue] = useState(sex ?? "");
-  const [selectedAge, setSelectedAge] = useState<Dayjs | undefined>(
-    birthDate ? dayjs(birthDate) : undefined,
-  );
-  const [selectedBreed, setSelectedBreed] = useState(breed ?? "");
-  const [selectedCity, setSelectedCity] = useState(city ?? "");
-  const [selectedCountry, setSelectedCountry] = useState(country ?? "");
+  const [sexValue, setSexValue] = useState("");
+  const [selectedAge, setSelectedAge] = useState<Dayjs | undefined>(undefined);
+  const [selectedBreed, setSelectedBreed] = useState("");
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const breeds = useBreeds();
   const countries = useCountries();
   const cities = useCities(selectedCountry);
@@ -83,14 +67,14 @@ const RegistrationSteps = ({
           <label className={styles.label}>{t("fields.sex")}</label>
           <Select
             value={sexValue}
-            onChange={setsexValue}
+            onChange={setSexValue}
             options={[
               { value: "male", label: t("sex.male") },
               { value: "female", label: t("sex.female") },
             ]}
             placeholder={t("placeholder.noneSelected")}
             disabled={isSaving}
-          ></Select>
+          />
         </div>
         <div className={styles.field}>
           <label className={styles.label}>{t("fields.birthday")}</label>
@@ -98,7 +82,7 @@ const RegistrationSteps = ({
             value={selectedAge}
             onChange={setSelectedAge}
             disabled={isSaving}
-          ></DatePicker>
+          />
         </div>
         <div className={styles.field}>
           <label className={styles.label}>{t("fields.country")}</label>
@@ -152,5 +136,3 @@ const RegistrationSteps = ({
     </form>
   );
 };
-
-export default RegistrationSteps;

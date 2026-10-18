@@ -21,13 +21,11 @@ export const generateMetadata = async ({
 
 export default function SignUpPage() {
   return (
-    <>
-      <main className={styles.page}>
-        <div className={styles.content}>
-          <SignUp />
-        </div>
-        <Footer />
-      </main>
-    </>
+    <main className={styles.page}>
+      <div className={styles.content}>
+        <SignUp />
+      </div>
+      <Footer />
+    </main>
   );
 }

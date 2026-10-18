@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
+import { isAxiosError } from "axios";
 import styles from "./SignIn.module.scss";
 import { SignInData } from "@/types";
 import {
@@ -52,8 +53,12 @@ export const SignIn = () => {
       } else {
         router.push(ROUTES.registrationSteps);
       }
-    } catch {
-      toast.error(t("errors.INVALID_CREDENTIALS"));
+    } catch (e) {
+      if (isAxiosError(e) && e.response?.data?.type === "INVALID_CREDENTIALS") {
+        toast.error(t("errors.INVALID_CREDENTIALS"));
+      } else {
+        toast.error(t("toasts.error"));
+      }
     }
   };
 
@@ -78,7 +83,7 @@ export const SignIn = () => {
         />
 
         {errors.email?.message && (
-          <ErrorMessage message={errors.email?.message} />
+          <ErrorMessage message={errors.email.message} />
         )}
 
         <div className={styles.password}>
@@ -107,7 +112,7 @@ export const SignIn = () => {
         </div>
 
         {errors.password?.message && (
-          <ErrorMessage message={errors.password?.message} />
+          <ErrorMessage message={errors.password.message} />
         )}
       </div>
       <Button type="submit" appearance="primary" disabled={isSubmitting}>
@@ -129,5 +134,3 @@ export const SignIn = () => {
     </form>
   );
 };
-
-export default SignIn;

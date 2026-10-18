@@ -1,7 +1,7 @@
 "use client";
 
 import { ROUTES } from "@/routes/routes";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import styles from "./SignUp.module.scss";
 import { useForm } from "react-hook-form";
 import {

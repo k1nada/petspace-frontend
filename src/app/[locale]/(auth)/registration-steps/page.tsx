@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import RegistrationSteps from "@/app/features/auth/RegistrationSteps/RegistrationSteps";
+import { RegistrationSteps } from "@/app/features/auth/RegistrationSteps/RegistrationSteps";
 import styles from "./page.module.scss";
 import { Footer } from "@/app/components/Footer/Footer";
 
