@@ -22,5 +22,21 @@ export const usePhotoNavigation = (photos: Photo[]) => {
     }
   };
 
-  return { selectedIndex, setSelectedIndex, handlePrev, handleNext };
+  let prevPhoto: Photo | null = null;
+  let nextPhoto: Photo | null = null;
+  if (selectedIndex !== null && photos.length > 1) {
+    prevPhoto =
+      photos[selectedIndex === 0 ? photos.length - 1 : selectedIndex - 1];
+    nextPhoto =
+      photos[selectedIndex === photos.length - 1 ? 0 : selectedIndex + 1];
+  }
+
+  return {
+    selectedIndex,
+    setSelectedIndex,
+    handlePrev,
+    handleNext,
+    prevPhoto,
+    nextPhoto,
+  };
 };

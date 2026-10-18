@@ -4,7 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { useState } from "react";
 import Image from "next/image";
 import cn from "classnames";
-import { MdPhotoCamera } from "react-icons/md";
+import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
 import styles from "./PhotoUploadModal.module.scss";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { Button } from "@/app/uikit/form/Button/Button";
@@ -95,7 +95,7 @@ export const PhotoUploadModal = ({
           </div>
         ) : (
           <div className={styles.placeholder}>
-            <MdPhotoCamera size={40} />
+            <PhotoIcon size={40} />
             <p className={styles.dropzoneText}>
               {t("photoUploadModal.dragAndDrop")}
             </p>

@@ -20,11 +20,20 @@ export const usePhotoComments = ({
   onCommentsRefresh,
 }: UsePhotoCommentsProps) => {
   const t = useTranslations();
-  const [fetchedComments, setFetchedComments] = useState<CommentType[]>(
-    photo?.comments ?? [],
-  );
-  const comments = postId ? (photo?.comments ?? []) : fetchedComments;
+  const [commentsByPhotoId, setCommentsByPhotoId] = useState<
+    Record<string, CommentType[]>
+  >({});
   const photoId = photo?.id;
+  const cachedComments = photoId ? commentsByPhotoId[photoId] : undefined;
+
+  const commentsLoading = !postId && !cachedComments;
+  let comments: CommentType[] = [];
+  if (postId) comments = photo?.comments ?? [];
+  else if (cachedComments) comments = cachedComments;
+
+  const saveComments = (id: string, data: CommentType[]) => {
+    setCommentsByPhotoId((prev) => ({ ...prev, [id]: data }));
+  };
 
   const refreshComments = () => {
     if (postId) {
@@ -33,14 +42,24 @@ export const usePhotoComments = ({
     }
     if (!photoId) return;
     getPhotoComments(photoId)
-      .then((data) => setFetchedComments(data))
+      .then((data) => saveComments(photoId, data))
       .catch(() => toast.error(t("toasts.commentsLoadError")));
   };
 
   useEffect(() => {
-    if (postId) return;
-    refreshComments();
-  }, [postId, photoId]);
+    if (postId || !photoId) return;
+
+    getPhotoComments(photoId)
+      .then((data) =>
+        setCommentsByPhotoId((prev) => ({ ...prev, [photoId]: data })),
+      )
+      .catch(() => {
+        setCommentsByPhotoId((prev) =>
+          prev[photoId] ? prev : { ...prev, [photoId]: [] },
+        );
+        toast.error(t("toasts.commentsLoadError"));
+      });
+  }, [postId, photoId, t]);
 
   const deleteComment = async (commentId: string) => {
     try {
@@ -60,5 +79,11 @@ export const usePhotoComments = ({
     }
   };
 
-  return { comments, refreshComments, deleteComment, editComment };
+  return {
+    comments,
+    commentsLoading,
+    refreshComments,
+    deleteComment,
+    editComment,
+  };
 };

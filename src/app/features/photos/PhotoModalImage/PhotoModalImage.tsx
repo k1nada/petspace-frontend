@@ -5,13 +5,10 @@ import cn from "classnames";
 import { useTranslations } from "next-intl";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-import { Photo } from "@/types";
-import { getPhotoUrl } from "@/utils/photo";
 import styles from "./PhotoModalImage.module.scss";
 
 interface PhotoModalImageProps {
-  photo: Photo;
-  imageUrl?: string;
+  src: string;
   currentIndex?: number;
   photosCount?: number;
   onPrev?: () => void;
@@ -19,8 +16,7 @@ interface PhotoModalImageProps {
 }
 
 export const PhotoModalImage = ({
-  photo,
-  imageUrl,
+  src,
   currentIndex,
   photosCount,
   onPrev,
@@ -28,12 +24,18 @@ export const PhotoModalImage = ({
 }: PhotoModalImageProps) => {
   const t = useTranslations();
   const showNavigation = (photosCount ?? 0) > 1;
-  const src = imageUrl ?? getPhotoUrl(photo);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.background}>
-        <Image src={src} alt="" fill className={styles.backgroundImage} />
+        <Image
+          src={src}
+          alt=""
+          fill
+          unoptimized
+          decoding="sync"
+          className={styles.backgroundImage}
+        />
       </div>
       {showNavigation && (
         <span className={styles.counter}>
@@ -57,6 +59,8 @@ export const PhotoModalImage = ({
           src={src}
           alt={t("postCreator.photo")}
           fill
+          unoptimized
+          decoding="sync"
           className={styles.foregroundImage}
         />
       </div>
