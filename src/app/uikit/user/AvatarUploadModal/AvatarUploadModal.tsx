@@ -3,7 +3,7 @@
 import { useDropzone } from "react-dropzone";
 import { useEffect, useState } from "react";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { MdPhotoCamera } from "react-icons/md";
+import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
 import styles from "./AvatarUploadModal.module.scss";
 
 interface AvatarUploadModalProps {
@@ -39,6 +39,7 @@ export const AvatarUploadModal = ({
     disabled,
     onDrop: (files) => {
       const file = files[0];
+      if (!file) return;
       const fileUrl = URL.createObjectURL(file);
       setPreview(fileUrl);
       onChange?.(file);
@@ -54,7 +55,7 @@ export const AvatarUploadModal = ({
       <input {...getInputProps()} />
       <Avatar size={size} src={preview} />
       <div className={styles.overlay}>
-        <MdPhotoCamera size={24} />
+        <PhotoIcon size={24} />
       </div>
     </div>
   );
