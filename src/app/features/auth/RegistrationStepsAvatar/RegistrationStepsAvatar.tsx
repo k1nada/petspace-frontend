@@ -3,7 +3,7 @@
 import styles from "./RegistrationStepsAvatar.module.scss";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { ROUTES } from "@/routes/routes";
 import { AvatarUploadModal } from "@/app/features/profile/modals/AvatarUploadModal/AvatarUploadModal";
 import { useState } from "react";
@@ -19,15 +19,18 @@ export const RegistrationStepsAvatar = () => {
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [isSaving, setIsSaving] = useState(false);
 
-  const navigateToProfile = () => {
-    if (currentUser) router.push(ROUTES.profile(currentUser.username));
-  };
-
   const completeOnboarding = async () => {
+    if (!currentUser) {
+      toast.error(t("toasts.error"));
+      setIsSaving(false);
+      return;
+    }
     try {
       await updateRegistrationSteps({ registrationCompleted: true });
-    } catch {}
-    navigateToProfile();
+    } catch {
+      // not critical: the steps will be shown again on the next sign-in
+    }
+    router.push(ROUTES.profile(currentUser.username));
   };
 
   const finishRegistration = async () => {
