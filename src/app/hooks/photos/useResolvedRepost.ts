@@ -35,9 +35,9 @@ export const useResolvedRepost = ({
       const result = await repostPhoto(photoId);
       setReposted(result.reposted);
       setRepostsCount(result.count);
-      setRepostLoading(false);
     } catch {
       toast.error(t("toasts.error"));
+    } finally {
       setRepostLoading(false);
     }
   };

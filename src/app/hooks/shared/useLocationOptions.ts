@@ -5,7 +5,9 @@ export const useCountries = () => {
   const [countries, setCountries] = useState<string[]>([]);
 
   useEffect(() => {
-    getCountries().then(setCountries);
+    getCountries()
+      .then(setCountries)
+      .catch(() => setCountries([]));
   }, []);
 
   return countries;
@@ -19,9 +21,13 @@ export const useCities = (country: string) => {
 
     let cancelled = false;
 
-    getCities(country).then((data) => {
-      if (!cancelled) setCities(data);
-    });
+    getCities(country)
+      .then((data) => {
+        if (!cancelled) setCities(data);
+      })
+      .catch(() => {
+        if (!cancelled) setCities([]);
+      });
 
     return () => {
       cancelled = true;

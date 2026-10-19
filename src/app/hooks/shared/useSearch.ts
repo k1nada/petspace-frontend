@@ -1,34 +1,42 @@
 import { ROUTES } from "@/routes/routes";
-import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { useEffect, useState } from "react";
 import { User as UserType } from "@/types/index";
 import { searchUsers } from "@/services/api/userClient";
 
+const SEARCH_DELAY_MS = 300;
+
 export const useSearch = () => {
   const router = useRouter();
+  const pathname = usePathname();
+  const [searchPathname, setSearchPathname] = useState(pathname);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<UserType[]>([]);
-  const latestQuery = useRef("");
 
-  const search = async (value: string) => {
+  useEffect(() => {
+    if (!query.trim()) return;
+    let cancelled = false;
+
+    const timer = setTimeout(() => {
+      searchUsers(query)
+        .then((data) => {
+          if (!cancelled) setResults(data);
+        })
+        .catch(() => {
+          if (!cancelled) setResults([]);
+        });
+    }, SEARCH_DELAY_MS);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [query]);
+
+  const search = (value: string) => {
+    setSearchPathname(pathname);
     setQuery(value);
-    latestQuery.current = value;
-
-    if (!value.trim()) {
-      setResults([]);
-      return;
-    }
-
-    try {
-      const data = await searchUsers(value);
-      if (latestQuery.current === value) {
-        setResults(data);
-      }
-    } catch {
-      if (latestQuery.current === value) {
-        setResults([]);
-      }
-    }
+    if (!value.trim()) setResults([]);
   };
 
   const select = (username: string) => {
@@ -37,5 +45,12 @@ export const useSearch = () => {
     router.push(ROUTES.profile(username));
   };
 
-  return { query, results, search, select };
+  const isOnSearchPage = searchPathname === pathname;
+
+  return {
+    query: isOnSearchPage ? query : "",
+    results: isOnSearchPage ? results : [],
+    search,
+    select,
+  };
 };

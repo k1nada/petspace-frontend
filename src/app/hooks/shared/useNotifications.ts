@@ -13,25 +13,32 @@ export const useNotifications = (currentUser: User | null) => {
   const t = useTranslations();
   const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [loading, setLoading] = useState(true);
+  const username = currentUser?.username;
 
   useEffect(() => {
-    if (!currentUser) return;
+    if (!username) return;
+    let cancelled = false;
 
     const loadNotifications = async () => {
       try {
-        const data = await getNotifications(currentUser.username);
-        setNotifications(data);
+        const data = await getNotifications(username);
+        if (!cancelled) setNotifications(data);
       } catch {
+        if (cancelled) return;
         setNotifications([]);
+        toast.error(t("toasts.error"));
       }
-      setLoading(false);
+      if (!cancelled) setLoading(false);
     };
 
     loadNotifications();
-  }, [currentUser]);
+    return () => {
+      cancelled = true;
+    };
+  }, [username, t]);
 
   useEffect(() => {
-    if (!currentUser) return;
+    if (!username) return;
 
     const handleNotification = (notification: AppNotification) => {
       setNotifications((prev) => [notification, ...prev]);
@@ -41,30 +48,36 @@ export const useNotifications = (currentUser: User | null) => {
     return () => {
       socket.off("notification", handleNotification);
     };
-  }, [currentUser]);
+  }, [username]);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   const markAllAsRead = async () => {
     if (!currentUser) return;
+    const unreadIds = notifications.filter((n) => !n.read).map((n) => n.id);
     setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
     try {
       await markAllNotificationsRead(currentUser.username);
     } catch {
+      setNotifications((prev) =>
+        prev.map((n) => (unreadIds.includes(n.id) ? { ...n, read: false } : n)),
+      );
       toast.error(t("toasts.error"));
     }
   };
 
-  const markAsRead = async (id: string) => {
+  const setNotificationRead = (id: string, read: boolean) => {
     setNotifications((prev) =>
-      prev.map((n) => {
-        if (n.id !== id) return n;
-        return { ...n, read: true };
-      }),
+      prev.map((n) => (n.id === id ? { ...n, read } : n)),
     );
+  };
+
+  const markAsRead = async (id: string) => {
+    setNotificationRead(id, true);
     try {
       await markNotificationRead(id);
     } catch {
+      setNotificationRead(id, false);
       toast.error(t("toasts.error"));
     }
   };
