@@ -12,3 +12,21 @@
   align-items: center;
   overflow-y: auto;
 }
+
+@media (max-width: 1024px) {
+  .content {
+    padding: 0 var(--padding-l);
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 0 var(--padding-m);
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    padding: 0 var(--padding-s);
+  }
+}

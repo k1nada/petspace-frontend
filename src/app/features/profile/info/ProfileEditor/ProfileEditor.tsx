@@ -204,7 +204,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
           control={control}
           render={({ field }) => (
             <Textarea
-              appearance="third"
+              appearance="tertiary"
               {...field}
               maxLength={150}
               placeholder={t("profileEditor.about")}

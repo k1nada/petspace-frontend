@@ -6,8 +6,8 @@
   border-radius: var(--radius-m);
   box-sizing: border-box;
   transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+    background-color var(--transition-base),
+    color var(--transition-base);
 
   &::placeholder {
     color: var(--text-placeholder);

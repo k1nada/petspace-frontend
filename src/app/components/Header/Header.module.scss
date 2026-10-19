@@ -141,7 +141,7 @@
 @media (max-width: 480px) {
   .container {
     gap: var(--gap-xs);
-    padding: 0 var(--padding-m) 0 var(--padding-xs);
+    padding: 0 var(--padding-m) 0 var(--padding-m);
   }
 
   .wrapper {

@@ -8,9 +8,9 @@
   box-sizing: border-box;
   font-family: var(--font-sans);
   transition:
-    box-shadow 0.2s ease,
-    background-color 0.3s ease,
-    color 0.3s ease;
+    box-shadow var(--transition-fast),
+    background-color var(--transition-base),
+    color var(--transition-base);
 
   &::placeholder {
     color: var(--text-placeholder);
@@ -41,7 +41,7 @@
   }
 }
 
-.third {
+.tertiary {
   background: var(--bg-input);
   color: var(--text-primary);
   width: 100%;

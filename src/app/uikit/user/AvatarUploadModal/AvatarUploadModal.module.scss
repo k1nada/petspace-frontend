@@ -15,9 +15,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.35);
+  background: var(--overlay-light);
   color: var(--text-on-color);
   border-radius: var(--radius-full);
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity var(--transition-fast);
 }
