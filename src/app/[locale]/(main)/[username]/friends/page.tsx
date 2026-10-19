@@ -24,14 +24,14 @@ export const generateMetadata = async ({
 const FriendsPage = async ({ params }: FriendsPageProps) => {
   const { username } = await params;
 
-  const [userData, friends, followers, following] = await Promise.all([
-    getUser(username),
+  const userData = await getUser(username);
+  if (!userData) notFound();
+
+  const [friends, followers, following] = await Promise.all([
     getFriends(username),
     getFollowers(username),
     getFollowing(username),
   ]);
-
-  if (!userData) notFound();
 
   return (
     <FriendsLayout

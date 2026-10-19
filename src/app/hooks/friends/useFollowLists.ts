@@ -5,7 +5,7 @@ import { FollowUser } from "@/types";
 import { unfollowUser } from "@/services/api/follows";
 import { revalidateFollows } from "@/services/actions/revalidateFollows";
 
-interface UseFollowListsParams {
+interface UseFollowListsProps {
   username: string;
   followers: FollowUser[];
   following: FollowUser[];
@@ -15,7 +15,7 @@ export const useFollowLists = ({
   username,
   followers: initialFollowers,
   following: initialFollowing,
-}: UseFollowListsParams) => {
+}: UseFollowListsProps) => {
   const t = useTranslations();
   const [followers, setFollowers] = useState(initialFollowers);
   const [following, setFollowing] = useState(initialFollowing);
@@ -26,6 +26,11 @@ export const useFollowLists = ({
 
   const removeFollowing = (targetUsername: string) =>
     setFollowing((prev) => prev.filter((u) => u.username !== targetUsername));
+
+  const addFollowing = (user: FollowUser) =>
+    setFollowing((prev) =>
+      prev.some((u) => u.id === user.id) ? prev : [user, ...prev],
+    );
 
   const unfollowAll = async () => {
     setIsConfirmAllOpen(false);
@@ -51,6 +56,7 @@ export const useFollowLists = ({
     followingList: following,
     followingCount: following.length,
     removeFollowing,
+    addFollowing,
     unfollowAll,
     isConfirmAllOpen,
     openConfirmAll: () => setIsConfirmAllOpen(true),

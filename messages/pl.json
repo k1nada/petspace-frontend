@@ -33,7 +33,8 @@
     "password": "Hasło",
     "createAccount": "Utwórz konto",
     "editProfile": "Edytuj profil",
-    "loading": "Wczytywanie..."
+    "loading": "Wczytywanie...",
+    "moreActions": "Więcej opcji"
   },
   "fields": {
     "birthday": "Urodziny:",
@@ -128,7 +129,11 @@
     "info": "Więcej info",
     "friends": "znajomi",
     "photos": "zdjęcia",
-    "requestSent": "Wysłano"
+    "requestSent": "Wysłano",
+    "removeFriend": "Usuń ze znajomych",
+    "cancelRequest": "Anuluj zaproszenie",
+    "friendsCount": "{count, plural, one {# znajomy} few {# znajomych} many {# znajomych} other {# znajomych}}",
+    "photosCount": "{count, plural, one {# zdjęcie} few {# zdjęcia} many {# zdjęć} other {# zdjęcia}}"
   },
   "profileEditor": {
     "bio": "O sobie:",
@@ -220,7 +225,8 @@
     "deleteAllModalTitle": "Usuń wszystkie zdjęcia",
     "deleteAllModalDescription": "Czy na pewno chcesz usunąć wszystkie swoje zdjęcia? Tej operacji nie można cofnąć.",
     "photoAlt": "Zdjęcie {name}",
-    "emptyPhotosText": "Czas uwiecznić chwile merdania ogonem!"
+    "emptyPhotosText": "Czas uwiecznić chwile merdania ogonem!",
+    "manage": "Zarządzaj zdjęciami"
   },
   "photoModal": {
     "counter": "{current} / {total}",
@@ -245,7 +251,8 @@
     "emptyFollowersText": "Udostępnij swój profil, żeby więcej psów mogło cię znaleźć!",
     "emptyFollowingTitle": "Nikogo jeszcze nie obserwujesz",
     "emptyFollowingText": "Przeglądaj profile i obserwuj psy, które lubisz!",
-    "lastSeen": "Ostatnio widziano {time}"
+    "lastSeen": "Ostatnio widziano {time}",
+    "manageFollowing": "Zarządzaj obserwowanymi"
   },
   "friendRequest": {
     "title": "Brak zaproszeń",
@@ -264,7 +271,9 @@
     "removeModalDescription": "{name} nie będzie już Cię obserwować.",
     "unfollowModalDescription": "Zawsze możesz ponownie zacząć obserwować {name}.",
     "unfollowAllModalDescription": "Przestaniesz obserwować wszystkich z tej listy. Zawsze możesz zacząć ich obserwować ponownie później.",
-    "followersCount": "{count} obserwujących"
+    "followersCount": "{count} obserwujących",
+    "removeFollower": "Usuń obserwującego",
+    "followBack": "Obserwuj również"
   },
   "friendTip": {
     "text": "Psy w tym samym wieku i rasie najlepiej się dogadują. Uzupełnij swój profil, a znajdziemy świetnych znajomych w pobliżu!"

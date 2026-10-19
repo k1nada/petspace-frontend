@@ -1,10 +1,10 @@
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 300px;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "content information";
   gap: var(--gap-xl);
   min-height: 100vh;
-  grid-template-areas: "content information";
   align-items: start;
 }
 
@@ -15,4 +15,29 @@
 
 .information {
   grid-area: information;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    grid-template-areas: "content";
+    gap: var(--gap-l);
+  }
+
+  .information {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    grid-template-areas:
+      "content"
+      "information";
+  }
+
+  .information {
+    display: block;
+  }
 }

@@ -46,7 +46,7 @@ export const ProfileEditorLayout = ({ user }: ProfileEditorLayoutProps) => {
         <ProfileEditor user={user} />
       </div>
       <div className={styles.information}>
-        <ProfileInformation username={user.username}></ProfileInformation>
+        <ProfileInformation username={user.username} />
       </div>
     </div>
   );

@@ -10,8 +10,8 @@ import { Link } from "../../uikit/navigation/Link/Link";
 import { Button } from "../../uikit/form/Button/Button";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { ROUTES } from "@/routes/routes";
-import { FaPowerOff, FaGlobe, FaMoon, FaSearch } from "react-icons/fa";
-import { FaSun } from "react-icons/fa6";
+import { FaPowerOff, FaSearch } from "react-icons/fa";
+import { MdDarkMode, MdLanguage, MdLightMode, MdLogout } from "react-icons/md";
 import { signOut } from "@/services/api/auth";
 import socket from "@/services/socket";
 import { SearchBar } from "../../uikit/navigation/SearchBar/SearchBar";
@@ -26,7 +26,7 @@ import { HeaderSkeleton } from "./HeaderSkeleton";
 import { HeaderMobileSearch } from "./HeaderMobileSearch";
 import { UserSearchDropdown } from "@/app/uikit/navigation/UserSearchDropdown/UserSearchDropdown";
 import { NotificationsDropdown } from "@/app/uikit/overlays/NotificationsDropdown/NotificationsDropdown";
-import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 import { BsHouseDoorFill } from "react-icons/bs";
 
@@ -45,12 +45,17 @@ export const Header = () => {
   const moreMenuItems = [
     {
       label: t("header.language"),
-      icon: <FaGlobe size={18} />,
+      icon: <MdLanguage size={20} />,
       onClick: toggleLocale,
     },
     {
       label: t("header.theme"),
-      icon: theme === "light" ? <FaMoon size={18} /> : <FaSun size={18} />,
+      icon:
+        theme === "light" ? (
+          <MdDarkMode size={20} />
+        ) : (
+          <MdLightMode size={20} />
+        ),
       onClick: toggleTheme,
     },
   ];
@@ -58,7 +63,7 @@ export const Header = () => {
   if (currentUser) {
     moreMenuItems.push({
       label: t("header.signOut"),
-      icon: <FaPowerOff size={18} />,
+      icon: <MdLogout size={20} />,
       onClick: () => setIsSignOutOpen(true),
     });
   }
@@ -107,10 +112,7 @@ export const Header = () => {
             )}
             {currentUser && <NotificationsDropdown />}
             <span className={styles.mobileMenu}>
-              <DropdownMenu
-                items={moreMenuItems}
-                className={styles.moreMenuDropdown}
-              />
+              <Dropdown items={moreMenuItems} />
             </span>
             {currentUser && (
               <Link

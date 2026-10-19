@@ -1,8 +1,8 @@
 "use client";
 
 import styles from "./AvatarEdit.module.scss";
-import { Button } from "@/app/uikit/form/Button/Button";
-import { MdDeleteSweep, MdModeEdit, MdPhotoCamera } from "react-icons/md";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
+import { MdDelete, MdEdit, MdPhotoCamera } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import defaultAvatar from "@/assets/avatars/default.png";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
@@ -131,29 +131,41 @@ export const AvatarEdit = ({
     );
   }
 
+  const menuItems = [];
+  if (hasAvatar) {
+    menuItems.push({
+      label: t("avatarEdit.open"),
+      icon: <MdPhotoCamera size={20} />,
+      onClick: () => setSelectedIndex(0),
+    });
+  }
+  menuItems.push({
+    label: t("avatarEdit.change"),
+    icon: <MdEdit size={20} />,
+    onClick: () => setIsChangeOpen(true),
+  });
+  if (hasAvatar) {
+    menuItems.push({
+      label: t("common.deletePhoto"),
+      icon: <MdDelete size={20} />,
+      onClick: () => setIsDeleteOpen(true),
+    });
+  }
+
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.avatarWrapper}>
-        <Avatar src={src ?? defaultAvatar} size={size} />
-      </div>
-      <div className={styles.overlay}>
-        {hasAvatar && (
-          <Button appearance="secondary" onClick={() => setSelectedIndex(0)}>
-            <MdPhotoCamera size={20} />
-            {t("avatarEdit.open")}
-          </Button>
-        )}
-        <Button appearance="secondary" onClick={() => setIsChangeOpen(true)}>
-          <MdModeEdit size={20} />
-          {t("avatarEdit.change")}
-        </Button>
-        {hasAvatar && (
-          <Button appearance="secondary" onClick={() => setIsDeleteOpen(true)}>
-            <MdDeleteSweep size={20} />
-            {t("common.deletePhoto")}
-          </Button>
-        )}
-      </div>
+    <>
+      <Dropdown
+        openOn="hover"
+        align="center"
+        className={styles.wrapper}
+        items={menuItems}
+        trigger={
+          <div className={styles.avatarWrapper}>
+            <Avatar src={src ?? defaultAvatar} size={size} />
+          </div>
+        }
+      />
+
 
       <PhotoModal
         photo={selectedPhoto}
@@ -188,6 +200,6 @@ export const AvatarEdit = ({
         onConfirm={deleteAvatar}
         onClose={() => setIsDeleteOpen(false)}
       />
-    </div>
+    </>
   );
 };

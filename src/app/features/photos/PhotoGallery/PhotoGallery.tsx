@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/app/uikit/form/Button/Button";
+import { MdAddPhotoAlternate, MdDelete } from "react-icons/md";
 import styles from "./PhotoGallery.module.scss";
 import { useTranslations } from "next-intl";
 import { PhotoModal } from "../PhotoModal/PhotoModal";
@@ -15,6 +15,7 @@ import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 
 interface PhotoGalleryProps {
   photos: Photo[];
@@ -49,6 +50,20 @@ export const PhotoGallery = ({
     selectedIndex !== null ? localPhotos[selectedIndex] : null;
   const isEmpty = localPhotos.length === 0;
 
+  const menuItems = [];
+  menuItems.push({
+    label: t("common.addPhoto"),
+    icon: <MdAddPhotoAlternate size={20} />,
+    onClick: () => setIsUploadOpen(true),
+  });
+  if (!isEmpty) {
+    menuItems.push({
+      label: t("photoGallery.deleteAll"),
+      icon: <MdDelete size={20} />,
+      onClick: () => setIsDeleteAllOpen(true),
+    });
+  }
+
   return (
     <AuthLoader fallback={<PhotoGallerySkeleton />}>
       <section className={styles.container}>
@@ -60,22 +75,7 @@ export const PhotoGallery = ({
             <span className={styles.count}>{localPhotos.length}</span>
           </h1>
           {isOwner && (
-            <div className={styles.actions}>
-              {!isEmpty && (
-                <Button
-                  appearance="secondary"
-                  onClick={() => setIsDeleteAllOpen(true)}
-                >
-                  {t("photoGallery.deleteAll")}
-                </Button>
-              )}
-              <Button
-                appearance="primary"
-                onClick={() => setIsUploadOpen(true)}
-              >
-                {t("common.addPhoto")}
-              </Button>
-            </div>
+            <Dropdown label={t("photoGallery.manage")} items={menuItems} />
           )}
         </div>
 

@@ -1,21 +1,29 @@
 "use client";
 
-import styles from "./FollowCard.module.scss";
-import { Button } from "@/app/uikit/form/Button/Button";
-import { useTranslations } from "next-intl";
-import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { FollowUser, FollowListType } from "@/types";
-import { Link } from "@/app/uikit/navigation/Link/Link";
-import { ROUTES } from "@/routes/routes";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { FaMessage } from "react-icons/fa6";
+import {
+  MdOutlineMoreHoriz,
+  MdPersonAdd,
+  MdPersonRemove,
+} from "react-icons/md";
+import { FollowUser, FollowListType } from "@/types";
+import { ROUTES } from "@/routes/routes";
+import { useRouter } from "@/i18n/navigation";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
+import { IconButton } from "@/app/uikit/form/IconButton/IconButton";
+import { UserRow } from "../UserRow/UserRow";
 
 interface FollowCardProps {
   user: FollowUser;
   currentUser: string;
   type: FollowListType;
   isOwner?: boolean;
-  onRemoved?: (username: string) => void;
+  onRemoved?: (username: string) => Promise<void>;
+  onFollowBack?: (user: FollowUser) => Promise<void>;
 }
 
 export const FollowCard = ({
@@ -24,15 +32,24 @@ export const FollowCard = ({
   type,
   isOwner = false,
   onRemoved,
+  onFollowBack,
 }: FollowCardProps) => {
   const t = useTranslations();
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFollowBackLoading, setIsFollowBackLoading] = useState(false);
+  const currentUserData = useAuthStore((state) => state.currentUser);
 
   const isSelf = user.username === currentUser;
   const canManage = isOwner && !isSelf;
+  const isAlreadyFollowing = !!currentUserData?.following?.includes(user.id);
+  const canFollowBack =
+    canManage && type === "followers" && !isAlreadyFollowing && !!onFollowBack;
 
-  const actionLabel =
-    type === "followers" ? t("common.remove") : t("friends.unfollow");
+  const removeLabel =
+    type === "followers"
+      ? t("followCard.removeFollower")
+      : t("friends.unfollow");
   const modalDescription = t(
     type === "followers"
       ? "followCard.removeModalDescription"
@@ -40,39 +57,78 @@ export const FollowCard = ({
     { name: user.name },
   );
 
-  const handleConfirm = () => {
-    onRemoved?.(user.username);
+  const goToMessages = () => {
+    router.push(ROUTES.messages(currentUser, user.username));
+  };
+
+  const handleConfirm = async () => {
+    await onRemoved?.(user.username);
     setIsModalOpen(false);
   };
 
+  const handleFollowBack = async () => {
+    if (isFollowBackLoading) return;
+    setIsFollowBackLoading(true);
+    try {
+      await onFollowBack?.(user);
+    } finally {
+      setIsFollowBackLoading(false);
+    }
+  };
+
+  const menuItems = [];
+  if (canManage) {
+    menuItems.push({
+      label: removeLabel,
+      icon: <MdPersonRemove size={20} />,
+      onClick: () => setIsModalOpen(true),
+    });
+  }
+  if (canFollowBack) {
+    menuItems.push({
+      label: t("followCard.followBack"),
+      icon: <MdPersonAdd size={20} />,
+      onClick: handleFollowBack,
+    });
+  }
+
   return (
-    <li className={styles.card}>
-      <Link href={ROUTES.profile(user.username)}>
-        <Avatar src={user.avatar} size={70} isOnline={user.isOnline} />
-      </Link>
-
-      <div className={styles.info}>
-        <Link href={ROUTES.profile(user.username)} className={styles.link}>
-          <div className={styles.name}>{user.name}</div>
-        </Link>
-        <div className={styles.followersCount}>
-          {t("followCard.followersCount", { count: user.followersCount })}
-        </div>
-      </div>
-
-      {canManage && (
-        <Button appearance="secondary" onClick={() => setIsModalOpen(true)}>
-          {actionLabel}
-        </Button>
-      )}
-
+    <UserRow
+      username={user.username}
+      name={user.name}
+      avatar={user.avatar}
+      isOnline={user.isOnline}
+      lastSeen={user.lastSeen}
+      fallbackStatus={t("followCard.followersCount", {
+        count: user.followersCount,
+      })}
+      actions={
+        isSelf ? undefined : (
+          <>
+            <IconButton
+              icon={<FaMessage size={18} />}
+              label={t("common.message")}
+              onClick={goToMessages}
+            />
+            {menuItems.length > 0 && (
+              <Dropdown
+                label={t("common.moreActions")}
+                triggerAppearance="iconButton"
+                trigger={<MdOutlineMoreHoriz size={18} />}
+                items={menuItems}
+              />
+            )}
+          </>
+        )
+      }
+    >
       <ConfirmModal
         isOpen={isModalOpen}
-        title={actionLabel}
+        title={removeLabel}
         description={modalDescription}
         onConfirm={handleConfirm}
         onClose={() => setIsModalOpen(false)}
       />
-    </li>
+    </UserRow>
   );
 };

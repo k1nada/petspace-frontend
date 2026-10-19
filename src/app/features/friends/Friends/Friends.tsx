@@ -4,8 +4,9 @@ import styles from "./Friends.module.scss";
 import { useTranslations } from "next-intl";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { Tab } from "@/app/uikit/navigation/Tab/Tab";
-import { Button } from "@/app/uikit/form/Button/Button";
+import { MdPersonRemove } from "react-icons/md";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { FriendCard } from "../FriendCard/FriendCard";
 import { Friend, FollowUser } from "@/types";
@@ -14,6 +15,7 @@ import { FollowList } from "../FollowList/FollowList";
 import { useFriendsTab } from "@/app/hooks/friends/useFriendsTab";
 import { useFriendsList } from "@/app/hooks/friends/useFriendsList";
 import { useFollowLists } from "@/app/hooks/friends/useFollowLists";
+import { Card } from "@/app/uikit/layout/Card/Card";
 
 interface FriendsProps {
   username: string;
@@ -46,6 +48,7 @@ export const Friends = ({
     followingList,
     followingCount,
     removeFollowing,
+    addFollowing,
     unfollowAll,
     isConfirmAllOpen,
     openConfirmAll,
@@ -64,7 +67,7 @@ export const Friends = ({
     activeTab === "following" && isMyProfile && followingCount > 0;
 
   return (
-    <section className={styles.container}>
+    <Card as="section">
       <div className={styles.header}>
         <div className={styles.tabs}>
           {tabs
@@ -81,9 +84,16 @@ export const Friends = ({
         </div>
 
         {canUnfollowAll && (
-          <Button appearance="secondary" onClick={openConfirmAll}>
-            {t("friends.unfollowAll")}
-          </Button>
+          <Dropdown
+            label={t("friends.manageFollowing")}
+            items={[
+              {
+                label: t("friends.unfollowAll"),
+                icon: <MdPersonRemove size={20} />,
+                onClick: openConfirmAll,
+              },
+            ]}
+          />
         )}
       </div>
 
@@ -125,6 +135,7 @@ export const Friends = ({
           currentUser={currentUser}
           isMyProfile={isMyProfile}
           onRemove={removeFollower}
+          onFollowBack={addFollowing}
         />
       )}
 
@@ -147,6 +158,6 @@ export const Friends = ({
         onConfirm={unfollowAll}
         onClose={closeConfirmAll}
       />
-    </section>
+    </Card>
   );
 };

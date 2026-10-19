@@ -5,9 +5,9 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Link } from "@/app/uikit/navigation/Link/Link";
-import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
-import { MdDeleteSweep } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import { ROUTES } from "@/routes/routes";
 import { FamilyMember } from "@/types";
@@ -43,7 +43,7 @@ export const FamilyMemberCard = ({
     {
       label: t("common.delete"),
       onClick: openConfirm,
-      icon: <MdDeleteSweep size={20} />,
+      icon: <MdDelete size={20} />,
     },
   ];
 
@@ -69,7 +69,7 @@ export const FamilyMemberCard = ({
 
       {isOwner && (
         <div className={styles.menu}>
-          <DropdownMenu items={menuItems} />
+          <Dropdown items={menuItems} />
         </div>
       )}
 

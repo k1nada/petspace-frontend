@@ -1,18 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./FriendRequestCard.module.scss";
-import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
-import { Link } from "@/app/uikit/navigation/Link/Link";
-import { ROUTES } from "@/routes/routes";
+import { MdCheck, MdClose } from "react-icons/md";
+import { IconButton } from "@/app/uikit/form/IconButton/IconButton";
 import { FriendRequest as FriendRequestType } from "@/types";
+import { UserRow } from "../UserRow/UserRow";
 
 interface FriendRequestCardProps {
   request: FriendRequestType;
-  onAccept: (requestId: string) => Promise<void>;
-  onReject: (requestId: string) => Promise<void>;
+  onAccept: (request: FriendRequestType) => Promise<void>;
+  onReject: (request: FriendRequestType) => Promise<void>;
 }
 
 export const FriendRequestCard = ({
@@ -26,50 +24,47 @@ export const FriendRequestCard = ({
   const handleAccept = async () => {
     if (isProcessing) return;
     setIsProcessing(true);
-    await onAccept(request.id);
-    setIsProcessing(false);
+    try {
+      await onAccept(request);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleReject = async () => {
     if (isProcessing) return;
     setIsProcessing(true);
-    await onReject(request.id);
-    setIsProcessing(false);
+    try {
+      await onReject(request);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
-    <li className={styles.card}>
-      <Link href={ROUTES.profile(request.from.username)}>
-        <Avatar
-          src={request.from.avatar}
-          size={70}
-          isOnline={request.from.isOnline}
-        />
-      </Link>
-      <div className={styles.info}>
-        <Link href={ROUTES.profile(request.from.username)}>
-          <div className={styles.name}>{request.from.name}</div>
-        </Link>
-        <div className={styles.status}>
-          {t("friendRequest.wantsToBeFriends")}
-        </div>
-      </div>
-      <div className={styles.actions}>
-        <Button
-          appearance="primary"
-          onClick={handleAccept}
-          disabled={isProcessing}
-        >
-          {t("friendRequest.accept")}
-        </Button>
-        <Button
-          appearance="secondary"
-          onClick={handleReject}
-          disabled={isProcessing}
-        >
-          {t("friendRequest.decline")}
-        </Button>
-      </div>
-    </li>
+    <UserRow
+      username={request.from.username}
+      name={request.from.name}
+      avatar={request.from.avatar}
+      isOnline={request.from.isOnline}
+      fallbackStatus={t("friendRequest.wantsToBeFriends")}
+      actions={
+        <>
+          <IconButton
+            accent
+            icon={<MdCheck size={18} />}
+            label={t("friendRequest.accept")}
+            onClick={handleAccept}
+            disabled={isProcessing}
+          />
+          <IconButton
+            icon={<MdClose size={18} />}
+            label={t("friendRequest.decline")}
+            onClick={handleReject}
+            disabled={isProcessing}
+          />
+        </>
+      }
+    />
   );
 };

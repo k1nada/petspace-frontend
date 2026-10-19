@@ -1,10 +1,20 @@
-import styles from "./TipSkeleton.module.scss";
+import { SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
+import { Card } from "@/app/uikit/layout/Card/Card";
+import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
+import styles from "./Tip.module.scss";
 
-export const TipSkeleton = () => (
-  <div className={styles.container}>
-    <div className={styles.title} />
-    <div className={styles.line} />
-    <div className={styles.line} />
-    <div className={styles.lineShort} />
-  </div>
+interface TipSkeletonProps {
+  title: string;
+  text: string;
+}
+
+export const TipSkeleton = ({ title, text }: TipSkeletonProps) => (
+  <Card as="section">
+    <CardTitle>
+      <SkeletonText>{title}</SkeletonText>
+    </CardTitle>
+    <p className={styles.text}>
+      <SkeletonText>{text}</SkeletonText>
+    </p>
+  </Card>
 );

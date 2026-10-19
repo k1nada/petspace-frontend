@@ -33,7 +33,8 @@
     "password": "Password",
     "createAccount": "Create Account",
     "editProfile": "Edit profile",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "moreActions": "More actions"
   },
   "fields": {
     "birthday": "Birthday:",
@@ -128,7 +129,11 @@
     "info": "More info",
     "friends": "friends",
     "photos": "photos",
-    "requestSent": "Request sent"
+    "requestSent": "Request sent",
+    "removeFriend": "Remove friend",
+    "cancelRequest": "Cancel request",
+    "friendsCount": "{count, plural, one {# friend} other {# friends}}",
+    "photosCount": "{count, plural, one {# photo} other {# photos}}"
   },
   "profileEditor": {
     "bio": "About:",
@@ -220,7 +225,8 @@
     "deleteAllModalTitle": "Delete all photos",
     "deleteAllModalDescription": "Are you sure you want to delete all your photos? This can't be undone.",
     "photoAlt": "{name}'s photo",
-    "emptyPhotosText": "Time to capture some tail-wagging moments!"
+    "emptyPhotosText": "Time to capture some tail-wagging moments!",
+    "manage": "Manage photos"
   },
   "photoModal": {
     "counter": "{current} / {total}",
@@ -245,7 +251,8 @@
     "emptyFollowersText": "Share your profile so more dogs can find you!",
     "emptyFollowingTitle": "Not following anyone yet",
     "emptyFollowingText": "Explore profiles and follow dogs you like!",
-    "lastSeen": "Last seen {time}"
+    "lastSeen": "Last seen {time}",
+    "manageFollowing": "Manage following"
   },
   "friendRequest": {
     "title": "No requests yet",
@@ -264,7 +271,9 @@
     "removeModalDescription": "{name} will no longer follow you.",
     "unfollowModalDescription": "You can always follow {name} again later.",
     "unfollowAllModalDescription": "You won't follow anyone from this list anymore. You can always follow them again later.",
-    "followersCount": "{count} followers"
+    "followersCount": "{count} followers",
+    "removeFollower": "Remove follower",
+    "followBack": "Follow back"
   },
   "friendTip": {
     "text": "Dogs the same age and breed make the best friends. Fill in your profile and we'll find great matches nearby!"

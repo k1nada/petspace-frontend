@@ -21,19 +21,18 @@ export const generateMetadata = async ({
 };
 
 const ProfilePage = async ({ params }: ProfilePageProps) => {
-  const awaitedParams = await params;
+  const { username } = await params;
 
-  const userData = await getUser(awaitedParams.username);
+  const [userData, postwallData] = await Promise.all([
+    getUser(username),
+    getPostwall(username).catch((error) => {
+      // eslint-disable-next-line no-console -- profile renders without the wall
+      console.error(error);
+      return null;
+    }),
+  ]);
 
   if (!userData) notFound();
-
-  let postwallData = null;
-  try {
-    postwallData = await getPostwall(awaitedParams.username);
-  } catch (error) {
-    console.error(error);
-    postwallData = null;
-  }
 
   return (
     <ProfileLayout
