@@ -6,6 +6,8 @@ import { useState } from "react";
 import cn from "classnames";
 import { FaAngleDown } from "react-icons/fa";
 
+const MAX_VISIBLE_OPTIONS = 100;
+
 interface ComboboxProps {
   value: string;
   placeholder?: string;
@@ -22,6 +24,11 @@ export const Combobox = ({
   disabled,
 }: ComboboxProps) => {
   const [open, setOpen] = useState(false);
+  const visibleOptions = open
+    ? options
+        .filter((o) => o.toLowerCase().includes(value.toLowerCase()))
+        .slice(0, MAX_VISIBLE_OPTIONS)
+    : [];
 
   return (
     <div className={styles.wrapper}>
@@ -48,20 +55,18 @@ export const Combobox = ({
       </div>
       {open && !disabled && (
         <ul className={styles.dropdown}>
-          {options
-            .filter((o) => o.toLowerCase().includes(value.toLowerCase()))
-            .map((o) => (
-              <li
-                key={o}
-                className={styles.option}
-                onClick={() => {
-                  onChange(o);
-                  setOpen(false);
-                }}
-              >
-                {o}
-              </li>
-            ))}
+          {visibleOptions.map((o) => (
+            <li
+              key={o}
+              className={styles.option}
+              onClick={() => {
+                onChange(o);
+                setOpen(false);
+              }}
+            >
+              {o}
+            </li>
+          ))}
         </ul>
       )}
     </div>

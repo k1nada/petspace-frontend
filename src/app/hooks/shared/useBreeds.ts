@@ -5,7 +5,9 @@ export const useBreeds = () => {
   const [breeds, setBreeds] = useState<string[]>([]);
 
   useEffect(() => {
-    getBreedsClient().then(setBreeds);
+    getBreedsClient()
+      .then(setBreeds)
+      .catch(() => setBreeds([]));
   }, []);
 
   return breeds;

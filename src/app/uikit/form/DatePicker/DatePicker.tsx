@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Input } from "../Input/Input";
 import "react-day-picker/style.css";
 import dayjs, { type Dayjs } from "@/utils/dayjs";
-import { pl, enUS } from "date-fns/locale";
+import { pl, enUS } from "react-day-picker/locale";
 import { useLocale, useTranslations } from "next-intl";
 import { CalendarDropdown } from "../CalendarDropdown/CalendarDropdown";
 
