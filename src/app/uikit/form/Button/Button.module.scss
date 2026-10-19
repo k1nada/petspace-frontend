@@ -4,9 +4,9 @@
   cursor: pointer;
   border-radius: var(--radius-m);
   transition:
-    background-color 0.3s ease,
-    color 0.3s ease,
-    opacity 0.2s ease;
+    background-color var(--transition-base),
+    color var(--transition-base),
+    opacity var(--transition-fast);
 
   &:disabled {
     opacity: 0.5;

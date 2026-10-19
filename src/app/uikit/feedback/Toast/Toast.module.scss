@@ -27,7 +27,7 @@
 .toast {
   background: var(--bg-card);
   border: 1px solid var(--border-card);
-  border-radius: var(--radius-m);
+  border-radius: var(--radius-m) !important;
   box-shadow: var(--shadow-card);
   padding: var(--padding-m) var(--padding-l);
   min-height: auto;
@@ -55,9 +55,30 @@
 }
 
 .toastEnter {
-  animation: toast-slide-in 0.2s ease both;
+  animation: toast-slide-in var(--transition-fast) both;
 }
 
 .toastExit {
-  animation: toast-slide-out 0.2s ease both;
+  animation: toast-slide-out var(--transition-fast) both;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: auto !important;
+    left: var(--padding-m) !important;
+    right: var(--padding-m);
+    bottom: var(--padding-m) !important;
+  }
+
+  .toast {
+    padding: var(--padding-m);
+    margin-bottom: var(--gap-s) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toastEnter,
+  .toastExit {
+    animation-duration: 1ms;
+  }
 }

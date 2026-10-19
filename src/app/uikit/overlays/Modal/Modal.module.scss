@@ -1,31 +1,19 @@
 .container {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--overlay-backdrop);
   display: flex;
-  align-items: center;
-  justify-content: center;
   overflow-y: auto;
   padding: var(--padding-l) 0;
   z-index: var(--z-modal);
   cursor: default;
 }
 
-.close {
-  position: absolute;
-  top: var(--padding-m);
-  right: var(--padding-m);
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--text-secondary);
-  padding: 0;
-}
-
 .modal {
   position: relative;
   background: var(--bg-card);
-  width: min(500px, 90vw);
+  width: 500px;
+  max-width: 90vw;
   margin: auto;
   padding: var(--padding-m);
   border-radius: var(--radius-s);

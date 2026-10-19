@@ -5,18 +5,18 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { Input } from "@/app/uikit/form/Input/Input";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { ErrorMessage } from "@/app/uikit/form/ErrorMessage/ErrorMessage";
-import { AvatarEditSkeleton } from "../AvatarEdit/AvatarEditSkeleton";
+import { AvatarEditSkeleton } from "@/app/features/profile/info/AvatarEdit/AvatarEditSkeleton";
 import styles from "./ProfileEditor.module.scss";
 
 export const ProfileEditorSkeleton = () => {
   const t = useTranslations();
-  const fieldLabels = [
-    t("profileEditor.name"),
-    t("fields.birthday"),
-    t("fields.sex"),
-    t("fields.country"),
-    t("fields.city"),
-    t("fields.breed"),
+  const fields = [
+    { label: t("profileEditor.name"), hasError: true },
+    { label: t("fields.birthday") },
+    { label: t("fields.sex") },
+    { label: t("fields.country") },
+    { label: t("fields.city") },
+    { label: t("fields.breed") },
   ];
 
   return (
@@ -39,38 +39,34 @@ export const ProfileEditorSkeleton = () => {
       </div>
 
       <div className={styles.fields}>
-        {fieldLabels.map((label, i) => (
+        {fields.map(({ label, hasError }) => (
           <div key={label} className={styles.field}>
-            <label className={styles.label}>
+            <span className={styles.label}>
               <SkeletonText>{label}</SkeletonText>
-            </label>
+            </span>
             <Skeleton shape="rounded" width="100%">
-              <Input appearance="wide" readOnly />
+              <Input appearance="wide" />
             </Skeleton>
-            {i === 0 && <ErrorMessage />}
+            {hasError && <ErrorMessage />}
           </div>
         ))}
       </div>
 
       <div className={styles.field}>
-        <label className={styles.label}>
+        <span className={styles.label}>
           <SkeletonText>{t("profileEditor.bio")}</SkeletonText>
-        </label>
+        </span>
         <Skeleton shape="rounded" width="100%">
-          <Textarea appearance="third" readOnly />
+          <Textarea appearance="tertiary" />
         </Skeleton>
       </div>
 
       <div className={styles.actions}>
         <Skeleton shape="rounded">
-          <Button appearance="primary">
-            {t("common.save")}
-          </Button>
+          <Button appearance="primary">{t("common.save")}</Button>
         </Skeleton>
         <Skeleton shape="rounded">
-          <Button appearance="secondary">
-            {t("common.cancel")}
-          </Button>
+          <Button appearance="secondary">{t("common.cancel")}</Button>
         </Skeleton>
       </div>
     </div>
