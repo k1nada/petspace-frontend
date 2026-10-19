@@ -37,6 +37,13 @@ export const uploadAvatar = async (file: File): Promise<UploadedAvatar> => {
   return data.data;
 };
 
+export const uploadFamilyAvatar = async (file: File): Promise<string> => {
+  const formData = new FormData();
+  formData.append("image", file);
+  const { data } = await api.post("/api/upload/family-avatar", formData);
+  return data.data.url;
+};
+
 export const deleteAvatar = async (): Promise<void> => {
   await api.delete("/api/upload/avatar");
 };
