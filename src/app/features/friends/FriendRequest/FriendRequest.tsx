@@ -3,40 +3,29 @@
 import styles from "./FriendRequest.module.scss";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import {
-  acceptFriendRequest,
-  rejectFriendRequest,
-} from "@/services/api/friends";
 import { FriendRequestCard } from "../FriendRequestCard/FriendRequestCard";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
-import { revalidateFollows } from "@/services/actions/revalidateFollows";
+import { useFriendRequestActions } from "@/app/hooks/friends/useFriendRequestActions";
+import { FriendRequest as FriendRequestType } from "@/types";
 
 export const FriendRequest = () => {
   const t = useTranslations();
   const requests = useFriendRequestsStore((state) => state.requests);
-  const setRequests = useFriendRequestsStore((state) => state.setRequests);
+  const { acceptRequest, rejectRequest } = useFriendRequestActions();
 
-  const removeRequest = (requestId: string) => {
-    setRequests(requests.filter((r) => r.id !== requestId));
-  };
-
-  const acceptRequest = async (requestId: string) => {
+  const handleAccept = async (request: FriendRequestType) => {
     try {
-      await acceptFriendRequest(requestId);
-      await revalidateFollows();
-      removeRequest(requestId);
+      await acceptRequest(request);
       toast.success(t("friendRequest.acceptedSuccess"));
     } catch {
       toast.error(t("toasts.error"));
     }
   };
 
-  const rejectRequest = async (requestId: string) => {
+  const handleReject = async (request: FriendRequestType) => {
     try {
-      await rejectFriendRequest(requestId);
-      await revalidateFollows();
-      removeRequest(requestId);
+      await rejectRequest(request);
       toast.success(t("friendRequest.rejectedSuccess"));
     } catch {
       toast.error(t("toasts.error"));
@@ -59,8 +48,8 @@ export const FriendRequest = () => {
           <FriendRequestCard
             key={request.id}
             request={request}
-            onAccept={acceptRequest}
-            onReject={rejectRequest}
+            onAccept={handleAccept}
+            onReject={handleReject}
           />
         ))}
       </ul>

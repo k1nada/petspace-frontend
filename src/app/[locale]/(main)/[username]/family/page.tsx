@@ -23,13 +23,13 @@ export const generateMetadata = async ({
 
 const FamilyPage = async ({ params }: FamilyPageProps) => {
   const { username } = await params;
-  const [userData, breeds, familyMembers] = await Promise.all([
-    getUser(username),
+  const userData = await getUser(username);
+  if (!userData) notFound();
+
+  const [breeds, familyMembers] = await Promise.all([
     getBreeds(),
     getFamilyMembers(username),
   ]);
-
-  if (!userData) notFound();
 
   return (
     <FamilyLayout

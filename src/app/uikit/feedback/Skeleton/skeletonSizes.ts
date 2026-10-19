@@ -3,6 +3,7 @@ export const SKELETON_AVATAR = {
   regular: 45,
   familyMember: 60,
   friend: 70,
+  friendRow: 56,
   familyUser: 96,
   editor: 120,
   banner: 140,
@@ -11,5 +12,4 @@ export const SKELETON_AVATAR = {
 export const SKELETON_ICON = {
   navigation: 20,
   mobileSearch: 18,
-  bannerStat: 18,
 };

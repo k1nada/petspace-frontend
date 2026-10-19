@@ -1,22 +1,17 @@
 import styles from "./Tip.module.scss";
-import cn from "classnames";
+import { Card } from "@/app/uikit/layout/Card/Card";
+import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 
 interface TipProps {
   title: string;
   text: string;
-  appearance?: "primary" | "secondary";
 }
 
-export const Tip = ({ title, text, appearance }: TipProps) => {
+export const Tip = ({ title, text }: TipProps) => {
   return (
-    <div
-      className={cn(styles.container, {
-        [styles.primary]: appearance === "primary",
-        [styles.secondary]: appearance === "secondary",
-      })}
-    >
-      <span className={styles.title}>{title}</span>
+    <Card as="section">
+      <CardTitle>{title}</CardTitle>
       <p className={styles.text}>{text}</p>
-    </div>
+    </Card>
   );
 };

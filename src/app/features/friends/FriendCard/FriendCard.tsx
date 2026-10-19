@@ -1,25 +1,29 @@
 "use client";
 
-import styles from "./FriendCard.module.scss";
-import { Button } from "@/app/uikit/form/Button/Button";
-import { useLocale, useTranslations } from "next-intl";
-import dayjs from "@/utils/dayjs";
-import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
-import { MdDeleteSweep } from "react-icons/md";
-import { Friend } from "@/types";
-import { Link } from "@/app/uikit/navigation/Link/Link";
-import { ROUTES } from "@/routes/routes";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
+import { FaMessage } from "react-icons/fa6";
+import {
+  MdCancel,
+  MdOutlineMoreHoriz,
+  MdPersonAdd,
+  MdPersonRemove,
+} from "react-icons/md";
+import { Friend } from "@/types";
+import { ROUTES } from "@/routes/routes";
+import { useRouter } from "@/i18n/navigation";
 import {
   addFriend as addFriendAPI,
   deleteFriend,
 } from "@/services/api/friends";
-import { toast } from "react-toastify";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { revalidateFollows } from "@/services/actions/revalidateFollows";
 import { getRelationshipStatus } from "@/utils/friends";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
+import { IconButton } from "@/app/uikit/form/IconButton/IconButton";
+import { UserRow } from "../UserRow/UserRow";
 
 interface FriendCardProps {
   friend: Friend;
@@ -35,7 +39,7 @@ export const FriendCard = ({
   onFriendDeleted,
 }: FriendCardProps) => {
   const t = useTranslations();
-  const locale = useLocale();
+  const router = useRouter();
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isRequestLoading, setIsRequestLoading] = useState(false);
   const currentUserData = useAuthStore((state) => state.currentUser);
@@ -44,11 +48,17 @@ export const FriendCard = ({
     currentUserData,
     friend.id,
   );
+  const isSelf = friend.username === currentUser;
+
+  const goToMessages = () => {
+    router.push(ROUTES.messages(currentUser, friend.username));
+  };
 
   const handleDeleteFriend = async () => {
     try {
       await deleteFriend(currentUser, friend.username);
       await revalidateFollows();
+      await fetchCurrentUser();
       onFriendDeleted?.(friend.username);
       setIsDeleteOpen(false);
     } catch {
@@ -63,9 +73,9 @@ export const FriendCard = ({
       await addFriendAPI(currentUser, friend.username);
       await revalidateFollows();
       await fetchCurrentUser();
-      setIsRequestLoading(false);
     } catch {
       toast.error(t("toasts.error"));
+    } finally {
       setIsRequestLoading(false);
     }
   };
@@ -77,84 +87,62 @@ export const FriendCard = ({
       await deleteFriend(currentUser, friend.username);
       await revalidateFollows();
       await fetchCurrentUser();
-      setIsRequestLoading(false);
     } catch {
       toast.error(t("toasts.error"));
+    } finally {
       setIsRequestLoading(false);
     }
   };
 
+  const menuItems = [];
+  if (isOwner) {
+    menuItems.push({
+      label: t("profileBanner.removeFriend"),
+      icon: <MdPersonRemove size={20} />,
+      onClick: () => setIsDeleteOpen(true),
+    });
+  } else if (!isFriend && isPending) {
+    menuItems.push({
+      label: t("profileBanner.cancelRequest"),
+      icon: <MdCancel size={20} />,
+      onClick: handleCancelRequest,
+    });
+  } else if (!isFriend && !isFollowing) {
+    menuItems.push({
+      label: t("common.addFriend"),
+      icon: <MdPersonAdd size={20} />,
+      onClick: handleAddFriend,
+    });
+  }
+
   return (
-    <li className={styles.card}>
-      <Link href={ROUTES.profile(friend.username)}>
-        <Avatar src={friend.avatar} size={70} isOnline={friend.isOnline} />
-      </Link>
-
-      <div className={styles.info}>
-        <Link href={ROUTES.profile(friend.username)}>
-          <div className={styles.name}>{friend.name}</div>
-        </Link>
-        {!friend.isOnline && (
-          <div className={styles.status}>
-            {friend.lastSeen
-              ? t("friends.lastSeen", {
-                  time: dayjs(friend.lastSeen).locale(locale).fromNow(),
-                })
-              : t("common.offline")}
-          </div>
-        )}
-      </div>
-
-      <div className={styles.actions}>
-        {isOwner ? (
-          <Link href={ROUTES.messages(currentUser, friend.username)}>
-            <Button appearance="primary">{t("common.message")}</Button>
-          </Link>
-        ) : (
+    <UserRow
+      username={friend.username}
+      name={friend.name}
+      avatar={friend.avatar}
+      isOnline={friend.isOnline}
+      lastSeen={friend.lastSeen}
+      fallbackStatus={t("common.offline")}
+      actions={
+        isSelf ? undefined : (
           <>
-            <Link href={ROUTES.messages(currentUser, friend.username)}>
-              <Button appearance="secondary">{t("common.message")}</Button>
-            </Link>
-            {!isFriend &&
-              (isPending ? (
-                <Button
-                  appearance="secondary"
-                  onClick={handleCancelRequest}
-                  disabled={isRequestLoading}
-                >
-                  {t("friends.sent")}
-                </Button>
-              ) : isFollowing ? (
-                <Button appearance="secondary" disabled>
-                  {t("common.following")}
-                </Button>
-              ) : (
-                <Button
-                  appearance="primary"
-                  onClick={handleAddFriend}
-                  disabled={isRequestLoading}
-                >
-                  {t("common.addFriend")}
-                </Button>
-              ))}
+            <IconButton
+              icon={<FaMessage size={18} />}
+              label={t("common.message")}
+              onClick={goToMessages}
+            />
+            {menuItems.length > 0 && (
+              <Dropdown
+                label={t("common.moreActions")}
+                triggerAppearance="iconButton"
+                trigger={<MdOutlineMoreHoriz size={18} />}
+                items={menuItems}
+              />
+            )}
           </>
-        )}
-      </div>
-
-      {isOwner && (
-        <div className={styles.menu}>
-          <DropdownMenu
-            items={[
-              {
-                label: t("common.delete"),
-                onClick: () => setIsDeleteOpen(true),
-                icon: <MdDeleteSweep size={20} />,
-              },
-            ]}
-          />
-        </div>
-      )}
-
+        )
+      }
+    >
       {isOwner && (
         <ConfirmModal
           isOpen={isDeleteOpen}
@@ -166,6 +154,6 @@ export const FriendCard = ({
           })}
         />
       )}
-    </li>
+    </UserRow>
   );
 };

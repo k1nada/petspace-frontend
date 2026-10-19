@@ -20,6 +20,13 @@ export const getFollowing = unstable_cache(
   { revalidate: 5, tags: ["follows"] },
 );
 
+export const followUser = async (
+  username: string,
+  targetUsername: string,
+): Promise<void> => {
+  await api.post(`/following/${username}/${targetUsername}`);
+};
+
 export const unfollowUser = async (
   username: string,
   targetUsername: string,

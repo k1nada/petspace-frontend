@@ -1,17 +1,38 @@
-import styles from "./ProfileFriendsSkeleton.module.scss";
+import { useTranslations } from "next-intl";
+import { Skeleton, SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
+import { SKELETON_AVATAR } from "@/app/uikit/feedback/Skeleton/skeletonSizes";
+import { Card } from "@/app/uikit/layout/Card/Card";
+import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
+import styles from "./ProfileFriends.module.scss";
 
-const FRIENDS_COUNT = 3;
+const NAME_WIDTHS = [60, 45, 55];
 
-export const ProfileFriendsSkeleton = () => (
-  <section className={styles.container}>
-    <div className={styles.title} />
-    <ul className={styles.friends}>
-      {Array.from({ length: FRIENDS_COUNT }, (_, i) => (
-        <li key={i} className={styles.friend}>
-          <div className={styles.avatar} />
-          <div className={styles.name} />
-        </li>
-      ))}
-    </ul>
-  </section>
-);
+export const ProfileFriendsSkeleton = () => {
+  const t = useTranslations();
+
+  return (
+    <Card as="section">
+      <div className={styles.titleLink}>
+        <CardTitle>
+          <SkeletonText>{t("common.friends")}</SkeletonText>
+        </CardTitle>
+      </div>
+      <ul className={styles.friends}>
+        {NAME_WIDTHS.map((width, i) => (
+          <li key={i}>
+            <div className={styles.friend}>
+              <Skeleton
+                shape="circle"
+                width={SKELETON_AVATAR.friend}
+                height={SKELETON_AVATAR.friend}
+              />
+              <div className={styles.name}>
+                <SkeletonText width={width} />
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+};

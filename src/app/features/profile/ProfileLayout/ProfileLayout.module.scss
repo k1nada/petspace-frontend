@@ -1,13 +1,14 @@
 .layout {
   display: grid;
   grid-template-columns: 1fr 300px;
-  grid-template-rows: auto 1fr;
-  gap: var(--gap-xl);
-  min-height: 100vh;
+  grid-template-rows: auto;
   grid-template-areas:
     "profileBanner profileBanner"
     "feedContainer rightColumn";
+  gap: var(--gap-xl);
+  min-height: 100vh;
   align-items: start;
+  align-content: start;
 }
 
 .profileBanner {
@@ -35,4 +36,31 @@
 
 .friends {
   grid-area: friends;
+}
+
+@media (max-width: 1024px) {
+  .layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "profileBanner"
+      "feedContainer";
+    gap: var(--gap-l);
+  }
+
+  .rightColumn {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-areas:
+      "profileBanner"
+      "feedContainer"
+      "rightColumn";
+  }
+
+  .rightColumn {
+    display: flex;
+  }
 }

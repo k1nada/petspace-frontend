@@ -2,8 +2,8 @@
 
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Link } from "@/app/uikit/navigation/Link/Link";
-import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
-import { MdDeleteSweep, MdModeEdit } from "react-icons/md";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import { ROUTES } from "@/routes/routes";
 import { formatDate } from "@/utils/dateFormatters";
@@ -33,13 +33,13 @@ export const PostHeader = ({
   if (canEdit) {
     menuItems.push({
       label: t("common.edit"),
-      icon: <MdModeEdit size={20} />,
+      icon: <MdEdit size={20} />,
       onClick: onEdit,
     });
   }
   menuItems.push({
     label: t("common.delete"),
-    icon: <MdDeleteSweep size={20} />,
+    icon: <MdDelete size={20} />,
     onClick: onDelete,
   });
 
@@ -58,7 +58,7 @@ export const PostHeader = ({
       </div>
       {showActions && (
         <div className={styles.dropdown}>
-          <DropdownMenu items={menuItems} />
+          <Dropdown items={menuItems} />
         </div>
       )}
     </div>

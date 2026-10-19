@@ -1,13 +1,12 @@
 "use client";
 
 import styles from "./Comment.module.scss";
-import cn from "classnames";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { LikeButton } from "@/app/uikit/feedback/LikeButton/LikeButton";
-import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
-import { MdDeleteSweep, MdModeEdit } from "react-icons/md";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
+import { MdDelete, MdEdit } from "react-icons/md";
 import { useLocale, useTranslations } from "next-intl";
 import { likeComment } from "@/services/api/likes";
 import { useLike } from "@/app/hooks/shared/useLike";
@@ -51,7 +50,6 @@ export const Comment = ({
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(comment.content);
-  const [isHovered, setIsHovered] = useState(false);
   const [isSavingEdit, setIsSavingEdit] = useState(false);
 
   const { liked, displayCount, likeLoading, toggleLike } = useLike({
@@ -81,92 +79,92 @@ export const Comment = ({
   };
 
   return (
-    <article
-      className={styles.container}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <Link href={ROUTES.profile(comment.user.username)}>
-        <Avatar size={avatarSize} src={comment.user.avatar} />
-      </Link>
-      <div className={styles.info}>
-        <div className={styles.header}>
-          <Link href={ROUTES.profile(comment.user.username)}>
-            <div className={styles.name}>{comment.user.name}</div>
-          </Link>
-          <time className={styles.time}>
-            {formatDate(comment.createdAt, locale)}
-          </time>
-        </div>
-        {isEditing ? (
-          <div className={styles.editWrapper}>
-            <Textarea
-              appearance="secondary"
-              value={editContent}
-              onChange={(e) => setEditContent(e.target.value)}
-              autoFocus
-              maxLength={1000}
-              disabled={isSavingEdit}
-            />
-            <div className={styles.editActions}>
-              <Button
-                appearance="secondary"
-                onClick={() => setIsEditing(false)}
-                disabled={isSavingEdit}
-              >
-                {t("common.cancel")}
-              </Button>
-              <Button
-                appearance="primary"
-                onClick={handleSaveEditComment}
-                disabled={!editContent.trim() || isSavingEdit}
-              >
-                {t("common.save")}
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div className={styles.content}>{comment.content}</div>
-        )}
-        {!isEditing && (
-          <div className={styles.footer}>
-            {onReply && (
-              <Button
-                appearance="ghost"
-                className={styles.reply}
-                onClick={() => onReply(comment.id, comment.user.name)}
-              >
-                {t("comment.reply")}
-              </Button>
+    <article className={styles.container}>
+      <div className={styles.row}>
+        <Link href={ROUTES.profile(comment.user.username)}>
+          <Avatar size={avatarSize} src={comment.user.avatar} />
+        </Link>
+        <div className={styles.info}>
+          <div className={styles.header}>
+            <Link href={ROUTES.profile(comment.user.username)}>
+              <div className={styles.name}>{comment.user.name}</div>
+            </Link>
+            <time className={styles.time}>
+              {formatDate(comment.createdAt, locale)}
+            </time>
+            {isOwner && !isEditing && (
+              <div className={styles.dropdown}>
+                <Dropdown
+                  align="left"
+                  size="small"
+                  items={[
+                    {
+                      label: t("common.edit"),
+                      icon: <MdEdit size={20} />,
+                      onClick: handleStartEditComment,
+                    },
+                    {
+                      label: t("common.delete"),
+                      icon: <MdDelete size={20} />,
+                      onClick: () => setIsDeleteOpen(true),
+                    },
+                  ]}
+                />
+              </div>
             )}
-            <LikeButton
-              liked={liked}
-              count={displayCount}
-              loading={likeLoading}
-              onToggle={toggleLike}
-              className={styles.likes}
-            />
           </div>
-        )}
-      </div>
-      {isOwner && !isEditing && (
-        <div className={cn(styles.dropdown, { [styles.visible]: isHovered })}>
-          <DropdownMenu
-            items={[
-              {
-                label: t("common.edit"),
-                icon: <MdModeEdit size={20} />,
-                onClick: handleStartEditComment,
-              },
-              {
-                label: t("common.delete"),
-                icon: <MdDeleteSweep size={20} />,
-                onClick: () => setIsDeleteOpen(true),
-              },
-            ]}
-          />
+          {isEditing ? (
+            <div className={styles.editWrapper}>
+              <Textarea
+                appearance="secondary"
+                value={editContent}
+                onChange={(e) => setEditContent(e.target.value)}
+                autoFocus
+                maxLength={1000}
+                disabled={isSavingEdit}
+              />
+              <div className={styles.editActions}>
+                <Button
+                  appearance="secondary"
+                  onClick={() => setIsEditing(false)}
+                  disabled={isSavingEdit}
+                >
+                  {t("common.cancel")}
+                </Button>
+                <Button
+                  appearance="primary"
+                  onClick={handleSaveEditComment}
+                  disabled={!editContent.trim() || isSavingEdit}
+                >
+                  {t("common.save")}
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <div className={styles.content}>{comment.content}</div>
+          )}
+          {!isEditing && (
+            <div className={styles.footer}>
+              {onReply && (
+                <Button
+                  appearance="ghost"
+                  className={styles.reply}
+                  onClick={() => onReply(comment.id, comment.user.name)}
+                >
+                  {t("comment.reply")}
+                </Button>
+              )}
+              <LikeButton
+                liked={liked}
+                count={displayCount}
+                loading={likeLoading}
+                onToggle={toggleLike}
+                className={styles.likes}
+              />
+            </div>
+          )}
         </div>
-      )}
+      </div>
 
       {replies && replies.length > 0 && (
         <ul className={styles.replies}>

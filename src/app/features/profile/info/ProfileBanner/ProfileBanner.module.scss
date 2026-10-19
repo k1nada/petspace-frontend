@@ -110,3 +110,16 @@
   align-items: center;
   gap: var(--gap-s);
 }
+
+$stat-icon-size: 18px;
+
+.statSkeleton {
+  min-height: $stat-icon-size;
+  font-size: var(--font-m);
+  color: var(--text-secondary);
+}
+
+.statIconSkeleton {
+  display: inline-block;
+  width: calc(#{$stat-icon-size} + var(--gap-xs));
+}

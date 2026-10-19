@@ -1,8 +1,13 @@
 .container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: var(--gap-m);
   padding: var(--padding-xs) 0;
+}
+
+.row {
+  display: flex;
+  gap: var(--gap-m);
 }
 
 .info {
@@ -71,7 +76,6 @@
 }
 
 .replies {
-  flex-basis: 100%;
   display: flex;
   flex-direction: column;
   gap: var(--gap-xs);
@@ -85,7 +89,7 @@
   gap: var(--gap-xs);
   color: var(--text-secondary);
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color var(--transition-fast);
 
   &:hover {
     color: var(--text-primary);
@@ -93,12 +97,18 @@
 }
 
 .dropdown {
-  margin-left: auto;
-  align-self: flex-start;
+  display: flex;
+  align-self: center;
   opacity: 0;
   transition: opacity 0.4s ease;
+}
 
-  &.visible {
+.row:hover .dropdown {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .dropdown {
     opacity: 1;
   }
 }

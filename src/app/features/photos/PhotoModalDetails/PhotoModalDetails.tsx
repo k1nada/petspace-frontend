@@ -11,8 +11,8 @@ import { useResolvedRepost } from "@/app/hooks/photos/useResolvedRepost";
 import { Comment } from "../../profile/feed/Comment/Comment";
 import { CommentCreator } from "../../profile/feed/CommentCreator/CommentCreator";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { DropdownMenu } from "@/app/uikit/overlays/DropdownMenu/DropdownMenu";
-import { MdDeleteSweep } from "react-icons/md";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
+import { MdDelete } from "react-icons/md";
 import { formatDate } from "@/utils/dateFormatters";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
@@ -110,11 +110,11 @@ export const PhotoModalDetails = ({
           </div>
           {isOwner && (
             <div className={styles.dropdown}>
-              <DropdownMenu
+              <Dropdown
                 items={[
                   {
                     label: t("common.delete"),
-                    icon: <MdDeleteSweep size={20} />,
+                    icon: <MdDelete size={20} />,
                     onClick: onDeleteRequest,
                   },
                 ]}

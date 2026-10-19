@@ -12,6 +12,11 @@
   flex-direction: column;
 }
 
+.skeletonLabel {
+  flex: 1;
+  min-width: 0;
+}
+
 .overlay {
   display: none;
   position: fixed;
