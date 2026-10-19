@@ -5,7 +5,6 @@ import { ProfileFriends } from "../friends/ProfileFriends/ProfileFriends";
 import { PostCreator } from "../feed/PostCreator/PostCreator";
 import { ProfileBanner } from "../info/ProfileBanner/ProfileBanner";
 import styles from "./ProfileLayout.module.scss";
-import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import { ProfilePhotos } from "../photos/ProfilePhotos/ProfilePhotos";
 import { useEffect, useState } from "react";
 import { getPosts } from "@/services/api/post";
@@ -44,9 +43,6 @@ export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
 
   return (
     <div className={styles.layout}>
-      <div className={styles.sidebar}>
-        <Sidebar />
-      </div>
       <div className={styles.profileBanner}>
         <ProfileBanner bannerInfo={bannerInfo} />
       </div>

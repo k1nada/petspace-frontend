@@ -1,14 +1,11 @@
-import "./../globals.scss";
-import { Geist } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { Toast } from "../uikit/feedback/Toast/Toast";
-import { UserProvider } from "../providers/UserProvider";
+import { Toast } from "@/app/uikit/feedback/Toast/Toast";
+import { UserProvider } from "@/app/providers/UserProvider";
+import { HtmlLang } from "@/app/components/HtmlLang/HtmlLang";
 
-const geist = Geist({ subsets: ["latin"] });
-
-export default async function RootLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: {
@@ -21,28 +18,12 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="icon" href="/favicon.ico?v=11" sizes="any" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-          try {
-            const t = localStorage.getItem('theme');
-            const theme = t ? JSON.parse(t).state?.theme : 'light';
-            document.documentElement.setAttribute('data-theme', theme || 'light');
-          } catch {}
-          `,
-          }}
-        />
-      </head>
-      <body className={geist.className} suppressHydrationWarning>
-        <Toast />
-        <NextIntlClientProvider>
-          <UserProvider>{children}</UserProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <>
+      <HtmlLang locale={locale} />
+      <Toast />
+      <NextIntlClientProvider>
+        <UserProvider>{children}</UserProvider>
+      </NextIntlClientProvider>
+    </>
   );
 }

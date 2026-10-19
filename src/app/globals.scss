@@ -53,6 +53,8 @@
   --z-modal: 100;
   --z-photo-overlay: 5;
 
+  --header-offset: 60px;
+
   --radius-s: 8px;
   --radius-m: 12px;
   --radius-l: 16px;
@@ -194,7 +196,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding-top: 60px;
+  padding-top: var(--header-offset);
 }
 
 a {

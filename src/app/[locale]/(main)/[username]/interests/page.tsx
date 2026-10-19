@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Header } from "@/app/components/Header/Header";
 import { getUser } from "@/services/api/user";
 import { ProfileInterestsLayout } from "@/app/features/profile/info/ProfileInterestsLayout/ProfileInterestsLayout";
 import { notFound } from "next/navigation";
@@ -26,14 +25,7 @@ const ProfileInterestsPage = async ({ params }: ProfileInterestsPageProps) => {
 
   if (!userData) notFound();
 
-  return (
-    <>
-      <Header />
-      <main>
-        <ProfileInterestsLayout user={userData} />
-      </main>
-    </>
-  );
+  return <ProfileInterestsLayout user={userData} />;
 };
 
 export default ProfileInterestsPage;

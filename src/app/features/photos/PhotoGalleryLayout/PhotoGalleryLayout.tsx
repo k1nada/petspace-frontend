@@ -1,4 +1,3 @@
-import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import styles from "./PhotoGalleryLayout.module.scss";
 import { PhotoGallery } from "../PhotoGallery/PhotoGallery";
 import { Photo } from "@/types";
@@ -18,9 +17,6 @@ export const PhotoGalleryLayout = ({
 }: PhotoGalleryLayoutProps) => {
   return (
     <div className={styles.layout}>
-      <div className={styles.sidebar}>
-        <Sidebar />
-      </div>
       <div className={styles.content}>
         <PhotoGallery
           photos={photos}

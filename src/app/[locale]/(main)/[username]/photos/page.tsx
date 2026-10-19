@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getUser } from "@/services/api/user";
-import { Header } from "@/app/components/Header/Header";
 import { PhotoGalleryLayout } from "@/app/features/photos/PhotoGalleryLayout/PhotoGalleryLayout";
 import { notFound } from "next/navigation";
 
@@ -27,17 +26,12 @@ const PhotosPage = async ({ params }: PhotosPageProps) => {
   if (!userData) notFound();
 
   return (
-    <>
-      <Header />
-      <main>
-        <PhotoGalleryLayout
-          name={userData.name}
-          photos={userData.photos ?? []}
-          avatar={userData.avatar}
-          username={userData.username}
-        />
-      </main>
-    </>
+    <PhotoGalleryLayout
+      name={userData.name}
+      photos={userData.photos ?? []}
+      avatar={userData.avatar}
+      username={userData.username}
+    />
   );
 };
 

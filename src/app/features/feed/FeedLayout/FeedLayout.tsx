@@ -2,7 +2,6 @@
 
 import styles from "./FeedLayout.module.scss";
 import { useTranslations } from "next-intl";
-import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
 import { TipSkeleton } from "@/app/uikit/feedback/Tip/TipSkeleton";
 import { Postwall } from "@/app/features/profile/feed/Postwall/Postwall";
@@ -36,9 +35,6 @@ export const FeedLayout = () => {
 
   return (
     <div className={styles.layout}>
-      <div className={styles.sidebar}>
-        <Sidebar />
-      </div>
       <div className={styles.content}>
         <Postwall
           posts={posts}

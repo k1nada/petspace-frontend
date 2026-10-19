@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Header } from "@/app/components/Header/Header";
 import { FeedLayout } from "@/app/features/feed/FeedLayout/FeedLayout";
 
 interface FeedPageProps {
@@ -19,14 +18,7 @@ export const generateMetadata = async ({
 };
 
 const FeedPage = () => {
-  return (
-    <>
-      <Header />
-      <main>
-        <FeedLayout />
-      </main>
-    </>
-  );
+  return <FeedLayout />;
 };
 
 export default FeedPage;

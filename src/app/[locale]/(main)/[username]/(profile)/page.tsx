@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Header } from "@/app/components/Header/Header";
 import { ProfileLayout } from "@/app/features/profile/ProfileLayout/ProfileLayout";
 import { getUser } from "@/services/api/user";
 import { notFound } from "next/navigation";
@@ -37,31 +36,26 @@ const ProfilePage = async ({ params }: ProfilePageProps) => {
   }
 
   return (
-    <>
-      <Header />
-      <main>
-        <ProfileLayout
-          bannerInfo={{
-            id: userData.id,
-            name: userData.name,
-            username: userData.username,
-            avatar: userData.avatar,
-            avatarPhotos: userData.avatarPhotos,
-            sex: userData.sex,
-            breed: userData.breed,
-            birthDate: userData.birthDate,
-            city: userData.city,
-            bio: userData.bio,
-            interests: userData.interests,
-            photos: userData.photos,
-            friends: userData.friends,
-            followers: userData.followers,
-            postwallId: postwallData?._id,
-            achievements: userData.achievements,
-          }}
-        />
-      </main>
-    </>
+    <ProfileLayout
+      bannerInfo={{
+        id: userData.id,
+        name: userData.name,
+        username: userData.username,
+        avatar: userData.avatar,
+        avatarPhotos: userData.avatarPhotos,
+        sex: userData.sex,
+        breed: userData.breed,
+        birthDate: userData.birthDate,
+        city: userData.city,
+        bio: userData.bio,
+        interests: userData.interests,
+        photos: userData.photos,
+        friends: userData.friends,
+        followers: userData.followers,
+        postwallId: postwallData?._id,
+        achievements: userData.achievements,
+      }}
+    />
   );
 };
 
