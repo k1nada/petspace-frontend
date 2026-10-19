@@ -1,9 +1,12 @@
 "use client";
 
 import styles from "./AddFamilyMemberModal.module.scss";
+import Image from "next/image";
+import cn from "classnames";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
+import { MdAdd } from "react-icons/md";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { Input } from "@/app/uikit/form/Input/Input";
@@ -12,16 +15,20 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { AvatarUploadModal } from "@/app/uikit/user/AvatarUploadModal/AvatarUploadModal";
 import { useSearch } from "@/app/hooks/shared/useSearch";
+import { uploadFamilyAvatar } from "@/services/api/upload";
 import { FamilyRelation, NewFamilyMember, User } from "@/types";
+import defaultAvatar from "@/assets/avatars/default.png";
 
 type Mode = "search" | "manual";
 const TABS: Mode[] = ["search", "manual"];
-const emptyForm = { name: "", breed: "", avatar: "" };
+const emptyForm = { name: "", breed: "" };
 
 interface AddFamilyMemberModalProps {
   isOpen: boolean;
   relation: FamilyRelation;
   breeds: string[];
+  avatar?: string;
+  existingMemberAvatar?: string;
   onClose: () => void;
   onAdd: (member: NewFamilyMember) => Promise<void>;
 }
@@ -30,6 +37,8 @@ export const AddFamilyMemberModal = ({
   isOpen,
   relation,
   breeds,
+  avatar,
+  existingMemberAvatar,
   onClose,
   onAdd,
 }: AddFamilyMemberModalProps) => {
@@ -37,12 +46,16 @@ export const AddFamilyMemberModal = ({
   const [mode, setMode] = useState<Mode>("search");
   const { query, results, search } = useSearch();
   const [form, setForm] = useState(emptyForm);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPhotoRevealed, setIsPhotoRevealed] = useState(false);
 
   const reset = () => {
     setMode("search");
     search("");
     setForm(emptyForm);
+    setAvatarFile(null);
+    setIsPhotoRevealed(false);
   };
 
   const handleClose = () => {
@@ -62,9 +75,9 @@ export const AddFamilyMemberModal = ({
         username: user.username,
       });
       reset();
-      setIsSubmitting(false);
     } catch {
       toast.error(t("familyTree.addError"));
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -73,29 +86,24 @@ export const AddFamilyMemberModal = ({
     if (isSubmitting) return;
     setIsSubmitting(true);
     try {
+      const avatarUrl = avatarFile
+        ? await uploadFamilyAvatar(avatarFile)
+        : undefined;
       await onAdd({
         name: form.name.trim(),
         breed: form.breed.trim() || undefined,
-        avatar: form.avatar.trim() || undefined,
+        avatar: avatarUrl,
       });
       reset();
-      setIsSubmitting(false);
     } catch {
       toast.error(t("familyTree.addError"));
+    } finally {
       setIsSubmitting(false);
     }
   };
 
   const generatePhoto = () => {
     toast.info(t("familyTree.generatePhotoComingSoon"));
-  };
-
-  const handleFilePicked = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      setForm({ ...form, avatar: reader.result as string });
-    };
-    reader.readAsDataURL(file);
   };
 
   const title = t(
@@ -143,7 +151,7 @@ export const AddFamilyMemberModal = ({
                   key={user.username}
                   className={styles.resultItem}
                   style={{ opacity: isSubmitting ? 0.6 : 1 }}
-                  onClick={() => !isSubmitting && selectUser(user)}
+                  onClick={() => selectUser(user)}
                 >
                   <Avatar src={user.avatar} size={40} />
                   <div className={styles.resultInfo}>
@@ -164,7 +172,7 @@ export const AddFamilyMemberModal = ({
       ) : (
         <div className={styles.manualMode}>
           <div className={styles.field}>
-            <label className={styles.label}>{t("familyTree.nameLabel")}</label>
+            <span className={styles.label}>{t("familyTree.nameLabel")}</span>
             <Input
               appearance="wide"
               value={form.name}
@@ -175,7 +183,7 @@ export const AddFamilyMemberModal = ({
           </div>
 
           <div className={styles.field}>
-            <label className={styles.label}>{t("familyTree.breedLabel")}</label>
+            <span className={styles.label}>{t("familyTree.breedLabel")}</span>
             <Combobox
               value={form.breed}
               onChange={(breed) => setForm({ ...form, breed })}
@@ -185,29 +193,62 @@ export const AddFamilyMemberModal = ({
             />
           </div>
 
-          <div className={styles.field}>
-            <label className={styles.label}>
-              {t("familyTree.avatarLabel")}
-            </label>
-            <div className={styles.avatarField}>
-              <AvatarUploadModal
-                size={72}
-                profileAvatar={form.avatar || undefined}
-                onChange={handleFilePicked}
-                disabled={isSubmitting}
-              />
-              <div className={styles.avatarActions}>
-                <p className={styles.hint}>{t("avatarEdit.choosePhoto")}</p>
-                <Button
-                  appearance="tertiary"
+          {isPhotoRevealed ? (
+            <div className={styles.field}>
+              <span className={styles.label}>
+                {t("familyTree.avatarLabel")}
+              </span>
+              <div className={styles.photoRow}>
+                <AvatarUploadModal
+                  size={44}
+                  onChange={setAvatarFile}
+                  disabled={isSubmitting}
+                />
+                <button
+                  type="button"
+                  className={styles.generateButton}
                   onClick={generatePhoto}
                   disabled={isSubmitting}
                 >
+                  <span className={styles.generateAvatars}>
+                    <Image
+                      src={avatar || defaultAvatar}
+                      alt=""
+                      width={18}
+                      height={18}
+                      unoptimized
+                      className={styles.generateAvatarThumb}
+                    />
+                    <Image
+                      src={existingMemberAvatar || avatar || defaultAvatar}
+                      alt=""
+                      width={18}
+                      height={18}
+                      unoptimized
+                      className={cn(
+                        styles.generateAvatarThumb,
+                        styles.generateAvatarThumbOverlap,
+                      )}
+                    />
+                  </span>
                   {t("familyTree.generatePhoto")}
-                </Button>
+                </button>
               </div>
             </div>
-          </div>
+          ) : (
+            <button
+              type="button"
+              className={styles.photoToggle}
+              onClick={() => setIsPhotoRevealed(true)}
+              disabled={isSubmitting}
+            >
+              <span>{t("familyTree.addPhotoLabel")}</span>
+              <span className={styles.photoToggleAction}>
+                {t("familyTree.add")}
+                <MdAdd size={14} />
+              </span>
+            </button>
+          )}
 
           <div className={styles.actions}>
             <Button

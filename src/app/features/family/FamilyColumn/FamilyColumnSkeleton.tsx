@@ -1,15 +1,29 @@
-import styles from "./FamilyColumnSkeleton.module.scss";
+import { Skeleton, SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
+import { Button } from "@/app/uikit/form/Button/Button";
+import styles from "./FamilyColumn.module.scss";
 import { FamilyMemberCardSkeleton } from "@/app/features/family/FamilyMemberCard/FamilyMemberCardSkeleton";
 
-const MEMBERS_COUNT = 2;
+interface FamilyColumnSkeletonProps {
+  title: string;
+  addLabel: string;
+}
 
-export const FamilyColumnSkeleton = () => (
+export const FamilyColumnSkeleton = ({
+  title,
+  addLabel,
+}: FamilyColumnSkeletonProps) => (
   <div className={styles.column}>
-    <div className={styles.title} />
+    <h2 className={styles.title}>
+      <SkeletonText>{title}</SkeletonText>
+    </h2>
+
     <ul className={styles.list}>
-      {Array.from({ length: MEMBERS_COUNT }, (_, i) => (
-        <FamilyMemberCardSkeleton key={i} />
-      ))}
+      <FamilyMemberCardSkeleton />
+      <FamilyMemberCardSkeleton />
     </ul>
+
+    <Skeleton shape="rounded" width="100%">
+      <Button appearance="secondary">{addLabel}</Button>
+    </Skeleton>
   </div>
 );

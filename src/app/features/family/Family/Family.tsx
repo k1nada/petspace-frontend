@@ -9,8 +9,8 @@ import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useFamilyTree } from "@/app/hooks/family/useFamilyTree";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
-import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
-import { FamilySkeleton } from "./FamilySkeleton";
+import { Card } from "@/app/uikit/layout/Card/Card";
+import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 
 interface FamilyProps {
   user: User;
@@ -27,54 +27,54 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
     useFamilyTree(familyMembers);
 
   return (
-    <AuthLoader fallback={<FamilySkeleton />}>
-      <section className={styles.container}>
-        <h1 className={styles.title}>
-          {isOwner
-            ? t("common.familyTree")
-            : t("familyTree.titleOther", { name })}
-        </h1>
+    <Card as="section">
+      <CardTitle as="h1">
+        {isOwner
+          ? t("common.familyTree")
+          : t("familyTree.titleOther", { name })}
+      </CardTitle>
 
-        <div className={styles.content}>
-          <div className={styles.parentsColumn}>
-            <FamilyColumn
-              title={t("familyTree.parents")}
-              emptyText={t("familyTree.emptyParents")}
-              addLabel={t("familyTree.addParent")}
-              relation="parent"
-              members={parents}
-              isOwner={isOwner}
-              breeds={breeds}
-              onAdd={(member) => addMember("parent", member)}
-              onRemove={removeMember}
-            />
-          </div>
-
-          <div className={styles.divider} />
-
-          <Link href={ROUTES.profile(username)} className={styles.user}>
-            <Avatar src={avatar} size={96} />
-            <span className={styles.name}>{name}</span>
-            {breed && <span className={styles.breed}>{breed}</span>}
-          </Link>
-
-          <div className={styles.divider} />
-
-          <div className={styles.childrenColumn}>
-            <FamilyColumn
-              title={t("familyTree.children")}
-              emptyText={t("familyTree.emptyChildren")}
-              addLabel={t("familyTree.addPuppy")}
-              relation="child"
-              members={children}
-              isOwner={isOwner}
-              breeds={breeds}
-              onAdd={(member) => addMember("child", member)}
-              onRemove={removeMember}
-            />
-          </div>
+      <div className={styles.content}>
+        <div className={styles.parentsColumn}>
+          <FamilyColumn
+            title={t("familyTree.parents")}
+            emptyText={t("familyTree.emptyParents")}
+            addLabel={t("familyTree.addParent")}
+            relation="parent"
+            members={parents}
+            isOwner={isOwner}
+            breeds={breeds}
+            avatar={avatar}
+            onAdd={(member) => addMember("parent", member)}
+            onRemove={removeMember}
+          />
         </div>
-      </section>
-    </AuthLoader>
+
+        <div className={styles.divider} />
+
+        <Link href={ROUTES.profile(username)} className={styles.user}>
+          <Avatar src={avatar} size={96} />
+          <span className={styles.name}>{name}</span>
+          {breed && <span className={styles.breed}>{breed}</span>}
+        </Link>
+
+        <div className={styles.divider} />
+
+        <div className={styles.childrenColumn}>
+          <FamilyColumn
+            title={t("familyTree.children")}
+            emptyText={t("familyTree.emptyChildren")}
+            addLabel={t("familyTree.addPuppy")}
+            relation="child"
+            members={children}
+            isOwner={isOwner}
+            breeds={breeds}
+            avatar={avatar}
+            onAdd={(member) => addMember("child", member)}
+            onRemove={removeMember}
+          />
+        </div>
+      </div>
+    </Card>
   );
 };
