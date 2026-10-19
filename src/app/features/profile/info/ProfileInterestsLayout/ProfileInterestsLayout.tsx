@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import styles from "./ProfileInterestsLayout.module.scss";
 import { ProfileInterests } from "../ProfileInterests/ProfileInterests";
 import { ProfileInformation } from "../ProfileInformation/ProfileInformation";
@@ -33,9 +32,6 @@ export const ProfileInterestsLayout = ({
   if (!isAuthChecked) {
     return (
       <div className={styles.wrapper}>
-        <div className={styles.sidebar}>
-          <Sidebar />
-        </div>
         <div className={styles.content}>
           <ProfileInterestsSkeleton />
         </div>
@@ -49,9 +45,6 @@ export const ProfileInterestsLayout = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.sidebar}>
-        <Sidebar />
-      </div>
       <div className={styles.content}>
         <ProfileInterests user={user} />
       </div>

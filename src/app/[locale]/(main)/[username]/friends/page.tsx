@@ -3,7 +3,6 @@ import { getTranslations } from "next-intl/server";
 import { getFollowers, getFollowing } from "@/services/api/follows";
 import { getFriends } from "@/services/api/friends";
 import { getUser } from "@/services/api/user";
-import { Header } from "@/app/components/Header/Header";
 import { FriendsLayout } from "@/app/features/friends/FriendsLayout/FriendsLayout";
 import { notFound } from "next/navigation";
 
@@ -35,18 +34,13 @@ const FriendsPage = async ({ params }: FriendsPageProps) => {
   if (!userData) notFound();
 
   return (
-    <>
-      <Header />
-      <main>
-        <FriendsLayout
-          username={userData.username}
-          name={userData.name}
-          friends={friends}
-          followers={followers}
-          following={following}
-        />
-      </main>
-    </>
+    <FriendsLayout
+      username={userData.username}
+      name={userData.name}
+      friends={friends}
+      followers={followers}
+      following={following}
+    />
   );
 };
 

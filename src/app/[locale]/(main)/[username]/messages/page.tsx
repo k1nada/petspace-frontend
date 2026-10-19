@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { getUser } from "@/services/api/user";
-import { Header } from "@/app/components/Header/Header";
 import { MessagesLayout } from "@/app/features/messages/MessagesLayout/MessagesLayout";
 import { ChatContact } from "@/types";
 import { notFound } from "next/navigation";
@@ -44,15 +43,7 @@ const MessagesPage = async ({ params, searchParams }: MessagesPageProps) => {
     : undefined;
 
   return (
-    <>
-      <Header />
-      <main>
-        <MessagesLayout
-          user={userData}
-          initialSelectedChat={initialSelectedChat}
-        />
-      </main>
-    </>
+    <MessagesLayout user={userData} initialSelectedChat={initialSelectedChat} />
   );
 };
 

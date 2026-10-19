@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Header } from "@/app/components/Header/Header";
 import { ProfileEditorLayout } from "@/app/features/profile/info/ProfileEditorLayout/ProfileEditorLayout";
 import { getUser } from "@/services/api/user";
 import { notFound } from "next/navigation";
@@ -26,14 +25,7 @@ const EditPage = async ({ params }: EditPageProps) => {
 
   if (!userData) notFound();
 
-  return (
-    <>
-      <Header />
-      <main>
-        <ProfileEditorLayout user={userData} />
-      </main>
-    </>
-  );
+  return <ProfileEditorLayout user={userData} />;
 };
 
 export default EditPage;

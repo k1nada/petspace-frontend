@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Header } from "@/app/components/Header/Header";
 import { FamilyLayout } from "@/app/features/family/FamilyLayout/FamilyLayout";
 import { getUser } from "@/services/api/user";
 import { getBreeds } from "@/services/api/breeds";
@@ -33,16 +32,11 @@ const FamilyPage = async ({ params }: FamilyPageProps) => {
   if (!userData) notFound();
 
   return (
-    <>
-      <Header />
-      <main>
-        <FamilyLayout
-          user={userData}
-          breeds={breeds}
-          familyMembers={familyMembers}
-        />
-      </main>
-    </>
+    <FamilyLayout
+      user={userData}
+      breeds={breeds}
+      familyMembers={familyMembers}
+    />
   );
 };
 

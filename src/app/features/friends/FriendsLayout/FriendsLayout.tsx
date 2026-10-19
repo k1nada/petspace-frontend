@@ -2,7 +2,6 @@
 
 import styles from "./FriendsLayout.module.scss";
 import { useTranslations } from "next-intl";
-import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { FollowUser, Friend } from "@/types";
@@ -32,9 +31,6 @@ export const FriendsLayout = ({
 
   return (
     <div className={styles.layout}>
-      <div className={styles.sidebar}>
-        <Sidebar />
-      </div>
       <div className={styles.content}>
         <AuthLoader fallback={<FriendsSkeleton />}>
           <Friends

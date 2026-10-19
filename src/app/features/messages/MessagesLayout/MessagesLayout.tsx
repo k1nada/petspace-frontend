@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Sidebar } from "@/app/components/Sidebar/Sidebar";
 import styles from "./MessagesLayout.module.scss";
 import { Chat } from "../Chat/Chat";
 import { ChatContact, Message, User } from "@/types";
@@ -101,9 +100,6 @@ export const MessagesLayout = ({
 
   return (
     <div className={styles.layout}>
-      <div className={styles.sidebar}>
-        <Sidebar />
-      </div>
       <div className={styles.chat}>
         <ContactList
           user={user}
