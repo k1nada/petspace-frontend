@@ -1,13 +1,3 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-xl);
-  background: var(--bg-card);
-  padding: var(--padding-xl);
-  border-radius: var(--radius-m);
-  box-shadow: var(--shadow-card);
-}
-
 .list {
   display: flex;
   flex-direction: column;

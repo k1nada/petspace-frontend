@@ -127,13 +127,12 @@
   },
   "profileBanner": {
     "info": "More info",
-    "friends": "friends",
-    "photos": "photos",
     "requestSent": "Request sent",
     "removeFriend": "Remove friend",
     "cancelRequest": "Cancel request",
     "friendsCount": "{count, plural, one {# friend} other {# friends}}",
-    "photosCount": "{count, plural, one {# photo} other {# photos}}"
+    "photosCount": "{count, plural, one {# photo} other {# photos}}",
+    "acceptRequest": "Accept request"
   },
   "profileEditor": {
     "bio": "About:",
@@ -162,7 +161,7 @@
   "profileInfoModal": {
     "title": "My info",
     "interestsTitle": "My interests",
-    "followers": "followers"
+    "followersCount": "{count, plural, one {# follower} other {# followers}}"
   },
   "avatarEdit": {
     "open": "Open photo",
@@ -187,7 +186,8 @@
     "photo": "Photo",
     "removePhoto": "Remove photo",
     "publish": "Add post",
-    "placeholder": "What's new, {name}?"
+    "placeholder": "What's new, {name}?",
+    "placeholderOtherWall": "Share your thoughts, {name}"
   },
   "post": {
     "image": "Post image",

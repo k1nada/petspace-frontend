@@ -1,28 +1,40 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "../../../../uikit/form/Button/Button";
-import styles from "./ProfileBanner.module.scss";
+import { toast } from "react-toastify";
 import { FaMapMarkerAlt, FaPaw, FaTree, FaTrophy } from "react-icons/fa";
-import { FaCamera, FaMessage } from "react-icons/fa6";
-import { ROUTES } from "@/routes/routes";
-import { Link } from "../../../../uikit/navigation/Link/Link";
-import { useRouter } from "next/navigation";
+import { FaMessage } from "react-icons/fa6";
+import { MdCancel, MdDelete } from "react-icons/md";
+import { Button } from "@/app/uikit/form/Button/Button";
+import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
+import { Link } from "@/app/uikit/navigation/Link/Link";
+import { Card } from "@/app/uikit/layout/Card/Card";
+import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
+import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { AvatarEdit } from "@/app/features/profile/info/AvatarEdit/AvatarEdit";
-import { useState } from "react";
-import { ProfileInfoModal } from "../../modals/ProfileInfoModal/ProfileInfoModal";
-import { AchievementsModal } from "../../modals/AchievementsModal/AchievementsModal";
+import { ProfileInfoModal } from "@/app/features/profile/modals/ProfileInfoModal/ProfileInfoModal";
+import { AchievementsModal } from "@/app/features/profile/modals/AchievementsModal/AchievementsModal";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
-import { BannerInfo } from "@/types";
-import { ProfileBannerSkeleton } from "./ProfileBannerSkeleton";
-import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
+import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
+import { useFriendRequestActions } from "@/app/hooks/friends/useFriendRequestActions";
 import {
   addFriend as addFriendAPI,
   deleteFriend,
 } from "@/services/api/friends";
 import { revalidateFollows } from "@/services/actions/revalidateFollows";
+import { useRouter } from "@/i18n/navigation";
+import { ROUTES } from "@/routes/routes";
 import { getRelationshipStatus } from "@/utils/friends";
-import { toast } from "react-toastify";
+import { BannerInfo } from "@/types";
+import styles from "./ProfileBanner.module.scss";
+
+type RelationStatus =
+  | "none"
+  | "incoming"
+  | "outgoing"
+  | "friends"
+  | "following";
 
 interface ProfileBannerProps {
   bannerInfo: BannerInfo;
@@ -37,9 +49,9 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
 
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [isAchievementsOpen, setIsAchievementsOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState<string | undefined>(
-    bannerInfo.avatar,
-  );
+  const [isDeleteFriendOpen, setIsDeleteFriendOpen] = useState(false);
+  const [optimisticStatus, setOptimisticStatus] =
+    useState<RelationStatus | null>(null);
 
   const hasMoreInfo = !!(
     bannerInfo.breed ||
@@ -57,48 +69,215 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     bannerInfo.id,
   );
   const isOwner = currentUser?.username === bannerInfo.username;
+  const hasCurrentUser = !!currentUser;
+  const requests = useFriendRequestsStore((state) => state.requests);
+  const incomingRequest = requests.find(
+    (request) => request.from.id === bannerInfo.id,
+  );
+  const { acceptRequest, rejectRequest } = useFriendRequestActions();
+
+  let realStatus: RelationStatus = "none";
+  if (isFriend) realStatus = "friends";
+  else if (incomingRequest) realStatus = "incoming";
+  else if (isPending) realStatus = "outgoing";
+  else if (isFollowing) realStatus = "following";
+
+  const status = optimisticStatus ?? realStatus;
+  const isBusy = optimisticStatus !== null;
+
+  useEffect(() => {
+    if (hasCurrentUser && !isOwner) fetchCurrentUser();
+  }, [bannerInfo.id, hasCurrentUser, isOwner, fetchCurrentUser]);
 
   const editProfile = () => {
     router.push(ROUTES.editProfile(bannerInfo.username));
   };
 
-  const goToMessages = (targetUsername: string) => {
-    router.push(ROUTES.messages(currentUser?.username || "", targetUsername));
+  const goToMessages = () => {
+    if (!currentUser) return;
+    router.push(ROUTES.messages(currentUser.username, bannerInfo.username));
   };
 
-  const addFriend = async () => {
-    if (!currentUser?.username) return;
+  const runAction = async (
+    nextStatus: RelationStatus,
+    action: () => Promise<void>,
+  ) => {
+    if (isBusy) return;
+    setOptimisticStatus(nextStatus);
     try {
-      await addFriendAPI(currentUser.username, bannerInfo.username);
-      await revalidateFollows();
-      await fetchCurrentUser();
+      await action();
     } catch {
       toast.error(t("toasts.error"));
+    } finally {
+      setOptimisticStatus(null);
     }
   };
 
-  const cancelRequest = async () => {
-    if (!currentUser?.username) return;
-    try {
-      await deleteFriend(currentUser.username, bannerInfo.username);
+  const addFriend = () => {
+    const username = currentUser?.username;
+    if (!username) return;
+    runAction("outgoing", async () => {
+      await addFriendAPI(username, bannerInfo.username);
       await revalidateFollows();
       await fetchCurrentUser();
-    } catch {
-      toast.error(t("toasts.error"));
+    });
+  };
+
+  const removeRelation = () => {
+    const username = currentUser?.username;
+    if (!username) return;
+    runAction("none", async () => {
+      await deleteFriend(username, bannerInfo.username);
+      await revalidateFollows();
+      await fetchCurrentUser();
+    });
+  };
+
+  const removeFriend = () => {
+    setIsDeleteFriendOpen(false);
+    removeRelation();
+  };
+
+  const acceptIncomingRequest = () => {
+    if (!incomingRequest) return;
+    runAction("friends", () => acceptRequest(incomingRequest));
+  };
+
+  const declineIncomingRequest = () => {
+    if (!incomingRequest) return;
+    runAction("none", () => rejectRequest(incomingRequest));
+  };
+
+  const stats = [
+    {
+      href: ROUTES.friends(bannerInfo.username),
+      icon: <FaPaw size={18} />,
+      label: t("profileBanner.friendsCount", { count: friendsCount }),
+    },
+    {
+      href: ROUTES.photos(bannerInfo.username),
+      icon: <PhotoIcon size={18} />,
+      label: t("profileBanner.photosCount", { count: photosCount }),
+    },
+    {
+      href: ROUTES.familyTree(bannerInfo.username),
+      icon: <FaTree size={18} />,
+      label: t("common.familyTree"),
+    },
+  ];
+
+  const messageButton = (
+    <Button appearance="secondary" onClick={goToMessages}>
+      <FaMessage size={16} />
+    </Button>
+  );
+
+  const renderActions = () => {
+    if (isOwner) {
+      return (
+        <Button appearance="primary" onClick={editProfile}>
+          {t("common.editProfile")}
+        </Button>
+      );
     }
+
+    if (status === "friends") {
+      return (
+        <>
+          <Dropdown
+            triggerAppearance="button"
+            trigger={t("common.friends")}
+            align="left"
+            items={[
+              {
+                label: t("profileBanner.removeFriend"),
+                icon: <MdDelete size={20} />,
+                onClick: () => setIsDeleteFriendOpen(true),
+              },
+            ]}
+          />
+          <Button appearance="primary" onClick={goToMessages}>
+            {t("common.message")}
+          </Button>
+        </>
+      );
+    }
+
+    if (status === "incoming") {
+      return (
+        <>
+          {messageButton}
+          <Button
+            appearance="primary"
+            className={styles.mainAction}
+            onClick={acceptIncomingRequest}
+            disabled={isBusy}
+          >
+            {t("profileBanner.acceptRequest")}
+          </Button>
+          <Button
+            appearance="secondary"
+            onClick={declineIncomingRequest}
+            disabled={isBusy}
+          >
+            {t("friendRequest.decline")}
+          </Button>
+        </>
+      );
+    }
+
+    if (status === "outgoing") {
+      return (
+        <>
+          {messageButton}
+          <Dropdown
+            triggerAppearance="button"
+            triggerClassName={styles.mainAction}
+            trigger={t("profileBanner.requestSent")}
+            align="left"
+            items={[
+              {
+                label: t("profileBanner.cancelRequest"),
+                icon: <MdCancel size={20} />,
+                onClick: removeRelation,
+              },
+            ]}
+          />
+        </>
+      );
+    }
+
+    if (status === "following") {
+      return (
+        <>
+          {messageButton}
+          <Button appearance="secondary" className={styles.mainAction} disabled>
+            {t("common.following")}
+          </Button>
+        </>
+      );
+    }
+
+    return (
+      <>
+        {messageButton}
+        <Button appearance="primary" onClick={addFriend} disabled={isBusy}>
+          {t("common.addFriend")}
+        </Button>
+      </>
+    );
   };
 
   return (
-    <AuthLoader fallback={<ProfileBannerSkeleton />}>
+    <Card>
       <div className={styles.banner}>
         <div className={styles.avatarWrapper}>
           <AvatarEdit
-            src={avatarUrl}
+            src={bannerInfo.avatar}
             name={bannerInfo.name}
             username={bannerInfo.username}
             size={140}
             avatarPhotos={bannerInfo.avatarPhotos}
-            onAvatarChange={(url) => setAvatarUrl(url)}
             isEditable={isOwner}
           />
         </div>
@@ -106,7 +285,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
           <div className={styles.info}>
             <div className={styles.nameWrapper}>
               <h1 className={styles.name}>{bannerInfo.name}</h1>
-              <div className={styles.username}>@{bannerInfo.username} </div>
+              <div className={styles.username}>@{bannerInfo.username}</div>
             </div>
             {(bannerInfo.city || hasMoreInfo) && (
               <div className={styles.details}>
@@ -130,41 +309,14 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
           {bannerInfo.bio && <div className={styles.bio}>{bannerInfo.bio}</div>}
           <div className={styles.divider} />
           <div className={styles.stats}>
-            <div className={styles.stat}>
-              <Link
-                href={ROUTES.friends(bannerInfo.username)}
-                appearance="secondary"
-              >
-                <FaPaw size={18} />
-                <span className={styles.statValue}>{friendsCount}</span>
-                <span className={styles.statLabel}>
-                  {t("profileBanner.friends")}
-                </span>
-              </Link>
-            </div>
-            <div className={styles.stat}>
-              <Link
-                href={ROUTES.photos(bannerInfo.username)}
-                appearance="secondary"
-              >
-                <FaCamera size={18} />
-                <span className={styles.statValue}>{photosCount}</span>
-                <span className={styles.statLabel}>
-                  {t("profileBanner.photos")}
-                </span>
-              </Link>
-            </div>
-            <div className={styles.stat}>
-              <Link
-                href={ROUTES.familyTree(bannerInfo.username)}
-                appearance="secondary"
-              >
-                <FaTree size={18} />
-                <span className={styles.statLabel}>
-                  {t("common.familyTree")}
-                </span>
-              </Link>
-            </div>
+            {stats.map((stat) => (
+              <div key={stat.href} className={styles.stat}>
+                <Link href={stat.href} appearance="secondary">
+                  {stat.icon}
+                  <span>{stat.label}</span>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
         <div className={styles.actions}>
@@ -174,59 +326,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
           >
             <FaTrophy size={16} />
           </Button>
-          {isOwner ? (
-            <Button appearance="primary" onClick={editProfile}>
-              {t("common.editProfile")}
-            </Button>
-          ) : isFriend ? (
-            <>
-              <Button appearance="secondary">
-                <FaPaw size={16} />
-              </Button>
-              <Button
-                appearance="primary"
-                onClick={() => goToMessages(bannerInfo.username)}
-              >
-                {t("common.message")}
-              </Button>
-            </>
-          ) : isPending ? (
-            <>
-              <Button
-                appearance="secondary"
-                onClick={() => goToMessages(bannerInfo.username)}
-              >
-                <FaMessage size={16} />
-              </Button>
-              <Button appearance="secondary" onClick={cancelRequest}>
-                {t("profileBanner.requestSent")}
-              </Button>
-            </>
-          ) : isFollowing ? (
-            <>
-              <Button
-                appearance="secondary"
-                onClick={() => goToMessages(bannerInfo.username)}
-              >
-                <FaMessage size={16} />
-              </Button>
-              <Button appearance="secondary" disabled>
-                {t("common.following")}
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button
-                appearance="secondary"
-                onClick={() => goToMessages(bannerInfo.username)}
-              >
-                <FaMessage size={16} />
-              </Button>
-              <Button appearance="primary" onClick={addFriend}>
-                {t("common.addFriend")}
-              </Button>
-            </>
-          )}
+          {renderActions()}
         </div>
 
         <AchievementsModal
@@ -240,7 +340,17 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
           onClose={() => setIsInfoOpen(false)}
           user={bannerInfo}
         />
+
+        <ConfirmModal
+          isOpen={isDeleteFriendOpen}
+          title={t("friendCard.modalTitle")}
+          description={t("friendCard.modalDescription", {
+            name: bannerInfo.name,
+          })}
+          onConfirm={removeFriend}
+          onClose={() => setIsDeleteFriendOpen(false)}
+        />
       </div>
-    </AuthLoader>
+    </Card>
   );
 };

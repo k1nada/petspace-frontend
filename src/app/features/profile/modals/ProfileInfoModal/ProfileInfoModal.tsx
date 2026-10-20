@@ -29,7 +29,19 @@ export const ProfileInfoModal = ({
   const locale = useLocale();
   const { bio, breed, city, sex, birthDate, interests, followers } = user;
   const hasInterests = interests && Object.values(interests).some(Boolean);
-  const followersCount = followers ? followers.length : 0;
+  const followersCount = followers?.length ?? 0;
+
+  const interestItems = [
+    { label: t("profileInterests.toys"), value: interests?.favoriteToys },
+    { label: t("profileInterests.treats"), value: interests?.favoriteTreats },
+    {
+      label: t("profileInterests.activities"),
+      value: interests?.favoriteActivities,
+    },
+    { label: t("profileInterests.crimes"), value: interests?.crimes },
+    { label: t("profileInterests.habits"), value: interests?.guiltyHabits },
+    { label: t("profileInterests.humans"), value: interests?.humans },
+  ];
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -55,7 +67,9 @@ export const ProfileInfoModal = ({
             <div className={styles.row}>
               <FaDog size={16} className={styles.icon} />
               <span>
-                {followersCount} {t("profileInfoModal.followers")}
+                {t("profileInfoModal.followersCount", {
+                  count: followersCount,
+                })}
               </span>
             </div>
           )}
@@ -82,73 +96,19 @@ export const ProfileInfoModal = ({
           )}
 
           {hasInterests && (
-            <>
-              <div className={styles.interests}>
-                <h3 className={styles.interestsTitle}>
-                  {t("profileInfoModal.interestsTitle")}
-                </h3>
-                {interests.favoriteToys && (
-                  <div className={styles.interestItem}>
-                    <div className={styles.interestLabel}>
-                      {t("profileInterests.toys")}
-                    </div>
-                    <div className={styles.interestValue}>
-                      {interests.favoriteToys}
-                    </div>
+            <div className={styles.interests}>
+              <h3 className={styles.interestsTitle}>
+                {t("profileInfoModal.interestsTitle")}
+              </h3>
+              {interestItems
+                .filter((item) => item.value)
+                .map((item) => (
+                  <div key={item.label} className={styles.interestItem}>
+                    <div className={styles.interestLabel}>{item.label}</div>
+                    <div className={styles.interestValue}>{item.value}</div>
                   </div>
-                )}
-                {interests.favoriteTreats && (
-                  <div className={styles.interestItem}>
-                    <div className={styles.interestLabel}>
-                      {t("profileInterests.treats")}
-                    </div>
-                    <div className={styles.interestValue}>
-                      {interests.favoriteTreats}
-                    </div>
-                  </div>
-                )}
-                {interests.favoriteActivities && (
-                  <div className={styles.interestItem}>
-                    <div className={styles.interestLabel}>
-                      {t("profileInterests.activities")}
-                    </div>
-                    <div className={styles.interestValue}>
-                      {interests.favoriteActivities}
-                    </div>
-                  </div>
-                )}
-                {interests.crimes && (
-                  <div className={styles.interestItem}>
-                    <div className={styles.interestLabel}>
-                      {t("profileInterests.crimes")}
-                    </div>
-                    <div className={styles.interestValue}>
-                      {interests.crimes}
-                    </div>
-                  </div>
-                )}
-                {interests.guiltyHabits && (
-                  <div className={styles.interestItem}>
-                    <div className={styles.interestLabel}>
-                      {t("profileInterests.habits")}
-                    </div>
-                    <div className={styles.interestValue}>
-                      {interests.guiltyHabits}
-                    </div>
-                  </div>
-                )}
-                {interests.humans && (
-                  <div className={styles.interestItem}>
-                    <div className={styles.interestLabel}>
-                      {t("profileInterests.humans")}
-                    </div>
-                    <div className={styles.interestValue}>
-                      {interests.humans}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </>
+                ))}
+            </div>
           )}
         </div>
       </div>

@@ -1,8 +1,4 @@
 .banner {
-  background: var(--bg-card);
-  border-radius: var(--radius-m);
-  box-shadow: var(--shadow-card);
-  padding: var(--padding-xl);
   display: flex;
   align-items: center;
   gap: var(--gap-xxl);
@@ -109,6 +105,35 @@
   display: flex;
   align-items: center;
   gap: var(--gap-s);
+}
+
+.mainAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-xs);
+  min-width: 160px;
+}
+
+@media (max-width: 768px) {
+  .banner {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-l);
+    text-align: center;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .nameWrapper,
+  .details,
+  .stats,
+  .actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 $stat-icon-size: 18px;

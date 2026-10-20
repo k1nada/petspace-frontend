@@ -16,7 +16,7 @@
   cursor: pointer;
   padding: 0;
   font-size: var(--font-m);
-  transition: color 0.2s ease;
+  transition: color var(--transition-fast);
 
   &:hover {
     color: var(--text-primary);

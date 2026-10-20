@@ -111,6 +111,13 @@ export interface Post {
   createdAt: Date;
 }
 
+export interface PostChanges {
+  liked?: boolean;
+  likesCount?: number;
+  reposted?: boolean;
+  reposts?: number;
+}
+
 export interface RepostState {
   reposted: boolean;
   count: number;

@@ -4,17 +4,20 @@ import styles from "./PostCreator.module.scss";
 import Image from "next/image";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { FaCamera, FaTimes } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
+import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { createPost, uploadPostPhoto } from "@/services/api/post";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { useTextareaSubmit } from "@/app/hooks/shared/useTextareaSubmit";
 import { toast } from "react-toastify";
+import { Card } from "@/app/uikit/layout/Card/Card";
 
 interface PostCreatorProps {
   avatar?: string;
   name: string;
+  isOwner: boolean;
   postwallId: string;
   onSuccess?: () => void;
 }
@@ -22,6 +25,7 @@ interface PostCreatorProps {
 export const PostCreator = ({
   avatar,
   name,
+  isOwner,
   postwallId,
   onSuccess,
 }: PostCreatorProps) => {
@@ -42,13 +46,11 @@ export const PostCreator = ({
     const file = e.target.files?.[0];
     e.target.value = "";
     if (!file) return;
-    if (imagePreview) URL.revokeObjectURL(imagePreview);
     setImageFile(file);
     setImagePreview(URL.createObjectURL(file));
   };
 
   const removeImage = () => {
-    if (imagePreview) URL.revokeObjectURL(imagePreview);
     setImageFile(null);
     setImagePreview(null);
   };
@@ -63,9 +65,9 @@ export const PostCreator = ({
       setContent("");
       removeImage();
       onSuccess?.();
-      setIsPublishing(false);
     } catch {
       toast.error(t("toasts.postPublishError"));
+    } finally {
       setIsPublishing(false);
     }
   };
@@ -73,7 +75,7 @@ export const PostCreator = ({
   const { handleKeyDown } = useTextareaSubmit({ onSubmit: publishPost });
 
   return (
-    <div className={styles.container}>
+    <Card>
       <div className={styles.wrapper}>
         <Avatar src={avatar} />
         <div className={styles.textareaWrapper}>
@@ -82,7 +84,12 @@ export const PostCreator = ({
             value={content}
             onKeyDown={handleKeyDown}
             onChange={(e) => setContent(e.target.value)}
-            placeholder={t("postCreator.placeholder", { name })}
+            placeholder={t(
+              isOwner
+                ? "postCreator.placeholder"
+                : "postCreator.placeholderOtherWall",
+              { name },
+            )}
             maxLength={3000}
             disabled={isPublishing}
           />
@@ -123,7 +130,7 @@ export const PostCreator = ({
             onClick={() => fileInputRef.current?.click()}
             disabled={isPublishing}
           >
-            <FaCamera size={16} />
+            <PhotoIcon size={16} />
             {t("postCreator.photo")}
           </Button>
         </div>
@@ -135,6 +142,6 @@ export const PostCreator = ({
           {t("postCreator.publish")}
         </Button>
       </div>
-    </div>
+    </Card>
   );
 };

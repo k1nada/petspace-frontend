@@ -82,6 +82,7 @@ export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
         {canCreatePost && currentUser && (
           <PostCreator
             name={currentUser.name}
+            isOwner={isOwner}
             avatar={currentUser.avatar}
             postwallId={postwallId ?? ""}
             onSuccess={refreshPosts}

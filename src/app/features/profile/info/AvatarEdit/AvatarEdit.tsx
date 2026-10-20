@@ -6,7 +6,7 @@ import { MdDelete, MdEdit, MdPhotoCamera } from "react-icons/md";
 import { useTranslations } from "next-intl";
 import defaultAvatar from "@/assets/avatars/default.png";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { toast } from "react-toastify";
 import { AvatarChangeModal } from "../AvatarChangeModal/AvatarChangeModal";
@@ -18,6 +18,8 @@ import {
 } from "@/services/api/upload";
 import { revalidateUser } from "@/services/actions/revalidateUser";
 import { usePhotoNavigation } from "@/app/hooks/photos/usePhotoNavigation";
+import { useRouter } from "@/i18n/navigation";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 
 interface AvatarEditProps {
   avatarPhotos?: Photo[];
@@ -39,17 +41,27 @@ export const AvatarEdit = ({
   isEditable = true,
 }: AvatarEditProps) => {
   const t = useTranslations();
+  const router = useRouter();
+  const fetchCurrentUser = useAuthStore((state) => state.fetchCurrentUser);
   const [isChangeOpen, setIsChangeOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [localAvatarPhotos, setLocalAvatarPhotos] = useState(avatarPhotos);
+  const [prevAvatarPhotos, setPrevAvatarPhotos] = useState(avatarPhotos);
 
-  useEffect(() => {
+  if (avatarPhotos !== prevAvatarPhotos) {
+    setPrevAvatarPhotos(avatarPhotos);
     setLocalAvatarPhotos(avatarPhotos);
-  }, [avatarPhotos]);
+  }
 
   const newestFirstPhotos = [...(localAvatarPhotos ?? [])].reverse();
-  const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
-    usePhotoNavigation(newestFirstPhotos);
+  const {
+    selectedIndex,
+    setSelectedIndex,
+    handlePrev,
+    handleNext,
+    prevPhoto,
+    nextPhoto,
+  } = usePhotoNavigation(newestFirstPhotos);
 
   const handleLikeChange = (
     photoId: string,
@@ -77,7 +89,10 @@ export const AvatarEdit = ({
       }
 
       await revalidateUser();
-      if (avatarChanged) window.location.reload();
+      if (avatarChanged) {
+        await fetchCurrentUser();
+        router.refresh();
+      }
     } catch {
       toast.error(t("toasts.error"));
     }
@@ -90,7 +105,8 @@ export const AvatarEdit = ({
       onAvatarChange?.(undefined);
       setIsDeleteOpen(false);
       await revalidateUser();
-      window.location.reload();
+      await fetchCurrentUser();
+      router.refresh();
     } catch {
       toast.error(t("toasts.error"));
     }
@@ -121,6 +137,8 @@ export const AvatarEdit = ({
             currentIndex: selectedIndex ?? 0,
             onPrev: handlePrev,
             onNext: handleNext,
+            prevPhoto,
+            nextPhoto,
           }}
           isOwner={false}
           onClose={() => setSelectedIndex(null)}
@@ -166,7 +184,6 @@ export const AvatarEdit = ({
         }
       />
 
-
       <PhotoModal
         photo={selectedPhoto}
         author={{ name: name ?? "", username, avatar: src }}
@@ -175,6 +192,8 @@ export const AvatarEdit = ({
           currentIndex: selectedIndex ?? 0,
           onPrev: handlePrev,
           onNext: handleNext,
+          prevPhoto,
+          nextPhoto,
         }}
         isOwner
         onClose={() => setSelectedIndex(null)}

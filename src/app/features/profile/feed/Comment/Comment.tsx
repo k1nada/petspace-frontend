@@ -95,8 +95,6 @@ export const Comment = ({
             {isOwner && !isEditing && (
               <div className={styles.dropdown}>
                 <Dropdown
-                  align="left"
-                  size="small"
                   items={[
                     {
                       label: t("common.edit"),

@@ -17,7 +17,6 @@ interface DropdownProps {
   items: DropdownItem[];
   openOn?: "click" | "hover";
   align?: "left" | "center" | "right";
-  size?: "default" | "small";
   triggerAppearance?: "icon" | "button" | "iconButton";
   triggerClassName?: string;
   trigger?: ReactNode;
@@ -29,19 +28,16 @@ export const Dropdown = ({
   items,
   openOn = "click",
   align = "right",
-  size = "default",
   triggerAppearance = "icon",
   triggerClassName,
-  trigger = <MdOutlineMoreHoriz size={size === "small" ? 18 : 25} />,
+  trigger = <MdOutlineMoreHoriz size={25} />,
   label,
   className,
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const isButton = triggerAppearance === "button";
-  const buttonClassName = isButton
-    ? triggerClassName
-    : cn(styles.trigger, { [styles.triggerSmall]: size === "small" });
+  const buttonClassName = isButton ? triggerClassName : styles.trigger;
 
   return (
     <div
