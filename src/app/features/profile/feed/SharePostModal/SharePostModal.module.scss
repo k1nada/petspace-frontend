@@ -25,6 +25,12 @@ button.wallOption {
   min-width: 280px;
 }
 
+@media (max-width: 480px) {
+  .list {
+    min-width: 0;
+  }
+}
+
 button.friend {
   display: flex;
   align-items: center;

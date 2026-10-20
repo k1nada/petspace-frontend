@@ -13,7 +13,8 @@
   border: none;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &.active {
     background-color: var(--button-ghost-hover);
   }
 }

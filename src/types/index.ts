@@ -151,6 +151,18 @@ export interface Message {
   createdAt: string;
   sender: User;
   post?: SharedPost | null;
+  tempId?: string;
+  status?: "sending" | "failed";
+}
+
+export interface MessagesPage {
+  messages: Message[];
+  hasMore: boolean;
+}
+
+export interface SendMessageAck {
+  message?: Message;
+  error?: { code: number; type: string };
 }
 
 export interface ConversationMessage {

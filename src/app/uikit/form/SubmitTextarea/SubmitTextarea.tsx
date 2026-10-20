@@ -36,6 +36,7 @@ export const SubmitTextarea = ({
       <FaAngleRight
         size={30}
         className={styles.arrow}
+        onMouseDown={(e) => e.preventDefault()}
         onClick={disabled ? undefined : onSubmit}
       />
     </div>

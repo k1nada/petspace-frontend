@@ -9,6 +9,8 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import socket from "@/services/socket";
+import { SendMessageAck } from "@/types";
+import { SEND_TIMEOUT_MS, SOCKET_EVENTS, getRoomId } from "@/utils/chat";
 
 interface SharePostModalProps {
   isOpen: boolean;
@@ -31,10 +33,26 @@ export const SharePostModal = ({
 
   const sendToFriend = (friendId: string) => {
     if (!currentUser?.id) return;
-    const roomId = [currentUser.id, friendId].sort().join("_");
-    socket.emit("message", { roomId, text: "", postId });
-    toast.success(t("sharePostModal.sent"));
+    const roomId = getRoomId(currentUser.id, friendId);
     onClose();
+
+    if (!socket.connected) {
+      toast.error(t("toasts.error"));
+      return;
+    }
+    socket
+      .timeout(SEND_TIMEOUT_MS)
+      .emit(
+        SOCKET_EVENTS.MESSAGE,
+        { roomId, text: "", postId },
+        (err: Error | null, response?: SendMessageAck) => {
+          if (err || !response?.message) {
+            toast.error(t("toasts.error"));
+            return;
+          }
+          toast.success(t("sharePostModal.sent"));
+        },
+      );
   };
 
   const shareToWall = () => {

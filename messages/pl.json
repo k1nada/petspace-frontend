@@ -320,10 +320,20 @@
   },
   "chat": {
     "placeholder": "Napisz wiadomość...",
-    "selectFriend": "Wybierz znajomego, aby zacząć rozmawiać",
+    "selectFriend": "Wybierz czat, aby zacząć rozmowę",
     "noBarks": "Brak szczekania",
     "emptyInbox": "Twoja skrzynka jest cichsza niż śpiący szczeniak.",
-    "deletedPost": "Post usunięty"
+    "deletedPost": "Post usunięty",
+    "loadingOlder": "Wczytywanie starszych wiadomości...",
+    "newMessages": "Nowe wiadomości ↓",
+    "sending": "Wysyłanie...",
+    "notSent": "Nie wysłano",
+    "retry": "Ponów",
+    "userNotFound": "Ten czat jest niedostępny",
+    "firstMessage": "Brak wiadomości. Przywitaj się!",
+    "noConnection": "Brak połączenia. Łączenie…",
+    "loadFailed": "Nie udało się wczytać wiadomości",
+    "listLoadFailed": "Nie udało się wczytać czatów"
   },
   "achievements": {
     "title": "Osiągnięcia",

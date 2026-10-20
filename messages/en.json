@@ -320,10 +320,20 @@
   },
   "chat": {
     "placeholder": "Write a message...",
-    "selectFriend": "Select a friend to start chatting",
+    "selectFriend": "Select a chat to start messaging",
     "noBarks": "No barks yet",
     "emptyInbox": "Your inbox is quieter than a sleeping puppy.",
-    "deletedPost": "Post deleted"
+    "deletedPost": "Post deleted",
+    "loadingOlder": "Loading earlier messages...",
+    "newMessages": "New messages ↓",
+    "sending": "Sending...",
+    "notSent": "Not sent",
+    "retry": "Retry",
+    "userNotFound": "This chat is not available",
+    "firstMessage": "No messages yet. Say hi!",
+    "noConnection": "No connection. Reconnecting…",
+    "loadFailed": "Couldn't load messages",
+    "listLoadFailed": "Couldn't load chats"
   },
   "achievements": {
     "title": "Achievements",
