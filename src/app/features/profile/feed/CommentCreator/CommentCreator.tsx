@@ -30,15 +30,16 @@ export const CommentCreator = ({
   const currentUser = useAuthStore((state) => state.currentUser);
 
   const handleSubmit = async () => {
-    if (!content || isSubmitting) return;
+    const trimmedContent = content.trim();
+    if (!trimmedContent || isSubmitting) return;
     setIsSubmitting(true);
     try {
-      await createComment(content, postId, photoId, replyCommentId);
+      await createComment(trimmedContent, postId, photoId, replyCommentId);
       setContent("");
       onSuccess?.();
-      setIsSubmitting(false);
     } catch {
       toast.error(t("toasts.commentPostError"));
+    } finally {
       setIsSubmitting(false);
     }
   };

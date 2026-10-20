@@ -3,7 +3,7 @@
 import styles from "./Post.module.scss";
 import Image from "next/image";
 import { FaReply } from "react-icons/fa";
-import { Photo, Post as PostType, RepostState } from "@/types";
+import { Photo, Post as PostType, PostChanges, RepostState } from "@/types";
 import { Comment } from "@/app/features/profile/feed/Comment/Comment";
 import { CommentCreator } from "../CommentCreator/CommentCreator";
 import { SharePostModal } from "../SharePostModal/SharePostModal";
@@ -23,6 +23,8 @@ import { ROUTES } from "@/routes/routes";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
+import { useFeedStore } from "@/app/hooks/feed/useFeedStore";
+import { useProfilePostsStore } from "@/app/hooks/profile/useProfilePostsStore";
 
 interface PostProps {
   post: PostType;
@@ -42,21 +44,30 @@ export const Post = ({ post, onRefresh }: PostProps) => {
   const [isPhotoOpen, setIsPhotoOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
+  const updatePostInStores = (changes: PostChanges) => {
+    useFeedStore.getState().updatePost(post.id, changes);
+    useProfilePostsStore.getState().updatePost(post.id, changes);
+  };
+
   const { liked, displayCount, likeLoading, toggleLike } = useLike({
     initialLiked: post.liked,
     initialCount: post.likesCount,
     onLike: likePost,
     id: post.id,
+    onChange: (newLiked, count) =>
+      updatePostInStores({ liked: newLiked, likesCount: count }),
   });
 
   const { reposted, repostCount, repostLoading, handleToggleRepost } =
     usePostRepost({
       postId: post.id,
-      initialReposted: post.reposted ? true : false,
-      initialCount: post.reposts ? post.reposts : 0,
+      initialReposted: post.reposted ?? false,
+      initialCount: post.reposts ?? 0,
+      onChange: (newReposted, count) =>
+        updatePostInStores({ reposted: newReposted, reposts: count }),
     });
 
-  const commentCount = post.comments ? post.comments.length : 0;
+  const commentCount = post.comments?.length ?? 0;
 
   const {
     showCommentCreator,
@@ -104,9 +115,9 @@ export const Post = ({ post, onRefresh }: PostProps) => {
       await updatePost(post.id, trimmedContent);
       setIsEditing(false);
       onRefresh();
-      setIsSavingEdit(false);
     } catch {
       toast.error(t("toasts.postSaveError"));
+    } finally {
       setIsSavingEdit(false);
     }
   };
@@ -167,7 +178,12 @@ export const Post = ({ post, onRefresh }: PostProps) => {
             className={styles.mediaContent}
             onClick={() => setIsPhotoOpen(true)}
           >
-            <Image src={post.image} alt={t("post.image")} fill />
+            <Image
+              src={post.image}
+              alt={t("post.image")}
+              fill
+              sizes="(max-width: 768px) 100vw, 700px"
+            />
           </button>
         )}
       </div>

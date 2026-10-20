@@ -44,7 +44,6 @@
   margin-top: var(--gap-s);
 
   &:not(:empty) {
-    padding-top: var(--gap-m);
-    border-top: 1px solid var(--border-divider);
+    margin-top: var(--gap-l);
   }
 }

@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
 import { uploadAvatar } from "@/services/api/upload";
 import { revalidateUser } from "@/services/actions/revalidateUser";
+import { useRouter } from "@/i18n/navigation";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { AvatarUploadModal } from "@/app/uikit/user/AvatarUploadModal/AvatarUploadModal";
@@ -25,6 +27,8 @@ export const AvatarChangeModal = ({
   onAvatarChange,
 }: AvatarChangeModalProps) => {
   const t = useTranslations();
+  const router = useRouter();
+  const fetchCurrentUser = useAuthStore((state) => state.fetchCurrentUser);
   const [file, setFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -38,7 +42,8 @@ export const AvatarChangeModal = ({
       setFile(null);
       onClose();
       await revalidateUser();
-      window.location.reload();
+      await fetchCurrentUser();
+      router.refresh();
     } catch (error) {
       if (
         isAxiosError(error) &&

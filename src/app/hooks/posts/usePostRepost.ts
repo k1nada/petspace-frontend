@@ -7,12 +7,14 @@ interface UsePostRepostProps {
   postId: string;
   initialReposted: boolean;
   initialCount: number;
+  onChange?: (reposted: boolean, count: number) => void;
 }
 
 export const usePostRepost = ({
   postId,
   initialReposted,
   initialCount,
+  onChange,
 }: UsePostRepostProps) => {
   const t = useTranslations();
   const [reposted, setReposted] = useState(initialReposted);
@@ -26,6 +28,7 @@ export const usePostRepost = ({
       const { reposted: newReposted, count } = await repostPost(postId);
       setReposted(newReposted);
       setRepostCount(count);
+      onChange?.(newReposted, count);
     } catch {
       toast.error(t("toasts.error"));
     }

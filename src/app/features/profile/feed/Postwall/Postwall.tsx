@@ -4,12 +4,11 @@ import { Post } from "@/app/features/profile/feed/Post/Post";
 import styles from "./Postwall.module.scss";
 import { useTranslations } from "next-intl";
 import { Post as PostType } from "@/types";
-import { PostwallSkeleton } from "./PostwallSkeleton";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
+import { Card } from "@/app/uikit/layout/Card/Card";
 
 interface PostwallProps {
   posts: PostType[];
-  loading?: boolean;
   onRefresh: () => void;
   emptyTitle?: string;
   emptyText?: string;
@@ -17,17 +16,14 @@ interface PostwallProps {
 
 export const Postwall = ({
   posts,
-  loading,
   onRefresh,
   emptyTitle,
   emptyText,
 }: PostwallProps) => {
   const t = useTranslations();
 
-  if (loading) return <PostwallSkeleton />;
-
   return (
-    <div className={styles.container}>
+    <Card>
       {posts.length > 0 ? (
         <ul className={styles.list}>
           {posts.map((post) => (
@@ -49,6 +45,6 @@ export const Postwall = ({
           text={emptyText ?? t("feed.text")}
         />
       )}
-    </div>
+    </Card>
   );
 };

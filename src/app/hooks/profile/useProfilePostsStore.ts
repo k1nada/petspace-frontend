@@ -1,11 +1,13 @@
 import { create } from "zustand";
-import { Post } from "@/types";
+import { Post, PostChanges } from "@/types";
 
 interface ProfilePostsStore {
   postwallId: string | null;
   posts: Post[];
   hasLoaded: boolean;
   setPosts: (postwallId: string, posts: Post[]) => void;
+  updatePost: (postId: string, changes: PostChanges) => void;
+  reset: () => void;
 }
 
 export const useProfilePostsStore = create<ProfilePostsStore>((set) => ({
@@ -14,4 +16,11 @@ export const useProfilePostsStore = create<ProfilePostsStore>((set) => ({
   hasLoaded: false,
 
   setPosts: (postwallId, posts) => set({ postwallId, posts, hasLoaded: true }),
+  updatePost: (postId, changes) =>
+    set((state) => ({
+      posts: state.posts.map((post) =>
+        post.id === postId ? { ...post, ...changes } : post,
+      ),
+    })),
+  reset: () => set({ postwallId: null, posts: [], hasLoaded: false }),
 }));

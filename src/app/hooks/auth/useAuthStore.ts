@@ -10,6 +10,7 @@ import { useSuggestedFriendsStore } from "@/app/hooks/friends/useSuggestedFriend
 import { useFeedStore } from "@/app/hooks/feed/useFeedStore";
 import { useConversationsStore } from "@/app/hooks/messages/useConversationsStore";
 import { usePresenceStore } from "@/app/hooks/shared/usePresenceStore";
+import { useProfilePostsStore } from "@/app/hooks/profile/useProfilePostsStore";
 import { ChatContact, FriendRequest, User } from "@/types";
 
 interface AuthStore {
@@ -72,6 +73,7 @@ export const useAuthStore = create<AuthStore>()(
           useFeedStore.getState().reset();
           useConversationsStore.getState().reset();
           usePresenceStore.getState().reset();
+          useProfilePostsStore.getState().reset();
         },
       };
     },

@@ -10,13 +10,17 @@ import { Achievements } from "@/types";
 
 const ACHIEVEMENT_KEYS: (keyof Achievements)[] = ["firstFriend", "firstPost"];
 
-interface Props {
+interface AchievementsModalProps {
   isOpen: boolean;
   onClose: () => void;
   achievements?: Achievements;
 }
 
-export const AchievementsModal = ({ isOpen, onClose, achievements }: Props) => {
+export const AchievementsModal = ({
+  isOpen,
+  onClose,
+  achievements,
+}: AchievementsModalProps) => {
   const t = useTranslations();
 
   return (

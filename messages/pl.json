@@ -127,13 +127,12 @@
   },
   "profileBanner": {
     "info": "Więcej info",
-    "friends": "znajomi",
-    "photos": "zdjęcia",
     "requestSent": "Wysłano",
     "removeFriend": "Usuń ze znajomych",
     "cancelRequest": "Anuluj zaproszenie",
     "friendsCount": "{count, plural, one {# znajomy} few {# znajomych} many {# znajomych} other {# znajomych}}",
-    "photosCount": "{count, plural, one {# zdjęcie} few {# zdjęcia} many {# zdjęć} other {# zdjęcia}}"
+    "photosCount": "{count, plural, one {# zdjęcie} few {# zdjęcia} many {# zdjęć} other {# zdjęcia}}",
+    "acceptRequest": "Przyjmij zaproszenie"
   },
   "profileEditor": {
     "bio": "O sobie:",
@@ -162,7 +161,7 @@
   "profileInfoModal": {
     "title": "Moje informacje",
     "interestsTitle": "Moje zainteresowania",
-    "followers": "obserwujących"
+    "followersCount": "{count, plural, one {# obserwujący} few {# obserwujących} many {# obserwujących} other {# obserwujących}}"
   },
   "avatarEdit": {
     "open": "Otwórz zdjęcie",
@@ -187,7 +186,8 @@
     "photo": "Zdjęcie",
     "removePhoto": "Usuń zdjęcie",
     "publish": "Opublikuj post",
-    "placeholder": "Co nowego, {name}?"
+    "placeholder": "Co nowego, {name}?",
+    "placeholderOtherWall": "Podziel się swoją opinią, {name}"
   },
   "post": {
     "image": "Zdjęcie posta",
