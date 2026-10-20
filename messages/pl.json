@@ -179,7 +179,9 @@
     "friendsEmptyText": "Nikt z obserwowanych jeszcze nic nie opublikował. Zajrzyj tu później albo zacznij obserwować więcej piesków."
   },
   "suggestedFriends": {
-    "title": "Psy, które możesz znać"
+    "title": "Psy, które możesz znać",
+    "add": "Dodaj",
+    "sent": "Wysłano"
   },
   "postCreator": {
     "photo": "Zdjęcie",
@@ -242,7 +244,6 @@
     "requestsTitle": "Zaproszenia",
     "followersTitle": "Obserwujący",
     "followingTitle": "Obserwowani",
-    "sent": "Wysłano",
     "unfollowAll": "Nie obserwuj nikogo",
     "unfollow": "Nie obserwuj",
     "emptyFriendsText": "Znajdź jakieś psy i wyślij im zaproszenie do znajomych!",
@@ -252,7 +253,8 @@
     "emptyFollowingTitle": "Nikogo jeszcze nie obserwujesz",
     "emptyFollowingText": "Przeglądaj profile i obserwuj psy, które lubisz!",
     "lastSeen": "Ostatnio widziano {time}",
-    "manageFollowing": "Zarządzaj obserwowanymi"
+    "manageFollowing": "Zarządzaj obserwowanymi",
+    "message": "Napisz"
   },
   "friendRequest": {
     "title": "Brak zaproszeń",

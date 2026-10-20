@@ -3,12 +3,11 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import { FaMessage } from "react-icons/fa6";
 import {
   MdCancel,
+  MdDelete,
   MdOutlineMoreHoriz,
   MdPersonAdd,
-  MdPersonRemove,
 } from "react-icons/md";
 import { Friend } from "@/types";
 import { ROUTES } from "@/routes/routes";
@@ -22,7 +21,6 @@ import { revalidateFollows } from "@/services/actions/revalidateFollows";
 import { getRelationshipStatus } from "@/utils/friends";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
-import { IconButton } from "@/app/uikit/form/IconButton/IconButton";
 import { UserRow } from "../UserRow/UserRow";
 
 interface FriendCardProps {
@@ -98,7 +96,7 @@ export const FriendCard = ({
   if (isOwner) {
     menuItems.push({
       label: t("profileBanner.removeFriend"),
-      icon: <MdPersonRemove size={20} />,
+      icon: <MdDelete size={20} />,
       onClick: () => setIsDeleteOpen(true),
     });
   } else if (!isFriend && isPending) {
@@ -115,32 +113,27 @@ export const FriendCard = ({
     });
   }
 
+  const showMenu = !isSelf && menuItems.length > 0;
+
   return (
     <UserRow
+      userId={friend.id}
       username={friend.username}
       name={friend.name}
       avatar={friend.avatar}
       isOnline={friend.isOnline}
       lastSeen={friend.lastSeen}
       fallbackStatus={t("common.offline")}
+      onMessage={isSelf ? undefined : goToMessages}
       actions={
-        isSelf ? undefined : (
-          <>
-            <IconButton
-              icon={<FaMessage size={18} />}
-              label={t("common.message")}
-              onClick={goToMessages}
-            />
-            {menuItems.length > 0 && (
-              <Dropdown
-                label={t("common.moreActions")}
-                triggerAppearance="iconButton"
-                trigger={<MdOutlineMoreHoriz size={18} />}
-                items={menuItems}
-              />
-            )}
-          </>
-        )
+        showMenu ? (
+          <Dropdown
+            label={t("common.moreActions")}
+            triggerAppearance="iconButton"
+            trigger={<MdOutlineMoreHoriz size={18} />}
+            items={menuItems}
+          />
+        ) : undefined
       }
     >
       {isOwner && (

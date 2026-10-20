@@ -43,6 +43,7 @@ export const FriendRequestCard = ({
 
   return (
     <UserRow
+      userId={request.from.id}
       username={request.from.username}
       name={request.from.name}
       avatar={request.from.avatar}

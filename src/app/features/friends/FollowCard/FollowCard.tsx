@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { FaMessage } from "react-icons/fa6";
 import {
   MdOutlineMoreHoriz,
   MdPersonAdd,
@@ -14,7 +13,6 @@ import { useRouter } from "@/i18n/navigation";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
-import { IconButton } from "@/app/uikit/form/IconButton/IconButton";
 import { UserRow } from "../UserRow/UserRow";
 
 interface FollowCardProps {
@@ -92,34 +90,26 @@ export const FollowCard = ({
     });
   }
 
+  const showMenu = !isSelf && menuItems.length > 0;
+
   return (
     <UserRow
       username={user.username}
       name={user.name}
       avatar={user.avatar}
-      isOnline={user.isOnline}
-      lastSeen={user.lastSeen}
       fallbackStatus={t("followCard.followersCount", {
         count: user.followersCount,
       })}
+      onMessage={isSelf ? undefined : goToMessages}
       actions={
-        isSelf ? undefined : (
-          <>
-            <IconButton
-              icon={<FaMessage size={18} />}
-              label={t("common.message")}
-              onClick={goToMessages}
-            />
-            {menuItems.length > 0 && (
-              <Dropdown
-                label={t("common.moreActions")}
-                triggerAppearance="iconButton"
-                trigger={<MdOutlineMoreHoriz size={18} />}
-                items={menuItems}
-              />
-            )}
-          </>
-        )
+        showMenu ? (
+          <Dropdown
+            label={t("common.moreActions")}
+            triggerAppearance="iconButton"
+            trigger={<MdOutlineMoreHoriz size={18} />}
+            items={menuItems}
+          />
+        ) : undefined
       }
     >
       <ConfirmModal

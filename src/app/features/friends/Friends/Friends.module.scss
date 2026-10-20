@@ -14,6 +14,13 @@
   row-gap: var(--gap-s);
 }
 
+.menu {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  height: 0;
+}
+
 .list {
   display: flex;
   flex-direction: column;

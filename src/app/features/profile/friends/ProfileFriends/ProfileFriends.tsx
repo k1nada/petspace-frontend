@@ -1,13 +1,15 @@
 "use client";
 
-import Link from "next/link";
+import { useEffect } from "react";
+import { Link } from "@/i18n/navigation";
 import styles from "./ProfileFriends.module.scss";
 import { ROUTES } from "@/routes/routes";
+import { Card } from "@/app/uikit/layout/Card/Card";
+import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { useTranslations } from "next-intl";
 import { Friend } from "@/types";
-import { ProfileFriendsSkeleton } from "./ProfileFriendsSkeleton";
-import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
+import { usePresenceStore } from "@/app/hooks/shared/usePresenceStore";
 
 interface ProfileFriendsProps {
   username: string;
@@ -18,38 +20,49 @@ const MAX_VISIBLE_FRIENDS = 3;
 
 export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
   const t = useTranslations();
+  const presenceByUserId = usePresenceStore((state) => state.presenceByUserId);
+  useEffect(() => {
+    const store = usePresenceStore.getState();
+    for (const friend of friends) {
+      if (store.presenceByUserId[friend.id]) continue;
+      store.setPresence(friend.id, {
+        isOnline: friend.isOnline ?? false,
+        lastSeen: friend.lastSeen,
+      });
+    }
+  }, [friends]);
 
   const visibleFriends = friends.slice(0, MAX_VISIBLE_FRIENDS);
 
   return (
-    <AuthLoader fallback={<ProfileFriendsSkeleton />}>
-      <section className={styles.container}>
-        <Link href={ROUTES.friends(username)} className={styles.titleLink}>
-          <h3 className={styles.title}>{t("common.friends")}</h3>
-          <span className={styles.count}>{friends.length}</span>
-        </Link>
-        {friends.length === 0 ? (
-          <p className={styles.empty}>{t("common.noFriendsYet")}</p>
-        ) : (
-          <ul className={styles.friends}>
-            {visibleFriends.map((friend) => (
-              <li key={friend.username}>
-                <Link
-                  href={ROUTES.profile(friend.username)}
-                  className={styles.friend}
-                >
-                  <Avatar
-                    src={friend.avatar}
-                    size={70}
-                    isOnline={friend.isOnline}
-                  />
-                  <div className={styles.name}>{friend.name}</div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-    </AuthLoader>
+    <Card as="section">
+      <Link href={ROUTES.friends(username)} className={styles.titleLink}>
+        <CardTitle>{t("common.friends")}</CardTitle>
+        <span className={styles.count}>{friends.length}</span>
+      </Link>
+      {friends.length === 0 ? (
+        <p className={styles.empty}>{t("common.noFriendsYet")}</p>
+      ) : (
+        <ul className={styles.friends}>
+          {visibleFriends.map((friend) => (
+            <li key={friend.username}>
+              <Link
+                href={ROUTES.profile(friend.username)}
+                className={styles.friend}
+              >
+                <Avatar
+                  src={friend.avatar}
+                  size={70}
+                  isOnline={
+                    presenceByUserId[friend.id]?.isOnline ?? friend.isOnline
+                  }
+                />
+                <div className={styles.name}>{friend.name}</div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Card>
   );
 };
