@@ -1,10 +1,10 @@
 "use client";
 
 import styles from "./error.module.scss";
-import Link from "next/link";
-import { Button } from "../uikit/form/Button/Button";
-import { Header } from "../components/Header/Header";
-import { ROUTES } from "../../routes/routes";
+import { useRouter } from "@/i18n/navigation";
+import { Button } from "@/app/uikit/form/Button/Button";
+import { Header } from "@/app/components/Header/Header";
+import { ROUTES } from "@/routes/routes";
 import { useTranslations } from "next-intl";
 
 interface ErrorPageProps {
@@ -14,6 +14,7 @@ interface ErrorPageProps {
 
 export default function ErrorPage({ reset }: ErrorPageProps) {
   const t = useTranslations();
+  const router = useRouter();
 
   return (
     <div className={styles.page}>
@@ -27,9 +28,12 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
             <Button appearance="tertiary" onClick={reset}>
               {t("serverError.tryAgain")}
             </Button>
-            <Link href={ROUTES.feed}>
-              <Button appearance="primary">{t("serverError.goBack")}</Button>
-            </Link>
+            <Button
+              appearance="primary"
+              onClick={() => router.push(ROUTES.feed)}
+            >
+              {t("serverError.goBack")}
+            </Button>
           </div>
         </div>
       </main>

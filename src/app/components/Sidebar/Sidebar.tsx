@@ -1,11 +1,12 @@
 "use client";
 
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import cn from "classnames";
 import { BiSolidMessage } from "react-icons/bi";
 import { FaPaw, FaBone, FaDog, FaTree } from "react-icons/fa";
-import { FaCamera } from "react-icons/fa6";
-import styles from "./Sidebar.module.scss";
+import { usePathname } from "@/i18n/navigation";
+import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
 import { ROUTES } from "@/routes/routes";
 import { NavLink } from "@/app/uikit/navigation/NavLink/NavLink";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
@@ -13,8 +14,9 @@ import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
 import { useMessagesStore } from "@/app/hooks/messages/useMessagesStore";
 import { useMobileMenuStore } from "@/app/hooks/shared/useMobileMenuStore";
-import { SidebarSkeleton } from "./SidebarSkeleton";
 import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
+import { SidebarSkeleton } from "./SidebarSkeleton";
+import styles from "./Sidebar.module.scss";
 
 export const Sidebar = () => {
   const t = useTranslations();
@@ -25,8 +27,13 @@ export const Sidebar = () => {
   );
   const isMobileMenuOpen = useMobileMenuStore((state) => state.isOpen);
   const closeMobileMenu = useMobileMenuStore((state) => state.close);
+  const pathname = usePathname();
   const tips = t.raw("dailyTip.tips") as string[];
   const tip = tips[new Date().getDay()];
+
+  useEffect(() => {
+    closeMobileMenu();
+  }, [pathname, closeMobileMenu]);
 
   return (
     <AuthLoader fallback={<SidebarSkeleton />}>
@@ -36,10 +43,9 @@ export const Sidebar = () => {
             <div className={styles.overlay} onClick={closeMobileMenu} />
           )}
           <nav
-            className={cn(
-              styles.container,
-              isMobileMenuOpen && styles.containerOpen,
-            )}
+            className={cn(styles.container, {
+              [styles.containerOpen]: isMobileMenuOpen,
+            })}
           >
             <div className={styles.list}>
               <NavLink
@@ -73,7 +79,7 @@ export const Sidebar = () => {
                 href={ROUTES.photos(currentUser.username)}
                 onClick={closeMobileMenu}
               >
-                <FaCamera size={20} />
+                <PhotoIcon size={20} />
                 {t("common.photos")}
               </NavLink>
               <NavLink

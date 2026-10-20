@@ -12,7 +12,11 @@ export const useThemeStore = create<ThemeStore>()(
   persist(
     (set, get) => ({
       theme: "light",
-      toggle: () => set({ theme: get().theme === "light" ? "dark" : "light" }),
+      toggle: () => {
+        const nextTheme = get().theme === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", nextTheme);
+        set({ theme: nextTheme });
+      },
     }),
     { name: "theme" },
   ),
