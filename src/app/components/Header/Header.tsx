@@ -3,19 +3,19 @@
 import styles from "./Header.module.scss";
 import cn from "classnames";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { Logo } from "../../uikit/brand/Logo/Logo";
-import { Link } from "../../uikit/navigation/Link/Link";
-import { Button } from "../../uikit/form/Button/Button";
+import { Logo } from "@/app/uikit/brand/Logo/Logo";
+import { Link } from "@/app/uikit/navigation/Link/Link";
+import { Button } from "@/app/uikit/form/Button/Button";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { ROUTES } from "@/routes/routes";
 import { FaPowerOff, FaSearch } from "react-icons/fa";
 import { MdDarkMode, MdLanguage, MdLightMode, MdLogout } from "react-icons/md";
 import { signOut } from "@/services/api/auth";
 import socket from "@/services/socket";
-import { SearchBar } from "../../uikit/navigation/SearchBar/SearchBar";
-import { MenuToggle } from "../../uikit/navigation/MenuToggle/MenuToggle";
+import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
+import { MenuToggle } from "@/app/uikit/navigation/MenuToggle/MenuToggle";
 import { ThemeToggle } from "@/app/uikit/brand/ThemeToggle/ThemeToggle";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useThemeStore } from "@/app/hooks/shared/useThemeStore";
@@ -140,7 +140,10 @@ export const Header = () => {
           query={query}
           onSearch={search}
           results={results}
-          onSelect={select}
+          onSelect={(username) => {
+            setIsSearchOpen(false);
+            select(username);
+          }}
         />
 
         <ConfirmModal

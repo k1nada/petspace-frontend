@@ -3,7 +3,8 @@
   flex-direction: column;
   gap: var(--gap-xl);
   padding: var(--padding-l);
-  height: 100vh;
+  height: 100%;
+  overflow-y: auto;
   transition: transform var(--transition-base);
 }
 
@@ -32,14 +33,13 @@
     top: 50px;
     left: 0;
     bottom: 0;
-    // ширина 280px, но не больше 80% экрана на совсем узких устройствах
-    width: min(280px, 80%);
+    width: 280px;
+    max-width: 80%;
     height: auto;
     background: var(--bg-page);
     box-shadow: var(--shadow-drawer);
     transform: translateX(-100%);
     z-index: var(--z-modal);
-    overflow-y: auto;
   }
 
   .containerOpen {

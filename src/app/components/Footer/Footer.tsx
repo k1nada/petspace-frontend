@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Link } from "../../uikit/navigation/Link/Link";
+import { Link } from "@/app/uikit/navigation/Link/Link";
 import styles from "./Footer.module.scss";
 
 const PRIVACY_POLICY_URL =

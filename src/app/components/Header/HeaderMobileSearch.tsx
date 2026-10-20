@@ -2,8 +2,8 @@
 
 import styles from "./HeaderMobileSearch.module.scss";
 import { FaArrowLeft } from "react-icons/fa";
-import { Button } from "../../uikit/form/Button/Button";
-import { SearchBar } from "../../uikit/navigation/SearchBar/SearchBar";
+import { Button } from "@/app/uikit/form/Button/Button";
+import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { UserSearchDropdown } from "@/app/uikit/navigation/UserSearchDropdown/UserSearchDropdown";
 import { User as UserType } from "@/types/index";
 

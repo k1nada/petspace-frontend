@@ -9,6 +9,7 @@ import { Button } from "../../form/Button/Button";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useNotifications } from "@/app/hooks/shared/useNotifications";
 import { NotificationItem } from "@/app/uikit/overlays/NotificationItem/NotificationItem";
+import { NotificationsSkeleton } from "./NotificationsSkeleton";
 
 export const NotificationsDropdown = () => {
   const t = useTranslations();
@@ -51,7 +52,7 @@ export const NotificationsDropdown = () => {
           </div>
 
           {loading ? (
-            <EmptyState text={t("common.loading")} compact center />
+            <NotificationsSkeleton />
           ) : notifications.length === 0 ? (
             <EmptyState text={t("notifications.empty")} compact center />
           ) : (
