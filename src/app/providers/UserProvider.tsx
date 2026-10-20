@@ -7,7 +7,9 @@ import { usePresenceSync } from "../hooks/shared/usePresenceSync";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ROUTES } from "@/routes/routes";
 import socket from "@/services/socket";
+import { getConversations } from "@/services/api/conversations";
 import { Message } from "@/types";
+import { SOCKET_EVENTS, getRoomId } from "@/utils/chat";
 
 const PUBLIC_ROUTES: string[] = [ROUTES.signin, ROUTES.signup];
 
@@ -24,18 +26,37 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     fetchCurrentUser();
 
     const handleNewMessage = (message: Message) => {
-      const currentUser = useAuthStore.getState().currentUser;
+      const user = useAuthStore.getState().currentUser;
       const activeRoomId = useMessagesStore.getState().activeRoomId;
-      if (!currentUser) return;
+      if (!user) return;
+      if (message.sender?.id === user.id) return;
       if (message.roomId === activeRoomId) return;
       useMessagesStore.getState().incrementUnreadMessagesCount();
     };
 
-    socket.on("newMessage", handleNewMessage);
-    return () => {
-      socket.off("newMessage", handleNewMessage);
+    const handleReconnect = () => {
+      const user = useAuthStore.getState().currentUser;
+      if (!user) return;
+      getConversations(user.username)
+        .then((conversations) => {
+          const activeRoomId = useMessagesStore.getState().activeRoomId;
+          let totalUnread = 0;
+          for (const conversation of conversations) {
+            if (getRoomId(user.id, conversation.id) === activeRoomId) continue;
+            totalUnread += conversation.unreadCount ?? 0;
+          }
+          useMessagesStore.getState().setUnreadMessagesCount(totalUnread);
+        })
+        .catch(() => {});
     };
-  }, []);
+
+    socket.on(SOCKET_EVENTS.MESSAGE, handleNewMessage);
+    socket.io.on("reconnect", handleReconnect);
+    return () => {
+      socket.off(SOCKET_EVENTS.MESSAGE, handleNewMessage);
+      socket.io.off("reconnect", handleReconnect);
+    };
+  }, [fetchCurrentUser]);
 
   useEffect(() => {
     if (!isAuthChecked || currentUser) return;

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import socket from "@/services/socket";
 import { getUsersPresence } from "@/services/api/presence";
 import { StatusChangeEvent } from "@/types";
+import { SOCKET_EVENTS } from "@/utils/chat";
 import { usePresenceStore } from "./usePresenceStore";
 
 const MAX_IDS_PER_REQUEST = 200;
@@ -26,10 +27,10 @@ export const usePresenceSync = () => {
         .catch(() => {});
     };
 
-    socket.on("statusChange", handleStatusChange);
+    socket.on(SOCKET_EVENTS.STATUS_CHANGE, handleStatusChange);
     socket.io.on("reconnect", handleReconnect);
     return () => {
-      socket.off("statusChange", handleStatusChange);
+      socket.off(SOCKET_EVENTS.STATUS_CHANGE, handleStatusChange);
       socket.io.off("reconnect", handleReconnect);
     };
   }, []);

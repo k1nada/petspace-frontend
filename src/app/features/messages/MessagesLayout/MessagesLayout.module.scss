@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: "chat";
-  gap: var(--gap-xl);
   min-height: 100vh;
   align-items: start;
 }
@@ -12,10 +11,32 @@
   min-width: 0;
   display: flex;
   background: var(--bg-card);
-  border-radius: var(--radius-m);
   box-shadow: var(--shadow-card);
   height: calc(100vh - 70px);
+  border-radius: var(--radius-m);
   position: sticky;
   top: 0;
   overflow: hidden;
+}
+
+.contactListWrapper,
+.chatWrapper {
+  display: contents;
+}
+
+@media (max-width: 768px) {
+  .chat {
+    height: calc(100vh - 110px);
+    border-radius: 0;
+  }
+
+  .contactListWrapper,
+  .chatWrapper {
+    display: block;
+    width: 100%;
+  }
+
+  .hiddenMobile {
+    display: none;
+  }
 }

@@ -1,5 +1,11 @@
 import api from "@/config/axios";
-import { ChatContact, Message } from "@/types";
+import { ChatContact, MessagesPage } from "@/types";
+
+interface GetMessagesParams {
+  before?: string;
+  after?: string;
+  limit?: number;
+}
 
 export const getConversations = async (
   username: string,
@@ -8,9 +14,12 @@ export const getConversations = async (
   return data ?? [];
 };
 
-export const getMessages = async (roomId: string): Promise<Message[]> => {
-  const { data } = await api.get(`/chat/${roomId}`);
-  return data ?? [];
+export const getMessages = async (
+  roomId: string,
+  params: GetMessagesParams = {},
+): Promise<MessagesPage> => {
+  const { data } = await api.get(`/chat/${roomId}`, { params });
+  return data;
 };
 
 export const markMessagesRead = async (roomId: string): Promise<void> => {

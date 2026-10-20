@@ -9,8 +9,9 @@ import { useMessagesStore } from "@/app/hooks/messages/useMessagesStore";
 import { useSuggestedFriendsStore } from "@/app/hooks/friends/useSuggestedFriendsStore";
 import { useFeedStore } from "@/app/hooks/feed/useFeedStore";
 import { useConversationsStore } from "@/app/hooks/messages/useConversationsStore";
-import { usePresenceStore } from "@/app/hooks/shared/usePresenceStore";
+import { useChatMessagesStore } from "@/app/hooks/messages/useChatMessagesStore";
 import { useProfilePostsStore } from "@/app/hooks/profile/useProfilePostsStore";
+import { usePresenceStore } from "@/app/hooks/shared/usePresenceStore";
 import { ChatContact, FriendRequest, User } from "@/types";
 
 interface AuthStore {
@@ -28,6 +29,11 @@ export const useAuthStore = create<AuthStore>()(
         isAuthChecked: false,
 
         fetchCurrentUser: async () => {
+          if (!localStorage.getItem("token")) {
+            set({ currentUser: null, isAuthChecked: true });
+            return;
+          }
+
           let user: User | null = null;
           try {
             const response = await api.get<User>("/me");
@@ -37,7 +43,6 @@ export const useAuthStore = create<AuthStore>()(
               set({ isAuthChecked: true });
               return;
             }
-            user = null;
           }
 
           set({ currentUser: user, isAuthChecked: true });
@@ -46,17 +51,13 @@ export const useAuthStore = create<AuthStore>()(
           let requests: FriendRequest[] = [];
           try {
             requests = await getPendingRequests(user.username);
-          } catch {
-            requests = [];
-          }
+          } catch {}
           useFriendRequestsStore.getState().setRequests(requests);
 
           let conversations: ChatContact[] = [];
           try {
             conversations = await getConversations(user.username);
-          } catch {
-            conversations = [];
-          }
+          } catch {}
 
           let totalUnread = 0;
           for (const conversation of conversations) {
@@ -72,8 +73,9 @@ export const useAuthStore = create<AuthStore>()(
           useSuggestedFriendsStore.getState().reset();
           useFeedStore.getState().reset();
           useConversationsStore.getState().reset();
-          usePresenceStore.getState().reset();
+          useChatMessagesStore.getState().reset();
           useProfilePostsStore.getState().reset();
+          usePresenceStore.getState().reset();
         },
       };
     },

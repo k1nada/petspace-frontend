@@ -39,6 +39,7 @@ const MessagesPage = async ({ params, searchParams }: MessagesPageProps) => {
         name: targetUser.name,
         avatar: targetUser.avatar,
         isOnline: targetUser.isOnline,
+        lastSeen: targetUser.lastSeen,
       }
     : undefined;
 

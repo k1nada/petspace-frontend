@@ -8,6 +8,7 @@ import {
 } from "@/services/api/notifications";
 import { AppNotification, User } from "@/types";
 import socket from "@/services/socket";
+import { SOCKET_EVENTS } from "@/utils/chat";
 
 export const useNotifications = (currentUser: User | null) => {
   const t = useTranslations();
@@ -44,9 +45,9 @@ export const useNotifications = (currentUser: User | null) => {
       setNotifications((prev) => [notification, ...prev]);
     };
 
-    socket.on("notification", handleNotification);
+    socket.on(SOCKET_EVENTS.NOTIFICATION, handleNotification);
     return () => {
-      socket.off("notification", handleNotification);
+      socket.off(SOCKET_EVENTS.NOTIFICATION, handleNotification);
     };
   }, [username]);
 

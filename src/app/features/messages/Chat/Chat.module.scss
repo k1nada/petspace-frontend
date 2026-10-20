@@ -1,7 +1,9 @@
 .container {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-width: 0;
 }
 
 .userInfo {
@@ -47,6 +49,37 @@
   list-style: none;
 }
 
+.loadingOlder {
+  padding: var(--padding-s);
+  text-align: center;
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.dayDivider {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-m);
+  margin: var(--gap-l) 0 var(--gap-xs);
+  font-size: var(--font-s);
+  color: var(--text-secondary);
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--border-divider);
+  }
+}
+
+.newMessagesButton {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: var(--shadow-card);
+}
+
 .input {
   display: flex;
   align-items: center;
@@ -75,4 +108,28 @@
   margin: 0;
   color: var(--text-secondary);
   font-size: var(--font-m);
+}
+
+.backButton {
+  display: none;
+  align-items: center;
+  color: var(--text-secondary);
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+@media (max-width: 768px) {
+  .backButton {
+    display: flex;
+  }
+}
+
+.connectionBanner {
+  padding: var(--padding-xs) var(--padding-m);
+  font-size: var(--font-s);
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  text-align: center;
 }
