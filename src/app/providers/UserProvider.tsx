@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useAuthStore } from "../hooks/auth/useAuthStore";
 import { useMessagesStore } from "../hooks/messages/useMessagesStore";
+import { usePresenceSync } from "../hooks/shared/usePresenceSync";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { ROUTES } from "@/routes/routes";
 import socket from "@/services/socket";
@@ -16,6 +17,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const isAuthChecked = useAuthStore((state) => state.isAuthChecked);
   const pathname = usePathname();
   const router = useRouter();
+
+  usePresenceSync();
 
   useEffect(() => {
     fetchCurrentUser();

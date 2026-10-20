@@ -12,6 +12,8 @@ import { useSuggestedFriends } from "@/app/hooks/friends/useSuggestedFriends";
 import { getRelationshipStatus } from "@/utils/friends";
 import styles from "./SuggestedFriends.module.scss";
 
+const AVATAR_SIZE = 44;
+
 export const SuggestedFriends = () => {
   const t = useTranslations();
   const currentUser = useAuthStore((state) => state.currentUser);
@@ -30,24 +32,35 @@ export const SuggestedFriends = () => {
           return (
             <li key={friend.username} className={styles.card}>
               <Link href={ROUTES.profile(friend.username)}>
-                <Avatar src={friend.avatar} size={45} />
+                <Avatar src={friend.avatar} size={AVATAR_SIZE} />
               </Link>
               <div className={styles.info}>
                 <div className={styles.name}>{friend.name}</div>
-                <div className={styles.breed}>{friend.breed}</div>
+                {friend.breed && (
+                  <div className={styles.breed}>{friend.breed}</div>
+                )}
               </div>
-              <Button
-                className={styles.button}
-                appearance={isPending ? "secondary" : "primary"}
-                disabled={loadingUsername === friend.username}
-                onClick={() =>
-                  isPending
-                    ? cancelRequest(friend.username)
-                    : requestFriend(friend.username)
-                }
-              >
-                {isPending ? t("friends.sent") : t("common.addFriend")}
-              </Button>
+              {isPending ? (
+                <Button
+                  appearance="secondary"
+                  className={styles.addButton}
+                  title={t("profileBanner.cancelRequest")}
+                  onClick={() => cancelRequest(friend.username)}
+                  disabled={loadingUsername === friend.username}
+                >
+                  {t("suggestedFriends.sent")}
+                </Button>
+              ) : (
+                <Button
+                  appearance="primary"
+                  className={styles.addButton}
+                  title={t("common.addFriend")}
+                  onClick={() => requestFriend(friend.username)}
+                  disabled={loadingUsername === friend.username}
+                >
+                  {t("suggestedFriends.add")}
+                </Button>
+              )}
             </li>
           );
         })}

@@ -22,8 +22,8 @@ export const SuggestedFriendsSkeleton = () => {
           <li key={i} className={styles.card}>
             <Skeleton
               shape="circle"
-              width={SKELETON_AVATAR.regular}
-              height={SKELETON_AVATAR.regular}
+              width={SKELETON_AVATAR.suggested}
+              height={SKELETON_AVATAR.suggested}
             />
             <div className={styles.info}>
               <div className={styles.name}>
@@ -34,11 +34,8 @@ export const SuggestedFriendsSkeleton = () => {
               </div>
             </div>
             <Skeleton shape="rounded">
-              <Button
-                appearance="primary"
-                className={styles.button}
-              >
-                {t("common.addFriend")}
+              <Button appearance="primary" className={styles.addButton}>
+                {t("suggestedFriends.add")}
               </Button>
             </Skeleton>
           </li>

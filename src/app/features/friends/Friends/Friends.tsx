@@ -84,16 +84,18 @@ export const Friends = ({
         </div>
 
         {canUnfollowAll && (
-          <Dropdown
-            label={t("friends.manageFollowing")}
-            items={[
-              {
-                label: t("friends.unfollowAll"),
-                icon: <MdPersonRemove size={20} />,
-                onClick: openConfirmAll,
-              },
-            ]}
-          />
+          <div className={styles.menu}>
+            <Dropdown
+              label={t("friends.manageFollowing")}
+              items={[
+                {
+                  label: t("friends.unfollowAll"),
+                  icon: <MdPersonRemove size={20} />,
+                  onClick: openConfirmAll,
+                },
+              ]}
+            />
+          </div>
         )}
       </div>
 

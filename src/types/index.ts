@@ -54,8 +54,6 @@ export interface FollowUser {
   username: string;
   name: string;
   avatar?: string;
-  isOnline?: boolean;
-  lastSeen?: string;
   followersCount: number;
 }
 
@@ -195,4 +193,16 @@ export interface AppNotification {
   user?: NotificationUser;
   createdAt: Date;
   read: boolean;
+}
+
+export interface UserStatus {
+  id: string;
+  isOnline: boolean;
+  lastSeen?: string;
+}
+
+export interface StatusChangeEvent {
+  userId: string;
+  isOnline: boolean;
+  lastSeen: string | null;
 }
