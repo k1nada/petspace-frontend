@@ -9,6 +9,7 @@ import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { createPost, uploadPostPhoto } from "@/services/api/post";
+import { Post } from "@/types";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { submitOnEnter } from "@/utils/textarea";
 import { toast } from "react-toastify";
@@ -19,7 +20,7 @@ interface PostCreatorProps {
   name: string;
   isOwner: boolean;
   postwallId: string;
-  onSuccess?: () => void;
+  onSuccess?: (post: Post) => void;
 }
 
 export const PostCreator = ({
@@ -61,10 +62,10 @@ export const PostCreator = ({
     setIsPublishing(true);
     try {
       const image = imageFile ? await uploadPostPhoto(imageFile) : undefined;
-      await createPost(trimmedContent, postwallId, image);
+      const post = await createPost(trimmedContent, postwallId, image);
       setContent("");
       removeImage();
-      onSuccess?.();
+      onSuccess?.(post);
     } catch {
       toast.error(t("toasts.postPublishError"));
     } finally {

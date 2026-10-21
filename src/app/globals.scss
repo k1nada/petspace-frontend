@@ -55,6 +55,8 @@
   --skeleton: #e9e9e7;
 
   --icon-on-primary: #686460;
+  --icon-secondary: #8c8781;
+  --icon-secondary-hover: var(--text-secondary);
   --text-on-color: #ffffff;
 
   --z-dropdown: 10;
@@ -193,6 +195,8 @@
   --skeleton: #333335;
 
   --icon-on-primary: #ffffff;
+  --icon-secondary: var(--text-secondary);
+  --icon-secondary-hover: var(--text-primary);
 }
 
 *,

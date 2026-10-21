@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { LikeState } from "@/app/hooks/photos/useResolvedLike";
 import { getModalPhotoUrl, getPhotoUrl } from "@/utils/photo";
+import { preloadPhotoComments } from "@/app/hooks/photos/usePhotoComments";
 import { PhotoModalImage } from "../PhotoModalImage/PhotoModalImage";
 import { PhotoModalDetails } from "../PhotoModalDetails/PhotoModalDetails";
 
@@ -109,6 +110,15 @@ export const PhotoModal = ({
     if (prevSrc) loadImage(prevSrc);
     if (nextNeighborSrc) loadImage(nextNeighborSrc);
   }, [prevSrc, nextNeighborSrc]);
+
+  const prevPhotoId = navigation?.prevPhoto?.id;
+  const nextPhotoId = navigation?.nextPhoto?.id;
+
+  useEffect(() => {
+    if (postId) return;
+    if (prevPhotoId) preloadPhotoComments(prevPhotoId);
+    if (nextPhotoId) preloadPhotoComments(nextPhotoId);
+  }, [postId, prevPhotoId, nextPhotoId]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") navigation?.onPrev?.();

@@ -31,14 +31,27 @@ export const useLike = ({
 
   const toggleLike = async () => {
     if (likeLoading) return;
+    const prevLiked = liked;
+    const prevCount = likesCount;
+    const nextLiked = !liked;
+    const nextCount = nextLiked ? likesCount + 1 : Math.max(likesCount - 1, 0);
+
+    setLiked(nextLiked);
+    setLikesCount(nextCount);
+    onChange?.(nextLiked, nextCount);
     setLikeLoading(true);
 
     try {
       const { liked: newLiked, count } = await onLike(id);
-      setLiked(newLiked);
-      setLikesCount(count);
-      onChange?.(newLiked, count);
+      if (newLiked !== nextLiked || count !== nextCount) {
+        setLiked(newLiked);
+        setLikesCount(count);
+        onChange?.(newLiked, count);
+      }
     } catch {
+      setLiked(prevLiked);
+      setLikesCount(prevCount);
+      onChange?.(prevLiked, prevCount);
       toast.error(t("toasts.likeError"));
     } finally {
       setLikeLoading(false);

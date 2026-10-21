@@ -7,7 +7,7 @@ import { getPosts } from "@/services/api/post";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useProfilePostsStore } from "@/app/hooks/profile/useProfilePostsStore";
 import { getRelationshipStatus } from "@/utils/friends";
-import { BannerInfo } from "@/types";
+import { BannerInfo, Post } from "@/types";
 import { Postwall } from "../feed/Postwall/Postwall";
 import { ProfileFriends } from "../friends/ProfileFriends/ProfileFriends";
 import { PostCreator } from "../feed/PostCreator/PostCreator";
@@ -32,6 +32,7 @@ export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
   const storedPosts = useProfilePostsStore((state) => state.posts);
   const hasLoaded = useProfilePostsStore((state) => state.hasLoaded);
   const setStoredPosts = useProfilePostsStore((state) => state.setPosts);
+  const addStoredPost = useProfilePostsStore((state) => state.addPost);
 
   const postsLoading =
     !!postwallId && !(hasLoaded && storedPostwallId === postwallId);
@@ -65,6 +66,10 @@ export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
     };
   }, [postwallId, setStoredPosts, t]);
 
+  const addCreatedPost = (post: Post) => {
+    addStoredPost({ ...post, likesCount: 0, liked: false, comments: [] });
+  };
+
   const friends = bannerInfo.friends ?? [];
   const photos = bannerInfo.photos ?? [];
   const canCreatePost = isOwner || isFriend;
@@ -85,7 +90,7 @@ export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
             isOwner={isOwner}
             avatar={currentUser.avatar}
             postwallId={postwallId ?? ""}
-            onSuccess={refreshPosts}
+            onSuccess={addCreatedPost}
           />
         )}
         <Postwall posts={posts} onRefresh={refreshPosts} />

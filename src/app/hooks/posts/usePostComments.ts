@@ -9,17 +9,15 @@ import { Comment as CommentType } from "@/types";
 
 interface UsePostCommentsProps {
   comments: CommentType[];
-  hasComments: boolean;
   onRefresh: () => void;
 }
 
 export const usePostComments = ({
   comments,
-  hasComments,
   onRefresh,
 }: UsePostCommentsProps) => {
   const t = useTranslations();
-  const [showCommentCreator, setShowCommentCreator] = useState(hasComments);
+  const [isInputShown, setIsInputShown] = useState(false);
   const [replyTo, setReplyTo] = useState<{
     commentId: string;
     name: string;
@@ -30,7 +28,6 @@ export const usePostComments = ({
     comments.filter((comment) => comment.parent === commentId);
 
   const replyComment = (commentId: string, name: string) => {
-    setShowCommentCreator(true);
     setReplyTo((prev) =>
       prev?.commentId === commentId ? null : { commentId, name },
     );
@@ -60,8 +57,8 @@ export const usePostComments = ({
   };
 
   return {
-    showCommentCreator,
-    setShowCommentCreator,
+    isInputShown,
+    setIsInputShown,
     replyTo,
     rootComments,
     repliesFor,

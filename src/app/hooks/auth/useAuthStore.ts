@@ -12,6 +12,7 @@ import { useConversationsStore } from "@/app/hooks/messages/useConversationsStor
 import { useChatMessagesStore } from "@/app/hooks/messages/useChatMessagesStore";
 import { useProfilePostsStore } from "@/app/hooks/profile/useProfilePostsStore";
 import { usePresenceStore } from "@/app/hooks/shared/usePresenceStore";
+import { usePhotoCommentsStore } from "@/app/hooks/photos/usePhotoCommentsStore";
 import { ChatContact, FriendRequest, User } from "@/types";
 
 interface AuthStore {
@@ -76,6 +77,7 @@ export const useAuthStore = create<AuthStore>()(
           useChatMessagesStore.getState().reset();
           useProfilePostsStore.getState().reset();
           usePresenceStore.getState().reset();
+          usePhotoCommentsStore.getState().reset();
         },
       };
     },

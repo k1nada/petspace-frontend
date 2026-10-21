@@ -7,3 +7,18 @@
 .repost.reposted {
   color: var(--text-primary);
 }
+
+.repost svg {
+  color: var(--icon-secondary);
+  transition: color var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .repost:hover svg {
+    color: var(--icon-secondary-hover);
+  }
+}
+
+.repost.reposted svg {
+  color: currentColor;
+}

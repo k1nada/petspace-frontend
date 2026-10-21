@@ -1,3 +1,4 @@
+import { Ref } from "react";
 import { FaAngleRight } from "react-icons/fa";
 import { Textarea } from "../Textarea/Textarea";
 import styles from "./SubmitTextarea.module.scss";
@@ -10,6 +11,8 @@ interface SubmitTextareaProps {
   placeholder?: string;
   maxLength?: number;
   disabled?: boolean;
+  textareaRef?: Ref<HTMLTextAreaElement>;
+  autoFocus?: boolean;
 }
 
 export const SubmitTextarea = ({
@@ -19,6 +22,8 @@ export const SubmitTextarea = ({
   placeholder,
   maxLength,
   disabled,
+  textareaRef,
+  autoFocus,
 }: SubmitTextareaProps) => {
   return (
     <div className={styles.textareaWrapper}>
@@ -30,6 +35,8 @@ export const SubmitTextarea = ({
         placeholder={placeholder}
         maxLength={maxLength}
         disabled={disabled}
+        ref={textareaRef}
+        autoFocus={autoFocus}
       />
       <FaAngleRight
         size={30}

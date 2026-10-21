@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import {
@@ -7,6 +7,16 @@ import {
   deleteComment as deleteCommentApi,
 } from "@/services/api/comment";
 import { Comment as CommentType, Photo } from "@/types";
+import { usePhotoCommentsStore } from "./usePhotoCommentsStore";
+
+export const preloadPhotoComments = (photoId: string) => {
+  const { commentsByPhotoId, setComments } = usePhotoCommentsStore.getState();
+  if (commentsByPhotoId[photoId]) return;
+
+  getPhotoComments(photoId)
+    .then((data) => setComments(photoId, data))
+    .catch(() => {});
+};
 
 interface UsePhotoCommentsProps {
   photo: Photo | null;
@@ -20,9 +30,10 @@ export const usePhotoComments = ({
   onCommentsRefresh,
 }: UsePhotoCommentsProps) => {
   const t = useTranslations();
-  const [commentsByPhotoId, setCommentsByPhotoId] = useState<
-    Record<string, CommentType[]>
-  >({});
+  const commentsByPhotoId = usePhotoCommentsStore(
+    (state) => state.commentsByPhotoId,
+  );
+  const saveComments = usePhotoCommentsStore((state) => state.setComments);
   const photoId = photo?.id;
   const cachedComments = photoId ? commentsByPhotoId[photoId] : undefined;
 
@@ -30,10 +41,6 @@ export const usePhotoComments = ({
   let comments: CommentType[] = [];
   if (postId) comments = photo?.comments ?? [];
   else if (cachedComments) comments = cachedComments;
-
-  const saveComments = (id: string, data: CommentType[]) => {
-    setCommentsByPhotoId((prev) => ({ ...prev, [id]: data }));
-  };
 
   const refreshComments = () => {
     if (postId) {
@@ -50,16 +57,13 @@ export const usePhotoComments = ({
     if (postId || !photoId) return;
 
     getPhotoComments(photoId)
-      .then((data) =>
-        setCommentsByPhotoId((prev) => ({ ...prev, [photoId]: data })),
-      )
+      .then((data) => saveComments(photoId, data))
       .catch(() => {
-        setCommentsByPhotoId((prev) =>
-          prev[photoId] ? prev : { ...prev, [photoId]: [] },
-        );
+        const { commentsByPhotoId } = usePhotoCommentsStore.getState();
+        if (!commentsByPhotoId[photoId]) saveComments(photoId, []);
         toast.error(t("toasts.commentsLoadError"));
       });
-  }, [postId, photoId, t]);
+  }, [postId, photoId, t, saveComments]);
 
   const deleteComment = async (commentId: string) => {
     try {

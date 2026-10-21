@@ -2,7 +2,7 @@
 
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import styles from "./CommentCreator.module.scss";
-import { useState } from "react";
+import { Ref, useState } from "react";
 import { useTranslations } from "next-intl";
 import { createComment } from "@/services/api/comment";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SubmitTextarea";
@@ -15,6 +15,8 @@ interface CommentCreatorProps {
   replyCommentId?: string;
   initialContent?: string;
   onSuccess?: () => void;
+  textareaRef?: Ref<HTMLTextAreaElement>;
+  autoFocus?: boolean;
 }
 
 export const CommentCreator = ({
@@ -23,6 +25,8 @@ export const CommentCreator = ({
   replyCommentId,
   initialContent,
   onSuccess,
+  textareaRef,
+  autoFocus,
 }: CommentCreatorProps) => {
   const t = useTranslations();
   const [content, setContent] = useState(initialContent ?? "");
@@ -57,6 +61,8 @@ export const CommentCreator = ({
           placeholder={t("commentCreator.placeholder")}
           maxLength={1000}
           disabled={isSubmitting}
+          textareaRef={textareaRef}
+          autoFocus={autoFocus}
         />
       </div>
     </div>

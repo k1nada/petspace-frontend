@@ -8,7 +8,7 @@ import { Comment } from "@/app/features/profile/feed/Comment/Comment";
 import { CommentCreator } from "../CommentCreator/CommentCreator";
 import { SharePostModal } from "../SharePostModal/SharePostModal";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { likePost } from "@/services/api/likes";
@@ -70,8 +70,8 @@ export const Post = ({ post, onRefresh }: PostProps) => {
   const commentCount = post.comments?.length ?? 0;
 
   const {
-    showCommentCreator,
-    setShowCommentCreator,
+    isInputShown,
+    setIsInputShown,
     replyTo,
     rootComments,
     repliesFor,
@@ -81,9 +81,19 @@ export const Post = ({ post, onRefresh }: PostProps) => {
     onCommentCreated,
   } = usePostComments({
     comments: post.comments ?? [],
-    hasComments: commentCount > 0,
     onRefresh,
   });
+
+  const commentInputRef = useRef<HTMLTextAreaElement>(null);
+  const isInputVisible = commentCount > 0 || isInputShown;
+
+  const showCommentInput = () => {
+    if (commentInputRef.current) {
+      commentInputRef.current.focus();
+      return;
+    }
+    setIsInputShown(true);
+  };
 
   const photoData: Photo = {
     id: post.id,
@@ -194,7 +204,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
         likeLoading={likeLoading}
         onToggleLike={toggleLike}
         commentCount={commentCount}
-        onToggleComments={() => setShowCommentCreator((prev) => !prev)}
+        onToggleComments={showCommentInput}
         reposted={reposted}
         repostCount={repostCount}
         onOpenShare={() => setIsShareOpen(true)}
@@ -217,8 +227,10 @@ export const Post = ({ post, onRefresh }: PostProps) => {
         ))}
       </ul>
 
-      {showCommentCreator && (
+      {isInputVisible && (
         <CommentCreator
+          textareaRef={commentInputRef}
+          autoFocus={isInputShown}
           key={replyTo ? replyTo.commentId : "root"}
           postId={post.id}
           replyCommentId={replyTo?.commentId}

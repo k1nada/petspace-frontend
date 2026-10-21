@@ -59,6 +59,7 @@ export const PhotoModalDetails = ({
 
   const {
     comments,
+    commentsLoading,
     refreshComments,
     deleteComment: onDeleteComment,
     editComment: onEditComment,
@@ -159,7 +160,7 @@ export const PhotoModalDetails = ({
             />
           </li>
         ))}
-        {rootComments.length === 0 && (
+        {rootComments.length === 0 && !commentsLoading && (
           <div className={styles.emptyComments}>
             <p className={styles.title}>{t("photoModal.commentsTitle")}</p>
             <p className={styles.text}>{t("photoModal.commentsText")}</p>
