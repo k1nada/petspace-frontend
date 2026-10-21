@@ -1,5 +1,6 @@
 {
   "common": {
+    "moreActions": "More actions",
     "delete": "Delete",
     "save": "Save",
     "continue": "Continue",
@@ -31,8 +32,7 @@
     "email": "Email",
     "password": "Password",
     "createAccount": "Create Account",
-    "editProfile": "Edit profile",
-    "moreActions": "More actions"
+    "editProfile": "Edit profile"
   },
   "fields": {
     "birthday": "Birthday:",
@@ -42,8 +42,8 @@
     "breed": "Breed:"
   },
   "validations": {
-    "minLength": "Must be at least {min} characters",
-    "maxLength": "Must not exceed {max} characters",
+    "minLength": "Must be at least {min, plural, one {# character} other {# characters}}",
+    "maxLength": "Must not exceed {max, plural, one {# character} other {# characters}}",
     "required": "This field is required",
     "emailPattern": "Invalid email address",
     "usernamePattern": "Username can only contain letters, numbers, and underscores",
@@ -54,7 +54,8 @@
     "EMAIL_ALREADY_EXISTS": "This email is already registered",
     "USERNAME_ALREADY_EXISTS": "This username is already registered",
     "INVALID_CREDENTIALS": "Invalid email or password",
-    "PHOTO_LIMIT_REACHED": "You've reached the 300 photo limit. Delete some photos to add new ones."
+    "PHOTO_LIMIT_REACHED": "You've reached the 300 photo limit. Delete some photos to add new ones.",
+    "FILE_TOO_LARGE": "The photo is larger than 5 MB"
   },
   "placeholder": {
     "noneSelected": "None selected",
@@ -126,11 +127,11 @@
   "profileBanner": {
     "info": "More info",
     "requestSent": "Request sent",
-    "removeFriend": "Remove friend",
+    "acceptRequest": "Accept request",
     "cancelRequest": "Cancel request",
+    "removeFriend": "Remove friend",
     "friendsCount": "{count, plural, one {# friend} other {# friends}}",
-    "photosCount": "{count, plural, one {# photo} other {# photos}}",
-    "acceptRequest": "Accept request"
+    "photosCount": "{count, plural, one {# photo} other {# photos}}"
   },
   "profileEditor": {
     "bio": "About:",
@@ -221,12 +222,12 @@
   "photoGallery": {
     "title": "My photos",
     "titleOther": "{name}'s photos",
+    "manage": "Manage photos",
     "deleteAll": "Delete all",
     "deleteAllModalTitle": "Delete all photos",
     "deleteAllModalDescription": "Are you sure you want to delete all your photos? This can't be undone.",
     "photoAlt": "{name}'s photo",
-    "emptyPhotosText": "Time to capture some tail-wagging moments!",
-    "manage": "Manage photos"
+    "emptyPhotosText": "Time to capture some tail-wagging moments!"
   },
   "photoModal": {
     "counter": "{current} / {total}",
@@ -242,6 +243,7 @@
     "requestsTitle": "Requests",
     "followersTitle": "Followers",
     "followingTitle": "Following",
+    "manageFollowing": "Manage following",
     "unfollowAll": "Unfollow all",
     "unfollow": "Unfollow",
     "emptyFriendsText": "Find some dogs and send them a friend request!",
@@ -251,7 +253,6 @@
     "emptyFollowingTitle": "Not following anyone yet",
     "emptyFollowingText": "Explore profiles and follow dogs you like!",
     "lastSeen": "Last seen {time}",
-    "manageFollowing": "Manage following",
     "message": "Message"
   },
   "friendRequest": {
@@ -271,7 +272,7 @@
     "removeModalDescription": "{name} will no longer follow you.",
     "unfollowModalDescription": "You can always follow {name} again later.",
     "unfollowAllModalDescription": "You won't follow anyone from this list anymore. You can always follow them again later.",
-    "followersCount": "{count} followers",
+    "followersCount": "{count, plural, one {# follower} other {# followers}}",
     "removeFollower": "Remove follower",
     "followBack": "Follow back"
   },

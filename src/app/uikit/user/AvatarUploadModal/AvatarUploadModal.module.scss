@@ -21,3 +21,7 @@
   opacity: 0;
   transition: opacity var(--transition-fast);
 }
+
+.disabled {
+  opacity: 0.6;
+}

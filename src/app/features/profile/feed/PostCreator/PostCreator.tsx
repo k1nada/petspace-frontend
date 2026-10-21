@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { createPost, uploadPostPhoto } from "@/services/api/post";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
-import { useTextareaSubmit } from "@/app/hooks/shared/useTextareaSubmit";
+import { submitOnEnter } from "@/utils/textarea";
 import { toast } from "react-toastify";
 import { Card } from "@/app/uikit/layout/Card/Card";
 
@@ -72,8 +72,6 @@ export const PostCreator = ({
     }
   };
 
-  const { handleKeyDown } = useTextareaSubmit({ onSubmit: publishPost });
-
   return (
     <Card>
       <div className={styles.wrapper}>
@@ -82,7 +80,7 @@ export const PostCreator = ({
           <Textarea
             appearance="secondary"
             value={content}
-            onKeyDown={handleKeyDown}
+            onKeyDown={(e) => submitOnEnter(e, publishPost)}
             onChange={(e) => setContent(e.target.value)}
             placeholder={t(
               isOwner

@@ -27,6 +27,7 @@ export const DatePicker = ({
   const [isOpen, setIsOpen] = useState(false);
   const localeCode = useLocale();
   const isPolish = localeCode === "pl";
+  const dayjsLocale = isPolish ? "pl" : "en";
 
   const dateValue = value ? dayjs(value) : undefined;
 
@@ -41,9 +42,7 @@ export const DatePicker = ({
         readOnly
         disabled={disabled}
         value={
-          dateValue
-            ? dateValue.locale(isPolish ? "pl" : "en").format("D MMMM YYYY")
-            : ""
+          dateValue ? dateValue.locale(dayjsLocale).format("D MMMM YYYY") : ""
         }
         onClick={() => !disabled && setIsOpen(!isOpen)}
       />
