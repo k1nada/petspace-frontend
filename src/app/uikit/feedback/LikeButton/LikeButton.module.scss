@@ -1,13 +1,22 @@
-.heart:hover {
-  color: var(--text-liked);
-}
-
 .count {
   font-variant-numeric: tabular-nums;
   font-weight: 400;
   line-height: 1;
 }
 
-.heart.liked {
+.heart svg {
+  color: var(--icon-secondary);
+  transition: color var(--transition-fast);
+}
+
+button.heart.liked,
+button.heart.liked svg {
   color: var(--text-liked);
+}
+
+@media (hover: hover) {
+  button.heart:hover,
+  button.heart:hover svg {
+    color: var(--text-liked);
+  }
 }

@@ -3,3 +3,14 @@
   font-weight: 400;
   line-height: 1;
 }
+
+.comment svg {
+  color: var(--icon-secondary);
+  transition: color var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .comment:hover svg {
+    color: var(--icon-secondary-hover);
+  }
+}

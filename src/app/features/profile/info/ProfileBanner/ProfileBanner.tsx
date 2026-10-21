@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { FaMapMarkerAlt, FaPaw, FaTree, FaTrophy } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
-import { MdCancel, MdDelete } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
 import { Link } from "@/app/uikit/navigation/Link/Link";
@@ -186,7 +186,8 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
         <>
           <Dropdown
             triggerAppearance="button"
-            trigger={t("common.friends")}
+            trigger={<FaPaw size={16} />}
+            label={t("common.friends")}
             align="left"
             items={[
               {
@@ -230,19 +231,14 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
       return (
         <>
           {messageButton}
-          <Dropdown
-            triggerAppearance="button"
-            triggerClassName={styles.mainAction}
-            trigger={t("profileBanner.requestSent")}
-            align="left"
-            items={[
-              {
-                label: t("profileBanner.cancelRequest"),
-                icon: <MdCancel size={20} />,
-                onClick: removeRelation,
-              },
-            ]}
-          />
+          <Button
+            appearance="secondary"
+            title={t("profileBanner.cancelRequest")}
+            onClick={removeRelation}
+            disabled={isBusy}
+          >
+            {t("profileBanner.requestSent")}
+          </Button>
         </>
       );
     }

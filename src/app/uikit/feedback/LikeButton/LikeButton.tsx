@@ -25,8 +25,7 @@ export const LikeButton = ({
     <Button
       appearance="minimal"
       className={cn(className, styles.heart, { [styles.liked]: liked })}
-      onClick={onToggle}
-      disabled={loading}
+      onClick={loading ? undefined : onToggle}
     >
       <FaHeart size={16} />
       {showCount && <span className={styles.count}>{displayCount}</span>}

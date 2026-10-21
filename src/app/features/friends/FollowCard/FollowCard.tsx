@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
 import {
+  MdAdd,
+  MdCheck,
   MdOutlineMoreHoriz,
   MdPersonAdd,
   MdPersonRemove,
@@ -11,9 +14,16 @@ import { FollowUser, FollowListType } from "@/types";
 import { ROUTES } from "@/routes/routes";
 import { useRouter } from "@/i18n/navigation";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
+import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
+import { useFriendRequestActions } from "@/app/hooks/friends/useFriendRequestActions";
+import { addFriend } from "@/services/api/friends";
+import { revalidateFollows } from "@/services/actions/revalidateFollows";
+import { getRelationshipStatus } from "@/utils/friends";
+import { IconButton } from "@/app/uikit/form/IconButton/IconButton";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { UserRow } from "../UserRow/UserRow";
+import styles from "./FollowCard.module.scss";
 
 interface FollowCardProps {
   user: FollowUser;
@@ -37,6 +47,11 @@ export const FollowCard = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFollowBackLoading, setIsFollowBackLoading] = useState(false);
   const currentUserData = useAuthStore((state) => state.currentUser);
+  const fetchCurrentUser = useAuthStore((state) => state.fetchCurrentUser);
+  const requests = useFriendRequestsStore((state) => state.requests);
+  const { acceptRequest } = useFriendRequestActions();
+  const [isRequestSent, setIsRequestSent] = useState(false);
+  const [isFriendLoading, setIsFriendLoading] = useState(false);
 
   const isSelf = user.username === currentUser;
   const canManage = isOwner && !isSelf;
@@ -54,6 +69,74 @@ export const FollowCard = ({
       : "followCard.unfollowModalDescription",
     { name: user.name },
   );
+
+  const { isFriend, isPending } = getRelationshipStatus(
+    currentUserData,
+    user.id,
+  );
+  const incomingRequest = requests.find(
+    (request) => request.from.id === user.id,
+  );
+
+  const sendFriendRequest = async () => {
+    if (!currentUserData || isFriendLoading) return;
+    setIsFriendLoading(true);
+    setIsRequestSent(true);
+    try {
+      await addFriend(currentUserData.username, user.username);
+      await revalidateFollows();
+      await fetchCurrentUser();
+    } catch {
+      toast.error(t("toasts.error"));
+    } finally {
+      setIsRequestSent(false);
+      setIsFriendLoading(false);
+    }
+  };
+
+  const acceptIncomingRequest = async () => {
+    if (!incomingRequest || isFriendLoading) return;
+    setIsFriendLoading(true);
+    try {
+      await acceptRequest(incomingRequest);
+    } catch {
+      toast.error(t("toasts.error"));
+    } finally {
+      setIsFriendLoading(false);
+    }
+  };
+
+  let friendButton = null;
+  if (type === "followers" && !isSelf && !isFriend) {
+    if (incomingRequest) {
+      friendButton = (
+        <IconButton
+          accent
+          icon={<MdCheck size={18} />}
+          label={t("friendRequest.accept")}
+          onClick={acceptIncomingRequest}
+          disabled={isFriendLoading}
+        />
+      );
+    } else if (isPending || isRequestSent) {
+      friendButton = (
+        <IconButton
+          icon={<MdCheck size={18} className={styles.sentIcon} />}
+          label={t("profileBanner.requestSent")}
+          disabled
+        />
+      );
+    } else {
+      friendButton = (
+        <IconButton
+          icon={<MdAdd size={18} />}
+          label={t("common.addFriend")}
+          onClick={sendFriendRequest}
+          disabled={isFriendLoading}
+        />
+      );
+    }
+  }
 
   const goToMessages = () => {
     router.push(ROUTES.messages(currentUser, user.username));
@@ -102,13 +185,18 @@ export const FollowCard = ({
       })}
       onMessage={isSelf ? undefined : goToMessages}
       actions={
-        showMenu ? (
-          <Dropdown
-            label={t("common.moreActions")}
-            triggerAppearance="iconButton"
-            trigger={<MdOutlineMoreHoriz size={18} />}
-            items={menuItems}
-          />
+        friendButton || showMenu ? (
+          <>
+            {friendButton}
+            {showMenu && (
+              <Dropdown
+                label={t("common.moreActions")}
+                triggerAppearance="iconButton"
+                trigger={<MdOutlineMoreHoriz size={18} />}
+                items={menuItems}
+              />
+            )}
+          </>
         ) : undefined
       }
     >
