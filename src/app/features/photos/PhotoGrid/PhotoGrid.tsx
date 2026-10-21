@@ -24,6 +24,7 @@ export const PhotoGrid = ({ photos, name, onSelect }: PhotoGridProps) => {
             src={getPhotoUrl(photo)}
             alt={t("photoGallery.photoAlt", { name })}
             fill
+            sizes="(max-width: 480px) 50vw, (max-width: 768px) 33vw, 200px"
           />
         </li>
       ))}
