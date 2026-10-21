@@ -37,8 +37,7 @@ export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
   return (
     <Card as="section">
       <Link href={ROUTES.friends(username)} className={styles.titleLink}>
-        <CardTitle>{t("common.friends")}</CardTitle>
-        <span className={styles.count}>{friends.length}</span>
+        <CardTitle count={friends.length}>{t("common.friends")}</CardTitle>
       </Link>
       {friends.length === 0 ? (
         <p className={styles.empty}>{t("common.noFriendsYet")}</p>

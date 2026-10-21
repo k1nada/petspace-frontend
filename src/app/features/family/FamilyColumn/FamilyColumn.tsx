@@ -3,6 +3,7 @@
 import styles from "./FamilyColumn.module.scss";
 import { useState } from "react";
 import { Button } from "@/app/uikit/form/Button/Button";
+import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 import { FamilyMember, FamilyRelation, NewFamilyMember } from "@/types";
 import { FamilyMemberCard } from "../FamilyMemberCard/FamilyMemberCard";
 import { AddFamilyMemberModal } from "../AddFamilyMemberModal/AddFamilyMemberModal";
@@ -42,10 +43,9 @@ export const FamilyColumn = ({
 
   return (
     <div className={styles.column}>
-      <h2 className={styles.title}>
+      <CardTitle className={styles.title} count={members.length}>
         {title}
-        <span className={styles.count}>{members.length}</span>
-      </h2>
+      </CardTitle>
 
       {members.length > 0 ? (
         <ul className={styles.list}>

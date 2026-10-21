@@ -10,8 +10,8 @@ import { Link } from "@/app/uikit/navigation/Link/Link";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { ROUTES } from "@/routes/routes";
-import { FaPowerOff, FaSearch } from "react-icons/fa";
-import { MdDarkMode, MdLanguage, MdLightMode, MdLogout } from "react-icons/md";
+import { FaGlobe, FaMoon, FaPowerOff, FaSearch } from "react-icons/fa";
+import { FaSun } from "react-icons/fa6";
 import { signOut } from "@/services/api/auth";
 import socket from "@/services/socket";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
@@ -45,17 +45,12 @@ export const Header = () => {
   const moreMenuItems = [
     {
       label: t("header.language"),
-      icon: <MdLanguage size={20} />,
+      icon: <FaGlobe size={16} />,
       onClick: toggleLocale,
     },
     {
       label: t("header.theme"),
-      icon:
-        theme === "light" ? (
-          <MdDarkMode size={20} />
-        ) : (
-          <MdLightMode size={20} />
-        ),
+      icon: theme === "light" ? <FaMoon size={16} /> : <FaSun size={16} />,
       onClick: toggleTheme,
     },
   ];
@@ -63,7 +58,7 @@ export const Header = () => {
   if (currentUser) {
     moreMenuItems.push({
       label: t("header.signOut"),
-      icon: <MdLogout size={20} />,
+      icon: <FaPowerOff size={16} />,
       onClick: () => setIsSignOutOpen(true),
     });
   }
