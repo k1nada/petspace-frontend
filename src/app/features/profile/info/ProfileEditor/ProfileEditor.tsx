@@ -58,6 +58,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
 
   const selectedCountry = useWatch({ control, name: "country" });
   const nameValue = useWatch({ control, name: "name" });
+  const sexValue = useWatch({ control, name: "sex" });
   const breeds = useBreeds();
   const countries = useCountries();
   const cities = useCities(selectedCountry);
@@ -207,7 +208,9 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
               appearance="tertiary"
               {...field}
               maxLength={150}
-              placeholder={t("profileEditor.about")}
+              placeholder={t("profileEditor.aboutPlaceholder", {
+                sex: sexValue,
+              })}
             />
           )}
         />

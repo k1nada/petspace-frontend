@@ -123,8 +123,8 @@ export const Post = ({ post, onRefresh }: PostProps) => {
     setIsSavingEdit(true);
     try {
       await updatePost(post.id, trimmedContent);
+      updatePostInStores({ content: trimmedContent });
       setIsEditing(false);
-      onRefresh();
     } catch {
       toast.error(t("toasts.postSaveError"));
     } finally {
@@ -174,6 +174,8 @@ export const Post = ({ post, onRefresh }: PostProps) => {
         {isEditing ? (
           <PostEditForm
             content={editContent}
+            originalContent={post.content}
+            isSaving={isSavingEdit}
             onChange={setEditContent}
             onCancel={() => setIsEditing(false)}
             onSave={handleSaveEditPost}
@@ -198,45 +200,49 @@ export const Post = ({ post, onRefresh }: PostProps) => {
         )}
       </div>
 
-      <PostStats
-        liked={liked}
-        likeCount={displayCount}
-        likeLoading={likeLoading}
-        onToggleLike={toggleLike}
-        commentCount={commentCount}
-        onToggleComments={showCommentInput}
-        reposted={reposted}
-        repostCount={repostCount}
-        onOpenShare={() => setIsShareOpen(true)}
-      />
+      {!isEditing && (
+        <>
+          <PostStats
+            liked={liked}
+            likeCount={displayCount}
+            likeLoading={likeLoading}
+            onToggleLike={toggleLike}
+            commentCount={commentCount}
+            onToggleComments={showCommentInput}
+            reposted={reposted}
+            repostCount={repostCount}
+            onOpenShare={() => setIsShareOpen(true)}
+          />
 
-      <ul className={styles.comments}>
-        {rootComments.map((comment) => (
-          <li key={comment.id}>
-            <Comment
-              comment={comment}
-              replies={repliesFor(comment.id)}
+          <ul className={styles.comments}>
+            {rootComments.map((comment) => (
+              <li key={comment.id}>
+                <Comment
+                  comment={comment}
+                  replies={repliesFor(comment.id)}
+                  postId={post.id}
+                  onDelete={() => deleteComment(comment.id)}
+                  onEdit={(content) => editComment(comment.id, content)}
+                  onDeleteReply={deleteComment}
+                  onEditReply={editComment}
+                  onReply={replyComment}
+                />
+              </li>
+            ))}
+          </ul>
+
+          {isInputVisible && (
+            <CommentCreator
+              textareaRef={commentInputRef}
+              autoFocus={isInputShown}
+              key={replyTo ? replyTo.commentId : "root"}
               postId={post.id}
-              onDelete={() => deleteComment(comment.id)}
-              onEdit={(content) => editComment(comment.id, content)}
-              onDeleteReply={deleteComment}
-              onEditReply={editComment}
-              onReply={replyComment}
+              replyCommentId={replyTo?.commentId}
+              initialContent={replyTo ? `${replyTo.name}, ` : undefined}
+              onSuccess={onCommentCreated}
             />
-          </li>
-        ))}
-      </ul>
-
-      {isInputVisible && (
-        <CommentCreator
-          textareaRef={commentInputRef}
-          autoFocus={isInputShown}
-          key={replyTo ? replyTo.commentId : "root"}
-          postId={post.id}
-          replyCommentId={replyTo?.commentId}
-          initialContent={replyTo ? `${replyTo.name}, ` : undefined}
-          onSuccess={onCommentCreated}
-        />
+          )}
+        </>
       )}
 
       <ConfirmModal

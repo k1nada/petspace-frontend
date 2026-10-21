@@ -137,7 +137,7 @@
     "bio": "O sobie:",
     "name": "Imię:",
     "username": "Nazwa użytkownika:",
-    "about": "Hau! Pochwal się wszystkim, jaki jestem grzeczny"
+    "aboutPlaceholder": "Hau! Powiedz wszystkim, {sex, select, male {jakim dobrym psem jestem} female {jaką dobrą sunią jestem} other {jakim dobrym pieskiem jestem}}"
   },
   "profileInformation": {
     "interests": "Zainteresowania"
@@ -339,7 +339,7 @@
   "achievements": {
     "title": "Osiągnięcia",
     "firstFriend": "Pierwszy przyjaciel",
-    "firstFriendText": "Znalazłeś pierwszego członka sfory",
+    "firstFriendText": "Pierwszy członek sfory znaleziony",
     "firstPost": "Pierwsze szczekanie",
     "firstPostText": "Napisz swój pierwszy wpis",
     "totalBones": "Zebrane kości"

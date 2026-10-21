@@ -12,6 +12,7 @@ import { createPost, uploadPostPhoto } from "@/services/api/post";
 import { Post } from "@/types";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
 import { submitOnEnter } from "@/utils/textarea";
+import { MAX_POST_LENGTH } from "@/utils/post";
 import { toast } from "react-toastify";
 import { Card } from "@/app/uikit/layout/Card/Card";
 
@@ -89,7 +90,7 @@ export const PostCreator = ({
                 : "postCreator.placeholderOtherWall",
               { name },
             )}
-            maxLength={3000}
+            maxLength={MAX_POST_LENGTH}
             disabled={isPublishing}
           />
         </div>

@@ -112,6 +112,7 @@ export interface Post {
 }
 
 export interface PostChanges {
+  content?: string;
   liked?: boolean;
   likesCount?: number;
   reposted?: boolean;
