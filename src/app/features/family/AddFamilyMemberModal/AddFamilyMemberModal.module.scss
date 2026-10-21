@@ -166,3 +166,7 @@
   gap: var(--gap-s);
   margin-top: var(--gap-s);
 }
+
+.disabled {
+  opacity: 0.6;
+}

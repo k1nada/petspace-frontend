@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import { isAxiosError } from "axios";
+import { getUploadErrorKey } from "@/utils/uploadErrors";
 import { uploadAvatar } from "@/services/api/upload";
 import { revalidateUser } from "@/services/actions/revalidateUser";
 import { useRouter } from "@/i18n/navigation";
@@ -45,14 +45,7 @@ export const AvatarChangeModal = ({
       await fetchCurrentUser();
       router.refresh();
     } catch (error) {
-      if (
-        isAxiosError(error) &&
-        error.response?.data?.type === "PHOTO_LIMIT_REACHED"
-      ) {
-        toast.error(t("errors.PHOTO_LIMIT_REACHED"));
-      } else {
-        toast.error(t("toasts.error"));
-      }
+      toast.error(t(getUploadErrorKey(error)));
     } finally {
       setIsSubmitting(false);
     }

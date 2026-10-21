@@ -149,8 +149,9 @@ export const AddFamilyMemberModal = ({
               {results.map((user) => (
                 <li
                   key={user.username}
-                  className={styles.resultItem}
-                  style={{ opacity: isSubmitting ? 0.6 : 1 }}
+                  className={cn(styles.resultItem, {
+                    [styles.disabled]: isSubmitting,
+                  })}
                   onClick={() => selectUser(user)}
                 >
                   <Avatar src={user.avatar} size={40} />

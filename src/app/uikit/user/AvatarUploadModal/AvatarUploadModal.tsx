@@ -1,6 +1,7 @@
 "use client";
 
 import { useDropzone } from "react-dropzone";
+import cn from "classnames";
 import { useEffect, useState } from "react";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
@@ -49,8 +50,8 @@ export const AvatarUploadModal = ({
   return (
     <div
       {...getRootProps()}
-      className={styles.wrapper}
-      style={{ width: size, height: size, opacity: disabled ? 0.6 : 1 }}
+      className={cn(styles.wrapper, { [styles.disabled]: disabled })}
+      style={{ width: size, height: size }}
     >
       <input {...getInputProps()} />
       <Avatar size={size} src={preview} />

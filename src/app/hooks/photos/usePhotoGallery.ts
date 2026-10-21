@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import { isAxiosError } from "axios";
+import { getUploadErrorKey } from "@/utils/uploadErrors";
 import {
   uploadPhoto,
   deletePhoto as deletePhotoApi,
@@ -36,26 +36,20 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
   const addPhoto = async (files: File[]): Promise<File[]> => {
     const uploaded: Photo[] = [];
     const failedFiles: File[] = [];
-    let photoLimitReached = false;
+    let errorKey = "toasts.error";
 
     for (const file of files) {
       try {
         uploaded.push(await uploadFile(file));
       } catch (error) {
         failedFiles.push(file);
-        if (
-          isAxiosError(error) &&
-          error.response?.data?.type === "PHOTO_LIMIT_REACHED"
-        ) {
-          photoLimitReached = true;
-        }
+        const fileErrorKey = getUploadErrorKey(error);
+        if (fileErrorKey !== "toasts.error") errorKey = fileErrorKey;
       }
     }
 
     if (failedFiles.length > 0) {
-      toast.error(
-        photoLimitReached ? t("errors.PHOTO_LIMIT_REACHED") : t("toasts.error"),
-      );
+      toast.error(t(errorKey));
     } else {
       setIsUploadOpen(false);
     }

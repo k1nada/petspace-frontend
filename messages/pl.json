@@ -1,5 +1,6 @@
 {
   "common": {
+    "moreActions": "Więcej opcji",
     "delete": "Usuń",
     "save": "Zapisz",
     "continue": "Kontynuuj",
@@ -31,8 +32,7 @@
     "email": "E-mail",
     "password": "Hasło",
     "createAccount": "Utwórz konto",
-    "editProfile": "Edytuj profil",
-    "moreActions": "Więcej opcji"
+    "editProfile": "Edytuj profil"
   },
   "fields": {
     "birthday": "Urodziny:",
@@ -42,8 +42,8 @@
     "breed": "Rasa:"
   },
   "validations": {
-    "minLength": "Musi zawierać co najmniej {min} znaków",
-    "maxLength": "Nie może przekraczać {max} znaków",
+    "minLength": "Musi zawierać co najmniej {min, plural, one {# znak} few {# znaki} many {# znaków} other {# znaku}}",
+    "maxLength": "Nie może przekraczać {max, plural, one {# znaku} few {# znaków} many {# znaków} other {# znaku}}",
     "required": "To pole jest wymagane",
     "emailPattern": "Nieprawidłowy adres e-mail",
     "usernamePattern": "Nazwa użytkownika może zawierać tylko litery, cyfry i podkreślenia",
@@ -54,7 +54,8 @@
     "EMAIL_ALREADY_EXISTS": "Ten e-mail jest już zarejestrowany",
     "USERNAME_ALREADY_EXISTS": "Ta nazwa użytkownika jest już zajęta",
     "INVALID_CREDENTIALS": "Nieprawidłowy e-mail lub hasło",
-    "PHOTO_LIMIT_REACHED": "Osiągnięto limit 300 zdjęć. Usuń kilka zdjęć, aby dodać nowe."
+    "PHOTO_LIMIT_REACHED": "Osiągnięto limit 300 zdjęć. Usuń kilka zdjęć, aby dodać nowe.",
+    "FILE_TOO_LARGE": "Zdjęcie jest większe niż 5 MB"
   },
   "placeholder": {
     "noneSelected": "Nie wybrano",
@@ -126,11 +127,11 @@
   "profileBanner": {
     "info": "Więcej info",
     "requestSent": "Wysłano",
-    "removeFriend": "Usuń ze znajomych",
+    "acceptRequest": "Przyjmij zaproszenie",
     "cancelRequest": "Anuluj zaproszenie",
+    "removeFriend": "Usuń ze znajomych",
     "friendsCount": "{count, plural, one {# znajomy} few {# znajomych} many {# znajomych} other {# znajomych}}",
-    "photosCount": "{count, plural, one {# zdjęcie} few {# zdjęcia} many {# zdjęć} other {# zdjęcia}}",
-    "acceptRequest": "Przyjmij zaproszenie"
+    "photosCount": "{count, plural, one {# zdjęcie} few {# zdjęcia} many {# zdjęć} other {# zdjęcia}}"
   },
   "profileEditor": {
     "bio": "O sobie:",
@@ -221,12 +222,12 @@
   "photoGallery": {
     "title": "Moje zdjęcia",
     "titleOther": "Zdjęcia użytkownika {name}",
+    "manage": "Zarządzaj zdjęciami",
     "deleteAll": "Usuń wszystkie",
     "deleteAllModalTitle": "Usuń wszystkie zdjęcia",
     "deleteAllModalDescription": "Czy na pewno chcesz usunąć wszystkie swoje zdjęcia? Tej operacji nie można cofnąć.",
     "photoAlt": "Zdjęcie {name}",
-    "emptyPhotosText": "Czas uwiecznić chwile merdania ogonem!",
-    "manage": "Zarządzaj zdjęciami"
+    "emptyPhotosText": "Czas uwiecznić chwile merdania ogonem!"
   },
   "photoModal": {
     "counter": "{current} / {total}",
@@ -242,6 +243,7 @@
     "requestsTitle": "Zaproszenia",
     "followersTitle": "Obserwujący",
     "followingTitle": "Obserwowani",
+    "manageFollowing": "Zarządzaj obserwowanymi",
     "unfollowAll": "Nie obserwuj nikogo",
     "unfollow": "Nie obserwuj",
     "emptyFriendsText": "Znajdź jakieś psy i wyślij im zaproszenie do znajomych!",
@@ -251,7 +253,6 @@
     "emptyFollowingTitle": "Nikogo jeszcze nie obserwujesz",
     "emptyFollowingText": "Przeglądaj profile i obserwuj psy, które lubisz!",
     "lastSeen": "Ostatnio widziano {time}",
-    "manageFollowing": "Zarządzaj obserwowanymi",
     "message": "Napisz"
   },
   "friendRequest": {
@@ -271,7 +272,7 @@
     "removeModalDescription": "{name} nie będzie już Cię obserwować.",
     "unfollowModalDescription": "Zawsze możesz ponownie zacząć obserwować {name}.",
     "unfollowAllModalDescription": "Przestaniesz obserwować wszystkich z tej listy. Zawsze możesz zacząć ich obserwować ponownie później.",
-    "followersCount": "{count} obserwujących",
+    "followersCount": "{count, plural, one {# obserwujący} few {# obserwujących} many {# obserwujących} other {# obserwujących}}",
     "removeFollower": "Usuń obserwującego",
     "followBack": "Obserwuj również"
   },

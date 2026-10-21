@@ -14,4 +14,4 @@ export const ROUTES = {
       ? `/${currentUsername}/messages?user=${targetUsername}`
       : `/${currentUsername}/messages`,
   familyTree: (username: string) => `/${username}/family`,
-} as const;
+};
