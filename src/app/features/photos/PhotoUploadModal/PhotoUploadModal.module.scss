@@ -78,9 +78,9 @@
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: var(--overlay-light);
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity var(--transition-fast);
 }
 
 .actions {

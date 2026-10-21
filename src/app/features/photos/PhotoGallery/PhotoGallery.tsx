@@ -16,6 +16,8 @@ import { AuthLoader } from "@/app/components/AuthLoader/AuthLoader";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
+import { Card } from "@/app/uikit/layout/Card/Card";
+import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 
 interface PhotoGalleryProps {
   photos: Photo[];
@@ -42,8 +44,14 @@ export const PhotoGallery = ({
     deleteAllPhotos,
     handleLikeChange,
   } = usePhotoGallery(photos, username);
-  const { selectedIndex, setSelectedIndex, handlePrev, handleNext } =
-    usePhotoNavigation(localPhotos);
+  const {
+    selectedIndex,
+    setSelectedIndex,
+    handlePrev,
+    handleNext,
+    prevPhoto,
+    nextPhoto,
+  } = usePhotoNavigation(localPhotos);
   const [isDeleteAllOpen, setIsDeleteAllOpen] = useState(false);
 
   const selectedPhoto =
@@ -66,14 +74,13 @@ export const PhotoGallery = ({
 
   return (
     <AuthLoader fallback={<PhotoGallerySkeleton />}>
-      <section className={styles.container}>
+      <Card as="section">
         <div className={styles.header}>
-          <h1 className={styles.title}>
+          <CardTitle as="h1" count={localPhotos.length}>
             {isOwner
               ? t("photoGallery.title")
               : t("photoGallery.titleOther", { name })}
-            <span className={styles.count}>{localPhotos.length}</span>
-          </h1>
+          </CardTitle>
           {isOwner && (
             <Dropdown label={t("photoGallery.manage")} items={menuItems} />
           )}
@@ -102,6 +109,8 @@ export const PhotoGallery = ({
               photosCount: localPhotos.length,
               onPrev: handlePrev,
               onNext: handleNext,
+              prevPhoto,
+              nextPhoto,
             }}
             isOwner={isOwner}
             onClose={() => setSelectedIndex(null)}
@@ -126,7 +135,7 @@ export const PhotoGallery = ({
           onConfirm={() => deleteAllPhotos(() => setIsDeleteAllOpen(false))}
           onClose={() => setIsDeleteAllOpen(false)}
         />
-      </section>
+      </Card>
     </AuthLoader>
   );
 };

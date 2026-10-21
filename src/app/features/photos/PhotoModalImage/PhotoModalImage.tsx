@@ -4,7 +4,7 @@ import Image from "next/image";
 import cn from "classnames";
 import { useTranslations } from "next-intl";
 import { Button } from "@/app/uikit/form/Button/Button";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import styles from "./PhotoModalImage.module.scss";
 
 interface PhotoModalImageProps {
@@ -51,7 +51,7 @@ export const PhotoModalImage = ({
           appearance="ghost"
           onClick={onPrev}
         >
-          <FaAngleLeft size={30} />
+          <FaChevronLeft size={18} />
         </Button>
       )}
       <div className={styles.foreground}>
@@ -70,7 +70,7 @@ export const PhotoModalImage = ({
           appearance="ghost"
           onClick={onNext}
         >
-          <FaAngleRight size={30} />
+          <FaChevronRight size={18} />
         </Button>
       )}
     </div>

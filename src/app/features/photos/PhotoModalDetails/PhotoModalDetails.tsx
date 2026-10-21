@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import cn from "classnames";
 import { useLocale, useTranslations } from "next-intl";
 import { Photo, RepostState } from "@/types";
 import { LikeButton } from "@/app/uikit/feedback/LikeButton/LikeButton";
@@ -16,6 +17,7 @@ import { MdDelete } from "react-icons/md";
 import { formatDate } from "@/utils/dateFormatters";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
+import statsStyles from "../../profile/feed/PostStats/PostStats.module.scss";
 import styles from "./PhotoModalDetails.module.scss";
 
 interface PhotoModalDetailsProps {
@@ -122,44 +124,42 @@ export const PhotoModalDetails = ({
             </div>
           )}
         </div>
-        <div className={styles.stats}>
+        <div className={cn(statsStyles.stats, styles.stats)}>
           <LikeButton
             liked={liked}
             count={displayCount}
             loading={likeLoading}
             onToggle={onToggleLike}
-            className={styles.stat}
+            className={statsStyles.stat}
           />
-          {showRepost && <span className={styles.divider} />}
           {showRepost && (
             <RepostButton
               reposted={reposted}
               count={repostDisplayCount}
               loading={repostLoading}
               onToggle={onToggleRepost}
-              className={styles.stat}
+              className={statsStyles.stat}
             />
           )}
         </div>
       </div>
       <ul className={styles.comments}>
-        {rootComments.length > 0 ? (
-          rootComments.map((comment) => (
-            <li key={comment.id}>
-              <Comment
-                comment={comment}
-                replies={repliesFor(comment.id)}
-                postId={postId}
-                photoId={commentPhotoId}
-                onDelete={() => onDeleteComment(comment.id)}
-                onEdit={(content) => onEditComment(comment.id, content)}
-                onDeleteReply={onDeleteComment}
-                onEditReply={onEditComment}
-                onReply={handleReply}
-              />
-            </li>
-          ))
-        ) : (
+        {rootComments.map((comment) => (
+          <li key={comment.id}>
+            <Comment
+              comment={comment}
+              replies={repliesFor(comment.id)}
+              postId={postId}
+              photoId={commentPhotoId}
+              onDelete={() => onDeleteComment(comment.id)}
+              onEdit={(content) => onEditComment(comment.id, content)}
+              onDeleteReply={onDeleteComment}
+              onEditReply={onEditComment}
+              onReply={handleReply}
+            />
+          </li>
+        ))}
+        {rootComments.length === 0 && (
           <div className={styles.emptyComments}>
             <p className={styles.title}>{t("photoModal.commentsTitle")}</p>
             <p className={styles.text}>{t("photoModal.commentsText")}</p>

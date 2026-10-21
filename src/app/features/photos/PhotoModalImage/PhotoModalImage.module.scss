@@ -42,30 +42,24 @@
   height: 40px;
   border-radius: var(--radius-full);
 
-  background: rgba(0, 0, 0, 0.55);
-  transition: background 0.2s ease;
+  background: var(--photo-nav-bg);
+  transition: background var(--transition-fast);
 
   svg {
     color: var(--text-on-color);
-    opacity: 0.9;
-    transition: opacity 0.2s ease;
   }
 
   &:hover {
-    background: rgba(0, 0, 0, 0.8);
-
-    svg {
-      opacity: 1;
-    }
+    background: var(--photo-nav-bg-hover);
   }
 }
 
 .arrowLeft {
-  left: var(--padding-xxl);
+  left: var(--padding-m);
 }
 
 .arrowRight {
-  right: var(--padding-xxl);
+  right: var(--padding-m);
 }
 
 .counter {
