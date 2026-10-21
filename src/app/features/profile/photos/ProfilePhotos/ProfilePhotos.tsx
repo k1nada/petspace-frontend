@@ -88,8 +88,7 @@ export const ProfilePhotos = ({
   return (
     <Card as="section">
       <Link href={ROUTES.photos(username)} className={styles.titleLink}>
-        <CardTitle>{t("common.photos")}</CardTitle>
-        <span className={styles.count}>{localPhotos.length}</span>
+        <CardTitle count={localPhotos.length}>{t("common.photos")}</CardTitle>
       </Link>
       {localPhotos.length === 0 ? (
         <div className={styles.empty}>{t("common.noPhotosYet")}</div>
