@@ -57,6 +57,7 @@ export const DatePicker = ({
               setIsOpen(false);
             }}
             captionLayout="dropdown"
+            hideNavigation
             fromYear={fromYear}
             toYear={new Date().getFullYear()}
             disabled={{ after: new Date() }}

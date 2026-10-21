@@ -5,8 +5,31 @@
   transition: none;
 }
 
+.textarea {
+  field-sizing: content;
+  width: 100%;
+  min-height: calc(2lh + 2 * var(--padding-s));
+  max-height: calc(10lh + 2 * var(--padding-s));
+  overflow-y: auto;
+  font: inherit;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  box-shadow: 0 0 0 0.5px var(--border-field);
+
+  &:hover {
+    box-shadow: 0 0 0 0.5px var(--border-field-hover);
+  }
+}
+
 .editActions {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   gap: var(--gap-s);
+}
+
+.counter {
+  font-size: var(--font-m);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
 }

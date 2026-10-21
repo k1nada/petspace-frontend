@@ -13,6 +13,10 @@
   --rdp-accent-color: var(--primary);
 }
 
+.picker :global(.rdp-dropdowns) {
+  width: 100%;
+}
+
 .dropdown {
   position: absolute;
   z-index: var(--z-dropdown);
