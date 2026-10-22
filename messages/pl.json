@@ -295,6 +295,8 @@
     "addParent": "Dodaj rodzica",
     "addPuppy": "Dodaj szczeniaka",
     "remove": "Usuń",
+    "removeParent": "Usuń rodzica",
+    "removePuppy": "Usuń szczeniaka",
     "modalTitle": "Usuń członka rodziny",
     "modalDescription": "Czy na pewno chcesz usunąć {name} z drzewa rodzinnego?",
     "addModalTitleParent": "Dodaj rodzica",

@@ -12,6 +12,8 @@ import { ROUTES } from "@/routes/routes";
 import { Card } from "@/app/uikit/layout/Card/Card";
 import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 
+const MAX_PARENTS = 2;
+
 interface FamilyProps {
   user: User;
   breeds: string[];
@@ -42,6 +44,7 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
             addLabel={t("familyTree.addParent")}
             relation="parent"
             members={parents}
+            maxMembers={MAX_PARENTS}
             isOwner={isOwner}
             breeds={breeds}
             avatar={avatar}

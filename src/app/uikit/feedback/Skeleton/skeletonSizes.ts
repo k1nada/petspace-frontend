@@ -2,7 +2,7 @@ export const SKELETON_AVATAR = {
   notification: 40,
   regular: 45,
   suggested: 44,
-  familyMember: 60,
+  familyMember: 56,
   friend: 70,
   friendRow: 56,
   familyUser: 96,
