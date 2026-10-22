@@ -14,6 +14,7 @@ interface FamilyColumnProps {
   addLabel: string;
   relation: FamilyRelation;
   members: FamilyMember[];
+  maxMembers?: number;
   isOwner: boolean;
   breeds: string[];
   avatar?: string;
@@ -27,6 +28,7 @@ export const FamilyColumn = ({
   addLabel,
   relation,
   members,
+  maxMembers,
   isOwner,
   breeds,
   avatar,
@@ -35,6 +37,8 @@ export const FamilyColumn = ({
 }: FamilyColumnProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const closeModal = () => setIsModalOpen(false);
+  const canAdd =
+    isOwner && (maxMembers === undefined || members.length < maxMembers);
 
   const addMember = async (member: NewFamilyMember) => {
     await onAdd(member);
@@ -62,7 +66,7 @@ export const FamilyColumn = ({
         <p className={styles.empty}>{emptyText}</p>
       )}
 
-      {isOwner && (
+      {canAdd && (
         <Button appearance="secondary" onClick={() => setIsModalOpen(true)}>
           {addLabel}
         </Button>

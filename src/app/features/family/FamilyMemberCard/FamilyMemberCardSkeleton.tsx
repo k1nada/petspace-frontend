@@ -6,11 +6,13 @@ import { DropdownSkeleton } from "@/app/uikit/overlays/Dropdown/DropdownSkeleton
 export const FamilyMemberCardSkeleton = () => (
   <li className={styles.card}>
     <div className={styles.link}>
-      <Skeleton
-        shape="circle"
-        width={SKELETON_AVATAR.familyMember}
-        height={SKELETON_AVATAR.familyMember}
-      />
+      <div className={styles.avatar}>
+        <Skeleton
+          shape="circle"
+          width={SKELETON_AVATAR.familyMember}
+          height={SKELETON_AVATAR.familyMember}
+        />
+      </div>
       <div className={styles.info}>
         <span className={styles.name}>
           <SkeletonText width={100} />

@@ -295,6 +295,8 @@
     "addParent": "Add parent",
     "addPuppy": "Add puppy",
     "remove": "Remove",
+    "removeParent": "Remove parent",
+    "removePuppy": "Remove puppy",
     "modalTitle": "Remove family member",
     "modalDescription": "Are you sure you want to remove {name} from the family tree?",
     "addModalTitleParent": "Add a parent",

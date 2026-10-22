@@ -7,7 +7,7 @@ import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
-import { MdDelete } from "react-icons/md";
+import { FaPaw } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import { ROUTES } from "@/routes/routes";
 import { FamilyMember } from "@/types";
@@ -41,15 +41,20 @@ export const FamilyMemberCard = ({
 
   const menuItems = [
     {
-      label: t("common.delete"),
+      label:
+        member.relation === "parent"
+          ? t("familyTree.removeParent")
+          : t("familyTree.removePuppy"),
       onClick: openConfirm,
-      icon: <MdDelete size={20} />,
+      icon: <FaPaw size={16} />,
     },
   ];
 
   const content = (
     <>
-      <Avatar src={member.avatar} size={60} />
+      <div className={styles.avatar}>
+        <Avatar src={member.avatar} size={56} />
+      </div>
       <div className={styles.info}>
         <span className={styles.name}>{member.name}</span>
         {member.breed && <span className={styles.breed}>{member.breed}</span>}
