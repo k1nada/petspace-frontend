@@ -91,7 +91,7 @@ export const PostCreator = ({
               { name },
             )}
             maxLength={MAX_POST_LENGTH}
-            disabled={isPublishing}
+            readOnly={isPublishing}
           />
         </div>
       </div>
