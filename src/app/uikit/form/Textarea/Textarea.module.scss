@@ -7,10 +7,10 @@
   resize: none;
   box-sizing: border-box;
   font-family: var(--font-sans);
-  transition:
-    box-shadow var(--transition-fast),
-    background-color var(--transition-base),
-    color var(--transition-base);
+
+  &:hover {
+    transition: box-shadow var(--transition-fast);
+  }
 
   &::placeholder {
     color: var(--text-placeholder);

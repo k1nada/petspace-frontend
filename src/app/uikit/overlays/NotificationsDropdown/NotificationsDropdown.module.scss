@@ -22,11 +22,11 @@
   padding: 0;
   cursor: pointer;
   color: var(--text-secondary);
-  transition:
-    color var(--transition-fast),
-    background-color var(--transition-fast);
 
   &:hover {
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast);
     color: var(--text-primary);
     background: var(--button-ghost-hover);
   }
