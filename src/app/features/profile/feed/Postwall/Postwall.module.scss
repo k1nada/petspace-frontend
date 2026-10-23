@@ -4,7 +4,11 @@
   gap: var(--gap-l);
 }
 
+.list > li {
+  border-top: 0 solid var(--border-divider);
+}
+
 .list > li + li {
   padding-top: var(--gap-l);
-  border-top: 1px solid var(--border-divider);
+  border-top-width: 1px;
 }
