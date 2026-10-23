@@ -34,7 +34,8 @@ export const Header = () => {
   const t = useTranslations();
   const router = useRouter();
   const currentUser = useAuthStore((state) => state.currentUser);
-  const { query, results, search, select } = useSearch();
+  const { query, results, isLoading, isEmpty, isDropdownOpen, search, select } =
+    useSearch();
   const [isSignOutOpen, setIsSignOutOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
@@ -90,7 +91,14 @@ export const Header = () => {
           {currentUser && (
             <div className={cn(styles.search, styles.desktopSearch)}>
               <SearchBar value={query} onChange={search} />
-              <UserSearchDropdown results={results} onSelect={select} />
+              {isDropdownOpen && (
+                <UserSearchDropdown
+                  results={results}
+                  isLoading={isLoading}
+                  isEmpty={isEmpty}
+                  onSelect={select}
+                />
+              )}
             </div>
           )}
           <nav className={styles.actions}>
@@ -135,6 +143,9 @@ export const Header = () => {
           query={query}
           onSearch={search}
           results={results}
+          isLoading={isLoading}
+          isEmpty={isEmpty}
+          isDropdownOpen={isDropdownOpen}
           onSelect={(username) => {
             setIsSearchOpen(false);
             select(username);

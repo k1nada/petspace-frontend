@@ -13,6 +13,9 @@ interface HeaderMobileSearchProps {
   query: string;
   onSearch: (value: string) => void;
   results: UserType[];
+  isLoading: boolean;
+  isEmpty: boolean;
+  isDropdownOpen: boolean;
   onSelect: (username: string) => void;
 }
 
@@ -22,6 +25,9 @@ export const HeaderMobileSearch = ({
   query,
   onSearch,
   results,
+  isLoading,
+  isEmpty,
+  isDropdownOpen,
   onSelect,
 }: HeaderMobileSearchProps) => {
   if (!isOpen) return null;
@@ -33,7 +39,15 @@ export const HeaderMobileSearch = ({
       </Button>
       <div className={styles.input}>
         <SearchBar value={query} onChange={onSearch} fullWidth autoFocus />
-        <UserSearchDropdown results={results} onSelect={onSelect} fullWidth />
+        {isDropdownOpen && (
+          <UserSearchDropdown
+            results={results}
+            isLoading={isLoading}
+            isEmpty={isEmpty}
+            onSelect={onSelect}
+            fullWidth
+          />
+        )}
       </div>
     </div>
   );

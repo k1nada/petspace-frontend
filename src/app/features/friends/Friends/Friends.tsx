@@ -4,7 +4,7 @@ import styles from "./Friends.module.scss";
 import { useTranslations } from "next-intl";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { Tab } from "@/app/uikit/navigation/Tab/Tab";
-import { MdPersonRemove } from "react-icons/md";
+import { FaPaw } from "react-icons/fa";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
@@ -90,7 +90,7 @@ export const Friends = ({
               items={[
                 {
                   label: t("friends.unfollowAll"),
-                  icon: <MdPersonRemove size={20} />,
+                  icon: <FaPaw size={16} />,
                   onClick: openConfirmAll,
                 },
               ]}

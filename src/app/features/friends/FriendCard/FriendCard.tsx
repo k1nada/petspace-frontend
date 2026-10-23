@@ -3,12 +3,8 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
-import {
-  MdCancel,
-  MdDelete,
-  MdOutlineMoreHoriz,
-  MdPersonAdd,
-} from "react-icons/md";
+import { MdCancel, MdOutlineMoreHoriz, MdPersonAdd } from "react-icons/md";
+import { FaPaw } from "react-icons/fa";
 import { Friend } from "@/types";
 import { ROUTES } from "@/routes/routes";
 import { useRouter } from "@/i18n/navigation";
@@ -96,7 +92,7 @@ export const FriendCard = ({
   if (isOwner) {
     menuItems.push({
       label: t("profileBanner.removeFriend"),
-      icon: <MdDelete size={20} />,
+      icon: <FaPaw size={16} />,
       onClick: () => setIsDeleteOpen(true),
     });
   } else if (!isFriend && isPending) {

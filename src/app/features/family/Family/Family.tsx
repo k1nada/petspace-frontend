@@ -11,8 +11,7 @@ import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
 import { Card } from "@/app/uikit/layout/Card/Card";
 import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
-
-const MAX_PARENTS = 2;
+import { MAX_PARENTS, MAX_PUPPIES } from "@/utils/family";
 
 interface FamilyProps {
   user: User;
@@ -70,6 +69,8 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
             addLabel={t("familyTree.addPuppy")}
             relation="child"
             members={children}
+            maxMembers={MAX_PUPPIES}
+            limitText={t("familyTree.puppiesLimit", { count: MAX_PUPPIES })}
             isOwner={isOwner}
             breeds={breeds}
             avatar={avatar}

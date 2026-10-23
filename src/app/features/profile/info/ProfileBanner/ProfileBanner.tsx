@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { FaMapMarkerAlt, FaPaw, FaTree, FaTrophy } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
-import { MdDelete } from "react-icons/md";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
 import { Link } from "@/app/uikit/navigation/Link/Link";
@@ -192,7 +191,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
             items={[
               {
                 label: t("profileBanner.removeFriend"),
-                icon: <MdDelete size={20} />,
+                icon: <FaPaw size={16} />,
                 onClick: () => setIsDeleteFriendOpen(true),
               },
             ]}

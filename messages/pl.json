@@ -87,7 +87,8 @@
     "feed": "Aktualności"
   },
   "searchBar": {
-    "search": "Szukaj"
+    "search": "Szukaj",
+    "noResults": "Nie znaleziono psów"
   },
   "dailyTip": {
     "title": "Porada dnia",
@@ -314,7 +315,9 @@
     "generatePhoto": "Wygeneruj zdjęcie",
     "generatePhotoComingSoon": "Generowanie zdjęć przez AI wkrótce!",
     "add": "Dodaj",
-    "addError": "Nie udało się dodać członka rodziny"
+    "addError": "Nie udało się dodać członka rodziny",
+    "puppiesLimit": "Możesz dodać maksymalnie {count, plural, one {# szczeniaka} few {# szczeniaki} many {# szczeniaków} other {# szczeniaka}}",
+    "showAll": "Pokaż wszystkie ({count})"
   },
   "contactList": {
     "emptyText": "Znajdź inne psy i zacznij rozmawiać!",

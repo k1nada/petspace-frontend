@@ -87,7 +87,8 @@
     "feed": "Feed"
   },
   "searchBar": {
-    "search": "Search"
+    "search": "Search",
+    "noResults": "No dogs found"
   },
   "dailyTip": {
     "title": "Tip of the day",
@@ -314,7 +315,9 @@
     "generatePhoto": "Generate photo",
     "generatePhotoComingSoon": "AI photo generation is coming soon!",
     "add": "Add",
-    "addError": "Failed to add family member"
+    "addError": "Failed to add family member",
+    "puppiesLimit": "You can add up to {count, plural, one {# puppy} other {# puppies}}",
+    "showAll": "Show all ({count})"
   },
   "contactList": {
     "emptyText": "Find other dogs to start chatting!",
