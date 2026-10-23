@@ -6,6 +6,7 @@ import cn from "classnames";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
+import { isAxiosError } from "axios";
 import { MdAdd } from "react-icons/md";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
@@ -17,6 +18,7 @@ import { AvatarUploadModal } from "@/app/uikit/user/AvatarUploadModal/AvatarUplo
 import { useSearch } from "@/app/hooks/shared/useSearch";
 import { uploadFamilyAvatar } from "@/services/api/upload";
 import { FamilyRelation, NewFamilyMember, User } from "@/types";
+import { MAX_PUPPIES } from "@/utils/family";
 import defaultAvatar from "@/assets/avatars/default.png";
 
 type Mode = "search" | "manual";
@@ -44,7 +46,7 @@ export const AddFamilyMemberModal = ({
 }: AddFamilyMemberModalProps) => {
   const t = useTranslations();
   const [mode, setMode] = useState<Mode>("search");
-  const { query, results, search } = useSearch();
+  const { query, results, isEmpty, search } = useSearch();
   const [form, setForm] = useState(emptyForm);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,6 +66,17 @@ export const AddFamilyMemberModal = ({
     onClose();
   };
 
+  const showAddError = (error: unknown) => {
+    if (
+      isAxiosError(error) &&
+      error.response?.data?.type === "PUPPIES_LIMIT_REACHED"
+    ) {
+      toast.error(t("familyTree.puppiesLimit", { count: MAX_PUPPIES }));
+      return;
+    }
+    toast.error(t("familyTree.addError"));
+  };
+
   const selectUser = async (user: User) => {
     if (isSubmitting) return;
     setIsSubmitting(true);
@@ -75,8 +88,8 @@ export const AddFamilyMemberModal = ({
         username: user.username,
       });
       reset();
-    } catch {
-      toast.error(t("familyTree.addError"));
+    } catch (error) {
+      showAddError(error);
     } finally {
       setIsSubmitting(false);
     }
@@ -95,8 +108,8 @@ export const AddFamilyMemberModal = ({
         avatar: avatarUrl,
       });
       reset();
-    } catch {
-      toast.error(t("familyTree.addError"));
+    } catch (error) {
+      showAddError(error);
     } finally {
       setIsSubmitting(false);
     }
@@ -111,8 +124,6 @@ export const AddFamilyMemberModal = ({
       ? "familyTree.addModalTitleParent"
       : "familyTree.addModalTitleChild",
   );
-
-  const showNoResults = query.trim() && results.length === 0;
 
   return (
     <Modal isOpen={isOpen} onClose={handleClose} className={styles.modal}>
@@ -166,7 +177,7 @@ export const AddFamilyMemberModal = ({
             </ul>
           )}
 
-          {showNoResults && (
+          {isEmpty && (
             <p className={styles.noResults}>{t("familyTree.noResults")}</p>
           )}
         </div>

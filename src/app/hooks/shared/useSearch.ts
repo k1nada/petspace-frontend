@@ -1,29 +1,43 @@
 import { ROUTES } from "@/routes/routes";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { toast } from "react-toastify";
 import { User as UserType } from "@/types/index";
 import { searchUsers } from "@/services/api/userClient";
 
 const SEARCH_DELAY_MS = 300;
+const MIN_QUERY_LENGTH = 2;
+
+interface FoundUsers {
+  query: string;
+  users: UserType[];
+}
 
 export const useSearch = () => {
+  const t = useTranslations();
   const router = useRouter();
   const pathname = usePathname();
   const [searchPathname, setSearchPathname] = useState(pathname);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<UserType[]>([]);
+  const [found, setFound] = useState<FoundUsers>({ query: "", users: [] });
+
+  const trimmedQuery = query.trim();
+  const isQueryLongEnough = trimmedQuery.length >= MIN_QUERY_LENGTH;
 
   useEffect(() => {
-    if (!query.trim()) return;
+    if (!isQueryLongEnough) return;
     let cancelled = false;
 
     const timer = setTimeout(() => {
-      searchUsers(query)
-        .then((data) => {
-          if (!cancelled) setResults(data);
+      searchUsers(trimmedQuery)
+        .then((users) => {
+          if (!cancelled) setFound({ query: trimmedQuery, users });
         })
         .catch(() => {
-          if (!cancelled) setResults([]);
+          if (cancelled) return;
+          setFound({ query: trimmedQuery, users: [] });
+          toast.error(t("toasts.error"));
         });
     }, SEARCH_DELAY_MS);
 
@@ -31,25 +45,30 @@ export const useSearch = () => {
       cancelled = true;
       clearTimeout(timer);
     };
-  }, [query]);
+  }, [trimmedQuery, isQueryLongEnough, t]);
 
   const search = (value: string) => {
     setSearchPathname(pathname);
     setQuery(value);
-    if (!value.trim()) setResults([]);
   };
 
   const select = (username: string) => {
     setQuery("");
-    setResults([]);
     router.push(ROUTES.profile(username));
   };
 
   const isOnSearchPage = searchPathname === pathname;
+  const isFound = isQueryLongEnough && found.query === trimmedQuery;
+  const results = isOnSearchPage && isFound ? found.users : [];
+  const isLoading = isOnSearchPage && isQueryLongEnough && !isFound;
+  const isEmpty = isOnSearchPage && isFound && results.length === 0;
 
   return {
     query: isOnSearchPage ? query : "",
-    results: isOnSearchPage ? results : [],
+    results,
+    isLoading,
+    isEmpty,
+    isDropdownOpen: isLoading || isEmpty || results.length > 0,
     search,
     select,
   };

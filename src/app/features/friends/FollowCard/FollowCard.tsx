@@ -8,8 +8,8 @@ import {
   MdCheck,
   MdOutlineMoreHoriz,
   MdPersonAdd,
-  MdPersonRemove,
 } from "react-icons/md";
+import { FaPaw } from "react-icons/fa";
 import { FollowUser, FollowListType } from "@/types";
 import { ROUTES } from "@/routes/routes";
 import { useRouter } from "@/i18n/navigation";
@@ -161,7 +161,7 @@ export const FollowCard = ({
   if (canManage) {
     menuItems.push({
       label: removeLabel,
-      icon: <MdPersonRemove size={20} />,
+      icon: <FaPaw size={16} />,
       onClick: () => setIsModalOpen(true),
     });
   }
