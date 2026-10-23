@@ -3,10 +3,14 @@
   padding: var(--padding-s) var(--padding-m);
   cursor: pointer;
   border-radius: var(--radius-m);
-  transition:
-    background-color var(--transition-base),
-    color var(--transition-base),
-    opacity var(--transition-fast);
+  transition: opacity var(--transition-fast);
+
+  &:hover {
+    transition:
+      background-color var(--transition-base),
+      color var(--transition-base),
+      opacity var(--transition-fast);
+  }
 
   &:disabled {
     opacity: 0.5;

@@ -89,9 +89,9 @@
   gap: var(--gap-xs);
   color: var(--text-secondary);
   cursor: pointer;
-  transition: color var(--transition-fast);
 
   &:hover {
+    transition: color var(--transition-fast);
     color: var(--text-primary);
   }
 }

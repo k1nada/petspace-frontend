@@ -5,9 +5,12 @@
   outline: none;
   border-radius: var(--radius-m);
   box-sizing: border-box;
-  transition:
-    background-color var(--transition-base),
-    color var(--transition-base);
+
+  &:hover {
+    transition:
+      background-color var(--transition-base),
+      color var(--transition-base);
+  }
 
   &::placeholder {
     color: var(--text-placeholder);

@@ -78,11 +78,11 @@
   padding: 0;
   border-radius: var(--radius-full);
   color: var(--text-secondary);
-  transition:
-    color var(--transition-fast),
-    background-color var(--transition-fast);
 
   &:hover {
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast);
     color: var(--text-primary);
   }
 }

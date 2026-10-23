@@ -24,10 +24,10 @@
   padding: var(--padding-s) var(--padding-m);
   border-radius: var(--radius-m);
   background: var(--bg-nested);
-  transition: background-color 0.3s ease;
   color: var(--icon-on-primary);
 
   &:hover {
+    transition: background-color var(--transition-base);
     background: var(--bg-nested-hover);
   }
 }

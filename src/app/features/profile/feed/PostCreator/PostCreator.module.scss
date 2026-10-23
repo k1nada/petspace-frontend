@@ -36,9 +36,9 @@ button.attachmentItem {
   border: none;
   padding: 0;
   cursor: pointer;
-  transition: color var(--transition-fast);
 
   &:hover {
+    transition: color var(--transition-fast);
     color: var(--text-primary);
     background: none;
   }

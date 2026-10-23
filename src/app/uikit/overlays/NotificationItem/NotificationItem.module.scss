@@ -5,9 +5,9 @@
   gap: var(--gap-m);
   padding: var(--padding-s) var(--padding-m);
   cursor: pointer;
-  transition: background-color var(--transition-fast);
 
   &:hover {
+    transition: background-color var(--transition-fast);
     background: var(--button-ghost-hover);
   }
 }
