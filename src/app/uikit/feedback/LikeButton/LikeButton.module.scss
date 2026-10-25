@@ -6,6 +6,9 @@
 
 .heart svg {
   color: var(--icon-secondary);
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
 }
 
 button.heart.liked,
@@ -16,7 +19,6 @@ button.heart.liked svg {
 @media (hover: hover) {
   button.heart:hover,
   button.heart:hover svg {
-    transition: color var(--transition-fast);
     color: var(--text-liked);
   }
 }

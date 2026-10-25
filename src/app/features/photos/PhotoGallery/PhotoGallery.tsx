@@ -130,8 +130,11 @@ export const PhotoGallery = ({
 
         <ConfirmModal
           isOpen={isDeleteAllOpen}
-          title={t("photoGallery.deleteAllModalTitle")}
-          description={t("photoGallery.deleteAllModalDescription")}
+          title={t("photoGallery.deleteAllModalTitle", {
+            count: localPhotos.length,
+          })}
+          description={t("common.cannotUndo")}
+          confirmLabel={t("photoGallery.deleteAllConfirm")}
           onConfirm={() => deleteAllPhotos(() => setIsDeleteAllOpen(false))}
           onClose={() => setIsDeleteAllOpen(false)}
         />

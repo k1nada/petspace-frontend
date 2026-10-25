@@ -214,8 +214,8 @@ export const AvatarEdit = ({
 
       <ConfirmModal
         isOpen={isDeleteOpen}
-        title={t("common.deletePhoto")}
-        description={t("avatarEdit.deleteModalDescription")}
+        title={t("avatarEdit.deleteModalTitle")}
+        description={t("common.cannotUndo")}
         onConfirm={deleteAvatar}
         onClose={() => setIsDeleteOpen(false)}
       />

@@ -21,6 +21,9 @@
   height: 36px;
   color: var(--text-secondary);
   flex-shrink: 0;
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
 
   &:hover {
     color: var(--text-primary);

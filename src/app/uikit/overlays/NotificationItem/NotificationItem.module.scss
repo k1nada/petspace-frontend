@@ -6,8 +6,11 @@
   padding: var(--padding-s) var(--padding-m);
   cursor: pointer;
 
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
+
   &:hover {
-    transition: background-color var(--transition-fast);
     background: var(--button-ghost-hover);
   }
 }

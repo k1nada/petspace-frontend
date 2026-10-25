@@ -63,12 +63,16 @@ export const FollowCard = ({
     type === "followers"
       ? t("followCard.removeFollower")
       : t("friends.unfollow");
-  const modalDescription = t(
-    type === "followers"
-      ? "followCard.removeModalDescription"
-      : "followCard.unfollowModalDescription",
-    { name: user.name },
-  );
+  const isFollowersList = type === "followers";
+  const modalTitle = isFollowersList
+    ? t("followCard.removeModalTitle", { name: user.name })
+    : t("followCard.unfollowModalTitle", { name: user.name });
+  const modalDescription = isFollowersList
+    ? t("followCard.removeModalDescription", { name: user.name })
+    : t("followCard.unfollowModalDescription");
+  const confirmLabel = isFollowersList
+    ? t("common.remove")
+    : t("friends.unfollow");
 
   const { isFriend, isPending } = getRelationshipStatus(
     currentUserData,
@@ -202,8 +206,9 @@ export const FollowCard = ({
     >
       <ConfirmModal
         isOpen={isModalOpen}
-        title={removeLabel}
+        title={modalTitle}
         description={modalDescription}
+        confirmLabel={confirmLabel}
         onConfirm={handleConfirm}
         onClose={() => setIsModalOpen(false)}
       />

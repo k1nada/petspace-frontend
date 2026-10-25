@@ -189,7 +189,7 @@ export const Comment = ({
       <ConfirmModal
         isOpen={isDeleteOpen}
         title={t("comment.deleteModalTitle")}
-        description={t("comment.deleteModalDescription")}
+        description={t("common.cannotUndo")}
         onConfirm={handleDeleteComment}
         onClose={() => setIsDeleteOpen(false)}
       />

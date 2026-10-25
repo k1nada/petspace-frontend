@@ -17,8 +17,11 @@
   padding: 0;
   font-size: var(--font-m);
 
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
+
   &:hover {
-    transition: color var(--transition-fast);
     color: var(--text-primary);
   }
 }

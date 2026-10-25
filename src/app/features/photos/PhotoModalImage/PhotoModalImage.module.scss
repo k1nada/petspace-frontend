@@ -43,7 +43,9 @@
   border-radius: var(--radius-full);
 
   background: var(--photo-nav-bg);
-  transition: background var(--transition-fast);
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
 
   svg {
     color: var(--text-on-color);

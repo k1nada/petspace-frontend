@@ -26,8 +26,11 @@
   background: var(--bg-nested);
   color: var(--icon-on-primary);
 
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
+
   &:hover {
-    transition: background-color var(--transition-base);
     background: var(--bg-nested-hover);
   }
 }

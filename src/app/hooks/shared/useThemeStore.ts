@@ -14,8 +14,13 @@ export const useThemeStore = create<ThemeStore>()(
       theme: "light",
       toggle: () => {
         const nextTheme = get().theme === "light" ? "dark" : "light";
-        document.documentElement.setAttribute("data-theme", nextTheme);
+        const html = document.documentElement;
+        html.classList.add("theme-switching");
+        html.setAttribute("data-theme", nextTheme);
         set({ theme: nextTheme });
+        requestAnimationFrame(() =>
+          requestAnimationFrame(() => html.classList.remove("theme-switching")),
+        );
       },
     }),
     { name: "theme" },

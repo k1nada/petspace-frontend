@@ -55,6 +55,9 @@
   cursor: pointer;
   color: var(--text-primary);
   font-size: var(--font-m);
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
 
   &:hover {
     background: var(--bg-input);

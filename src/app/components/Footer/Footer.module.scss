@@ -14,6 +14,9 @@
 
 .link {
   font-size: var(--font-s);
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
 
   &:hover {
     color: var(--text-primary);

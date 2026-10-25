@@ -32,8 +32,11 @@
 .dropdownItem {
   cursor: pointer;
 
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
+
   &:hover {
-    transition: background-color var(--transition-fast);
     background-color: var(--button-ghost-hover);
   }
 }

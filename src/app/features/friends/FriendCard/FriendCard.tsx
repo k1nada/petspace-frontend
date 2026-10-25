@@ -137,10 +137,11 @@ export const FriendCard = ({
           isOpen={isDeleteOpen}
           onClose={() => setIsDeleteOpen(false)}
           onConfirm={handleDeleteFriend}
-          title={t("friendCard.modalTitle")}
+          title={t("friendCard.modalTitle", { name: friend.name })}
           description={t("friendCard.modalDescription", {
             name: friend.name,
           })}
+          confirmLabel={t("common.remove")}
         />
       )}
     </UserRow>

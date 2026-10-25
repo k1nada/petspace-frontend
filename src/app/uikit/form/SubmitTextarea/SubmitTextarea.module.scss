@@ -20,8 +20,11 @@
   align-items: center;
   flex-shrink: 0;
 
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
+
   &:hover {
-    transition: color var(--transition-fast);
     color: var(--text-primary);
   }
 }
