@@ -248,7 +248,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
       <ConfirmModal
         isOpen={isDeleteOpen}
         title={t("post.modalTitle")}
-        description={t("post.modalDescription")}
+        description={t("common.cannotUndo")}
         onConfirm={handleDeletePost}
         onClose={() => setIsDeleteOpen(false)}
       />

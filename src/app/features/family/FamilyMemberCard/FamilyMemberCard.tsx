@@ -80,8 +80,8 @@ export const FamilyMemberCard = ({
 
       <ConfirmModal
         isOpen={isConfirmOpen}
-        title={t("familyTree.modalTitle")}
-        description={t("familyTree.modalDescription", { name: member.name })}
+        title={t("familyTree.modalTitle", { name: member.name })}
+        description={t("common.cannotUndo")}
         onConfirm={handleRemove}
         onClose={closeConfirm}
       />

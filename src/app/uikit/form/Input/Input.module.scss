@@ -6,11 +6,9 @@
   border-radius: var(--radius-m);
   box-sizing: border-box;
 
-  &:hover {
-    transition:
-      background-color var(--transition-base),
-      color var(--transition-base);
-  }
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
 
   &::placeholder {
     color: var(--text-placeholder);

@@ -213,7 +213,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
             onClick={acceptIncomingRequest}
             disabled={isBusy}
           >
-            {t("profileBanner.acceptRequest")}
+            {t("friendRequest.accept")}
           </Button>
           <Button
             appearance="secondary"
@@ -338,10 +338,11 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
 
         <ConfirmModal
           isOpen={isDeleteFriendOpen}
-          title={t("friendCard.modalTitle")}
+          title={t("friendCard.modalTitle", { name: bannerInfo.name })}
           description={t("friendCard.modalDescription", {
             name: bannerInfo.name,
           })}
+          confirmLabel={t("common.remove")}
           onConfirm={removeFriend}
           onClose={() => setIsDeleteFriendOpen(false)}
         />

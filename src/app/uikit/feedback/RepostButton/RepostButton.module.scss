@@ -10,11 +10,13 @@
 
 .repost svg {
   color: var(--icon-secondary);
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
 }
 
 @media (hover: hover) {
   .repost:hover svg {
-    transition: color var(--transition-fast);
     color: var(--icon-secondary-hover);
   }
 }

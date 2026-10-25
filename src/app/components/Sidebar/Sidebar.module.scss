@@ -6,6 +6,10 @@
   height: 100%;
   overflow-y: auto;
   transition: transform var(--transition-base);
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 .list {

@@ -114,6 +114,9 @@
   display: none;
   align-items: center;
   color: var(--text-secondary);
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
 
   &:hover {
     color: var(--text-primary);

@@ -20,7 +20,7 @@
     "addFriend": "Dodaj",
     "following": "Obserwujesz",
     "photos": "Zdjęcia",
-    "addPhoto": "Dodaj nowe zdjęcie",
+    "addPhoto": "Dodaj zdjęcie",
     "deletePhoto": "Usuń zdjęcie",
     "noPhotosYet": "Brak zdjęć",
     "imageFormats": "JPG, PNG, GIF, WEBP",
@@ -32,7 +32,9 @@
     "email": "E-mail",
     "password": "Hasło",
     "createAccount": "Utwórz konto",
-    "editProfile": "Edytuj profil"
+    "editProfile": "Edytuj profil",
+    "remove": "Usuń",
+    "cannotUndo": "Tej operacji nie można cofnąć."
   },
   "fields": {
     "birthday": "Urodziny:",
@@ -128,7 +130,6 @@
   "profileBanner": {
     "info": "Więcej info",
     "requestSent": "Wysłano",
-    "acceptRequest": "Przyjmij zaproszenie",
     "cancelRequest": "Anuluj zaproszenie",
     "removeFriend": "Usuń ze znajomych",
     "friendsCount": "{count, plural, one {# znajomy} few {# znajomych} many {# znajomych} other {# znajomych}}",
@@ -169,7 +170,7 @@
     "modalTitle": "Prześlij nowe zdjęcie",
     "modalDescription": "Pokaż sforze kim jesteś!",
     "choosePhoto": "Kliknij, aby wybrać zdjęcie",
-    "deleteModalDescription": "Czy na pewno chcesz usunąć swoje zdjęcie?"
+    "deleteModalTitle": "Usunąć to zdjęcie?"
   },
   "feed": {
     "title": "Brak postów",
@@ -191,15 +192,14 @@
   },
   "post": {
     "image": "Zdjęcie posta",
-    "modalTitle": "Usuń post",
-    "modalDescription": "Czy na pewno chcesz usunąć ten post?",
+    "modalTitle": "Usunąć ten post?",
     "repostedBy": "Udostępnione przez {name}"
   },
   "sharePostModal": {
     "title": "Udostępnij post",
-    "sent": "Wysłano post!",
+    "sent": "Post wysłany",
     "shareToWall": "Udostępnij na swojej tablicy",
-    "sharedToWall": "Udostępniono na Twojej tablicy!"
+    "sharedToWall": "Udostępniono na Twojej tablicy"
   },
   "signOut": {
     "modalTitle": "Wyloguj się",
@@ -214,8 +214,7 @@
   },
   "comment": {
     "reply": "Odpowiedz",
-    "deleteModalTitle": "Usuń komentarz",
-    "deleteModalDescription": "Czy na pewno chcesz usunąć ten komentarz?"
+    "deleteModalTitle": "Usunąć ten komentarz?"
   },
   "commentCreator": {
     "placeholder": "Powąchaj i skomentuj..."
@@ -225,16 +224,16 @@
     "titleOther": "Zdjęcia użytkownika {name}",
     "manage": "Zarządzaj zdjęciami",
     "deleteAll": "Usuń wszystkie",
-    "deleteAllModalTitle": "Usuń wszystkie zdjęcia",
-    "deleteAllModalDescription": "Czy na pewno chcesz usunąć wszystkie swoje zdjęcia? Tej operacji nie można cofnąć.",
+    "deleteAllModalTitle": "Usunąć wszystkie zdjęcia ({count})?",
     "photoAlt": "Zdjęcie {name}",
-    "emptyPhotosText": "Czas uwiecznić chwile merdania ogonem!"
+    "emptyPhotosText": "Czas uwiecznić chwile merdania ogonem!",
+    "deleteAllConfirm": "Usuń wszystkie zdjęcia"
   },
   "photoModal": {
     "counter": "{current} / {total}",
     "commentsTitle": "Jeszcze żadnych merdań ogonem...",
     "commentsText": "Bądź pierwszy!",
-    "modalDescription": "Czy na pewno chcesz usunąć to zdjęcie?"
+    "modalTitle": "Usunąć to zdjęcie?"
   },
   "photoUploadModal": {
     "dragAndDrop": "Przeciągnij i upuść lub kliknij tutaj"
@@ -245,8 +244,8 @@
     "followersTitle": "Obserwujący",
     "followingTitle": "Obserwowani",
     "manageFollowing": "Zarządzaj obserwowanymi",
-    "unfollowAll": "Nie obserwuj nikogo",
-    "unfollow": "Nie obserwuj",
+    "unfollowAll": "Przestań obserwować wszystkich",
+    "unfollow": "Przestań obserwować",
     "emptyFriendsText": "Znajdź jakieś psy i wyślij im zaproszenie do znajomych!",
     "noSearchResults": "Nie znaleziono znajomych",
     "emptyFollowersTitle": "Brak obserwujących",
@@ -266,16 +265,18 @@
     "rejectedSuccess": "Zaproszenie odrzucone"
   },
   "friendCard": {
-    "modalTitle": "Usuń znajomego",
-    "modalDescription": "Czy na pewno chcesz usunąć {name}?"
+    "modalTitle": "Usunąć {name} ze znajomych?",
+    "modalDescription": "Możesz ponownie dodać {name} później."
   },
   "followCard": {
     "removeModalDescription": "{name} nie będzie już Cię obserwować.",
-    "unfollowModalDescription": "Zawsze możesz ponownie zacząć obserwować {name}.",
-    "unfollowAllModalDescription": "Przestaniesz obserwować wszystkich z tej listy. Zawsze możesz zacząć ich obserwować ponownie później.",
+    "unfollowModalDescription": "Możesz ponownie zacząć obserwować później.",
     "followersCount": "{count, plural, one {# obserwujący} few {# obserwujących} many {# obserwujących} other {# obserwujących}}",
     "removeFollower": "Usuń obserwującego",
-    "followBack": "Obserwuj również"
+    "followBack": "Obserwuj również",
+    "removeModalTitle": "Usunąć {name} z obserwujących?",
+    "unfollowModalTitle": "Przestać obserwować {name}?",
+    "unfollowAllModalTitle": "Przestać obserwować {count, plural, one {# psa} few {# psy} many {# psów} other {# psa}}?"
   },
   "friendTip": {
     "text": "Psy w tym samym wieku i rasie najlepiej się dogadują. Uzupełnij swój profil, a znajdziemy świetnych znajomych w pobliżu!"
@@ -295,11 +296,9 @@
     "emptyChildren": "Nie dodano jeszcze szczeniaków",
     "addParent": "Dodaj rodzica",
     "addPuppy": "Dodaj szczeniaka",
-    "remove": "Usuń",
     "removeParent": "Usuń rodzica",
     "removePuppy": "Usuń szczeniaka",
-    "modalTitle": "Usuń członka rodziny",
-    "modalDescription": "Czy na pewno chcesz usunąć {name} z drzewa rodzinnego?",
+    "modalTitle": "Usunąć {name} z drzewa rodzinnego?",
     "addModalTitleParent": "Dodaj rodzica",
     "addModalTitleChild": "Dodaj szczeniaka",
     "addModalDescription": "Połącz istniejący profil lub dodaj dane samodzielnie.",

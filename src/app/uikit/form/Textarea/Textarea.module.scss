@@ -8,10 +8,6 @@
   box-sizing: border-box;
   font-family: var(--font-sans);
 
-  &:hover {
-    transition: box-shadow var(--transition-fast);
-  }
-
   &::placeholder {
     color: var(--text-placeholder);
   }

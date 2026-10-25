@@ -170,8 +170,8 @@ export const PhotoModal = ({
 
           <ConfirmModal
             isOpen={isDeleteOpen}
-            title={t("common.deletePhoto")}
-            description={t("photoModal.modalDescription")}
+            title={t("photoModal.modalTitle")}
+            description={t("common.cannotUndo")}
             onConfirm={handleDeletePhoto}
             onClose={() => setIsDeleteOpen(false)}
           />

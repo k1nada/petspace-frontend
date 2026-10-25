@@ -155,8 +155,11 @@ export const Friends = ({
 
       <ConfirmModal
         isOpen={isConfirmAllOpen}
-        title={t("friends.unfollowAll")}
-        description={t("followCard.unfollowAllModalDescription")}
+        title={t("followCard.unfollowAllModalTitle", {
+          count: followingCount,
+        })}
+        description={t("followCard.unfollowModalDescription")}
+        confirmLabel={t("friends.unfollowAll")}
         onConfirm={unfollowAll}
         onClose={closeConfirmAll}
       />

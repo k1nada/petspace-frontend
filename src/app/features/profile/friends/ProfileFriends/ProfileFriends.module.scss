@@ -25,7 +25,9 @@
   padding: var(--gap-xs);
   border-radius: var(--radius-m);
   text-align: center;
-  transition: background var(--transition-fast);
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
 
   &:hover {
     background: var(--bg-hover);

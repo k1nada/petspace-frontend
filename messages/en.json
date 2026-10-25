@@ -20,7 +20,7 @@
     "addFriend": "Add friend",
     "following": "Following",
     "photos": "Photos",
-    "addPhoto": "Add new photo",
+    "addPhoto": "Add photo",
     "deletePhoto": "Delete photo",
     "noPhotosYet": "No photos yet",
     "imageFormats": "JPG, PNG, GIF, WEBP",
@@ -32,7 +32,9 @@
     "email": "Email",
     "password": "Password",
     "createAccount": "Create Account",
-    "editProfile": "Edit profile"
+    "editProfile": "Edit profile",
+    "remove": "Remove",
+    "cannotUndo": "This can't be undone."
   },
   "fields": {
     "birthday": "Birthday:",
@@ -128,7 +130,6 @@
   "profileBanner": {
     "info": "More info",
     "requestSent": "Request sent",
-    "acceptRequest": "Accept request",
     "cancelRequest": "Cancel request",
     "removeFriend": "Remove friend",
     "friendsCount": "{count, plural, one {# friend} other {# friends}}",
@@ -169,7 +170,7 @@
     "modalTitle": "Upload new photo",
     "modalDescription": "Show the pack who you are!",
     "choosePhoto": "Click to choose a photo",
-    "deleteModalDescription": "Are you sure you want to delete your photo?"
+    "deleteModalTitle": "Delete this photo?"
   },
   "feed": {
     "title": "No posts yet",
@@ -191,15 +192,14 @@
   },
   "post": {
     "image": "Post image",
-    "modalTitle": "Delete post",
-    "modalDescription": "Are you sure you want to delete this post?",
+    "modalTitle": "Delete this post?",
     "repostedBy": "Reposted by {name}"
   },
   "sharePostModal": {
     "title": "Share post",
-    "sent": "Post sent!",
+    "sent": "Post sent",
     "shareToWall": "Share to your wall",
-    "sharedToWall": "Shared to your wall!"
+    "sharedToWall": "Shared to your wall"
   },
   "signOut": {
     "modalTitle": "Sign out",
@@ -214,8 +214,7 @@
   },
   "comment": {
     "reply": "Reply",
-    "deleteModalTitle": "Delete comment",
-    "deleteModalDescription": "Are you sure you want to delete this comment?"
+    "deleteModalTitle": "Delete this comment?"
   },
   "commentCreator": {
     "placeholder": "Sniff around and comment..."
@@ -225,16 +224,16 @@
     "titleOther": "{name}'s photos",
     "manage": "Manage photos",
     "deleteAll": "Delete all",
-    "deleteAllModalTitle": "Delete all photos",
-    "deleteAllModalDescription": "Are you sure you want to delete all your photos? This can't be undone.",
+    "deleteAllModalTitle": "Delete all {count, plural, one {# photo} other {# photos}}?",
     "photoAlt": "{name}'s photo",
-    "emptyPhotosText": "Time to capture some tail-wagging moments!"
+    "emptyPhotosText": "Time to capture some tail-wagging moments!",
+    "deleteAllConfirm": "Delete all photos"
   },
   "photoModal": {
     "counter": "{current} / {total}",
     "commentsTitle": "No tail wags yet...",
     "commentsText": "Be the first!",
-    "modalDescription": "Are you sure you want to delete this photo?"
+    "modalTitle": "Delete this photo?"
   },
   "photoUploadModal": {
     "dragAndDrop": "Drag & drop or click here"
@@ -262,20 +261,22 @@
     "decline": "Decline",
     "wantsToBeFriends": "Wants to be friends",
     "empty": "No friend requests right now. Check back later!",
-    "acceptedSuccess": "Friend request accepted",
-    "rejectedSuccess": "Friend request declined"
+    "acceptedSuccess": "Request accepted",
+    "rejectedSuccess": "Request declined"
   },
   "friendCard": {
-    "modalTitle": "Delete friend",
-    "modalDescription": "Are you sure you want to delete {name}?"
+    "modalTitle": "Remove {name} from friends?",
+    "modalDescription": "You can add them again later."
   },
   "followCard": {
     "removeModalDescription": "{name} will no longer follow you.",
-    "unfollowModalDescription": "You can always follow {name} again later.",
-    "unfollowAllModalDescription": "You won't follow anyone from this list anymore. You can always follow them again later.",
+    "unfollowModalDescription": "You can follow them again later.",
     "followersCount": "{count, plural, one {# follower} other {# followers}}",
     "removeFollower": "Remove follower",
-    "followBack": "Follow back"
+    "followBack": "Follow back",
+    "removeModalTitle": "Remove {name} from followers?",
+    "unfollowModalTitle": "Unfollow {name}?",
+    "unfollowAllModalTitle": "Unfollow all {count, plural, one {# dog} other {# dogs}}?"
   },
   "friendTip": {
     "text": "Dogs the same age and breed make the best friends. Fill in your profile and we'll find great matches nearby!"
@@ -295,11 +296,9 @@
     "emptyChildren": "No puppies added yet",
     "addParent": "Add parent",
     "addPuppy": "Add puppy",
-    "remove": "Remove",
-    "removeParent": "Remove parent",
-    "removePuppy": "Remove puppy",
-    "modalTitle": "Remove family member",
-    "modalDescription": "Are you sure you want to remove {name} from the family tree?",
+    "removeParent": "Delete parent",
+    "removePuppy": "Delete puppy",
+    "modalTitle": "Delete {name} from the family tree?",
     "addModalTitleParent": "Add a parent",
     "addModalTitleChild": "Add a puppy",
     "addModalDescription": "Link an existing profile or add the details yourself",
