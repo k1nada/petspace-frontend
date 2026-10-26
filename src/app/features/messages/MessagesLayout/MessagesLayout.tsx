@@ -130,7 +130,7 @@ export const MessagesLayout = ({
     getUserByUsername(selectedUsername)
       .then((found) => {
         if (cancelled) return;
-        if (!found.id || found.id === user.id) {
+        if (found.id === user.id) {
           setFailedUsername(selectedUsername);
           return;
         }

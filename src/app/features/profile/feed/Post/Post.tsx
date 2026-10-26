@@ -98,7 +98,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
   const photoData: Photo = {
     id: post.id,
     publicId: "",
-    createdAt: new Date(post.createdAt).toISOString(),
+    createdAt: post.createdAt,
     likesCount: post.likesCount,
     liked: post.liked,
     comments: post.comments,

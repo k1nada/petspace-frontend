@@ -1,5 +1,5 @@
 export interface User {
-  id?: string;
+  id: string;
   username: string;
   name: string;
   avatar?: string;
@@ -46,7 +46,7 @@ export interface FriendRequest {
   from: User;
   to: string;
   status: "pending" | "accepted" | "rejected";
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface FollowUser {
@@ -108,7 +108,7 @@ export interface Post {
     username: string;
   };
   repostedAt?: string;
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface PostChanges {
@@ -134,7 +134,7 @@ export interface Comment {
   likesCount: number;
   liked: boolean;
   parent?: string | null;
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface SharedPost {
@@ -209,6 +209,30 @@ export interface SignInData {
   password: string;
 }
 
+export interface AuthResponse {
+  token: string;
+  user: {
+    id: string;
+    username: string;
+    registrationCompleted: boolean;
+  };
+}
+
+export interface Postwall {
+  _id: string;
+  user: string;
+}
+
+export interface LikeResponse {
+  liked: boolean;
+  count: number;
+}
+
+export interface RepostResponse {
+  reposted: boolean;
+  count: number;
+}
+
 export type NotificationType =
   | "like"
   | "comment"
@@ -224,7 +248,7 @@ export interface AppNotification {
   id: string;
   type: NotificationType;
   user?: NotificationUser;
-  createdAt: Date;
+  createdAt: string;
   read: boolean;
 }
 

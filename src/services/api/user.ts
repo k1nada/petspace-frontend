@@ -1,11 +1,12 @@
 import { isAxiosError } from "axios";
 import { unstable_cache } from "next/cache";
 import api from "@/config/axios";
+import { User } from "@/types";
 
 export const getUser = unstable_cache(
-  async (username: string) => {
+  async (username: string): Promise<User | null> => {
     try {
-      const { data } = await api.get(`/user/${username}`);
+      const { data } = await api.get<User>(`/user/${username}`);
       return data;
     } catch (error) {
       if (isAxiosError(error) && error.response?.status === 404) {

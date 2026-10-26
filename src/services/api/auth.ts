@@ -1,13 +1,13 @@
 import api from "@/config/axios";
-import { SignInData, SignUpData } from "@/types";
+import { AuthResponse, SignInData, SignUpData } from "@/types";
 
-export const signIn = async (data: SignInData) => {
-  const response = await api.post("/signin", data);
+export const signIn = async (data: SignInData): Promise<AuthResponse> => {
+  const response = await api.post<AuthResponse>("/signin", data);
   return response.data;
 };
 
-export const signUp = async (data: SignUpData) => {
-  const response = await api.post("/signup", data);
+export const signUp = async (data: SignUpData): Promise<AuthResponse> => {
+  const response = await api.post<AuthResponse>("/signup", data);
   return response.data;
 };
 
