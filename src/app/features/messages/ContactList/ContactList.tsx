@@ -8,7 +8,13 @@ import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 import { ROUTES } from "@/routes/routes";
 import { useRouter } from "@/i18n/navigation";
-import { ChatContact, User } from "@/types";
+import { ChatContact, MessageSearchResult, User } from "@/types";
+import {
+  MIN_MESSAGE_SEARCH_LENGTH,
+  useMessageSearch,
+} from "@/app/hooks/messages/useMessageSearch";
+import { MessageSearchItem } from "../MessageSearchItem/MessageSearchItem";
+import { MessageSearchItemSkeleton } from "../MessageSearchItem/MessageSearchItemSkeleton";
 import { ContactCard } from "../ContactCard/ContactCard";
 import { ContactListSkeleton } from "./ContactListSkeleton";
 import styles from "./ContactList.module.scss";
@@ -36,9 +42,27 @@ export const ContactList = ({
   const router = useRouter();
   const [search, setSearch] = useState("");
 
-  const filteredConversations = conversations.filter((contact) =>
-    contact.name.toLowerCase().includes(search.trim().toLowerCase()),
+  const { messages: foundMessages, isLoading: isSearchingMessages } =
+    useMessageSearch(search);
+
+  const searchText = search.trim().toLowerCase();
+  const isMessageSearch = searchText.length >= MIN_MESSAGE_SEARCH_LENGTH;
+  const filteredConversations = conversations.filter(
+    (contact) =>
+      contact.name.toLowerCase().includes(searchText) ||
+      contact.username.toLowerCase().includes(searchText),
   );
+
+  const openMessage = (message: MessageSearchResult) => {
+    const contact = conversations.find(
+      (item) => item.id === message.partner.id,
+    );
+    if (contact) {
+      onSelectContact(contact);
+      return;
+    }
+    router.push(ROUTES.messages(user.username, message.partner.username));
+  };
 
   const findFriends = () => {
     router.push(ROUTES.friends(user.username));
@@ -76,6 +100,45 @@ export const ContactList = ({
           </Button>
         }
       />
+    );
+  } else if (isMessageSearch) {
+    const hasResults =
+      filteredConversations.length > 0 || foundMessages.length > 0;
+    listContent = (
+      <>
+        {filteredConversations.length > 0 && (
+          <li className={styles.sectionTitle}>
+            {t("contactList.chatsSection")}
+          </li>
+        )}
+        {filteredConversations.map((contact) => (
+          <ContactCard
+            key={contact.id}
+            contact={contact}
+            isActive={contact.id === activeContactId}
+            onClick={() => onSelectContact(contact)}
+          />
+        ))}
+        {foundMessages.length > 0 && (
+          <li className={styles.sectionTitle}>
+            {t("contactList.messagesSection")}
+          </li>
+        )}
+        {foundMessages.map((message) => (
+          <MessageSearchItem
+            key={message.id}
+            message={message}
+            query={search.trim()}
+            onClick={() => openMessage(message)}
+          />
+        ))}
+        {isSearchingMessages && filteredConversations.length === 0 && (
+          <MessageSearchItemSkeleton />
+        )}
+        {!hasResults && !isSearchingMessages && (
+          <EmptyState compact text={t("contactList.nothingFound")} />
+        )}
+      </>
     );
   } else if (filteredConversations.length === 0) {
     listContent = <EmptyState compact text={t("friends.noSearchResults")} />;

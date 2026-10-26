@@ -184,6 +184,19 @@ export interface ChatContact {
   unreadCount?: number;
 }
 
+export interface MessageSearchResult {
+  id: string;
+  roomId: string;
+  text: string;
+  createdAt: string;
+  partner: {
+    id: string;
+    username: string;
+    name: string;
+    avatar?: string;
+  };
+}
+
 export interface SignUpData {
   name: string;
   username: string;

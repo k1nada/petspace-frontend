@@ -321,7 +321,10 @@
   "contactList": {
     "emptyText": "Znajdź inne psy i zacznij rozmawiać!",
     "findFriends": "Znajdź znajomych",
-    "sharedPost": "Udostępnił post"
+    "sharedPost": "Udostępnił post",
+    "chatsSection": "Czaty",
+    "messagesSection": "Wiadomości",
+    "nothingFound": "Nic nie znaleziono"
   },
   "chat": {
     "placeholder": "Napisz wiadomość...",
