@@ -1,12 +1,13 @@
 import api from "@/config/axios";
+import { Comment } from "@/types";
 
 export const createComment = async (
   content: string,
   postId?: string,
   photoId?: string,
   replyCommentId?: string,
-) => {
-  const { data } = await api.post("/comments", {
+): Promise<Comment> => {
+  const { data } = await api.post<Comment>("/comments", {
     content,
     postId,
     photoId,
@@ -15,8 +16,8 @@ export const createComment = async (
   return data;
 };
 
-export const getPhotoComments = async (photoId: string) => {
-  const { data } = await api.get(`/comments/photo/${photoId}`);
+export const getPhotoComments = async (photoId: string): Promise<Comment[]> => {
+  const { data } = await api.get<Comment[]>(`/comments/photo/${photoId}`);
   return data;
 };
 

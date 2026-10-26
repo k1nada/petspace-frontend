@@ -10,14 +10,18 @@ interface GetMessagesParams {
 export const getConversations = async (
   username: string,
 ): Promise<ChatContact[]> => {
-  const { data } = await api.get(`/chat/conversations/${username}`);
+  const { data } = await api.get<ChatContact[]>(
+    `/chat/conversations/${username}`,
+  );
   return data ?? [];
 };
 
 export const searchMessages = async (
   query: string,
 ): Promise<MessageSearchResult[]> => {
-  const { data } = await api.get("/chat/search", { params: { q: query } });
+  const { data } = await api.get<MessageSearchResult[]>("/chat/search", {
+    params: { q: query },
+  });
   return data ?? [];
 };
 
@@ -25,7 +29,7 @@ export const getMessages = async (
   roomId: string,
   params: GetMessagesParams = {},
 ): Promise<MessagesPage> => {
-  const { data } = await api.get(`/chat/${roomId}`, { params });
+  const { data } = await api.get<MessagesPage>(`/chat/${roomId}`, { params });
   return data;
 };
 
