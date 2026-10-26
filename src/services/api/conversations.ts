@@ -1,5 +1,5 @@
 import api from "@/config/axios";
-import { ChatContact, MessagesPage } from "@/types";
+import { ChatContact, MessageSearchResult, MessagesPage } from "@/types";
 
 interface GetMessagesParams {
   before?: string;
@@ -11,6 +11,13 @@ export const getConversations = async (
   username: string,
 ): Promise<ChatContact[]> => {
   const { data } = await api.get(`/chat/conversations/${username}`);
+  return data ?? [];
+};
+
+export const searchMessages = async (
+  query: string,
+): Promise<MessageSearchResult[]> => {
+  const { data } = await api.get("/chat/search", { params: { q: query } });
   return data ?? [];
 };
 

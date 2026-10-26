@@ -29,6 +29,14 @@
   flex: 1;
 }
 
+.sectionTitle {
+  padding: var(--padding-s) var(--padding-s) var(--gap-xs);
+  font-size: var(--font-s);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
 @media (max-width: 1024px) {
   .container {
     width: 240px;

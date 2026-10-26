@@ -12,6 +12,9 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  transition:
+    color var(--transition-hover),
+    background-color var(--transition-hover);
 
   &:hover,
   &.active {
@@ -23,7 +26,15 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-width: 0;
   text-align: left;
+}
+
+.name,
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .name {
@@ -38,6 +49,7 @@
 }
 
 .message {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -45,6 +57,7 @@
 }
 
 .time {
+  white-space: nowrap;
   color: var(--text-secondary);
   font-size: var(--font-s);
 }

@@ -321,7 +321,10 @@
   "contactList": {
     "emptyText": "Find other dogs to start chatting!",
     "findFriends": "Find friends",
-    "sharedPost": "Shared a post"
+    "sharedPost": "Shared a post",
+    "chatsSection": "Chats",
+    "messagesSection": "Messages",
+    "nothingFound": "Nothing found"
   },
   "chat": {
     "placeholder": "Write a message...",
