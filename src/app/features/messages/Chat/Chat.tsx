@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useState, useEffect, useLayoutEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import socket from "@/services/socket";
 import styles from "./Chat.module.scss";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
@@ -8,17 +9,24 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SubmitTextarea";
 import { useLocale, useTranslations } from "next-intl";
 import { ROUTES } from "@/routes/routes";
-import { ChatContact, Message, SendMessageAck, User } from "@/types";
+import {
+  ChatContact,
+  Message,
+  SendMessageAck,
+  SharedPhoto,
+  User,
+} from "@/types";
 import { ChatMessage } from "../ChatMessage/ChatMessage";
+import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
 import { Link } from "@/app/uikit/navigation/Link/Link";
-import { formatDate, formatTime } from "@/utils/dateFormatters";
+import { formatChatDayLabel, formatTime } from "@/utils/dateFormatters";
 import {
   MAX_MESSAGE_LENGTH,
   SEND_TIMEOUT_MS,
   SOCKET_EVENTS,
   getRoomId,
 } from "@/utils/chat";
-import { ChatSkeleton } from "./ChatSkeleton";
+import { ChatMessagesSkeleton, ChatSkeleton } from "./ChatSkeleton";
 import { getMessages } from "@/services/api/conversations";
 import { useMessagesStore } from "@/app/hooks/messages/useMessagesStore";
 import { useChatMessagesStore } from "@/app/hooks/messages/useChatMessagesStore";
@@ -37,6 +45,7 @@ const NEAR_BOTTOM_PX = 80;
 const LOAD_OLDER_PX = 100;
 
 const NO_MESSAGES: Message[] = [];
+const SKELETON_DELAY_MS = 300;
 
 const isSameDay = (a: string, b: string) =>
   new Date(a).toDateString() === new Date(b).toDateString();
@@ -80,6 +89,7 @@ export const Chat = ({
   const [loadFailed, setLoadFailed] = useState(false);
   const [hasNewBelow, setHasNewBelow] = useState(false);
   const [isConnected, setIsConnected] = useState(true);
+  const [openedPhoto, setOpenedPhoto] = useState<SharedPhoto | null>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const isNearBottomRef = useRef(true);
   const lastMessageIdRef = useRef<string | null>(null);
@@ -107,6 +117,7 @@ export const Chat = ({
   const messagesLoading = !!roomId && !room?.isLoaded && !loadFailed;
   const isListShown =
     !!selectedChat && !conversationsLoading && !messagesLoading;
+  const [isSlowLoading, setIsSlowLoading] = useState(false);
 
   const scrollToBottom = () => {
     const list = listRef.current;
@@ -177,6 +188,15 @@ export const Chat = ({
       setActiveRoomId(null);
     };
   }, [roomId, onMessagesLoaded, setActiveRoomId, t]);
+
+  useEffect(() => {
+    if (!messagesLoading) return;
+    const timer = setTimeout(() => setIsSlowLoading(true), SKELETON_DELAY_MS);
+    return () => {
+      clearTimeout(timer);
+      setIsSlowLoading(false);
+    };
+  }, [messagesLoading]);
 
   useEffect(() => {
     const handleConnect = () => setIsConnected(true);
@@ -281,12 +301,7 @@ export const Chat = ({
     sendToServer(failed.tempId, failed.text);
   };
 
-  if (
-    conversationsLoading ||
-    isChatPending ||
-    (selectedChat && messagesLoading)
-  )
-    return <ChatSkeleton />;
+  if (conversationsLoading || isChatPending) return <ChatSkeleton />;
 
   if (!selectedChat && isUserNotFound) {
     return (
@@ -359,6 +374,7 @@ export const Chat = ({
         <div className={styles.connectionBanner}>{t("chat.noConnection")}</div>
       )}
       <ul className={styles.list} ref={listRef} onScroll={handleScroll}>
+        {messagesLoading && isSlowLoading && <ChatMessagesSkeleton />}
         {loadFailed && messages.length === 0 && (
           <li className={styles.emptyMessages}>
             <p className={styles.emptyTitle}>{t("chat.loadFailed")}</p>
@@ -386,12 +402,21 @@ export const Chat = ({
             <Fragment key={msg.tempId ?? msg.id}>
               {isNewDay && (
                 <li className={styles.dayDivider}>
-                  <span>{formatDate(msg.createdAt, locale)}</span>
+                  <span>
+                    {formatChatDayLabel(
+                      msg.createdAt,
+                      locale,
+                      t("dates.today"),
+                      t("dates.yesterday"),
+                    )}
+                  </span>
                 </li>
               )}
               <ChatMessage
                 text={msg.text}
                 post={msg.post}
+                photo={msg.photo}
+                onOpenPhoto={() => setOpenedPhoto(msg.photo ?? null)}
                 time={formatTime(msg.createdAt, locale)}
                 isOwn={msg.sender?.id === user.id}
                 status={msg.status}
@@ -421,6 +446,19 @@ export const Chat = ({
           maxLength={MAX_MESSAGE_LENGTH}
         />
       </div>
+      {openedPhoto &&
+        createPortal(
+          <PhotoModal
+            photo={openedPhoto}
+            author={{
+              avatar: openedPhoto.user.avatar,
+              name: openedPhoto.user.name,
+              username: openedPhoto.user.username,
+            }}
+            onClose={() => setOpenedPhoto(null)}
+          />,
+          document.body,
+        )}
     </section>
   );
 };

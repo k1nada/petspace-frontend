@@ -2,7 +2,6 @@
 
 import styles from "./Post.module.scss";
 import Image from "next/image";
-import { FaReply } from "react-icons/fa";
 import { Photo, Post as PostType, PostChanges, RepostState } from "@/types";
 import { Comment } from "@/app/features/profile/feed/Comment/Comment";
 import { CommentCreator } from "../CommentCreator/CommentCreator";
@@ -19,8 +18,6 @@ import { PostEditForm } from "../PostEditForm/PostEditForm";
 import { PostStats } from "../PostStats/PostStats";
 import { usePostRepost } from "@/app/hooks/posts/usePostRepost";
 import { usePostComments } from "@/app/hooks/posts/usePostComments";
-import { ROUTES } from "@/routes/routes";
-import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useFeedStore } from "@/app/hooks/feed/useFeedStore";
@@ -149,26 +146,30 @@ export const Post = ({ post, onRefresh }: PostProps) => {
     }
   };
 
+  const canShowActions = (isOwner || isRepostOwner) && !isEditing;
+  const onEdit = canShowActions && isOwner ? handleStartEditPost : undefined;
+  const onDelete = canShowActions ? () => setIsDeleteOpen(true) : undefined;
+  const deleteLabel = isRepostOwner ? t("post.undoRepost") : undefined;
+
   return (
     <article>
-      {post.repostedBy && (
-        <Link
-          href={ROUTES.profile(post.repostedBy.username)}
-          className={styles.repostedBy}
-        >
-          <FaReply size={16} />
-          <span>{t("post.repostedBy", { name: post.repostedBy.name })}</span>
-        </Link>
-      )}
-
       <PostHeader
-        post={post}
+        author={post.repostedBy ?? post.user}
+        date={post.repostedAt ?? post.createdAt}
         locale={locale}
-        showActions={(isOwner || isRepostOwner) && !isEditing}
-        canEdit={isOwner}
-        onEdit={handleStartEditPost}
-        onDelete={() => setIsDeleteOpen(true)}
+        deleteLabel={deleteLabel}
+        onEdit={onEdit}
+        onDelete={onDelete}
       />
+
+      {post.repostedBy && (
+        <PostHeader
+          author={post.user}
+          date={post.createdAt}
+          locale={locale}
+          size="compact"
+        />
+      )}
 
       <div className={styles.contentWrapper}>
         {isEditing ? (
@@ -247,8 +248,15 @@ export const Post = ({ post, onRefresh }: PostProps) => {
 
       <ConfirmModal
         isOpen={isDeleteOpen}
-        title={t("post.modalTitle")}
-        description={t("common.cannotUndo")}
+        title={
+          isRepostOwner ? t("post.undoRepostModalTitle") : t("post.modalTitle")
+        }
+        description={
+          isRepostOwner
+            ? t("post.undoRepostModalDescription")
+            : t("common.cannotUndo")
+        }
+        confirmLabel={deleteLabel}
         onConfirm={handleDeletePost}
         onClose={() => setIsDeleteOpen(false)}
       />

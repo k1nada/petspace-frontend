@@ -106,6 +106,7 @@ export interface Post {
   repostedBy?: {
     name: string;
     username: string;
+    avatar?: string;
   };
   repostedAt?: string;
   createdAt: string;
@@ -145,6 +146,10 @@ export interface SharedPost {
   user: User;
 }
 
+export interface SharedPhoto extends Photo {
+  user: User;
+}
+
 export interface Message {
   id: string;
   roomId: string;
@@ -152,6 +157,7 @@ export interface Message {
   createdAt: string;
   sender: User;
   post?: SharedPost | null;
+  photo?: SharedPhoto | null;
   tempId?: string;
   status?: "sending" | "failed";
 }
@@ -171,6 +177,7 @@ export interface ConversationMessage {
   text: string;
   createdAt: string;
   hasPost?: boolean;
+  hasPhoto?: boolean;
 }
 
 export interface ChatContact {

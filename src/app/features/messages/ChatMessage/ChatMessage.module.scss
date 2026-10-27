@@ -131,6 +131,14 @@ $joined-radius: 4px;
   }
 }
 
+.photoButton {
+  display: block;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 .postContent {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
