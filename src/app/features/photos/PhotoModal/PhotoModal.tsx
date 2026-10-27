@@ -47,7 +47,7 @@ interface PhotoModalProps {
 const loadImage = (src: string) => {
   const image = new window.Image();
   image.src = src;
-  return image.decode().catch(() => {});
+  return image.decode().catch((error) => console.error(error));
 };
 
 export const PhotoModal = ({

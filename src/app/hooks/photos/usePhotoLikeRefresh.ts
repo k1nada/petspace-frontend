@@ -22,7 +22,7 @@ export const usePhotoLikeRefresh = (
           }),
         );
       })
-      .catch(() => {});
+      .catch((error) => console.error(error));
 
     return () => {
       cancelled = true;

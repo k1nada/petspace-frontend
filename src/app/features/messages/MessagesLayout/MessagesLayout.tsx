@@ -21,8 +21,18 @@ import { syncRoomMessages } from "@/app/hooks/messages/syncRoomMessages";
 import { getUserByUsername } from "@/services/api/userClient";
 import socket from "@/services/socket";
 import { SOCKET_EVENTS, getRoomId } from "@/utils/chat";
+import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
+import { useRouter } from "@/i18n/navigation";
+import { ROUTES } from "@/routes/routes";
+import { ContactListSkeleton } from "../ContactList/ContactListSkeleton";
+import { ChatSkeleton } from "../Chat/ChatSkeleton";
 
 interface MessagesLayoutProps {
+  username: string;
+  initialSelectedChat?: ChatContact;
+}
+
+interface MessagesContentProps {
   user: User;
   initialSelectedChat?: ChatContact;
 }
@@ -39,9 +49,46 @@ const addSelectedChat = (
 };
 
 export const MessagesLayout = ({
-  user,
+  username,
   initialSelectedChat,
 }: MessagesLayoutProps) => {
+  const router = useRouter();
+  const currentUser = useAuthStore((state) => state.currentUser);
+  const isOwner = currentUser?.username === username;
+
+  useEffect(() => {
+    if (currentUser && !isOwner) {
+      router.replace(ROUTES.messages(currentUser.username));
+    }
+  }, [currentUser, isOwner, router]);
+
+  if (!currentUser || !isOwner) {
+    return (
+      <div className={styles.layout}>
+        <div className={styles.chat}>
+          <div className={styles.contactListWrapper}>
+            <ContactListSkeleton />
+          </div>
+          <div className={cn(styles.chatWrapper, styles.hiddenMobile)}>
+            <ChatSkeleton />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <MessagesContent
+      user={currentUser}
+      initialSelectedChat={initialSelectedChat}
+    />
+  );
+};
+
+const MessagesContent = ({
+  user,
+  initialSelectedChat,
+}: MessagesContentProps) => {
   const t = useTranslations();
   const searchParams = useSearchParams();
   const conversations = useConversationsStore((state) => state.conversations);
@@ -176,7 +223,7 @@ export const MessagesLayout = ({
     }
     markContactRead(selectedChatId);
     const roomId = getRoomId(user.id, selectedChatId);
-    markMessagesRead(roomId).catch(() => {});
+    markMessagesRead(roomId).catch((error) => console.error(error));
   }, [hasLoaded, selectedChatId, user.id, markContactRead]);
 
   useEffect(() => {
@@ -194,7 +241,7 @@ export const MessagesLayout = ({
       const isOpen =
         message.roomId === useMessagesStore.getState().activeRoomId;
       if (isOpen && !isOwn) {
-        markMessagesRead(message.roomId).catch(() => {});
+        markMessagesRead(message.roomId).catch((error) => console.error(error));
       }
 
       const known = useConversationsStore
@@ -237,11 +284,11 @@ export const MessagesLayout = ({
           setPresenceFromUsers(withActive);
           if (activePartnerId) markContactRead(activePartnerId);
         })
-        .catch(() => {});
+        .catch((error) => console.error(error));
 
       if (activeRoomId) {
-        syncRoomMessages(activeRoomId).catch(() => {});
-        markMessagesRead(activeRoomId).catch(() => {});
+        syncRoomMessages(activeRoomId).catch((error) => console.error(error));
+        markMessagesRead(activeRoomId).catch((error) => console.error(error));
       }
     };
 

@@ -15,7 +15,7 @@ export const preloadPhotoComments = (photoId: string) => {
 
   getPhotoComments(photoId)
     .then((data) => setComments(photoId, data))
-    .catch(() => {});
+    .catch((error) => console.error(error));
 };
 
 interface UsePhotoCommentsProps {

@@ -13,9 +13,18 @@ import { revalidateFollows } from "@/services/actions/revalidateFollows";
 
 const SUGGESTIONS_COUNT = 3;
 
+const shuffleUsers = (users: User[]) => {
+  const shuffled = [...users];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 export const loadSuggestions = async (username: string): Promise<User[]> => {
   const users = await getSuggestedFriends(username);
-  return [...users].sort(() => Math.random() - 0.5).slice(0, SUGGESTIONS_COUNT);
+  return shuffleUsers(users).slice(0, SUGGESTIONS_COUNT);
 };
 
 export const useLoadSuggestedFriends = (

@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { isAxiosError } from "axios";
 import api from "@/config/axios";
+import socket from "@/services/socket";
 import { getPendingRequests } from "@/services/api/friends";
 import { getConversations } from "@/services/api/conversations";
 import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
@@ -52,13 +53,17 @@ export const useAuthStore = create<AuthStore>()(
           let requests: FriendRequest[] = [];
           try {
             requests = await getPendingRequests(user.username);
-          } catch {}
+          } catch (error) {
+            console.error(error);
+          }
           useFriendRequestsStore.getState().setRequests(requests);
 
           let conversations: ChatContact[] = [];
           try {
             conversations = await getConversations(user.username);
-          } catch {}
+          } catch (error) {
+            console.error(error);
+          }
 
           let totalUnread = 0;
           for (const conversation of conversations) {
@@ -68,6 +73,8 @@ export const useAuthStore = create<AuthStore>()(
         },
 
         signOut: () => {
+          localStorage.removeItem("token");
+          socket.disconnect();
           set({ currentUser: null });
           useFriendRequestsStore.getState().reset();
           useMessagesStore.getState().reset();

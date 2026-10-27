@@ -24,7 +24,7 @@ export const usePresenceSync = () => {
         .then((users) =>
           usePresenceStore.getState().setPresenceFromUsers(users),
         )
-        .catch(() => {});
+        .catch((error) => console.error(error));
     };
 
     socket.on(SOCKET_EVENTS.STATUS_CHANGE, handleStatusChange);

@@ -13,7 +13,6 @@ import { ROUTES } from "@/routes/routes";
 import { FaGlobe, FaMoon, FaPowerOff, FaSearch } from "react-icons/fa";
 import { FaSun } from "react-icons/fa6";
 import { signOut } from "@/services/api/auth";
-import socket from "@/services/socket";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { MenuToggle } from "@/app/uikit/navigation/MenuToggle/MenuToggle";
 import { ThemeToggle } from "@/app/uikit/brand/ThemeToggle/ThemeToggle";
@@ -68,9 +67,9 @@ export const Header = () => {
     setIsSignOutOpen(false);
     try {
       await signOut();
-    } catch {}
-    localStorage.removeItem("token");
-    socket.disconnect();
+    } catch (error) {
+      console.error(error);
+    }
     useAuthStore.getState().signOut();
     router.push(ROUTES.signin);
   };
