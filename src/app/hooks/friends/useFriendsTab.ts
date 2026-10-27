@@ -4,6 +4,13 @@ import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsSto
 
 type FriendsTab = "friends" | "requests" | "followers" | "following";
 
+const FRIENDS_TABS: FriendsTab[] = [
+  "friends",
+  "requests",
+  "followers",
+  "following",
+];
+
 interface FriendsTabItem {
   key: FriendsTab;
   label: string;
@@ -29,9 +36,12 @@ export const useFriendsTab = ({
   const t = useTranslations();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const activeTab = (searchParams.get("tab") as FriendsTab) || "friends";
+  const tabParam = searchParams.get("tab");
+  const activeTab = FRIENDS_TABS.find((tab) => tab === tabParam) ?? "friends";
 
-  const requestsCount = useFriendRequestsStore((state) => state.requestCount);
+  const requestsCount = useFriendRequestsStore(
+    (state) => state.requests.length,
+  );
 
   const goToTab = (tab: FriendsTab) => router.push(`?tab=${tab}`);
 

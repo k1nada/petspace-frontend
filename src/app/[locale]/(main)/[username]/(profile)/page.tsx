@@ -26,7 +26,6 @@ const ProfilePage = async ({ params }: ProfilePageProps) => {
   const [userData, postwallData] = await Promise.all([
     getUser(username),
     getPostwall(username).catch((error) => {
-      // eslint-disable-next-line no-console -- profile renders without the wall
       console.error(error);
       return null;
     }),

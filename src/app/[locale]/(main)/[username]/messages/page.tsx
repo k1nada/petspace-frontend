@@ -44,7 +44,10 @@ const MessagesPage = async ({ params, searchParams }: MessagesPageProps) => {
     : undefined;
 
   return (
-    <MessagesLayout user={userData} initialSelectedChat={initialSelectedChat} />
+    <MessagesLayout
+      username={userData.username}
+      initialSelectedChat={initialSelectedChat}
+    />
   );
 };
 

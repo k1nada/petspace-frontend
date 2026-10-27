@@ -21,7 +21,7 @@ import styles from "./Sidebar.module.scss";
 export const Sidebar = () => {
   const t = useTranslations();
   const currentUser = useAuthStore((state) => state.currentUser);
-  const requestCount = useFriendRequestsStore((state) => state.requestCount);
+  const requestCount = useFriendRequestsStore((state) => state.requests.length);
   const unreadMessagesCount = useMessagesStore(
     (state) => state.unreadMessagesCount,
   );

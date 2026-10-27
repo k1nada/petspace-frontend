@@ -27,8 +27,8 @@ export const RegistrationStepsAvatar = () => {
     }
     try {
       await updateRegistrationSteps({ registrationCompleted: true });
-    } catch {
-      // not critical: the steps will be shown again on the next sign-in
+    } catch (error) {
+      console.error(error);
     }
     router.push(ROUTES.profile(currentUser.username));
   };

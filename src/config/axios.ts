@@ -45,13 +45,7 @@ api.interceptors.response.use(
       !isAuthEndpoint
     ) {
       localStorage.removeItem("token");
-      import("@/services/socket").then(({ default: socket }) =>
-        socket.disconnect(),
-      );
-      import("@/app/hooks/auth/useAuthStore").then(({ useAuthStore }) =>
-        useAuthStore.getState().signOut(),
-      );
-      window.location.href = `/${getCurrentLocale()}${ROUTES.signin}`;
+      window.location.replace(`/${getCurrentLocale()}${ROUTES.signin}`);
     }
 
     return Promise.reject(error);

@@ -47,7 +47,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
           }
           useMessagesStore.getState().setUnreadMessagesCount(totalUnread);
         })
-        .catch(() => {});
+        .catch((error) => console.error(error));
     };
 
     socket.on(SOCKET_EVENTS.MESSAGE, handleNewMessage);
