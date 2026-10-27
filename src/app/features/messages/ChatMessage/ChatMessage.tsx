@@ -4,20 +4,23 @@ import cn from "classnames";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import styles from "./ChatMessage.module.scss";
-import { SharedPost } from "@/types";
+import { SharedPhoto, SharedPost } from "@/types";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { ROUTES } from "@/routes/routes";
+import { getPhotoUrl } from "@/utils/photo";
 
 interface ChatMessageProps {
   text: string;
   time: string;
   isOwn?: boolean;
   post?: SharedPost | null;
+  photo?: SharedPhoto | null;
   status?: "sending" | "failed";
   isGroupStart?: boolean;
   isGroupEnd?: boolean;
   onRetry?: () => void;
+  onOpenPhoto?: () => void;
 }
 
 export const ChatMessage = ({
@@ -25,10 +28,12 @@ export const ChatMessage = ({
   time,
   isOwn,
   post,
+  photo,
   status,
   isGroupStart = true,
   isGroupEnd = true,
   onRetry,
+  onOpenPhoto,
 }: ChatMessageProps) => {
   const t = useTranslations();
 
@@ -47,8 +52,32 @@ export const ChatMessage = ({
       })}
     >
       <div className={styles.content}>
-        <div className={cn(styles.bubble, { [styles.postBubble]: post })}>
-          {post ? (
+        <div
+          className={cn(styles.bubble, { [styles.postBubble]: post || photo })}
+        >
+          {photo && (
+            <div className={styles.postCard}>
+              <Link
+                href={ROUTES.profile(photo.user.username)}
+                className={styles.postAuthor}
+              >
+                {photo.user.name}
+              </Link>
+              <button
+                type="button"
+                className={cn(styles.postImage, styles.photoButton)}
+                onClick={onOpenPhoto}
+              >
+                <Image
+                  src={getPhotoUrl(photo)}
+                  alt={t("photoGallery.photoAlt", { name: photo.user.name })}
+                  fill
+                  sizes="240px"
+                />
+              </button>
+            </div>
+          )}
+          {!photo && post && (
             <div className={styles.postCard}>
               <Link
                 href={ROUTES.profile(post.user.username)}
@@ -70,8 +99,11 @@ export const ChatMessage = ({
                 <span className={styles.postContent}>{post.content}</span>
               )}
             </div>
-          ) : (
-            <span className={styles.text}>{text || t("chat.deletedPost")}</span>
+          )}
+          {!photo && !post && (
+            <span className={styles.text}>
+              {text || t("chat.deletedContent")}
+            </span>
           )}
           {meta && <span className={styles.meta}>{meta}</span>}
         </div>

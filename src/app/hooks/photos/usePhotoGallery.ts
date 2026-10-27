@@ -23,11 +23,11 @@ export const usePhotoGallery = (photos: Photo[], username: string) => {
   usePhotoLikeRefresh(username, setLocalPhotos, hasLiked);
 
   const uploadFile = async (file: File): Promise<Photo> => {
-    const data = await uploadPhoto(file);
+    const uploaded = await uploadPhoto(file);
     return {
-      id: data._id,
-      publicId: data.public_id,
-      createdAt: data.createdAt,
+      id: uploaded.id,
+      publicId: uploaded.publicId,
+      createdAt: uploaded.createdAt,
       liked: false,
       likesCount: 0,
     };

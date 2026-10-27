@@ -263,6 +263,7 @@ const MessagesContent = ({
           text: message.text,
           createdAt: message.createdAt,
           hasPost: !!message.post,
+          hasPhoto: !!message.photo,
         },
         !isOwn && !isOpen,
       );

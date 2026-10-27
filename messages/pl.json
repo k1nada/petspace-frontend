@@ -193,7 +193,9 @@
   "post": {
     "image": "Zdjęcie posta",
     "modalTitle": "Usunąć ten post?",
-    "repostedBy": "Udostępnione przez {name}"
+    "undoRepost": "Cofnij udostępnienie",
+    "undoRepostModalTitle": "Cofnąć udostępnienie?",
+    "undoRepostModalDescription": "Możesz udostępnić go ponownie później."
   },
   "sharePostModal": {
     "title": "Udostępnij post",
@@ -324,14 +326,15 @@
     "sharedPost": "Udostępnił post",
     "chatsSection": "Czaty",
     "messagesSection": "Wiadomości",
-    "nothingFound": "Nic nie znaleziono"
+    "nothingFound": "Nic nie znaleziono",
+    "sharedPhoto": "Udostępnił zdjęcie"
   },
   "chat": {
     "placeholder": "Napisz wiadomość...",
     "selectFriend": "Wybierz czat, aby zacząć rozmowę",
     "noBarks": "Brak szczekania",
     "emptyInbox": "Twoja skrzynka jest cichsza niż śpiący szczeniak.",
-    "deletedPost": "Post usunięty",
+    "deletedContent": "Treść usunięta",
     "loadingOlder": "Wczytywanie starszych wiadomości...",
     "newMessages": "Nowe wiadomości ↓",
     "sending": "Wysyłanie...",
@@ -417,5 +420,9 @@
       "title": "Zdjęcia",
       "description": "Zobacz zdjęcia @{username} na Petspace."
     }
+  },
+  "dates": {
+    "today": "Dzisiaj",
+    "yesterday": "Wczoraj"
   }
 }

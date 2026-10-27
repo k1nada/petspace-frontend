@@ -193,7 +193,9 @@
   "post": {
     "image": "Post image",
     "modalTitle": "Delete this post?",
-    "repostedBy": "Reposted by {name}"
+    "undoRepost": "Undo repost",
+    "undoRepostModalTitle": "Undo this repost?",
+    "undoRepostModalDescription": "You can repost it again later."
   },
   "sharePostModal": {
     "title": "Share post",
@@ -324,14 +326,15 @@
     "sharedPost": "Shared a post",
     "chatsSection": "Chats",
     "messagesSection": "Messages",
-    "nothingFound": "Nothing found"
+    "nothingFound": "Nothing found",
+    "sharedPhoto": "Shared a photo"
   },
   "chat": {
     "placeholder": "Write a message...",
     "selectFriend": "Select a chat to start messaging",
     "noBarks": "No barks yet",
     "emptyInbox": "Your inbox is quieter than a sleeping puppy.",
-    "deletedPost": "Post deleted",
+    "deletedContent": "Content deleted",
     "loadingOlder": "Loading earlier messages...",
     "newMessages": "New messages ↓",
     "sending": "Sending...",
@@ -417,5 +420,9 @@
       "title": "Photos",
       "description": "See @{username}'s photos on Petspace."
     }
+  },
+  "dates": {
+    "today": "Today",
+    "yesterday": "Yesterday"
   }
 }

@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: "chat";
-  min-height: 100vh;
   align-items: start;
 }
 
@@ -12,7 +11,7 @@
   display: flex;
   background: var(--bg-card);
   box-shadow: var(--shadow-card);
-  height: calc(100vh - 70px);
+  height: calc(100dvh - var(--header-offset) - var(--gap-s));
   border-radius: var(--radius-m);
   position: sticky;
   top: 0;
@@ -26,7 +25,6 @@
 
 @media (max-width: 768px) {
   .chat {
-    height: calc(100vh - 110px);
     border-radius: 0;
   }
 

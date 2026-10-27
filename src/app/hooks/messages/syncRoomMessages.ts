@@ -14,6 +14,18 @@ const loadLatest = async (roomId: string) => {
     .setLatestMessages(roomId, page.messages, page.hasMore);
 };
 
+const prefetchingRoomIds = new Set<string>();
+
+export const prefetchRoomMessages = (roomId: string) => {
+  const room = useChatMessagesStore.getState().rooms[roomId];
+  if (room?.isLoaded || prefetchingRoomIds.has(roomId)) return;
+
+  prefetchingRoomIds.add(roomId);
+  loadLatest(roomId)
+    .catch((error) => console.error(error))
+    .finally(() => prefetchingRoomIds.delete(roomId));
+};
+
 export const syncRoomMessages = async (roomId: string) => {
   const room = useChatMessagesStore.getState().rooms[roomId];
   const sentMessages = room ? getSentMessages(room.messages) : [];

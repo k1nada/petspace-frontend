@@ -4,6 +4,26 @@
   align-items: center;
 }
 
+.avatarLink {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+}
+
+.repostBadge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+}
+
 .info {
   display: flex;
   flex-direction: column;
@@ -21,6 +41,19 @@
 .time {
   font-size: var(--font-m);
   color: var(--text-secondary);
+}
+
+.compact {
+  margin-top: var(--gap-m);
+
+  .name {
+    font-size: var(--font-m);
+    font-weight: 600;
+  }
+
+  .time {
+    font-size: var(--font-s);
+  }
 }
 
 .dropdown {

@@ -13,6 +13,8 @@ import {
   MIN_MESSAGE_SEARCH_LENGTH,
   useMessageSearch,
 } from "@/app/hooks/messages/useMessageSearch";
+import { prefetchRoomMessages } from "@/app/hooks/messages/syncRoomMessages";
+import { getRoomId } from "@/utils/chat";
 import { MessageSearchItem } from "../MessageSearchItem/MessageSearchItem";
 import { MessageSearchItemSkeleton } from "../MessageSearchItem/MessageSearchItemSkeleton";
 import { ContactCard } from "../ContactCard/ContactCard";
@@ -117,6 +119,7 @@ export const ContactList = ({
             contact={contact}
             isActive={contact.id === activeContactId}
             onClick={() => onSelectContact(contact)}
+            onHover={() => prefetchRoomMessages(getRoomId(user.id, contact.id))}
           />
         ))}
         {foundMessages.length > 0 && (
@@ -149,6 +152,7 @@ export const ContactList = ({
         contact={contact}
         isActive={contact.id === activeContactId}
         onClick={() => onSelectContact(contact)}
+        onHover={() => prefetchRoomMessages(getRoomId(user.id, contact.id))}
       />
     ));
   }

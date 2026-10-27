@@ -19,6 +19,30 @@ const MESSAGES = [
   { width: 200, own: true },
 ];
 
+export const ChatMessagesSkeleton = () => (
+  <>
+    {MESSAGES.map((message, i) => (
+      <li
+        key={i}
+        className={cn(messageStyles.message, messageStyles.groupStart, {
+          [messageStyles.own]: message.own,
+        })}
+      >
+        <div className={messageStyles.content}>
+          <Skeleton shape="rounded">
+            <span
+              className={messageStyles.bubble}
+              style={{ width: message.width }}
+            >
+              {"\u00a0"}
+            </span>
+          </Skeleton>
+        </div>
+      </li>
+    ))}
+  </>
+);
+
 export const ChatSkeleton = () => (
   <section className={styles.container}>
     <div className={styles.userInfo}>
@@ -46,25 +70,7 @@ export const ChatSkeleton = () => (
       </div>
     </div>
     <ul className={styles.list}>
-      {MESSAGES.map((message, i) => (
-        <li
-          key={i}
-          className={cn(messageStyles.message, messageStyles.groupStart, {
-            [messageStyles.own]: message.own,
-          })}
-        >
-          <div className={messageStyles.content}>
-            <Skeleton shape="rounded">
-              <span
-                className={messageStyles.bubble}
-                style={{ width: message.width }}
-              >
-                {"\u00a0"}
-              </span>
-            </Skeleton>
-          </div>
-        </li>
-      ))}
+      <ChatMessagesSkeleton />
     </ul>
     <div className={styles.input}>
       <Skeleton shape="rounded" width="100%">
