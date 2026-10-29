@@ -5,6 +5,7 @@
   left: 0;
   right: 0;
   height: 50px;
+  padding-right: var(--scrollbar-offset, 0px);
   box-shadow: var(--shadow-header);
   z-index: var(--z-modal);
 }

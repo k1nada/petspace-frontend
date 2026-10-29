@@ -4,6 +4,7 @@
   gap: var(--gap-xl);
   padding: var(--padding-l);
   height: 100%;
+  box-sizing: border-box;
   overflow-y: auto;
   transition: transform var(--transition-base);
 
