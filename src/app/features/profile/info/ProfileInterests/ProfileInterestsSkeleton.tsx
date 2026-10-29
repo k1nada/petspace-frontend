@@ -34,14 +34,10 @@ export const ProfileInterestsSkeleton = () => {
       </div>
       <div className={styles.actions}>
         <Skeleton shape="rounded">
-          <Button appearance="primary">
-            {t("common.save")}
-          </Button>
+          <Button appearance="primary">{t("common.save")}</Button>
         </Skeleton>
         <Skeleton shape="rounded">
-          <Button appearance="secondary">
-            {t("common.cancel")}
-          </Button>
+          <Button appearance="secondary">{t("common.cancel")}</Button>
         </Skeleton>
       </div>
     </div>

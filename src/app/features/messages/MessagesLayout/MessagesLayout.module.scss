@@ -1,3 +1,11 @@
+:global(html):has(.layout) {
+  overflow-y: auto;
+
+  @media (min-width: 769px) {
+    --scrollbar-offset: 8px;
+  }
+}
+
 .layout {
   display: grid;
   grid-template-columns: 1fr;

@@ -27,19 +27,14 @@ export const PostCreatorSkeleton = () => {
       <div className={styles.actions}>
         <div className={styles.attachments}>
           <Skeleton shape="rounded">
-            <Button
-              appearance="ghost"
-              className={styles.attachmentItem}
-            >
+            <Button appearance="ghost" className={styles.attachmentItem}>
               <PhotoIcon size={16} />
               {t("postCreator.photo")}
             </Button>
           </Skeleton>
         </div>
         <Skeleton shape="rounded">
-          <Button appearance="primary">
-            {t("postCreator.publish")}
-          </Button>
+          <Button appearance="primary">{t("postCreator.publish")}</Button>
         </Skeleton>
       </div>
     </Card>
