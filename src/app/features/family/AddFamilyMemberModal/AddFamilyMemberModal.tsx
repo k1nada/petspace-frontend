@@ -1,13 +1,11 @@
 "use client";
 
 import styles from "./AddFamilyMemberModal.module.scss";
-import Image from "next/image";
 import cn from "classnames";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
 import { isAxiosError } from "axios";
-import { MdAdd } from "react-icons/md";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { Input } from "@/app/uikit/form/Input/Input";
@@ -19,18 +17,14 @@ import { useSearch } from "@/app/hooks/shared/useSearch";
 import { uploadFamilyAvatar } from "@/services/api/upload";
 import { FamilyRelation, NewFamilyMember, User } from "@/types";
 import { MAX_PUPPIES } from "@/utils/family";
-import defaultAvatar from "@/assets/avatars/default.png";
 
 type Mode = "search" | "manual";
-const TABS: Mode[] = ["search", "manual"];
 const emptyForm = { name: "", breed: "" };
 
 interface AddFamilyMemberModalProps {
   isOpen: boolean;
   relation: FamilyRelation;
   breeds: string[];
-  avatar?: string;
-  existingMemberAvatar?: string;
   onClose: () => void;
   onAdd: (member: NewFamilyMember) => Promise<void>;
 }
@@ -39,25 +33,21 @@ export const AddFamilyMemberModal = ({
   isOpen,
   relation,
   breeds,
-  avatar,
-  existingMemberAvatar,
   onClose,
   onAdd,
 }: AddFamilyMemberModalProps) => {
   const t = useTranslations();
-  const [mode, setMode] = useState<Mode>("search");
+  const [mode, setMode] = useState<Mode>("manual");
   const { query, results, isEmpty, search } = useSearch();
   const [form, setForm] = useState(emptyForm);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isPhotoRevealed, setIsPhotoRevealed] = useState(false);
 
   const reset = () => {
-    setMode("search");
+    setMode("manual");
     search("");
     setForm(emptyForm);
     setAvatarFile(null);
-    setIsPhotoRevealed(false);
   };
 
   const handleClose = () => {
@@ -82,7 +72,7 @@ export const AddFamilyMemberModal = ({
     setIsSubmitting(true);
     try {
       await onAdd({
-        name: user.name,
+        name: user.name || user.username,
         avatar: user.avatar,
         breed: user.breed,
         username: user.username,
@@ -125,27 +115,37 @@ export const AddFamilyMemberModal = ({
       : "familyTree.addModalTitleChild",
   );
 
+  const isSearchMode = mode === "search";
+
+  const switchMode = () => {
+    if (isSearchMode) {
+      setMode("manual");
+      return;
+    }
+    setAvatarFile(null);
+    setMode("search");
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={handleClose} className={styles.modal}>
       <h2 className={styles.title}>{title}</h2>
-      <p className={styles.description}>
-        {t("familyTree.addModalDescription")}
+      <p className={styles.switchText}>
+        {isSearchMode
+          ? t("familyTree.notOnPetspace")
+          : t("familyTree.alreadyOnPetspace")}{" "}
+        <Button
+          appearance="minimal"
+          className={styles.switchButton}
+          onClick={switchMode}
+          disabled={isSubmitting}
+        >
+          {isSearchMode
+            ? t("familyTree.addManually")
+            : t("familyTree.findProfile")}
+        </Button>
       </p>
 
-      <div className={styles.tabs}>
-        {TABS.map((tab) => (
-          <Button
-            key={tab}
-            appearance={mode === tab ? "primary" : "tertiary"}
-            onClick={() => setMode(tab)}
-            disabled={isSubmitting}
-          >
-            {t(`familyTree.${tab}Tab`)}
-          </Button>
-        ))}
-      </div>
-
-      {mode === "search" ? (
+      {isSearchMode ? (
         <div className={styles.searchMode}>
           <SearchBar
             value={query}
@@ -167,7 +167,9 @@ export const AddFamilyMemberModal = ({
                 >
                   <Avatar src={user.avatar} size={40} />
                   <div className={styles.resultInfo}>
-                    <span className={styles.resultName}>{user.name}</span>
+                    <span className={styles.resultName}>
+                      {user.name || user.username}
+                    </span>
                     <span className={styles.resultUsername}>
                       @{user.username}
                     </span>
@@ -183,6 +185,21 @@ export const AddFamilyMemberModal = ({
         </div>
       ) : (
         <div className={styles.manualMode}>
+          <div className={styles.photo}>
+            <AvatarUploadModal
+              size={64}
+              onChange={setAvatarFile}
+              disabled={isSubmitting}
+            />
+            <Button
+              appearance="secondary"
+              onClick={generatePhoto}
+              disabled={isSubmitting}
+            >
+              {t("familyTree.generatePhoto")}
+            </Button>
+          </div>
+
           <div className={styles.field}>
             <span className={styles.label}>{t("familyTree.nameLabel")}</span>
             <Input
@@ -204,63 +221,6 @@ export const AddFamilyMemberModal = ({
               disabled={isSubmitting}
             />
           </div>
-
-          {isPhotoRevealed ? (
-            <div className={styles.field}>
-              <span className={styles.label}>
-                {t("familyTree.avatarLabel")}
-              </span>
-              <div className={styles.photoRow}>
-                <AvatarUploadModal
-                  size={44}
-                  onChange={setAvatarFile}
-                  disabled={isSubmitting}
-                />
-                <button
-                  type="button"
-                  className={styles.generateButton}
-                  onClick={generatePhoto}
-                  disabled={isSubmitting}
-                >
-                  <span className={styles.generateAvatars}>
-                    <Image
-                      src={avatar || defaultAvatar}
-                      alt=""
-                      width={18}
-                      height={18}
-                      unoptimized
-                      className={styles.generateAvatarThumb}
-                    />
-                    <Image
-                      src={existingMemberAvatar || avatar || defaultAvatar}
-                      alt=""
-                      width={18}
-                      height={18}
-                      unoptimized
-                      className={cn(
-                        styles.generateAvatarThumb,
-                        styles.generateAvatarThumbOverlap,
-                      )}
-                    />
-                  </span>
-                  {t("familyTree.generatePhoto")}
-                </button>
-              </div>
-            </div>
-          ) : (
-            <button
-              type="button"
-              className={styles.photoToggle}
-              onClick={() => setIsPhotoRevealed(true)}
-              disabled={isSubmitting}
-            >
-              <span>{t("familyTree.addPhotoLabel")}</span>
-              <span className={styles.photoToggleAction}>
-                {t("familyTree.add")}
-                <MdAdd size={14} />
-              </span>
-            </button>
-          )}
 
           <div className={styles.actions}>
             <Button
