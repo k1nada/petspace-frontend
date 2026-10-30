@@ -21,7 +21,6 @@ interface FamilyColumnProps {
   limitText?: string;
   isOwner: boolean;
   breeds: string[];
-  avatar?: string;
   onAdd: (member: NewFamilyMember) => Promise<void>;
   onRemove: (id: string) => Promise<void>;
 }
@@ -36,7 +35,6 @@ export const FamilyColumn = ({
   limitText,
   isOwner,
   breeds,
-  avatar,
   onAdd,
   onRemove,
 }: FamilyColumnProps) => {
@@ -97,8 +95,6 @@ export const FamilyColumn = ({
         isOpen={isModalOpen}
         relation={relation}
         breeds={breeds}
-        avatar={avatar}
-        existingMemberAvatar={members[0]?.avatar}
         onClose={closeModal}
         onAdd={addMember}
       />

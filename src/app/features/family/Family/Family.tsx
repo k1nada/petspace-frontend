@@ -46,7 +46,6 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
             maxMembers={MAX_PARENTS}
             isOwner={isOwner}
             breeds={breeds}
-            avatar={avatar}
             onAdd={(member) => addMember("parent", member)}
             onRemove={removeMember}
           />
@@ -73,7 +72,6 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
             limitText={t("familyTree.puppiesLimit", { count: MAX_PUPPIES })}
             isOwner={isOwner}
             breeds={breeds}
-            avatar={avatar}
             onAdd={(member) => addMember("child", member)}
             onRemove={removeMember}
           />
