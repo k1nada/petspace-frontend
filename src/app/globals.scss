@@ -61,6 +61,7 @@
   --text-on-color: #ffffff;
 
   --z-dropdown: 10;
+  --z-drawer: 90;
   --z-modal: 100;
   --z-photo-overlay: 5;
 
@@ -116,6 +117,8 @@
   --overlay-strong: rgba(0, 0, 0, 0.6);
   --photo-nav-bg: rgba(36, 36, 36, 0.8);
   --photo-nav-bg-hover: rgba(54, 54, 56, 0.8);
+  --photo-viewer-bg: #000000;
+  --photo-viewer-shade: rgba(0, 0, 0, 0.75);
 }
 
 @media (max-width: 768px) {

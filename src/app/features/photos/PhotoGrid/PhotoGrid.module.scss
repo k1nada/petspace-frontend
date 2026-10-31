@@ -8,19 +8,11 @@
   .gallery {
     grid-template-columns: repeat(3, 1fr);
   }
-
-  .oneRow > li:nth-child(n + 4) {
-    display: none;
-  }
 }
 
 @media (max-width: 480px) {
   .gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .oneRow > li:nth-child(n + 3) {
-    display: none;
+    gap: var(--gap-xs);
   }
 }
 
@@ -39,7 +31,9 @@
     transition: filter var(--transition-base);
   }
 
-  &:hover img {
-    filter: brightness(0.7);
+  @media (hover: hover) {
+    &:hover img {
+      filter: brightness(0.7);
+    }
   }
 }

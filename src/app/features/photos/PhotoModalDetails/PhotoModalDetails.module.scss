@@ -81,3 +81,123 @@
   color: var(--text-secondary);
   font-size: var(--font-m);
 }
+
+.sheetHeader {
+  display: none;
+}
+
+.stats .commentsToggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .details {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-photo-overlay);
+    padding: var(--padding-m) var(--padding-m)
+      max(var(--padding-m), env(safe-area-inset-bottom));
+  }
+
+  .details .stats {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .stats .commentsToggle {
+    display: flex;
+  }
+
+  .detailsClosed {
+    position: static;
+    padding: 0;
+
+    .author {
+      position: absolute;
+      top: calc(env(safe-area-inset-top) + var(--gap-xs));
+      left: calc(var(--gap-xs) * 2 + 44px);
+      right: var(--gap-xs);
+      z-index: var(--z-dropdown);
+      height: 44px;
+    }
+
+    .info {
+      min-width: 0;
+      max-width: 50%;
+    }
+
+    .name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--text-on-color);
+    }
+
+    .time,
+    .comments,
+    .detailsFooter {
+      display: none;
+    }
+
+    .dropdown {
+      align-self: center;
+      color: var(--text-on-color);
+
+      button {
+        color: inherit;
+      }
+    }
+
+    .stats {
+      position: absolute;
+      left: var(--padding-m);
+      right: var(--padding-m);
+      bottom: max(var(--padding-m), env(safe-area-inset-bottom));
+      z-index: var(--z-photo-overlay);
+      gap: var(--gap-xl);
+      margin: 0;
+    }
+
+    .stats > * {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-xs);
+      height: 44px;
+      color: var(--text-on-color);
+    }
+
+    .stats > * svg {
+      color: var(--text-on-color);
+    }
+  }
+
+  .detailsOpen {
+    height: 75%;
+    background: var(--bg-card);
+    border-radius: var(--radius-l) var(--radius-l) 0 0;
+
+    .sheetHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .sheetTitle {
+    font-weight: 600;
+    font-size: var(--font-l);
+    color: var(--text-primary);
+  }
+
+  .sheetClose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-right: calc(var(--gap-l) * -1);
+    color: var(--text-secondary);
+  }
+}

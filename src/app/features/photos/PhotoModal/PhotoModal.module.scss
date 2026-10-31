@@ -9,11 +9,39 @@
   grid-template-columns: minmax(0, 2fr) minmax(260px, 400px);
   outline: none;
   height: 92vh;
+  height: 92dvh;
 }
 
-@media (max-width: 700px) {
+.close {
+  display: none;
+}
+
+@media (max-width: 768px) {
   .container {
-    grid-template-columns: 1fr;
-    grid-template-rows: minmax(240px, 45vh) 1fr;
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: block;
+    height: auto;
+    background: var(--photo-viewer-bg);
+  }
+
+  .close {
+    position: absolute;
+    top: calc(env(safe-area-inset-top) + var(--gap-xs));
+    left: var(--gap-xs);
+    z-index: var(--z-dropdown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: var(--text-on-color);
+  }
+}
+
+@media (max-width: 480px) {
+  .modal {
+    width: 100% !important;
   }
 }

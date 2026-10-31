@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdAddPhotoAlternate, MdDelete } from "react-icons/md";
 import styles from "./PhotoGallery.module.scss";
 import { useTranslations } from "next-intl";
@@ -18,6 +18,8 @@ import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { Card } from "@/app/uikit/layout/Card/Card";
 import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
+
+const PHOTO_TYPES = "image/jpeg,image/png,image/gif,image/webp";
 
 interface PhotoGalleryProps {
   photos: Photo[];
@@ -53,24 +55,42 @@ export const PhotoGallery = ({
     nextPhoto,
   } = usePhotoNavigation(localPhotos);
   const [isDeleteAllOpen, setIsDeleteAllOpen] = useState(false);
+  const [pickedFiles, setPickedFiles] = useState<File[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const openUpload = () => {
+    const isTouchScreen = window.matchMedia("(hover: none)").matches;
+    if (isTouchScreen) {
+      fileInputRef.current?.click();
+      return;
+    }
+    setPickedFiles([]);
+    setIsUploadOpen(true);
+  };
+
+  const handlePick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files ?? []);
+    e.target.value = "";
+    if (files.length === 0) return;
+    setPickedFiles(files);
+    setIsUploadOpen(true);
+  };
 
   const selectedPhoto =
     selectedIndex !== null ? localPhotos[selectedIndex] : null;
   const isEmpty = localPhotos.length === 0;
 
-  const menuItems = [];
-  menuItems.push({
+  const addPhotoItem = {
     label: t("common.addPhoto"),
     icon: <MdAddPhotoAlternate size={20} />,
-    onClick: () => setIsUploadOpen(true),
-  });
-  if (!isEmpty) {
-    menuItems.push({
-      label: t("photoGallery.deleteAll"),
-      icon: <MdDelete size={20} />,
-      onClick: () => setIsDeleteAllOpen(true),
-    });
-  }
+    onClick: openUpload,
+  };
+  const deleteAllItem = {
+    label: t("photoGallery.deleteAll"),
+    icon: <MdDelete size={20} />,
+    onClick: () => setIsDeleteAllOpen(true),
+  };
+  const menuItems = isEmpty ? [addPhotoItem] : [addPhotoItem, deleteAllItem];
 
   return (
     <AuthLoader fallback={<PhotoGallerySkeleton />}>
@@ -82,7 +102,9 @@ export const PhotoGallery = ({
               : t("photoGallery.titleOther", { name })}
           </CardTitle>
           {isOwner && (
-            <Dropdown label={t("photoGallery.manage")} items={menuItems} />
+            <div className={styles.menu}>
+              <Dropdown label={t("photoGallery.manage")} items={menuItems} />
+            </div>
           )}
         </div>
 
@@ -122,11 +144,24 @@ export const PhotoGallery = ({
           />
         )}
 
-        <PhotoUploadModal
-          isOpen={isUploadOpen}
-          onClose={() => setIsUploadOpen(false)}
-          onUpload={addPhoto}
-        />
+        {isOwner && (
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept={PHOTO_TYPES}
+            multiple
+            hidden
+            onChange={handlePick}
+          />
+        )}
+
+        {isUploadOpen && (
+          <PhotoUploadModal
+            initialFiles={pickedFiles}
+            onClose={() => setIsUploadOpen(false)}
+            onUpload={addPhoto}
+          />
+        )}
 
         <ConfirmModal
           isOpen={isDeleteAllOpen}

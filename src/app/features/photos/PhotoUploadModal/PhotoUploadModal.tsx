@@ -9,24 +9,28 @@ import styles from "./PhotoUploadModal.module.scss";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
+import { MdAdd, MdClose } from "react-icons/md";
 
 interface PhotoUploadModalProps {
-  isOpen: boolean;
   onClose: () => void;
   onUpload: (files: File[]) => Promise<File[]>;
+  initialFiles?: File[];
 }
 
 export const PhotoUploadModal = ({
-  isOpen,
   onClose,
   onUpload,
+  initialFiles = [],
 }: PhotoUploadModalProps) => {
   const t = useTranslations();
-  const [previews, setPreviews] = useState<string[]>([]);
-  const [files, setFiles] = useState<File[]>([]);
+  const isTouchScreen = window.matchMedia("(hover: none)").matches;
+  const [previews, setPreviews] = useState<string[]>(() =>
+    initialFiles.map((file) => URL.createObjectURL(file)),
+  );
+  const [files, setFiles] = useState<File[]>(initialFiles);
   const [isUploading, setIsUploading] = useState(false);
 
-  const { getRootProps, getInputProps } = useDropzone({
+  const { getRootProps, getInputProps, open } = useDropzone({
     accept: {
       "image/jpeg": [],
       "image/png": [],
@@ -36,11 +40,25 @@ export const PhotoUploadModal = ({
     multiple: true,
     disabled: isUploading,
     onDrop: (dropped) => {
+      if (isTouchScreen) {
+        setFiles([...files, ...dropped]);
+        setPreviews([
+          ...previews,
+          ...dropped.map((file) => URL.createObjectURL(file)),
+        ]);
+        return;
+      }
       previews.forEach((url) => URL.revokeObjectURL(url));
       setFiles(dropped);
       setPreviews(dropped.map((f) => URL.createObjectURL(f)));
     },
   });
+
+  const removeFile = (index: number) => {
+    URL.revokeObjectURL(previews[index]);
+    setFiles(files.filter((_, i) => i !== index));
+    setPreviews(previews.filter((_, i) => i !== index));
+  };
 
   const handleClose = () => {
     if (isUploading) return;
@@ -67,43 +85,78 @@ export const PhotoUploadModal = ({
     }
   };
 
-  return (
-    <Modal isOpen={isOpen} onClose={handleClose}>
+  const content = (
+    <>
       <h3 className={styles.title}>{t("common.addPhoto")}</h3>
 
-      <div
-        {...getRootProps()}
-        className={cn(styles.dropzone, {
-          [styles.uploading]: isUploading,
-          [styles.empty]: previews.length === 0,
-        })}
-      >
-        <input {...getInputProps()} />
-        {previews.length > 0 ? (
-          <div className={styles.previews}>
-            {previews.map((src, i) => (
-              <div key={i} className={styles.previewItem}>
-                <Image
-                  src={src}
-                  alt={t("common.preview")}
-                  fill
-                  unoptimized
-                  className={styles.preview}
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className={styles.placeholder}>
-            <PhotoIcon size={40} />
-            <p className={styles.dropzoneText}>
-              {t("photoUploadModal.dragAndDrop")}
-            </p>
-            <p className={styles.dropzoneHint}>{t("common.imageFormats")}</p>
-          </div>
-        )}
-        <div className={styles.overlay} />
-      </div>
+      {isTouchScreen ? (
+        <div className={styles.pickedGrid}>
+          <input {...getInputProps()} />
+          {previews.map((src, i) => (
+            <div key={src} className={styles.pickedItem}>
+              <Image
+                src={src}
+                alt={t("common.preview")}
+                fill
+                unoptimized
+                className={styles.preview}
+              />
+              <button
+                type="button"
+                className={styles.removePicked}
+                title={t("common.remove")}
+                onClick={() => removeFile(i)}
+                disabled={isUploading}
+              >
+                <MdClose size={14} />
+              </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            className={styles.addMore}
+            onClick={open}
+            disabled={isUploading}
+          >
+            <MdAdd size={26} />
+            {t("photoUploadModal.addMore")}
+          </button>
+        </div>
+      ) : (
+        <div
+          {...getRootProps()}
+          className={cn(styles.dropzone, {
+            [styles.uploading]: isUploading,
+            [styles.empty]: previews.length === 0,
+          })}
+        >
+          <input {...getInputProps()} />
+          {previews.length > 0 ? (
+            <div className={styles.previews}>
+              {previews.map((src, i) => (
+                <div key={i} className={styles.previewItem}>
+                  <Image
+                    src={src}
+                    alt={t("common.preview")}
+                    fill
+                    unoptimized
+                    className={styles.preview}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.placeholder}>
+              <PhotoIcon size={40} />
+              <p className={styles.dropzoneText}>
+                {t("photoUploadModal.dragAndDrop")}
+              </p>
+              <p className={styles.dropzoneHint}>{t("common.imageFormats")}</p>
+            </div>
+          )}
+          <div className={styles.overlay} />
+        </div>
+      )}
 
       <div className={styles.actions}>
         <Button
@@ -121,6 +174,16 @@ export const PhotoUploadModal = ({
           {t("common.upload")} {files.length > 1 && `(${files.length})`}
         </Button>
       </div>
+    </>
+  );
+
+  if (isTouchScreen) {
+    return <div className={styles.sheet}>{content}</div>;
+  }
+
+  return (
+    <Modal isOpen onClose={handleClose}>
+      {content}
     </Modal>
   );
 };

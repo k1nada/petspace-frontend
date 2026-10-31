@@ -3,10 +3,27 @@
   grid-template-columns: 1fr;
   grid-template-areas: "content";
   min-height: 100vh;
+  min-height: 100dvh;
   align-items: start;
 }
 
 .content {
   grid-area: content;
   min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    min-height: calc(100dvh - var(--header-offset));
+    align-items: stretch;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content > * {
+    flex: 1;
+  }
 }
