@@ -15,12 +15,8 @@ export const ProfileLayoutSkeleton = () => (
       <PostwallSkeleton />
     </div>
     <div className={styles.rightColumn}>
-      <div className={styles.photos}>
-        <ProfilePhotosSkeleton />
-      </div>
-      <div className={styles.friends}>
-        <ProfileFriendsSkeleton />
-      </div>
+      <ProfilePhotosSkeleton />
+      <ProfileFriendsSkeleton />
     </div>
   </div>
 );

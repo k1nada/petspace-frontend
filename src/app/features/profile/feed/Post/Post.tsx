@@ -2,6 +2,7 @@
 
 import styles from "./Post.module.scss";
 import Image from "next/image";
+import cn from "classnames";
 import { Photo, Post as PostType, PostChanges, RepostState } from "@/types";
 import { Comment } from "@/app/features/profile/feed/Comment/Comment";
 import { CommentCreator } from "../CommentCreator/CommentCreator";
@@ -40,6 +41,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isPhotoOpen, setIsPhotoOpen] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isCommentsOpen, setIsCommentsOpen] = useState(false);
 
   const updatePostInStores = (changes: PostChanges) => {
     useFeedStore.getState().updatePost(post.id, changes);
@@ -90,6 +92,11 @@ export const Post = ({ post, onRefresh }: PostProps) => {
       return;
     }
     setIsInputShown(true);
+  };
+
+  const toggleComments = () => {
+    setIsCommentsOpen(!isCommentsOpen);
+    showCommentInput();
   };
 
   const photoData: Photo = {
@@ -209,40 +216,46 @@ export const Post = ({ post, onRefresh }: PostProps) => {
             likeLoading={likeLoading}
             onToggleLike={toggleLike}
             commentCount={commentCount}
-            onToggleComments={showCommentInput}
+            onToggleComments={toggleComments}
             reposted={reposted}
             repostCount={repostCount}
             onOpenShare={() => setIsShareOpen(true)}
           />
 
-          <ul className={styles.comments}>
-            {rootComments.map((comment) => (
-              <li key={comment.id}>
-                <Comment
-                  comment={comment}
-                  replies={repliesFor(comment.id)}
-                  postId={post.id}
-                  onDelete={() => deleteComment(comment.id)}
-                  onEdit={(content) => editComment(comment.id, content)}
-                  onDeleteReply={deleteComment}
-                  onEditReply={editComment}
-                  onReply={replyComment}
-                />
-              </li>
-            ))}
-          </ul>
+          <div
+            className={cn(styles.commentsBlock, {
+              [styles.commentsBlockOpen]: isCommentsOpen,
+            })}
+          >
+            <ul className={styles.comments}>
+              {rootComments.map((comment) => (
+                <li key={comment.id}>
+                  <Comment
+                    comment={comment}
+                    replies={repliesFor(comment.id)}
+                    postId={post.id}
+                    onDelete={() => deleteComment(comment.id)}
+                    onEdit={(content) => editComment(comment.id, content)}
+                    onDeleteReply={deleteComment}
+                    onEditReply={editComment}
+                    onReply={replyComment}
+                  />
+                </li>
+              ))}
+            </ul>
 
-          {isInputVisible && (
-            <CommentCreator
-              textareaRef={commentInputRef}
-              autoFocus={isInputShown}
-              key={replyTo ? replyTo.commentId : "root"}
-              postId={post.id}
-              replyCommentId={replyTo?.commentId}
-              initialContent={replyTo ? `${replyTo.name}, ` : undefined}
-              onSuccess={onCommentCreated}
-            />
-          )}
+            {isInputVisible && (
+              <CommentCreator
+                textareaRef={commentInputRef}
+                autoFocus={isInputShown}
+                key={replyTo ? replyTo.commentId : "root"}
+                postId={post.id}
+                replyCommentId={replyTo?.commentId}
+                initialContent={replyTo ? `${replyTo.name}, ` : undefined}
+                onSuccess={onCommentCreated}
+              />
+            )}
+          </div>
         </>
       )}
 
@@ -267,7 +280,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
         postId={post.id}
         author={{
           avatar: post.user.avatar,
-          name: post.user.name,
+          name: post.user.name || post.user.username,
           username: post.user.username,
         }}
         onClose={() => setIsPhotoOpen(false)}

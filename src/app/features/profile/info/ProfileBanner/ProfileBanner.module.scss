@@ -30,14 +30,14 @@
   font-weight: 700;
   color: var(--text-primary);
   min-width: 0;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .username {
   font-size: var(--font-m);
   color: var(--text-tertiary);
   min-width: 0;
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .details {
@@ -62,15 +62,17 @@
   cursor: pointer;
   width: fit-content;
 
-  &:hover {
-    text-decoration: underline;
+  @media (hover: hover) {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
 .bio {
   font-size: var(--font-base);
   color: var(--text-secondary);
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .divider {
@@ -108,16 +110,24 @@
   min-width: 160px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .banner {
     flex-direction: column;
     align-items: center;
     gap: var(--gap-l);
-    text-align: center;
   }
 
   .container {
     width: 100%;
+    text-align: center;
+  }
+
+  .info {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    column-gap: var(--gap-s);
   }
 
   .nameWrapper,
@@ -140,4 +150,40 @@ $stat-icon-size: 18px;
 .statIconSkeleton {
   display: inline-block;
   width: calc(#{$stat-icon-size} + var(--gap-xs));
+}
+
+@media (max-width: 768px) {
+  .moreInfo {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .stat a {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      transform: translate(-50%, calc(-50% - 3px));
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .avatarWrapper {
+    zoom: 0.8;
+  }
 }

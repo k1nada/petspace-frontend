@@ -33,16 +33,10 @@ export const ProfileBannerSkeleton = () => {
               </div>
             </div>
             <div className={styles.details}>
-              <div className={styles.city}>
-                <SkeletonText width={100} />
-              </div>
               <div className={styles.moreInfo}>
                 <SkeletonText>{t("profileBanner.info")}</SkeletonText>
               </div>
             </div>
-          </div>
-          <div className={styles.bio}>
-            <SkeletonText width="70%" />
           </div>
           <div className={styles.divider} />
           <div className={styles.stats}>

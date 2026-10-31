@@ -41,10 +41,18 @@ button.attachmentItem {
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    color: var(--text-primary);
-    background: none;
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-primary);
+      background: none;
+    }
   }
+}
+
+.attachmentSkeleton {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-m);
 }
 
 .imagePreviewWrapper {
@@ -75,4 +83,48 @@ button.attachmentItem {
   background: var(--overlay-strong);
   color: var(--text-on-color);
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .textareaWrapper textarea {
+    line-height: 20px;
+  }
+
+  .textareaWrapper textarea::placeholder {
+    font-size: var(--font-m);
+  }
+
+  button.attachmentItem,
+  .attachmentSkeleton {
+    min-height: 44px;
+  }
+
+  .removeImage {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    gap: var(--gap-s);
+
+    > :first-child {
+      zoom: 0.8;
+    }
+  }
+
+  .textareaWrapper textarea {
+    height: 34px;
+    padding-top: var(--padding-xs);
+    padding-bottom: var(--padding-xs);
+    line-height: 22px;
+  }
 }
