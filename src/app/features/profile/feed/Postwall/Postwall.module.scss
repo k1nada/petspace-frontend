@@ -12,3 +12,13 @@
   padding-top: var(--gap-l);
   border-top-width: 1px;
 }
+
+@media (max-width: 480px) {
+  .list {
+    gap: var(--gap-m);
+  }
+
+  .list > li + li {
+    padding-top: var(--gap-m);
+  }
+}

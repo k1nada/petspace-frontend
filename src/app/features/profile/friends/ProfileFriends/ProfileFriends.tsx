@@ -16,7 +16,7 @@ interface ProfileFriendsProps {
   friends: Friend[];
 }
 
-const MAX_VISIBLE_FRIENDS = 3;
+const MAX_VISIBLE_FRIENDS = 8;
 
 export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
   const t = useTranslations();
@@ -56,7 +56,9 @@ export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
                     presenceByUserId[friend.id]?.isOnline ?? friend.isOnline
                   }
                 />
-                <div className={styles.name}>{friend.name}</div>
+                <div className={styles.name}>
+                  {friend.name || friend.username}
+                </div>
               </Link>
             </li>
           ))}

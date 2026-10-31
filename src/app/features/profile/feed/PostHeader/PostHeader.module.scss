@@ -35,7 +35,7 @@
   font-weight: 500;
   font-size: var(--font-base);
   color: var(--text-primary);
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .time {
@@ -59,4 +59,10 @@
 .dropdown {
   margin-left: auto;
   align-self: flex-start;
+}
+
+@media (max-width: 480px) {
+  .wrapper:not(.compact) > :first-child {
+    zoom: 0.8;
+  }
 }

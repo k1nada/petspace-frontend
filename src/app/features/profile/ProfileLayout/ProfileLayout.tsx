@@ -86,7 +86,7 @@ export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
       <div className={styles.feedContainer}>
         {canCreatePost && currentUser && (
           <PostCreator
-            name={currentUser.name}
+            name={currentUser.name || currentUser.username}
             isOwner={isOwner}
             avatar={currentUser.avatar}
             postwallId={postwallId ?? ""}
@@ -96,17 +96,13 @@ export const ProfileLayout = ({ bannerInfo }: ProfileLayoutProps) => {
         <Postwall posts={posts} onRefresh={refreshPosts} />
       </div>
       <div className={styles.rightColumn}>
-        <div className={styles.photos}>
-          <ProfilePhotos
-            username={bannerInfo.username}
-            photos={photos}
-            avatar={bannerInfo.avatar}
-            name={bannerInfo.name}
-          />
-        </div>
-        <div className={styles.friends}>
-          <ProfileFriends username={bannerInfo.username} friends={friends} />
-        </div>
+        <ProfilePhotos
+          username={bannerInfo.username}
+          photos={photos}
+          avatar={bannerInfo.avatar}
+          name={bannerInfo.name}
+        />
+        <ProfileFriends username={bannerInfo.username} friends={friends} />
       </div>
     </div>
   );

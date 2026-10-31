@@ -12,3 +12,30 @@
 .avatarWrapper {
   flex-shrink: 0;
 }
+
+@media (max-width: 768px) {
+  .wrapper textarea {
+    line-height: 20px;
+  }
+
+  .wrapper textarea::placeholder {
+    font-size: var(--font-m);
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    gap: var(--gap-s);
+
+    textarea {
+      height: 34px;
+      padding-top: var(--padding-xs);
+      padding-bottom: var(--padding-xs);
+      line-height: 22px;
+    }
+  }
+
+  .avatarWrapper {
+    zoom: 0.8;
+  }
+}

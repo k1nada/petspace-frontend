@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
-import { Skeleton } from "@/app/uikit/feedback/Skeleton/Skeleton";
+import { Skeleton, SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
 import { SKELETON_AVATAR } from "@/app/uikit/feedback/Skeleton/skeletonSizes";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { Textarea } from "@/app/uikit/form/Textarea/Textarea";
@@ -26,12 +26,12 @@ export const PostCreatorSkeleton = () => {
       </div>
       <div className={styles.actions}>
         <div className={styles.attachments}>
-          <Skeleton shape="rounded">
-            <Button appearance="ghost" className={styles.attachmentItem}>
+          <div className={styles.attachmentSkeleton}>
+            <SkeletonText>
               <PhotoIcon size={16} />
               {t("postCreator.photo")}
-            </Button>
-          </Skeleton>
+            </SkeletonText>
+          </div>
         </div>
         <Skeleton shape="rounded">
           <Button appearance="primary">{t("postCreator.publish")}</Button>

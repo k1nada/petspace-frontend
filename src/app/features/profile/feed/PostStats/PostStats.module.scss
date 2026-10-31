@@ -21,7 +21,32 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    color: var(--text-primary);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .stat {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: calc(var(--gap-m) / -2);
+      right: calc(var(--gap-m) / -2);
+      height: 44px;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .stat svg {
+    width: 14px;
+    height: 14px;
   }
 }

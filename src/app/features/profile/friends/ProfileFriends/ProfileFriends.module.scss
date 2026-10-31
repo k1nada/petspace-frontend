@@ -13,7 +13,10 @@
 
 .friends {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(78px, 1fr));
+  grid-template-rows: auto;
+  grid-auto-rows: 0;
+  overflow: hidden;
 }
 
 .friend {
@@ -29,8 +32,10 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    background: var(--bg-hover);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--bg-hover);
+    }
   }
 }
 
@@ -38,4 +43,50 @@
   font-weight: 500;
   font-size: var(--font-m);
   color: var(--text-primary);
+}
+
+@media (max-width: 1024px) {
+  .friends {
+    grid-template-columns: repeat(auto-fill, 78px);
+    justify-content: space-between;
+    column-gap: var(--gap-s);
+  }
+}
+
+@media (max-width: 768px) {
+  .titleLink {
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .friends {
+    grid-template-columns: repeat(auto-fill, 60px);
+    column-gap: var(--gap-m);
+  }
+
+  .friend {
+    padding: var(--gap-xs) 0;
+  }
+
+  .friend > :first-child {
+    zoom: 0.8;
+  }
+
+  .name {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

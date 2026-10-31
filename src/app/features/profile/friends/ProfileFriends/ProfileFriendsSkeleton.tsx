@@ -5,7 +5,7 @@ import { Card } from "@/app/uikit/layout/Card/Card";
 import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 import styles from "./ProfileFriends.module.scss";
 
-const NAME_WIDTHS = [60, 45, 55];
+const NAME_WIDTHS = [60, 45, 55, 50, 65, 40, 55, 50];
 
 export const ProfileFriendsSkeleton = () => {
   const t = useTranslations();

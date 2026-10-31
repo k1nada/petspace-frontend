@@ -7,7 +7,7 @@
 
 .content {
   color: var(--text-primary);
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   white-space: pre-wrap;
   transition: none;
 }
@@ -36,5 +36,25 @@
 
   &:not(:empty) {
     margin-top: var(--gap-l);
+  }
+}
+
+.commentsBlock {
+  display: contents;
+}
+
+@media (max-width: 768px) {
+  .commentsBlock {
+    display: none;
+  }
+
+  .commentsBlockOpen {
+    display: contents;
+  }
+}
+
+@media (max-width: 480px) {
+  .contentWrapper {
+    row-gap: var(--gap-s);
   }
 }
