@@ -7,6 +7,8 @@ import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
+import { MdClose } from "react-icons/md";
+import { Button } from "@/app/uikit/form/Button/Button";
 import { LikeState } from "@/app/hooks/photos/useResolvedLike";
 import { getModalPhotoUrl, getPhotoUrl } from "@/utils/photo";
 import { preloadPhotoComments } from "@/app/hooks/photos/usePhotoComments";
@@ -143,6 +145,15 @@ export const PhotoModal = ({
           tabIndex={0}
           autoFocus
         >
+          <Button
+            appearance="ghost"
+            className={styles.close}
+            title={t("photoModal.close")}
+            onClick={onClose}
+          >
+            <MdClose size={24} />
+          </Button>
+
           <PhotoModalImage
             src={getSrc(visiblePhoto)}
             currentIndex={visibleIndex}

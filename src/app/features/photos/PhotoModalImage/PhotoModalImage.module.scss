@@ -51,8 +51,10 @@
     color: var(--text-on-color);
   }
 
-  &:hover {
-    background: var(--photo-nav-bg-hover);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--photo-nav-bg-hover);
+    }
   }
 }
 
@@ -79,4 +81,28 @@
   line-height: 1;
 
   z-index: var(--z-photo-overlay);
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    position: absolute;
+    inset: 0;
+  }
+
+  .background,
+  .arrow {
+    display: none;
+  }
+
+  .counter {
+    top: calc(env(safe-area-inset-top) + var(--gap-xs));
+    bottom: auto;
+    left: auto;
+    right: calc(var(--gap-xs) + 44px);
+    transform: none;
+    padding: 0 var(--padding-m);
+    font-size: var(--font-base);
+    line-height: 44px;
+    background: none;
+  }
 }

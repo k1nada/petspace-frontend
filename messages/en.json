@@ -233,12 +233,15 @@
   },
   "photoModal": {
     "counter": "{current} / {total}",
+    "comments": "Comments",
+    "close": "Close",
     "commentsTitle": "No tail wags yet...",
     "commentsText": "Be the first!",
     "modalTitle": "Delete this photo?"
   },
   "photoUploadModal": {
-    "dragAndDrop": "Drag & drop or click here"
+    "dragAndDrop": "Drag & drop or click here",
+    "addMore": "Add more"
   },
   "friends": {
     "friendsTitleOther": "{name}'s friends",

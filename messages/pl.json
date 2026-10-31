@@ -233,12 +233,15 @@
   },
   "photoModal": {
     "counter": "{current} / {total}",
+    "comments": "Komentarze",
+    "close": "Zamknij",
     "commentsTitle": "Jeszcze żadnych merdań ogonem...",
     "commentsText": "Bądź pierwszy!",
     "modalTitle": "Usunąć to zdjęcie?"
   },
   "photoUploadModal": {
-    "dragAndDrop": "Przeciągnij i upuść lub kliknij tutaj"
+    "dragAndDrop": "Przeciągnij i upuść lub kliknij tutaj",
+    "addMore": "Dodaj więcej"
   },
   "friends": {
     "friendsTitleOther": "Znajomi użytkownika {name}",

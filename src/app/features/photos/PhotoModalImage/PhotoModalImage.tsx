@@ -1,11 +1,14 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import cn from "classnames";
 import { useTranslations } from "next-intl";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import styles from "./PhotoModalImage.module.scss";
+
+const SWIPE_DISTANCE = 50;
 
 interface PhotoModalImageProps {
   src: string;
@@ -24,9 +27,26 @@ export const PhotoModalImage = ({
 }: PhotoModalImageProps) => {
   const t = useTranslations();
   const showNavigation = (photosCount ?? 0) > 1;
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || !showNavigation) return;
+    const distance = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (distance > SWIPE_DISTANCE) onPrev?.();
+    if (distance < -SWIPE_DISTANCE) onNext?.();
+  };
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className={styles.background}>
         <Image
           src={src}

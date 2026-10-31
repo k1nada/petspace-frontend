@@ -6,6 +6,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { Photo, RepostState } from "@/types";
 import { LikeButton } from "@/app/uikit/feedback/LikeButton/LikeButton";
 import { RepostButton } from "@/app/uikit/feedback/RepostButton/RepostButton";
+import { CommentButton } from "@/app/uikit/feedback/CommentButton/CommentButton";
+import { Button } from "@/app/uikit/form/Button/Button";
 import { usePhotoComments } from "@/app/hooks/photos/usePhotoComments";
 import { useResolvedLike, LikeState } from "@/app/hooks/photos/useResolvedLike";
 import { useResolvedRepost } from "@/app/hooks/photos/useResolvedRepost";
@@ -13,7 +15,7 @@ import { Comment } from "../../profile/feed/Comment/Comment";
 import { CommentCreator } from "../../profile/feed/CommentCreator/CommentCreator";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
-import { MdDelete } from "react-icons/md";
+import { MdClose, MdDelete } from "react-icons/md";
 import { formatDate } from "@/utils/dateFormatters";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
@@ -56,6 +58,7 @@ export const PhotoModalDetails = ({
     commentId: string;
     name: string;
   } | null>(null);
+  const [isCommentsOpen, setIsCommentsOpen] = useState(false);
 
   const {
     comments,
@@ -93,7 +96,23 @@ export const PhotoModalDetails = ({
   };
 
   return (
-    <div className={styles.details}>
+    <div
+      className={cn(styles.details, {
+        [styles.detailsOpen]: isCommentsOpen,
+        [styles.detailsClosed]: !isCommentsOpen,
+      })}
+    >
+      <div className={styles.sheetHeader}>
+        <span className={styles.sheetTitle}>{t("photoModal.comments")}</span>
+        <Button
+          appearance="ghost"
+          className={styles.sheetClose}
+          title={t("photoModal.close")}
+          onClick={() => setIsCommentsOpen(false)}
+        >
+          <MdClose size={22} />
+        </Button>
+      </div>
       <div className={styles.detailsWrapper}>
         <div className={styles.author}>
           {username ? (
@@ -132,6 +151,11 @@ export const PhotoModalDetails = ({
             loading={likeLoading}
             onToggle={onToggleLike}
             className={statsStyles.stat}
+          />
+          <CommentButton
+            count={comments.length}
+            onClick={() => setIsCommentsOpen(true)}
+            className={cn(statsStyles.stat, styles.commentsToggle)}
           />
           {showRepost && (
             <RepostButton
