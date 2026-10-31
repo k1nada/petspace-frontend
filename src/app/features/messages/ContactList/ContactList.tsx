@@ -51,7 +51,7 @@ export const ContactList = ({
   const isMessageSearch = searchText.length >= MIN_MESSAGE_SEARCH_LENGTH;
   const filteredConversations = conversations.filter(
     (contact) =>
-      contact.name.toLowerCase().includes(searchText) ||
+      (contact.name || "").toLowerCase().includes(searchText) ||
       contact.username.toLowerCase().includes(searchText),
   );
 

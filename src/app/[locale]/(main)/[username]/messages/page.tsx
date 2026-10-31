@@ -36,7 +36,7 @@ const MessagesPage = async ({ params, searchParams }: MessagesPageProps) => {
     ? {
         id: targetUser.id,
         username: targetUser.username,
-        name: targetUser.name,
+        name: targetUser.name || targetUser.username,
         avatar: targetUser.avatar,
         isOnline: targetUser.isOnline,
         lastSeen: targetUser.lastSeen,

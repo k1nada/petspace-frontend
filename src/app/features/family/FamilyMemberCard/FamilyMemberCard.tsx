@@ -56,7 +56,7 @@ export const FamilyMemberCard = ({
         <Avatar src={member.avatar} size={56} />
       </div>
       <div className={styles.info}>
-        <span className={styles.name}>{member.name}</span>
+        <span className={styles.name}>{member.name || member.username}</span>
         {member.breed && <span className={styles.breed}>{member.breed}</span>}
       </div>
     </>
@@ -80,7 +80,9 @@ export const FamilyMemberCard = ({
 
       <ConfirmModal
         isOpen={isConfirmOpen}
-        title={t("familyTree.modalTitle", { name: member.name })}
+        title={t("familyTree.modalTitle", {
+          name: member.name || member.username || "",
+        })}
         description={t("common.cannotUndo")}
         onConfirm={handleRemove}
         onClose={closeConfirm}

@@ -23,7 +23,7 @@ export const useFriendsList = ({
   }, [initialFriends]);
 
   const friendsList = friends.filter((f) =>
-    f.name.toLowerCase().includes(search.toLowerCase()),
+    (f.name || f.username).toLowerCase().includes(search.toLowerCase()),
   );
 
   const deleteFriend = (friendUsername: string) =>

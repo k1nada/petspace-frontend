@@ -44,7 +44,9 @@ export const ContactCard = ({
       >
         <Avatar src={contact.avatar} isOnline={isOnline} />
         <div className={styles.info}>
-          <span className={styles.name}>{contact.name}</span>
+          <span className={styles.name}>
+            {contact.name || contact.username}
+          </span>
           <span className={styles.text}>{lastMessageText}</span>
         </div>
         <div className={styles.message}>

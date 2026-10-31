@@ -35,7 +35,9 @@ export const SuggestedFriends = () => {
                 <Avatar src={friend.avatar} size={AVATAR_SIZE} />
               </Link>
               <div className={styles.info}>
-                <div className={styles.name}>{friend.name}</div>
+                <div className={styles.name}>
+                  {friend.name || friend.username}
+                </div>
                 {friend.breed && (
                   <div className={styles.breed}>{friend.breed}</div>
                 )}

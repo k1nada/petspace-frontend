@@ -37,7 +37,9 @@ export const NotificationItem = ({
   const locale = useLocale();
 
   const getMessage = () =>
-    t(messageKeys[notification.type], { name: notification.user?.name ?? "" });
+    t(messageKeys[notification.type], {
+      name: notification.user?.name || notification.user?.username || "",
+    });
 
   const avatarSrc = notification.user ? notification.user.avatar : ownAvatar;
 

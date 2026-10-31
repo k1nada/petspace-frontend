@@ -83,7 +83,9 @@ export const SharePostModal = ({
                 onClick={() => sendToFriend(friend.id)}
               >
                 <Avatar src={friend.avatar} size={38} />
-                <span className={styles.name}>{friend.name}</span>
+                <span className={styles.name}>
+                  {friend.name || friend.username}
+                </span>
               </Button>
             </li>
           ))}

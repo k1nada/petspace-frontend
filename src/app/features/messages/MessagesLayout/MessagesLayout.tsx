@@ -184,7 +184,7 @@ const MessagesContent = ({
         const contact: ChatContact = {
           id: found.id,
           username: found.username,
-          name: found.name,
+          name: found.name || found.username,
           avatar: found.avatar,
           isOnline: found.isOnline,
           lastSeen: found.lastSeen,
@@ -252,7 +252,7 @@ const MessagesContent = ({
       const contact = known ?? {
         id: partnerId,
         username: message.sender.username,
-        name: message.sender.name,
+        name: message.sender.name || message.sender.username,
         avatar: message.sender.avatar,
       };
 

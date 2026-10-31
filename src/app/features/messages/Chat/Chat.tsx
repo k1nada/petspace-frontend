@@ -363,7 +363,9 @@ export const Chat = ({
             <Avatar src={selectedChat.avatar} size={45} />
           </Link>
           <div className={styles.info}>
-            <span className={styles.name}>{selectedChat.name}</span>
+            <span className={styles.name}>
+              {selectedChat.name || selectedChat.username}
+            </span>
             <span className={presence.isOnline ? styles.online : styles.status}>
               {statusText}
             </span>
@@ -452,7 +454,7 @@ export const Chat = ({
             photo={openedPhoto}
             author={{
               avatar: openedPhoto.user.avatar,
-              name: openedPhoto.user.name,
+              name: openedPhoto.user.name || openedPhoto.user.username,
               username: openedPhoto.user.username,
             }}
             onClose={() => setOpenedPhoto(null)}

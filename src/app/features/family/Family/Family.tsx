@@ -32,7 +32,7 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
       <CardTitle as="h1">
         {isOwner
           ? t("common.familyTree")
-          : t("familyTree.titleOther", { name })}
+          : t("familyTree.titleOther", { name: name || username })}
       </CardTitle>
 
       <div className={styles.content}>
@@ -55,7 +55,7 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
 
         <Link href={ROUTES.profile(username)} className={styles.user}>
           <Avatar src={avatar} size={96} />
-          <span className={styles.name}>{name}</span>
+          <span className={styles.name}>{name || username}</span>
           {breed && <span className={styles.breed}>{breed}</span>}
         </Link>
 

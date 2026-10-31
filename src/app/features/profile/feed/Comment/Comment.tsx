@@ -87,7 +87,9 @@ export const Comment = ({
         <div className={styles.info}>
           <div className={styles.header}>
             <Link href={ROUTES.profile(comment.user.username)}>
-              <div className={styles.name}>{comment.user.name}</div>
+              <div className={styles.name}>
+                {comment.user.name || comment.user.username}
+              </div>
             </Link>
             <time className={styles.time}>
               {formatDate(comment.createdAt, locale)}
@@ -147,7 +149,12 @@ export const Comment = ({
                 <Button
                   appearance="ghost"
                   className={styles.reply}
-                  onClick={() => onReply(comment.id, comment.user.name)}
+                  onClick={() =>
+                    onReply(
+                      comment.id,
+                      comment.user.name || comment.user.username,
+                    )
+                  }
                 >
                   {t("comment.reply")}
                 </Button>
