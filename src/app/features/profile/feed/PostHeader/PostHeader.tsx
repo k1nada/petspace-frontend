@@ -73,7 +73,7 @@ export const PostHeader = ({
       </Link>
       <div className={styles.info}>
         <Link href={ROUTES.profile(author.username)}>
-          <div className={styles.name}>{author.name}</div>
+          <div className={styles.name}>{author.name || author.username}</div>
         </Link>
         <time className={styles.time}>{formatDate(date, locale)}</time>
       </div>

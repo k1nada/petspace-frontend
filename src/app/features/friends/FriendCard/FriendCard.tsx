@@ -115,7 +115,7 @@ export const FriendCard = ({
     <UserRow
       userId={friend.id}
       username={friend.username}
-      name={friend.name}
+      name={friend.name || friend.username}
       avatar={friend.avatar}
       isOnline={friend.isOnline}
       lastSeen={friend.lastSeen}
@@ -137,9 +137,11 @@ export const FriendCard = ({
           isOpen={isDeleteOpen}
           onClose={() => setIsDeleteOpen(false)}
           onConfirm={handleDeleteFriend}
-          title={t("friendCard.modalTitle", { name: friend.name })}
+          title={t("friendCard.modalTitle", {
+            name: friend.name || friend.username,
+          })}
           description={t("friendCard.modalDescription", {
-            name: friend.name,
+            name: friend.name || friend.username,
           })}
           confirmLabel={t("common.remove")}
         />

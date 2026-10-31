@@ -94,7 +94,7 @@ export const ProfileEditor = ({ user }: ProfileEditorProps) => {
           />
         </div>
         <div className={styles.userInfo}>
-          <h2 className={styles.name}>{nameValue}</h2>
+          <h2 className={styles.name}>{nameValue || user.username}</h2>
           <div className={styles.username}>
             {t("profileEditor.username")} @{user.username}
           </div>

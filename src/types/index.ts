@@ -248,6 +248,7 @@ export type NotificationType =
 
 export interface NotificationUser {
   name: string;
+  username: string;
   avatar?: string;
 }
 

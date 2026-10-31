@@ -155,7 +155,7 @@ export const Header = () => {
           isOpen={isSignOutOpen}
           title={t("signOut.modalTitle")}
           description={t("signOut.modalDescription", {
-            name: currentUser?.name ?? "",
+            name: currentUser?.name || currentUser?.username || "",
           })}
           confirmLabel={t("signOut.leave")}
           cancelLabel={t("signOut.stay")}

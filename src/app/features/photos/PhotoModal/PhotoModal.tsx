@@ -154,7 +154,7 @@ export const PhotoModal = ({
           <PhotoModalDetails
             photo={visiblePhoto}
             avatar={author.avatar}
-            name={author.name}
+            name={author.name || author.username || ""}
             username={author.username}
             isOwner={isOwner}
             onDeleteRequest={() => {

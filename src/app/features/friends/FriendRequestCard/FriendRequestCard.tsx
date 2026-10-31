@@ -45,7 +45,7 @@ export const FriendRequestCard = ({
     <UserRow
       userId={request.from.id}
       username={request.from.username}
-      name={request.from.name}
+      name={request.from.name || request.from.username}
       avatar={request.from.avatar}
       isOnline={request.from.isOnline}
       fallbackStatus={t("friendRequest.wantsToBeFriends")}

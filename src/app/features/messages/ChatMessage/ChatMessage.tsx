@@ -61,7 +61,7 @@ export const ChatMessage = ({
                 href={ROUTES.profile(photo.user.username)}
                 className={styles.postAuthor}
               >
-                {photo.user.name}
+                {photo.user.name || photo.user.username}
               </Link>
               <button
                 type="button"
@@ -70,7 +70,9 @@ export const ChatMessage = ({
               >
                 <Image
                   src={getPhotoUrl(photo)}
-                  alt={t("photoGallery.photoAlt", { name: photo.user.name })}
+                  alt={t("photoGallery.photoAlt", {
+                    name: photo.user.name || photo.user.username,
+                  })}
                   fill
                   sizes="240px"
                 />
@@ -83,7 +85,7 @@ export const ChatMessage = ({
                 href={ROUTES.profile(post.user.username)}
                 className={styles.postAuthor}
               >
-                {post.user.name}
+                {post.user.name || post.user.username}
               </Link>
               {post.image && (
                 <div className={styles.postImage}>

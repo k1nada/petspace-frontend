@@ -65,10 +65,12 @@ export const FollowCard = ({
       : t("friends.unfollow");
   const isFollowersList = type === "followers";
   const modalTitle = isFollowersList
-    ? t("followCard.removeModalTitle", { name: user.name })
-    : t("followCard.unfollowModalTitle", { name: user.name });
+    ? t("followCard.removeModalTitle", { name: user.name || user.username })
+    : t("followCard.unfollowModalTitle", { name: user.name || user.username });
   const modalDescription = isFollowersList
-    ? t("followCard.removeModalDescription", { name: user.name })
+    ? t("followCard.removeModalDescription", {
+        name: user.name || user.username,
+      })
     : t("followCard.unfollowModalDescription");
   const confirmLabel = isFollowersList
     ? t("common.remove")
@@ -182,7 +184,7 @@ export const FollowCard = ({
   return (
     <UserRow
       username={user.username}
-      name={user.name}
+      name={user.name || user.username}
       avatar={user.avatar}
       fallbackStatus={t("followCard.followersCount", {
         count: user.followersCount,

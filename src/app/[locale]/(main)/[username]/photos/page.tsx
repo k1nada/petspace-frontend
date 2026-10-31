@@ -27,7 +27,7 @@ const PhotosPage = async ({ params }: PhotosPageProps) => {
 
   return (
     <PhotoGalleryLayout
-      name={userData.name}
+      name={userData.name || userData.username}
       photos={userData.photos ?? []}
       avatar={userData.avatar}
       username={userData.username}
