@@ -82,7 +82,7 @@ export const Header = () => {
             {currentUser && (
               <MenuToggle className={cn(styles.icon, styles.menuToggle)} />
             )}
-            <Link href={ROUTES.feed} className={styles.logo}>
+            <Link href={ROUTES.feed} className={styles.logo} draggable={false}>
               <Logo />
               <span className={styles.logoTitle}>Petspace</span>
             </Link>
