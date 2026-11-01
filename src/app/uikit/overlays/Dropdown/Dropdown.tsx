@@ -14,7 +14,8 @@ interface DropdownItem {
 }
 
 interface DropdownProps {
-  items: DropdownItem[];
+  items?: DropdownItem[];
+  content?: ReactNode;
   openOn?: "click" | "hover";
   align?: "left" | "center" | "right";
   triggerAppearance?: "icon" | "button" | "iconButton";
@@ -25,7 +26,8 @@ interface DropdownProps {
 }
 
 export const Dropdown = ({
-  items,
+  items = [],
+  content,
   openOn = "click",
   align = "right",
   triggerAppearance = "icon",
@@ -38,6 +40,7 @@ export const Dropdown = ({
 
   const isButton = triggerAppearance === "button";
   const buttonClassName = isButton ? triggerClassName : styles.trigger;
+  const isPopover = content !== undefined;
 
   return (
     <div
@@ -60,9 +63,11 @@ export const Dropdown = ({
       {openOn === "click" && triggerAppearance !== "iconButton" && (
         <Button
           appearance={isButton ? "secondary" : "ghost"}
-          className={buttonClassName}
+          className={cn(buttonClassName, {
+            [styles.triggerActive]: isPopover && isOpen,
+          })}
           title={label}
-          onClick={() => setIsOpen(true)}
+          onClick={() => setIsOpen(!isOpen)}
         >
           {trigger}
         </Button>
@@ -71,6 +76,7 @@ export const Dropdown = ({
       <div
         className={cn(styles.menu, styles[align], { [styles.open]: isOpen })}
       >
+        {content}
         {items.map((item) => (
           <Button
             key={item.label}

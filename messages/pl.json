@@ -320,7 +320,8 @@
     "add": "Dodaj",
     "addError": "Nie udało się dodać członka rodziny",
     "puppiesLimit": "Możesz dodać maksymalnie {count, plural, one {# szczeniaka} few {# szczeniaki} many {# szczeniaków} other {# szczeniaka}}",
-    "showAll": "Pokaż wszystkie ({count})"
+    "showAll": "Pokaż wszystkie ({count})",
+    "about": "O drzewie genealogicznym"
   },
   "contactList": {
     "emptyText": "Znajdź inne psy i zacznij rozmawiać!",
