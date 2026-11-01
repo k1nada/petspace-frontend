@@ -90,7 +90,9 @@ export const Sidebar = () => {
                 {t("common.familyTree")}
               </NavLink>
             </div>
-            <Tip title={t("dailyTip.title")} text={tip} />
+            <div className={styles.tip}>
+              <Tip title={t("dailyTip.title")} text={tip} />
+            </div>
           </nav>
         </>
       )}

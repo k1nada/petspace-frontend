@@ -10,6 +10,7 @@ export const Logo = () => {
       height={40}
       alt=""
       className={styles.logo}
+      draggable={false}
       priority
     />
   );

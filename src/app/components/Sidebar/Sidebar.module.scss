@@ -53,6 +53,11 @@
     z-index: var(--z-modal);
   }
 
+  .tip {
+    border-radius: var(--radius-m);
+    overflow: hidden;
+  }
+
   .containerOpen {
     transform: translateX(0);
   }
