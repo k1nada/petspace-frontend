@@ -1,3 +1,5 @@
+@use "@/app/styles/mixins" as *;
+
 .footer {
   display: flex;
   align-items: center;
@@ -18,7 +20,17 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    color: var(--text-primary);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .link {
+    position: relative;
+
+    @include touch-target;
   }
 }

@@ -13,7 +13,7 @@
 .bio {
   font-size: var(--font-m);
   color: var(--text-secondary);
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 .rows {
@@ -62,5 +62,5 @@
 .interestValue {
   font-size: var(--font-m);
   color: var(--text-secondary);
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
 }

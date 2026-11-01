@@ -1,5 +1,6 @@
 .page {
   height: calc(100vh - 60px);
+  height: calc(100dvh - 60px);
   display: flex;
   flex-direction: column;
   background: var(--bg-page);
@@ -49,4 +50,10 @@
 .actions {
   display: flex;
   gap: var(--gap-m);
+}
+
+@media (max-width: 1024px) {
+  .content {
+    box-sizing: border-box;
+  }
 }

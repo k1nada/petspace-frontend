@@ -16,9 +16,14 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover,
   &.active {
     background-color: var(--button-ghost-hover);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--button-ghost-hover);
+    }
   }
 }
 

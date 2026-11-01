@@ -5,6 +5,7 @@
   grid-template-areas: "content information";
   gap: var(--gap-xl);
   min-height: 100vh;
+  min-height: 100dvh;
   align-items: start;
 }
 
@@ -32,6 +33,7 @@
 
 @media (max-width: 768px) {
   .wrapper {
+    align-content: start;
     grid-template-areas:
       "content"
       "information";

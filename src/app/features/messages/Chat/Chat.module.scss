@@ -118,14 +118,22 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    color: var(--text-primary);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-primary);
+    }
   }
 }
 
 @media (max-width: 768px) {
   .backButton {
     display: flex;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .input {
+    padding-bottom: max(var(--padding-m), env(safe-area-inset-bottom));
   }
 }
 

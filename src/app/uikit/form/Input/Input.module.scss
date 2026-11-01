@@ -24,8 +24,10 @@
   background: var(--bg-input);
   color: var(--text-primary);
 
-  &:hover {
-    background: var(--button-secondary-hover);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--button-secondary-hover);
+    }
   }
 }
 
@@ -39,8 +41,10 @@
   padding-right: 36px;
   width: 100%;
 
-  &:hover {
-    background: var(--bg-search-hover);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--bg-search-hover);
+    }
   }
 }
 

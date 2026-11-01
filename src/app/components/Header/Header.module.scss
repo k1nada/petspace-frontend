@@ -5,7 +5,8 @@
   left: 0;
   right: 0;
   height: 50px;
-  padding-right: var(--scrollbar-offset, 0px);
+  padding-right: max(var(--scrollbar-offset, 0px), env(safe-area-inset-right));
+  padding-left: env(safe-area-inset-left);
   box-shadow: var(--shadow-header);
   z-index: var(--z-modal);
 }
@@ -79,9 +80,11 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    color: var(--text-primary);
-    background: var(--button-ghost-hover);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-primary);
+      background: var(--button-ghost-hover);
+    }
   }
 
   svg {
@@ -135,6 +138,11 @@
     gap: var(--gap-xs);
   }
 
+  .icon {
+    width: 44px;
+    height: 44px;
+  }
+
   .menuToggle {
     display: flex;
   }
@@ -148,6 +156,12 @@
 
   .wrapper {
     gap: var(--gap-2xs);
+  }
+
+  .logo {
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
   }
 
   .logo img {
@@ -177,9 +191,6 @@
   }
 
   .menuToggle {
-    width: 36px;
-    height: 36px;
-
     svg {
       width: 18px;
       height: 18px;

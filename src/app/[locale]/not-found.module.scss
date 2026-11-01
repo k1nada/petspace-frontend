@@ -1,5 +1,6 @@
 .page {
   height: calc(100vh - 60px);
+  height: calc(100dvh - 60px);
   display: flex;
   flex-direction: column;
   background: var(--bg-page);
@@ -44,4 +45,10 @@
   line-height: 1.6;
   margin: 0;
   max-width: 480px;
+}
+
+@media (max-width: 1024px) {
+  .content {
+    box-sizing: border-box;
+  }
 }

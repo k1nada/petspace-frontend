@@ -1,3 +1,5 @@
+@use "@/app/styles/mixins" as *;
+
 .wrapper {
   position: relative;
 }
@@ -27,9 +29,11 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    color: var(--text-primary);
-    background: var(--button-ghost-hover);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-primary);
+      background: var(--button-ghost-hover);
+    }
   }
 }
 
@@ -92,8 +96,10 @@
   font-size: var(--font-m);
   cursor: pointer;
 
-  &:hover {
-    color: var(--link-hover);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--link-hover);
+    }
   }
 }
 
@@ -105,12 +111,20 @@
   overflow-y: auto;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .trigger {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
   }
 
+  .markAllRead {
+    position: relative;
+
+    @include touch-target;
+  }
+}
+
+@media (max-width: 480px) {
   .overlay {
     background: var(--overlay-medium);
   }
@@ -124,10 +138,13 @@
     width: auto;
     max-width: none;
     min-height: calc(100vh - 50px);
+    min-height: calc(100dvh - 50px);
     border-radius: 0;
   }
 
   .list {
     max-height: calc(100vh - 110px);
+    max-height: calc(100dvh - 110px);
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }

@@ -4,6 +4,7 @@
   grid-template-areas: "content rightColumn";
   gap: var(--gap-xl);
   min-height: 100vh;
+  min-height: 100dvh;
   align-items: start;
 }
 
@@ -36,6 +37,7 @@
 
 @media (max-width: 768px) {
   .layout {
+    align-content: start;
     grid-template-areas:
       "content"
       "rightColumn";

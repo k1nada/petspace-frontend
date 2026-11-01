@@ -33,6 +33,10 @@
 }
 
 @media (max-width: 768px) {
+  :global(html):has(.containerOpen) {
+    overflow: hidden;
+  }
+
   .container {
     position: fixed;
     top: 50px;
@@ -41,6 +45,8 @@
     width: 280px;
     max-width: 80%;
     height: auto;
+    padding-left: max(var(--padding-l), env(safe-area-inset-left));
+    padding-bottom: max(var(--padding-l), env(safe-area-inset-bottom));
     background: var(--bg-page);
     box-shadow: var(--shadow-drawer);
     transform: translateX(-100%);

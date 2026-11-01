@@ -1,3 +1,5 @@
+@use "@/app/styles/mixins" as *;
+
 $bubble-radius: 18px;
 $joined-radius: 4px;
 
@@ -142,4 +144,12 @@ $joined-radius: 4px;
 .postContent {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  .retry {
+    position: relative;
+
+    @include touch-target;
+  }
 }

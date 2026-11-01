@@ -1,9 +1,16 @@
 import "./globals.scss";
+import type { Viewport } from "next";
 import { Geist } from "next/font/google";
 import { getLocale } from "next-intl/server";
 import { ThemeSync } from "@/app/components/ThemeSync/ThemeSync";
 
 const geist = Geist({ subsets: ["latin"] });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export default async function RootLayout({
   children,

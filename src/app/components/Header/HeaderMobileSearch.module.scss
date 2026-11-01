@@ -10,23 +10,26 @@
   box-shadow: var(--shadow-header);
   align-items: center;
   gap: var(--gap-s);
-  padding: 0 var(--padding-s);
+  padding: 0 max(var(--padding-s), env(safe-area-inset-right)) 0
+    max(var(--padding-s), env(safe-area-inset-left));
 }
 
 .back {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   color: var(--text-secondary);
   flex-shrink: 0;
   transition:
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    color: var(--text-primary);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-primary);
+    }
   }
 }
 
