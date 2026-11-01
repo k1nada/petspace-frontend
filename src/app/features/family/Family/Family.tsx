@@ -3,6 +3,8 @@
 import styles from "./Family.module.scss";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { FamilyColumn } from "../FamilyColumn/FamilyColumn";
+import { FamilyGrid } from "../FamilyGrid/FamilyGrid";
+import { FamilyInfo } from "../FamilyInfo/FamilyInfo";
 import { FamilyMember, User } from "@/types";
 import { useTranslations } from "next-intl";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
@@ -12,6 +14,8 @@ import { ROUTES } from "@/routes/routes";
 import { Card } from "@/app/uikit/layout/Card/Card";
 import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 import { MAX_PARENTS, MAX_PUPPIES } from "@/utils/family";
+
+const MOBILE_AVATAR_SIZE = 76;
 
 interface FamilyProps {
   user: User;
@@ -28,16 +32,74 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
     useFamilyTree(familyMembers);
 
   return (
-    <Card as="section">
-      <CardTitle as="h1">
-        {isOwner
-          ? t("common.familyTree")
-          : t("familyTree.titleOther", { name: name || username })}
-      </CardTitle>
+    <>
+      <Card as="section" className={styles.desktopTree}>
+        <CardTitle as="h1">
+          {isOwner
+            ? t("common.familyTree")
+            : t("familyTree.titleOther", { name: name || username })}
+        </CardTitle>
 
-      <div className={styles.content}>
-        <div className={styles.parentsColumn}>
-          <FamilyColumn
+        <div className={styles.content}>
+          <div className={styles.parentsColumn}>
+            <FamilyColumn
+              title={t("familyTree.parents")}
+              emptyText={t("familyTree.emptyParents")}
+              addLabel={t("familyTree.addParent")}
+              relation="parent"
+              members={parents}
+              maxMembers={MAX_PARENTS}
+              isOwner={isOwner}
+              breeds={breeds}
+              onAdd={(member) => addMember("parent", member)}
+              onRemove={removeMember}
+            />
+          </div>
+
+          <div className={styles.divider} />
+
+          <Link href={ROUTES.profile(username)} className={styles.user}>
+            <Avatar src={avatar} size={96} />
+            <span className={styles.name}>{name || username}</span>
+            {breed && <span className={styles.breed}>{breed}</span>}
+          </Link>
+
+          <div className={styles.divider} />
+
+          <div className={styles.childrenColumn}>
+            <FamilyColumn
+              title={t("familyTree.children")}
+              emptyText={t("familyTree.emptyChildren")}
+              addLabel={t("familyTree.addPuppy")}
+              relation="child"
+              members={children}
+              maxMembers={MAX_PUPPIES}
+              limitText={t("familyTree.puppiesLimit", { count: MAX_PUPPIES })}
+              isOwner={isOwner}
+              breeds={breeds}
+              onAdd={(member) => addMember("child", member)}
+              onRemove={removeMember}
+            />
+          </div>
+        </div>
+      </Card>
+
+      <div className={styles.mobileTree}>
+        <Card as="section" className={styles.dogCard}>
+          <Link href={ROUTES.profile(username)} className={styles.dog}>
+            <span className={styles.dogAvatar}>
+              <Avatar src={avatar} size={MOBILE_AVATAR_SIZE} />
+            </span>
+            <span className={styles.dogName}>{name || username}</span>
+          </Link>
+          <div className={styles.dogCaption}>
+            {t("common.familyTree")}
+            <FamilyInfo />
+          </div>
+        </Card>
+
+        <Card as="section">
+          <FamilyGrid
             title={t("familyTree.parents")}
             emptyText={t("familyTree.emptyParents")}
             addLabel={t("familyTree.addParent")}
@@ -49,34 +111,20 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
             onAdd={(member) => addMember("parent", member)}
             onRemove={removeMember}
           />
-        </div>
-
-        <div className={styles.divider} />
-
-        <Link href={ROUTES.profile(username)} className={styles.user}>
-          <Avatar src={avatar} size={96} />
-          <span className={styles.name}>{name || username}</span>
-          {breed && <span className={styles.breed}>{breed}</span>}
-        </Link>
-
-        <div className={styles.divider} />
-
-        <div className={styles.childrenColumn}>
-          <FamilyColumn
+          <FamilyGrid
             title={t("familyTree.children")}
             emptyText={t("familyTree.emptyChildren")}
             addLabel={t("familyTree.addPuppy")}
             relation="child"
             members={children}
             maxMembers={MAX_PUPPIES}
-            limitText={t("familyTree.puppiesLimit", { count: MAX_PUPPIES })}
             isOwner={isOwner}
             breeds={breeds}
             onAdd={(member) => addMember("child", member)}
             onRemove={removeMember}
           />
-        </div>
+        </Card>
       </div>
-    </Card>
+    </>
   );
 };

@@ -1,10 +1,11 @@
+@use "@/app/styles/breakpoints" as *;
 @use "@/app/styles/mixins" as *;
 
 .modal {
   width: min(400px, 90vw) !important;
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .modal {
     width: 100% !important;
   }
@@ -125,7 +126,7 @@
   opacity: 0.6;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .switchButton {
     position: relative;
 

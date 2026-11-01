@@ -1,6 +1,8 @@
+@use "@/app/styles/breakpoints" as *;
+
 .content {
   display: grid;
-  grid-template-columns: 1fr auto auto auto 1fr;
+  grid-template-columns: minmax(0, 1fr) auto auto auto minmax(0, 1fr);
   justify-items: stretch;
   align-items: center;
   gap: var(--gap-l);
@@ -37,15 +39,58 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
-  .content {
-    grid-template-columns: 1fr;
-    grid-auto-flow: row;
-    justify-items: center;
+.mobileTree {
+  display: none;
+}
+
+@media (max-width: $laptop) {
+  .desktopTree {
+    display: none;
   }
 
-  .divider {
-    width: 100%;
-    max-width: 200px;
+  .mobileTree {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-s);
+  }
+
+  .mobileTree > :last-child {
+    flex: 1;
+    padding-bottom: max(var(--padding-l), env(safe-area-inset-bottom));
+  }
+
+  .mobileTree .dogCard {
+    position: relative;
+    align-items: center;
+    gap: 0;
+  }
+
+  .dog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-s);
+  }
+
+  .dogAvatar {
+    display: flex;
+  }
+
+  .dogName {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .dogCaption > * {
+    position: static;
+  }
+
+  .dogCaption {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-2xs);
+    font-size: var(--font-m);
+    color: var(--text-secondary);
   }
 }
