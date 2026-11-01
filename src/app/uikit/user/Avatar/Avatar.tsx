@@ -1,12 +1,12 @@
 "use client";
 
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { PiDogFill } from "react-icons/pi";
 import styles from "./Avatar.module.scss";
-import defaultAvatar from "@/assets/avatars/default.png";
 
 interface AvatarProps {
-  src?: string | StaticImageData;
+  src?: string;
   size?: number;
   isOnline?: boolean;
 }
@@ -25,14 +25,20 @@ export const Avatar = ({ src, size = 45, isOnline }: AvatarProps) => {
         } as React.CSSProperties
       }
     >
-      <Image
-        src={src ?? defaultAvatar}
-        fill
-        alt={t("common.avatar")}
-        className={styles.image}
-        sizes={`${size}px`}
-        unoptimized
-      />
+      {src ? (
+        <Image
+          src={src}
+          fill
+          alt={t("common.avatar")}
+          className={styles.image}
+          sizes={`${size}px`}
+          unoptimized
+        />
+      ) : (
+        <div className={styles.placeholder}>
+          <PiDogFill />
+        </div>
+      )}
       {isOnline && <span className={styles.online} />}
     </div>
   );

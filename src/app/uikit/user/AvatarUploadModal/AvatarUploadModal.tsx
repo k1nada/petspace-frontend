@@ -4,7 +4,6 @@ import { useDropzone } from "react-dropzone";
 import cn from "classnames";
 import { useEffect, useState } from "react";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
-import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
 import styles from "./AvatarUploadModal.module.scss";
 
 interface AvatarUploadModalProps {
@@ -54,10 +53,9 @@ export const AvatarUploadModal = ({
       style={{ width: size, height: size }}
     >
       <input {...getInputProps()} />
-      <Avatar size={size} src={preview} />
-      <div className={styles.overlay}>
-        <PhotoIcon size={24} />
-      </div>
+      <span className={styles.preview}>
+        <Avatar size={size} src={preview} />
+      </span>
     </div>
   );
 };

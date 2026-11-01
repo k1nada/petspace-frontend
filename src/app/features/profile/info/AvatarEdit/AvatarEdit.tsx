@@ -4,7 +4,6 @@ import styles from "./AvatarEdit.module.scss";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { MdDelete, MdEdit, MdPhotoCamera } from "react-icons/md";
 import { useTranslations } from "next-intl";
-import defaultAvatar from "@/assets/avatars/default.png";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { useState } from "react";
 import { ConfirmModal } from "@/app/uikit/overlays/ConfirmModal/ConfirmModal";
@@ -126,7 +125,7 @@ export const AvatarEdit = ({
             if (hasAvatar) setSelectedIndex(0);
           }}
         >
-          <Avatar src={src ?? defaultAvatar} size={size} />
+          <Avatar src={src} size={size} />
         </div>
 
         <PhotoModal
@@ -179,7 +178,7 @@ export const AvatarEdit = ({
         items={menuItems}
         trigger={
           <div className={styles.avatarWrapper}>
-            <Avatar src={src ?? defaultAvatar} size={size} />
+            <Avatar src={src} size={size} />
           </div>
         }
       />

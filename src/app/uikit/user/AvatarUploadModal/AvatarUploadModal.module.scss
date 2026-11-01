@@ -4,22 +4,16 @@
   border-radius: var(--radius-full);
   overflow: hidden;
 
-  &:hover .overlay {
-    opacity: 1;
+  @media (hover: hover) {
+    &:hover .preview {
+      filter: brightness(0.7);
+    }
   }
 }
 
-.overlay {
-  position: absolute;
-  inset: 0;
+.preview {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--overlay-light);
-  color: var(--text-on-color);
-  border-radius: var(--radius-full);
-  opacity: 0;
-  transition: opacity var(--transition-fast);
+  transition: filter var(--transition-base);
 }
 
 .disabled {
