@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -19,7 +21,7 @@
   display: block;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $tablet-landscape) {
   .wrapper {
     grid-template-columns: 1fr;
     grid-template-areas: "content";
@@ -31,7 +33,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .wrapper {
     align-content: start;
     grid-template-areas:

@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .page {
   height: calc(100vh - 60px);
   height: calc(100dvh - 60px);
@@ -52,7 +54,7 @@
   gap: var(--gap-m);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $tablet-landscape) {
   .content {
     box-sizing: border-box;
   }

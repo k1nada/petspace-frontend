@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .iconButton {
   display: inline-flex;
   align-items: center;
@@ -9,7 +11,7 @@
   border-radius: 12px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .iconButton {
     width: 44px;
     height: 44px;

@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .container {
   position: relative;
   display: flex;
@@ -125,7 +127,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .backButton {
     display: flex;
     min-width: 44px;

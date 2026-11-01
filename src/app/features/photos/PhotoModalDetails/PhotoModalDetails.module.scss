@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .details {
   display: flex;
   flex-direction: column;
@@ -90,7 +92,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .details {
     position: absolute;
     left: 0;

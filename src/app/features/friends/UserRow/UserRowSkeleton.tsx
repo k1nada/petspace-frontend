@@ -3,6 +3,7 @@ import { Skeleton, SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
 import { SKELETON_AVATAR } from "@/app/uikit/feedback/Skeleton/skeletonSizes";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { IconButtonSkeleton } from "@/app/uikit/form/IconButton/IconButtonSkeleton";
+import { AvatarSkeleton } from "@/app/uikit/user/Avatar/AvatarSkeleton";
 import styles from "./UserRow.module.scss";
 
 interface UserRowSkeletonProps {
@@ -14,10 +15,9 @@ export const UserRowSkeleton = ({ nameWidth }: UserRowSkeletonProps) => {
 
   return (
     <li className={styles.row}>
-      <Skeleton
-        shape="circle"
-        width={SKELETON_AVATAR.friendRow}
-        height={SKELETON_AVATAR.friendRow}
+      <AvatarSkeleton
+        size={SKELETON_AVATAR.friendRow}
+        mobileSize={SKELETON_AVATAR.friendRowMobile}
       />
 
       <div className={styles.info}>
@@ -30,9 +30,12 @@ export const UserRowSkeleton = ({ nameWidth }: UserRowSkeletonProps) => {
       </div>
 
       <div className={styles.actions}>
-        <Skeleton shape="rounded">
+        <Skeleton shape="rounded" className={styles.messageButton}>
           <Button appearance="primary">{t("friends.message")}</Button>
         </Skeleton>
+        <div className={styles.messageIcon}>
+          <IconButtonSkeleton />
+        </div>
         <IconButtonSkeleton />
       </div>
     </li>

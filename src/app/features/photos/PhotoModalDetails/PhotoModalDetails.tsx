@@ -22,6 +22,8 @@ import { ROUTES } from "@/routes/routes";
 import statsStyles from "../../profile/feed/PostStats/PostStats.module.scss";
 import styles from "./PhotoModalDetails.module.scss";
 
+const MOBILE_AVATAR_SIZE = 32;
+
 interface PhotoModalDetailsProps {
   photo: Photo;
   avatar?: string;
@@ -117,11 +119,11 @@ export const PhotoModalDetails = ({
         <div className={styles.author}>
           {username ? (
             <Link href={ROUTES.profile(username)} className={styles.avatar}>
-              <Avatar src={avatar} />
+              <Avatar src={avatar} mobileSize={MOBILE_AVATAR_SIZE} />
             </Link>
           ) : (
             <div className={styles.avatar}>
-              <Avatar src={avatar} />
+              <Avatar src={avatar} mobileSize={MOBILE_AVATAR_SIZE} />
             </div>
           )}
           <div className={styles.info}>

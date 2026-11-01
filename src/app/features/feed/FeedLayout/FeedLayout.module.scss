@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .layout {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -23,9 +25,9 @@
   gap: var(--gap-xl);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $tablet-landscape) {
   .layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-areas: "content";
     gap: var(--gap-l);
   }
@@ -35,7 +37,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .layout {
     align-content: start;
     grid-template-areas:
@@ -45,5 +47,13 @@
 
   .rightColumn {
     display: flex;
+  }
+}
+
+@media (max-width: $phone) {
+  .layout,
+  .content,
+  .rightColumn {
+    gap: var(--gap-s);
   }
 }

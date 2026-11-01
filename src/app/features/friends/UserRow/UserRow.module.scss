@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .row {
   display: flex;
   align-items: center;
@@ -55,4 +57,25 @@
   gap: var(--gap-s);
   flex-shrink: 0;
   margin-left: auto;
+}
+
+.messageIcon {
+  display: none;
+}
+
+@media (max-width: $phone) {
+  .row {
+    gap: var(--gap-m);
+    padding: var(--gap-s) 0;
+    border: none;
+    border-radius: 0;
+  }
+
+  .actions .messageButton {
+    display: none;
+  }
+
+  .messageIcon {
+    display: flex;
+  }
 }

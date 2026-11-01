@@ -1,3 +1,4 @@
+@use "@/app/styles/breakpoints" as *;
 @use "@/app/styles/mixins" as *;
 
 .signInForm {
@@ -11,19 +12,19 @@
   padding: 40px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $tablet-landscape) {
   .signInForm {
     padding: var(--padding-xl);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .signInForm {
     padding: var(--padding-l);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .signInForm {
     box-sizing: border-box;
     width: 100%;
@@ -94,7 +95,7 @@
   background: var(--border-divider);
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .passwordButton {
     @include touch-target;
   }

@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .container {
   background: var(--bg-card);
   display: flex;
@@ -36,19 +38,19 @@
   gap: var(--gap-s);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $tablet-landscape) {
   .container {
     padding: var(--padding-l) var(--padding-xl);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .container {
     padding: var(--padding-l);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .container {
     box-sizing: border-box;
     width: 100%;

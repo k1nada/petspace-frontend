@@ -3,8 +3,10 @@
 import { ReactNode } from "react";
 import cn from "classnames";
 import { useTranslations } from "next-intl";
+import { BiSolidMessage } from "react-icons/bi";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Button } from "@/app/uikit/form/Button/Button";
+import { IconButton } from "@/app/uikit/form/IconButton/IconButton";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
 import {
@@ -14,6 +16,7 @@ import {
 import styles from "./UserRow.module.scss";
 
 const AVATAR_SIZE = 56;
+const MOBILE_AVATAR_SIZE = 48;
 
 interface UserRowProps {
   userId?: string;
@@ -51,7 +54,12 @@ export const UserRow = ({
   return (
     <li className={styles.row}>
       <Link href={ROUTES.profile(username)} className={styles.avatarLink}>
-        <Avatar src={avatar} size={AVATAR_SIZE} isOnline={presence.isOnline} />
+        <Avatar
+          src={avatar}
+          size={AVATAR_SIZE}
+          mobileSize={MOBILE_AVATAR_SIZE}
+          isOnline={presence.isOnline}
+        />
       </Link>
       <div className={styles.info}>
         <Link href={ROUTES.profile(username)} className={styles.nameLink}>
@@ -66,9 +74,22 @@ export const UserRow = ({
       {(onMessage || actions) && (
         <div className={styles.actions}>
           {onMessage && (
-            <Button appearance="primary" onClick={onMessage}>
-              {t("friends.message")}
-            </Button>
+            <>
+              <Button
+                appearance="primary"
+                className={styles.messageButton}
+                onClick={onMessage}
+              >
+                {t("friends.message")}
+              </Button>
+              <div className={styles.messageIcon}>
+                <IconButton
+                  icon={<BiSolidMessage size={18} />}
+                  label={t("friends.message")}
+                  onClick={onMessage}
+                />
+              </div>
+            </>
           )}
           {actions}
         </div>

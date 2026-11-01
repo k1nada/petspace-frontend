@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .wrapper {
   position: relative;
   display: inline-block;
@@ -100,7 +102,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .trigger {
     width: 44px;
     height: 44px;

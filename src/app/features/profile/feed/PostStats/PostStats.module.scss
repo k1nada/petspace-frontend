@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .stats {
   display: flex;
   flex-direction: row;
@@ -28,7 +30,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .stat {
     position: relative;
 
@@ -44,7 +46,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .stat svg {
     width: 14px;
     height: 14px;

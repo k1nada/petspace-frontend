@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .container {
   background: var(--bg-card);
   display: flex;
@@ -40,7 +42,7 @@
   gap: var(--gap-s);
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .fields {
     grid-template-columns: 1fr;
   }

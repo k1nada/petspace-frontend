@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .container {
   width: 100%;
   padding: var(--padding-xs) 0;
@@ -13,7 +15,7 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .wrapper textarea {
     line-height: 20px;
   }
@@ -23,7 +25,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .wrapper {
     gap: var(--gap-s);
 

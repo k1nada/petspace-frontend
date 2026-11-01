@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -32,7 +34,7 @@
   z-index: var(--z-modal);
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   :global(html):has(.containerOpen) {
     overflow: hidden;
   }

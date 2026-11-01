@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -27,8 +29,17 @@
   gap: var(--gap-s);
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .tabs {
-    flex-wrap: wrap;
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: calc(var(--gap-s) * -1) calc(var(--padding-l) * -1);
+    padding: var(--gap-s) var(--padding-l);
+    scroll-padding-inline: var(--padding-l);
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
   }
 }

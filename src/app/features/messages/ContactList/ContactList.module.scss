@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -37,13 +39,13 @@
   text-transform: uppercase;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $tablet-landscape) {
   .container {
     width: 240px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .container {
     width: 100%;
     border-right: none;

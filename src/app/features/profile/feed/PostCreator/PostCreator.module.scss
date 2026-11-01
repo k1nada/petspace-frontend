@@ -1,3 +1,4 @@
+@use "@/app/styles/breakpoints" as *;
 @use "@/app/styles/mixins" as *;
 
 .wrapper {
@@ -87,7 +88,7 @@ button.attachmentItem {
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .textareaWrapper textarea {
     line-height: 20px;
   }
@@ -106,7 +107,7 @@ button.attachmentItem {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .wrapper {
     gap: var(--gap-s);
 

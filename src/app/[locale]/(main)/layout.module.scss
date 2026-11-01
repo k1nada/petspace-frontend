@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 $layout-max-width: 1400px;
 
 .layout {
@@ -30,14 +32,14 @@ $layout-max-width: 1400px;
   min-width: 0;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $tablet-landscape) {
   .layout {
     grid-template-columns: 220px 1fr;
     gap: var(--gap-l);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .layout {
     grid-template-columns: 1fr;
     padding: 0;
