@@ -9,7 +9,9 @@
 .secondary {
   color: var(--text-secondary);
 
-  &:hover {
-    text-decoration: underline;
+  @media (hover: hover) {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

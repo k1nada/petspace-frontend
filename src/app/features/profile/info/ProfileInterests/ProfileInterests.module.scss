@@ -39,3 +39,9 @@
   align-items: center;
   gap: var(--gap-s);
 }
+
+@media (max-width: 480px) {
+  .fields {
+    grid-template-columns: 1fr;
+  }
+}

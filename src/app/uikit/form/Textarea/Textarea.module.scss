@@ -32,8 +32,10 @@
   overflow: hidden;
   box-shadow: 0 0 0 0.5px var(--border-field);
 
-  &:hover {
-    box-shadow: 0 0 0 0.5px var(--border-field-hover);
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0 0 0 0.5px var(--border-field-hover);
+    }
   }
 }
 

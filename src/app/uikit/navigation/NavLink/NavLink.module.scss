@@ -11,9 +11,11 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    background: var(--button-secondary-hover);
-    color: var(--text-primary);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--button-secondary-hover);
+      color: var(--text-primary);
+    }
   }
 }
 

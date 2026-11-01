@@ -59,8 +59,10 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    background: var(--bg-input);
-    color: var(--primary);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--bg-input);
+      color: var(--primary);
+    }
   }
 }

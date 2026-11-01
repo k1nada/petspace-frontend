@@ -19,3 +19,18 @@
   border-radius: var(--radius-s);
   color: var(--text-primary);
 }
+
+@media (max-width: 480px) {
+  .container {
+    padding-top: max(var(--padding-s), env(safe-area-inset-top));
+    padding-right: max(var(--padding-s), env(safe-area-inset-right));
+    padding-bottom: max(var(--padding-s), env(safe-area-inset-bottom));
+    padding-left: max(var(--padding-s), env(safe-area-inset-left));
+  }
+
+  .modal {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+}

@@ -67,7 +67,7 @@
     width: auto !important;
     left: var(--padding-m) !important;
     right: var(--padding-m);
-    bottom: var(--padding-m) !important;
+    bottom: calc(var(--padding-m) + env(safe-area-inset-bottom)) !important;
   }
 
   .toast {

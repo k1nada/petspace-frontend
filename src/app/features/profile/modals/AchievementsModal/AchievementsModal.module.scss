@@ -30,8 +30,10 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    background: var(--bg-nested-hover);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--bg-nested-hover);
+    }
   }
 }
 
@@ -86,4 +88,10 @@
   gap: var(--gap-xs);
   color: var(--icon-on-primary);
   font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .container {
+    min-width: 0;
+  }
 }

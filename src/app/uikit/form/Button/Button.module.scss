@@ -17,8 +17,10 @@
   background: var(--primary);
   color: var(--text-on-color);
 
-  &:hover {
-    background: var(--primary-hover);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--primary-hover);
+    }
   }
 }
 
@@ -26,8 +28,10 @@
   background: var(--button-secondary);
   color: var(--text-secondary);
 
-  &:hover {
-    background: var(--button-secondary-hover);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--button-secondary-hover);
+    }
   }
 }
 
@@ -35,8 +39,10 @@
   background: var(--button-tertiary);
   color: var(--text-secondary);
 
-  &:hover {
-    background: var(--button-tertiary-hover);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--button-tertiary-hover);
+    }
   }
 }
 
@@ -45,8 +51,10 @@
   border-radius: var(--radius-full);
   padding: 0;
 
-  &:hover {
-    background: var(--button-ghost-hover);
+  @media (hover: hover) {
+    &:hover {
+      background: var(--button-ghost-hover);
+    }
   }
 }
 
@@ -54,7 +62,9 @@
   background: transparent;
   padding: 0;
 
-  &:hover {
-    background: transparent;
+  @media (hover: hover) {
+    &:hover {
+      background: transparent;
+    }
   }
 }

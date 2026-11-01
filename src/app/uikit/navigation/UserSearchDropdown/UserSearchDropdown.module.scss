@@ -7,6 +7,7 @@
   padding: var(--gap-xs);
   max-width: 290px;
   max-height: min(60vh, 400px);
+  max-height: min(60dvh, 400px);
   overflow-y: auto;
   background: var(--bg-elevated);
   border: 1px solid var(--border-card);
@@ -36,8 +37,10 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    background-color: var(--button-ghost-hover);
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--button-ghost-hover);
+    }
   }
 }
 

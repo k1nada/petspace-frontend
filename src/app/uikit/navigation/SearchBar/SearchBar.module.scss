@@ -1,3 +1,5 @@
+@use "@/app/styles/mixins" as *;
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -34,4 +36,14 @@
 
 .wrapper input {
   min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .wrapper input::placeholder {
+    font-size: var(--font-m);
+  }
+
+  .delete {
+    @include touch-target;
+  }
 }

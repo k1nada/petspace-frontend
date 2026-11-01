@@ -147,6 +147,16 @@
     --font-2xl: 20px;
     --font-3xl: 24px;
   }
+
+  img {
+    max-width: 100%;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
 }
 
 [data-theme="dark"] {
@@ -206,7 +216,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
+  *:not(.Toastify__progress-bar),
   *::before,
   *::after {
     animation-duration: 1ms !important;
@@ -228,8 +238,10 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  min-height: 100dvh;
   padding-top: var(--header-offset);
-  padding-right: var(--scrollbar-offset, 0px);
+  padding-right: max(var(--scrollbar-offset, 0px), env(safe-area-inset-right));
+  padding-left: env(safe-area-inset-left);
 }
 
 a {

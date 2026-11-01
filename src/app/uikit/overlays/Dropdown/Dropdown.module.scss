@@ -25,8 +25,10 @@
     align-items: center;
     gap: var(--gap-s);
 
-    &:hover {
-      color: var(--text-primary);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--text-primary);
+      }
     }
   }
 }
@@ -83,14 +85,20 @@
     color var(--transition-hover),
     background-color var(--transition-hover);
 
-  &:hover {
-    color: var(--text-primary);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--text-primary);
+    }
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .trigger {
-    width: 30px;
-    height: 30px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .menu button {
+    min-height: 44px;
   }
 }
