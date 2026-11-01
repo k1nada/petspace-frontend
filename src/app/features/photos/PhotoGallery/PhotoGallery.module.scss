@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -12,13 +14,13 @@
   margin-right: calc(var(--gap-s) * -1);
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .menu {
     margin-right: calc(var(--gap-l) * -1);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .menu {
     margin-right: calc(var(--gap-xs) * -1);
   }

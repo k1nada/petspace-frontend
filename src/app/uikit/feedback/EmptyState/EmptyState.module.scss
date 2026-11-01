@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .empty {
   display: flex;
   flex-direction: column;
@@ -30,7 +32,7 @@
   font-size: var(--font-m);
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .empty {
     padding: 48px 0;
   }

@@ -1,3 +1,13 @@
+@use "@/app/styles/breakpoints" as *;
+
+.avatar,
+.skeleton {
+  --avatar-size: var(--avatar-base-size);
+  flex-shrink: 0;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+}
+
 .avatar {
   position: relative;
   border-radius: var(--radius-full);
@@ -35,4 +45,11 @@
   background: var(--color-online);
   border-radius: var(--radius-full);
   border: max(1px, calc(var(--avatar-size) * 0.03)) solid var(--bg-card);
+}
+
+@media (max-width: $phone) {
+  .avatar,
+  .skeleton {
+    --avatar-size: var(--avatar-mobile-size);
+  }
 }

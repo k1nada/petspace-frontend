@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .modal {
   width: min(1200px, 95vw) !important;
   overflow: hidden;
@@ -16,7 +18,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .container {
     position: fixed;
     inset: 0;
@@ -40,7 +42,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .modal {
     width: 100% !important;
   }

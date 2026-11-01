@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .wrapper {
   position: relative;
   display: flex;
@@ -83,7 +85,7 @@
   z-index: var(--z-photo-overlay);
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .wrapper {
     position: absolute;
     inset: 0;

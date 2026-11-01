@@ -1,8 +1,11 @@
+@use "@/app/styles/breakpoints" as *;
+
 :global(html):has(.layout) {
   overflow-y: auto;
+  --scrollbar-offset: 8px;
 
-  @media (min-width: 769px) {
-    --scrollbar-offset: 8px;
+  @media (max-width: $tablet) {
+    --scrollbar-offset: 0px;
   }
 }
 
@@ -31,7 +34,7 @@
   display: contents;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .chat {
     border-radius: 0;
   }

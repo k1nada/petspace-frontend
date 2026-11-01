@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .container {
   position: fixed;
   inset: 0;
@@ -20,7 +22,7 @@
   color: var(--text-primary);
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .container {
     padding-top: max(var(--padding-s), env(safe-area-inset-top));
     padding-right: max(var(--padding-s), env(safe-area-inset-right));

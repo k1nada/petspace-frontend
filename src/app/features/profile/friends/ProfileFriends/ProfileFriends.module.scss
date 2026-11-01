@@ -1,3 +1,4 @@
+@use "@/app/styles/breakpoints" as *;
 @use "@/app/styles/mixins" as *;
 
 .titleLink {
@@ -47,7 +48,7 @@
   color: var(--text-primary);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $tablet-landscape) {
   .friends {
     grid-template-columns: repeat(auto-fill, 78px);
     justify-content: space-between;
@@ -55,7 +56,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .titleLink {
     position: relative;
 
@@ -63,7 +64,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .friends {
     grid-template-columns: repeat(auto-fill, 60px);
     column-gap: var(--gap-m);

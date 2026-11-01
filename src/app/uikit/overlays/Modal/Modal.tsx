@@ -4,16 +4,23 @@ import cn from "classnames";
 
 interface ModalProps {
   className?: string;
+  overlayClassName?: string;
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
 }
 
-export const Modal = ({ className, isOpen, onClose, children }: ModalProps) => {
+export const Modal = ({
+  className,
+  overlayClassName,
+  isOpen,
+  onClose,
+  children,
+}: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className={styles.container} onClick={onClose}>
+    <div className={cn(styles.container, overlayClassName)} onClick={onClose}>
       <div
         className={cn(styles.modal, className)}
         onClick={(e) => e.stopPropagation()}

@@ -1,3 +1,4 @@
+@use "@/app/styles/breakpoints" as *;
 @use "@/app/styles/mixins" as *;
 
 .tab,
@@ -52,7 +53,7 @@
     background-color var(--transition-hover);
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .tab,
   .tabActive {
     position: relative;

@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./ConfirmModal.module.scss";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
+import styles from "./ConfirmModal.module.scss";
 
 interface ConfirmModalProps {
   isOpen: boolean;
@@ -39,7 +39,7 @@ export const ConfirmModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} className={styles.modal}>
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.description}>{description}</p>
       <div className={styles.actions}>

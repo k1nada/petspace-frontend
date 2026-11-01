@@ -8,20 +8,26 @@ import styles from "./Avatar.module.scss";
 interface AvatarProps {
   src?: string;
   size?: number;
+  mobileSize?: number;
   isOnline?: boolean;
 }
 
-export const Avatar = ({ src, size = 45, isOnline }: AvatarProps) => {
+export const Avatar = ({
+  src,
+  size = 45,
+  mobileSize,
+  isOnline,
+}: AvatarProps) => {
   const t = useTranslations();
+  const phoneSize = mobileSize ?? size;
 
   return (
     <div
       className={styles.avatar}
       style={
         {
-          width: size,
-          height: size,
-          "--avatar-size": `${size}px`,
+          "--avatar-base-size": `${size}px`,
+          "--avatar-mobile-size": `${phoneSize}px`,
         } as React.CSSProperties
       }
     >

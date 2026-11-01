@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .wrapper {
   display: flex;
   gap: var(--gap-s);
@@ -61,7 +63,7 @@
   align-self: flex-start;
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .wrapper:not(.compact) > :first-child {
     zoom: 0.8;
   }

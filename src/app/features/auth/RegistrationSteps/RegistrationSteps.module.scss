@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .form {
   display: flex;
   flex-direction: column;
@@ -45,21 +47,21 @@
   gap: var(--gap-s);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $tablet-landscape) {
   .form {
     min-width: 340px;
     padding: var(--padding-xl);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .form {
     min-width: 320px;
     padding: var(--padding-l);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .form {
     box-sizing: border-box;
     min-width: 0;

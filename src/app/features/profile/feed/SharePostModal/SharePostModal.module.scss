@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .title {
   margin: 0 0 var(--gap-m);
   font-size: var(--font-l);
@@ -25,7 +27,7 @@ button.wallOption {
   min-width: 280px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .list {
     min-width: 0;
   }

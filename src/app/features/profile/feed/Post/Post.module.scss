@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .contentWrapper {
   display: flex;
   flex-direction: column;
@@ -43,7 +45,7 @@
   display: contents;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .commentsBlock {
     display: none;
   }
@@ -53,7 +55,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .contentWrapper {
     row-gap: var(--gap-s);
   }

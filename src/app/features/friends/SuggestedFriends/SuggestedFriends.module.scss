@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .list {
   display: flex;
   flex-direction: column;
@@ -36,4 +38,38 @@
 
 .addButton {
   flex-shrink: 0;
+}
+
+@media (max-width: $phone) {
+  .list {
+    flex-direction: row;
+    gap: var(--gap-s);
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 calc(var(--padding-l) * -1);
+    padding: 0 var(--padding-l);
+  }
+
+  .list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card {
+    flex: 0 0 128px;
+    flex-direction: column;
+    gap: var(--gap-xs);
+    padding: var(--padding-m) var(--padding-s);
+    border: 1px solid var(--border-divider);
+    border-radius: var(--radius-l);
+    text-align: center;
+  }
+
+  .info {
+    width: 100%;
+  }
+
+  .addButton {
+    width: 100%;
+    margin-top: var(--gap-xs);
+  }
 }

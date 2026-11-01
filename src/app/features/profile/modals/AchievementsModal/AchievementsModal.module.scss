@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -37,14 +39,21 @@
   }
 }
 
-.unlocked .item {
-  background: var(--bg-primary);
+.item.unlocked {
+  background: var(--button-secondary);
   color: var(--icon-on-primary);
 }
 
-.locked .item {
+.item.locked {
   background: var(--bg-input);
   color: var(--icon-on-primary);
+}
+
+@media (hover: hover) {
+  .item.unlocked:hover,
+  .item.locked:hover {
+    background: var(--bg-nested-hover);
+  }
 }
 
 .locked {
@@ -90,8 +99,38 @@
   font-weight: 600;
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
+  .overlay {
+    padding: var(--header-height) 0 0;
+    background: var(--overlay-medium);
+  }
+
+  .modal {
+    width: 100%;
+    max-width: none;
+    min-height: calc(100dvh - var(--header-height));
+    margin: 0;
+    padding: 0 0 max(var(--padding-m), env(safe-area-inset-bottom));
+    border-radius: 0;
+    background: var(--bg-elevated);
+  }
+
   .container {
     min-width: 0;
+    gap: var(--gap-m);
+  }
+
+  .header {
+    padding: var(--padding-s) var(--padding-m);
+    border-bottom: 1px solid var(--border-divider);
+  }
+
+  .list,
+  .footer {
+    padding: 0 var(--padding-m);
+  }
+
+  .item {
+    border: 1px solid var(--border-divider);
   }
 }

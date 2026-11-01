@@ -1,3 +1,4 @@
+@use "@/app/styles/breakpoints" as *;
 @use "@/app/styles/mixins" as *;
 
 .wrapper {
@@ -111,7 +112,7 @@
   overflow-y: auto;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .trigger {
     width: 44px;
     height: 44px;
@@ -124,7 +125,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .overlay {
     background: var(--overlay-medium);
   }

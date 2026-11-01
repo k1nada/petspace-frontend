@@ -1,3 +1,5 @@
+@use "@/app/styles/breakpoints" as *;
+
 .signUpForm {
   display: flex;
   flex-direction: column;
@@ -10,21 +12,21 @@
   padding: var(--padding-xxl);
 }
 
-@media (max-width: 1024px) {
+@media (max-width: $tablet-landscape) {
   .signUpForm {
     min-width: 340px;
     padding: var(--padding-xl);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tablet) {
   .signUpForm {
     min-width: 320px;
     padding: var(--padding-l);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $phone) {
   .signUpForm {
     box-sizing: border-box;
     min-width: 0;

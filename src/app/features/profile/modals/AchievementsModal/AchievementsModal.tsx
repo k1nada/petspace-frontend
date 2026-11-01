@@ -1,12 +1,12 @@
 "use client";
 
-import styles from "./AchievementsModal.module.scss";
 import { useTranslations } from "next-intl";
 import cn from "classnames";
 import { FaDog, FaLock } from "react-icons/fa";
 import { BiSolidBone } from "react-icons/bi";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
 import { Achievements } from "@/types";
+import styles from "./AchievementsModal.module.scss";
 
 const ACHIEVEMENT_KEYS: (keyof Achievements)[] = ["firstFriend", "firstPost"];
 
@@ -24,9 +24,16 @@ export const AchievementsModal = ({
   const t = useTranslations();
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      className={styles.modal}
+      overlayClassName={styles.overlay}
+    >
       <div className={styles.container}>
-        <h2 className={styles.title}>{t("achievements.title")}</h2>
+        <div className={styles.header}>
+          <h2 className={styles.title}>{t("achievements.title")}</h2>
+        </div>
         <div className={styles.list}>
           {ACHIEVEMENT_KEYS.map((key) => {
             const unlocked = achievements?.[key];
