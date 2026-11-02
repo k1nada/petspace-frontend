@@ -9,14 +9,29 @@ interface TabProps {
   count: number;
   isActive: boolean;
   onClick: () => void;
+  dataCy?: string;
 }
 
-export const Tab = ({ label, count, isActive, onClick }: TabProps) => {
+export const Tab = ({ label, count, isActive, onClick, dataCy }: TabProps) => {
   const tabRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (isActive) {
-      tabRef.current?.scrollIntoView({ block: "nearest", inline: "nearest" });
+    const tab = tabRef.current;
+    const list = tab?.parentElement;
+    if (!isActive || !tab || !list) return;
+
+    const tabRect = tab.getBoundingClientRect();
+    const listRect = list.getBoundingClientRect();
+    const padding = parseFloat(getComputedStyle(list).paddingLeft);
+    const visibleLeft = listRect.left + padding;
+    const visibleRight = listRect.right - padding;
+
+    if (tabRect.left < visibleLeft) {
+      list.scrollLeft -= visibleLeft - tabRect.left;
+    }
+
+    if (tabRect.right > visibleRight) {
+      list.scrollLeft += tabRect.right - visibleRight;
     }
   }, [isActive]);
 
@@ -26,6 +41,7 @@ export const Tab = ({ label, count, isActive, onClick }: TabProps) => {
       appearance="ghost"
       className={isActive ? styles.tabActive : styles.tab}
       onClick={onClick}
+      data-cy={dataCy}
     >
       <span className={styles.title}>{label}</span>
       <span className={styles.count}>{count}</span>

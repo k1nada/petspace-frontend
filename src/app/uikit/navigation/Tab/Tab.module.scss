@@ -61,3 +61,13 @@
     @include touch-target;
   }
 }
+
+@media (max-width: $phone) {
+  .title {
+    font-size: var(--font-base);
+  }
+
+  .count {
+    font-size: var(--font-m);
+  }
+}

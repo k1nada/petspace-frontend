@@ -67,9 +67,9 @@ export const Friends = ({
     activeTab === "following" && isMyProfile && followingCount > 0;
 
   return (
-    <Card as="section">
+    <Card as="section" dataCy="friends-card">
       <div className={styles.header}>
-        <div className={styles.tabs}>
+        <div className={styles.tabs} data-cy="friends-tabs">
           {tabs
             .filter((tab) => !tab.hidden)
             .map(({ key, label, count }) => (
@@ -79,6 +79,7 @@ export const Friends = ({
                 count={count}
                 isActive={activeTab === key}
                 onClick={() => goToTab(key)}
+                dataCy={`friends-tab-${key}`}
               />
             ))}
         </div>
