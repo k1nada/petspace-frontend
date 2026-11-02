@@ -6,6 +6,11 @@
 
 @media (max-width: $tablet) {
   .backButton {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin: 0 calc(var(--gap-s) * -1);
   }
 }

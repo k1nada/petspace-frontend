@@ -68,11 +68,13 @@
 }
 
 .count {
-  background: var(--bg-input);
-  color: var(--text-primary);
+  box-sizing: border-box;
+  background: var(--primary);
+  color: var(--text-on-color);
   border-radius: var(--radius-full);
-  width: 20px;
+  min-width: 20px;
   height: 20px;
+  padding: 0 5px;
   display: flex;
   align-items: center;
   justify-content: center;

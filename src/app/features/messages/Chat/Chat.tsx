@@ -5,6 +5,10 @@ import { createPortal } from "react-dom";
 import socket from "@/services/socket";
 import styles from "./Chat.module.scss";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
+import {
+  SKELETON_AVATAR,
+  SKELETON_ICON,
+} from "@/app/uikit/feedback/Skeleton/skeletonSizes";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SubmitTextarea";
 import { useLocale, useTranslations } from "next-intl";
@@ -38,7 +42,7 @@ import {
   getSentMessages,
   syncRoomMessages,
 } from "@/app/hooks/messages/syncRoomMessages";
-import { FaArrowLeft } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
 import { toast } from "react-toastify";
 
 const NEAR_BOTTOM_PX = 80;
@@ -312,7 +316,7 @@ export const Chat = ({
             className={styles.backButton}
             onClick={onBack}
           >
-            <FaArrowLeft size={18} />
+            <MdClose size={SKELETON_ICON.close} />
           </Button>
         )}
         <div className={styles.emptyMessages}>
@@ -356,11 +360,15 @@ export const Chat = ({
               className={styles.backButton}
               onClick={onBack}
             >
-              <FaArrowLeft size={18} />
+              <MdClose size={SKELETON_ICON.close} />
             </Button>
           )}
           <Link href={ROUTES.profile(selectedChat.username)}>
-            <Avatar src={selectedChat.avatar} size={45} />
+            <Avatar
+              src={selectedChat.avatar}
+              size={SKELETON_AVATAR.regular}
+              mobileSize={SKELETON_AVATAR.regularMobile}
+            />
           </Link>
           <div className={styles.info}>
             <span className={styles.name}>

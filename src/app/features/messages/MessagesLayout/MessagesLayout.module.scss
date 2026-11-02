@@ -36,6 +36,7 @@
 
 @media (max-width: $tablet) {
   .chat {
+    height: calc(100dvh - var(--header-offset));
     border-radius: 0;
   }
 
@@ -47,5 +48,13 @@
 
   .hiddenMobile {
     display: none;
+  }
+
+  :global(html):has(.contactListWrapper.hiddenMobile) {
+    --header-offset: 0px;
+
+    :global(header) {
+      display: none;
+    }
   }
 }

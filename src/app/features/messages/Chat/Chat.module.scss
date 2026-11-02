@@ -59,19 +59,10 @@
 }
 
 .dayDivider {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-m);
   margin: var(--gap-l) 0 var(--gap-xs);
   font-size: var(--font-s);
   color: var(--text-secondary);
-
-  &::before,
-  &::after {
-    content: "";
-    flex: 1;
-    border-top: 1px solid var(--border-divider);
-  }
+  text-align: center;
 }
 
 .newMessagesButton {
@@ -128,10 +119,18 @@
 }
 
 @media (max-width: $tablet) {
+  .userInfo {
+    padding-top: var(--padding-xs);
+    padding-bottom: var(--padding-xs);
+  }
+
   .backButton {
     display: flex;
+    justify-content: center;
     min-width: 44px;
     min-height: 44px;
+    padding: 0;
+    margin: 0 calc(var(--gap-s) * -1);
   }
 
   .input {
