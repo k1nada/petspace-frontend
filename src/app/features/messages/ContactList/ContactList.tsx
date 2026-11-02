@@ -163,7 +163,7 @@ export const ContactList = ({
         <div className={styles.header}>
           <CardTitle as="h1">{t("common.messages")}</CardTitle>
         </div>
-        <SearchBar value={search} onChange={setSearch} />
+        <SearchBar value={search} onChange={setSearch} fullWidth />
       </div>
       <ul className={styles.list}>{listContent}</ul>
     </div>

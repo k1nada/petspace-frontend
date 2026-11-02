@@ -2,6 +2,7 @@ export const SKELETON_AVATAR = {
   notification: 40,
   messageSearch: 40,
   regular: 45,
+  regularMobile: 38,
   suggested: 44,
   suggestedMobile: 72,
   familyMember: 56,
@@ -17,5 +18,6 @@ export const SKELETON_AVATAR = {
 
 export const SKELETON_ICON = {
   navigation: 20,
+  close: 22,
   mobileSearch: 18,
 };

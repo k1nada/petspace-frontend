@@ -31,6 +31,10 @@
   flex: 1;
 }
 
+.listSkeleton {
+  overflow: hidden;
+}
+
 .sectionTitle {
   padding: var(--padding-s) var(--padding-s) var(--gap-xs);
   font-size: var(--font-s);

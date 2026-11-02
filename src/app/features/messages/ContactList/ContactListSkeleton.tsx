@@ -1,4 +1,5 @@
 import { useTranslations } from "next-intl";
+import cn from "classnames";
 import { Skeleton, SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
 import { SKELETON_AVATAR } from "@/app/uikit/feedback/Skeleton/skeletonSizes";
 import { Button } from "@/app/uikit/form/Button/Button";
@@ -7,7 +8,29 @@ import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 import cardStyles from "../ContactCard/ContactCard.module.scss";
 import styles from "./ContactList.module.scss";
 
-const NAME_WIDTHS = ["55%", "40%", "65%", "50%", "45%"];
+const NAME_WIDTHS = [
+  "55%",
+  "40%",
+  "65%",
+  "50%",
+  "45%",
+  "60%",
+  "35%",
+  "55%",
+  "45%",
+  "50%",
+  "40%",
+  "60%",
+  "50%",
+  "65%",
+  "45%",
+  "55%",
+  "35%",
+  "60%",
+  "50%",
+  "40%",
+];
+const TIME_WIDTH = 50;
 
 export const ContactListSkeleton = () => {
   const t = useTranslations();
@@ -21,10 +44,10 @@ export const ContactListSkeleton = () => {
           </CardTitle>
         </div>
         <Skeleton shape="rounded" width="100%">
-          <SearchBar />
+          <SearchBar fullWidth />
         </Skeleton>
       </div>
-      <ul className={styles.list}>
+      <ul className={cn(styles.list, styles.listSkeleton)}>
         {NAME_WIDTHS.map((width, i) => (
           <li key={i} className={cardStyles.card}>
             <Button appearance="ghost">
@@ -39,6 +62,11 @@ export const ContactListSkeleton = () => {
                 </span>
                 <span className={cardStyles.text}>
                   <SkeletonText width="75%" />
+                </span>
+              </div>
+              <div className={cardStyles.message}>
+                <span className={cardStyles.time}>
+                  <SkeletonText width={TIME_WIDTH} />
                 </span>
               </div>
             </Button>

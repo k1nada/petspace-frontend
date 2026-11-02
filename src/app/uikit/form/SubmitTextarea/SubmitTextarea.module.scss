@@ -35,6 +35,14 @@
 }
 
 @media (max-width: $tablet) {
+  .textarea {
+    line-height: 20px;
+  }
+
+  .textarea::placeholder {
+    font-size: var(--font-m);
+  }
+
   .arrow {
     position: relative;
 

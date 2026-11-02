@@ -29,6 +29,7 @@ export const SubmitTextarea = ({
     <div className={styles.textareaWrapper}>
       <Textarea
         appearance="secondary"
+        className={styles.textarea}
         value={value}
         onKeyDown={disabled ? undefined : (e) => submitOnEnter(e, onSubmit)}
         onChange={(e) => onChange(e.target.value)}

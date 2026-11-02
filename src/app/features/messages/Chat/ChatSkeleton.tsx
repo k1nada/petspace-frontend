@@ -1,9 +1,11 @@
 import cn from "classnames";
-import { FaArrowLeft } from "react-icons/fa";
 import { Skeleton, SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
-import { SKELETON_AVATAR } from "@/app/uikit/feedback/Skeleton/skeletonSizes";
-import { Button } from "@/app/uikit/form/Button/Button";
+import {
+  SKELETON_AVATAR,
+  SKELETON_ICON,
+} from "@/app/uikit/feedback/Skeleton/skeletonSizes";
 import { SubmitTextarea } from "@/app/uikit/form/SubmitTextarea/SubmitTextarea";
+import { AvatarSkeleton } from "@/app/uikit/user/Avatar/AvatarSkeleton";
 import messageStyles from "../ChatMessage/ChatMessage.module.scss";
 import styles from "./Chat.module.scss";
 import skeletonStyles from "./ChatSkeleton.module.scss";
@@ -48,16 +50,15 @@ export const ChatSkeleton = () => (
     <div className={styles.userInfo}>
       <div className={styles.user}>
         <div className={skeletonStyles.backButton}>
-          <Skeleton shape="circle">
-            <Button appearance="ghost">
-              <FaArrowLeft size={18} />
-            </Button>
-          </Skeleton>
+          <Skeleton
+            shape="circle"
+            width={SKELETON_ICON.close}
+            height={SKELETON_ICON.close}
+          />
         </div>
-        <Skeleton
-          shape="circle"
-          width={SKELETON_AVATAR.regular}
-          height={SKELETON_AVATAR.regular}
+        <AvatarSkeleton
+          size={SKELETON_AVATAR.regular}
+          mobileSize={SKELETON_AVATAR.regularMobile}
         />
         <div className={styles.info}>
           <span className={styles.name}>
