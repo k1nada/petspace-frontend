@@ -30,16 +30,33 @@
 }
 
 @media (max-width: $phone) {
+  .header {
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+
   .tabs {
+    flex: 1 1 100%;
+    justify-content: space-between;
+    gap: var(--gap-s);
     min-width: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
     margin: calc(var(--gap-s) * -1) calc(var(--padding-l) * -1);
     padding: var(--gap-s) var(--padding-l);
-    scroll-padding-inline: var(--padding-l);
+    overflow-x: auto;
+    scrollbar-width: none;
   }
 
   .tabs::-webkit-scrollbar {
     display: none;
+  }
+
+  .tabs button {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  .menu {
+    height: auto;
+    margin-left: auto;
   }
 }
