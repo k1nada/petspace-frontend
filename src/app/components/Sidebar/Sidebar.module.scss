@@ -50,7 +50,6 @@
     padding-left: max(var(--padding-l), env(safe-area-inset-left));
     padding-bottom: max(var(--padding-l), env(safe-area-inset-bottom));
     background: var(--bg-page);
-    box-shadow: var(--shadow-drawer);
     transform: translateX(-100%);
     z-index: var(--z-modal);
   }
@@ -62,6 +61,7 @@
 
   .containerOpen {
     transform: translateX(0);
+    box-shadow: var(--shadow-drawer);
   }
 
   .overlay {

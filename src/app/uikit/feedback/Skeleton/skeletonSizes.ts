@@ -4,7 +4,7 @@ export const SKELETON_AVATAR = {
   regular: 45,
   regularMobile: 38,
   suggested: 44,
-  suggestedMobile: 72,
+  suggestionsStrip: 56,
   familyMember: 56,
   familyMini: 48,
   friend: 70,

@@ -86,16 +86,20 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
 
       <div className={styles.mobileTree}>
         <Card as="section" className={styles.dogCard}>
+          <div className={styles.dogHeader}>
+            <CardTitle as="h1">
+              {isOwner
+                ? t("common.familyTree")
+                : t("familyTree.titleOther", { name: name || username })}
+            </CardTitle>
+            <FamilyInfo />
+          </div>
           <Link href={ROUTES.profile(username)} className={styles.dog}>
             <span className={styles.dogAvatar}>
               <Avatar src={avatar} size={MOBILE_AVATAR_SIZE} />
             </span>
             <span className={styles.dogName}>{name || username}</span>
           </Link>
-          <div className={styles.dogCaption}>
-            {t("common.familyTree")}
-            <FamilyInfo />
-          </div>
         </Card>
 
         <Card as="section">

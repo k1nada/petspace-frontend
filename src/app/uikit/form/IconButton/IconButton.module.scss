@@ -17,3 +17,11 @@
     height: 44px;
   }
 }
+
+@media (max-width: $phone) {
+  .iconButton.quiet {
+    border-radius: var(--radius-full);
+    background: transparent;
+    color: var(--icon-secondary);
+  }
+}
