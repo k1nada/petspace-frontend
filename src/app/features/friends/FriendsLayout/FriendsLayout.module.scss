@@ -12,7 +12,14 @@
 
 .content {
   grid-area: content;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xl);
   min-width: 0;
+}
+
+.strip {
+  display: none;
 }
 
 .rightColumn {
@@ -32,24 +39,21 @@
   .rightColumn {
     display: none;
   }
+
+  .strip {
+    display: block;
+  }
 }
 
 @media (max-width: $tablet) {
   .layout {
     align-content: start;
-    grid-template-areas:
-      "content"
-      "rightColumn";
-  }
-
-  .rightColumn {
-    display: flex;
   }
 }
 
 @media (max-width: $phone) {
   .layout,
-  .rightColumn {
+  .content {
     gap: var(--gap-s);
   }
 }

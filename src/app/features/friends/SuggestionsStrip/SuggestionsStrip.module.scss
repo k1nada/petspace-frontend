@@ -1,0 +1,120 @@
+@use "@/app/styles/breakpoints" as *;
+@use "@/app/styles/mixins" as *;
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xs);
+}
+
+.info {
+  display: inline-flex;
+  margin: calc(var(--padding-m) * -1) 0;
+  color: var(--text-secondary);
+}
+
+.popover {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  box-sizing: border-box;
+  width: min(260px, calc(100vw - 2 * var(--padding-l)));
+  padding: var(--padding-m);
+  white-space: normal;
+  text-align: left;
+}
+
+.popoverTitle {
+  margin: 0;
+  font-size: var(--font-m);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.popoverText {
+  margin: 0;
+  font-size: var(--font-m);
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.list {
+  display: flex;
+  gap: var(--gap-m);
+  margin: 0 calc(var(--padding-l) * -1);
+  padding: 0 var(--padding-l);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  display: flex;
+  flex: 0 0 64px;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-xs);
+  min-width: 0;
+}
+
+.avatar {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 2px solid var(--bg-card);
+  border-radius: var(--radius-full);
+  background: var(--primary);
+  color: var(--text-on-color);
+  cursor: pointer;
+  transition: background-color var(--transition-hover);
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--primary-hover);
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.badge.badgeSent {
+  background: var(--button-secondary);
+  color: var(--icon-secondary);
+
+  @media (hover: hover) {
+    &:hover {
+      background: var(--button-secondary-hover);
+    }
+  }
+}
+
+.name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: var(--font-s);
+  color: var(--text-primary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: $tablet) {
+  .badge {
+    @include touch-target;
+  }
+}

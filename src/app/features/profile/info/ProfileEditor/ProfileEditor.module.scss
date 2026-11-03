@@ -67,6 +67,14 @@
 }
 
 @media (max-width: $tablet) {
+  .container {
+    padding: var(--padding-l);
+  }
+
+  .title {
+    font-weight: 600;
+  }
+
   .fields {
     grid-template-columns: repeat(2, 1fr);
   }

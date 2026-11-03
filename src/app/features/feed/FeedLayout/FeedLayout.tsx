@@ -9,6 +9,8 @@ import { Postwall } from "@/app/features/profile/feed/Postwall/Postwall";
 import { PostwallSkeleton } from "@/app/features/profile/feed/Postwall/PostwallSkeleton";
 import { SuggestedFriends } from "@/app/features/friends/SuggestedFriends/SuggestedFriends";
 import { SuggestedFriendsSkeleton } from "@/app/features/friends/SuggestedFriends/SuggestedFriendsSkeleton";
+import { SuggestionsStrip } from "@/app/features/friends/SuggestionsStrip/SuggestionsStrip";
+import { SuggestionsStripSkeleton } from "@/app/features/friends/SuggestionsStrip/SuggestionsStripSkeleton";
 import { getFeed } from "@/services/api/post";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useFeedStore } from "@/app/hooks/feed/useFeedStore";
@@ -72,6 +74,9 @@ export const FeedLayout = () => {
     return (
       <div className={styles.layout}>
         <div className={styles.content}>
+          <div className={styles.strip}>
+            <SuggestionsStripSkeleton />
+          </div>
           <PostwallSkeleton />
         </div>
         <div className={styles.rightColumn}>
@@ -88,6 +93,9 @@ export const FeedLayout = () => {
   return (
     <div className={styles.layout}>
       <div className={styles.content}>
+        <div className={styles.strip}>
+          <SuggestionsStrip tipText={t("feedTip.text")} />
+        </div>
         <Postwall
           posts={posts}
           onRefresh={refreshPosts}

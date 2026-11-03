@@ -18,6 +18,10 @@
   min-width: 0;
 }
 
+.strip {
+  display: none;
+}
+
 .rightColumn {
   grid-area: rightColumn;
   display: flex;
@@ -35,25 +39,21 @@
   .rightColumn {
     display: none;
   }
+
+  .strip {
+    display: block;
+  }
 }
 
 @media (max-width: $tablet) {
   .layout {
     align-content: start;
-    grid-template-areas:
-      "content"
-      "rightColumn";
-  }
-
-  .rightColumn {
-    display: flex;
   }
 }
 
 @media (max-width: $phone) {
   .layout,
-  .content,
-  .rightColumn {
+  .content {
     gap: var(--gap-s);
   }
 }

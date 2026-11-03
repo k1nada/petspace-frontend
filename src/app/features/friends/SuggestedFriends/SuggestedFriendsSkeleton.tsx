@@ -21,10 +21,7 @@ export const SuggestedFriendsSkeleton = () => {
       <ul className={styles.list}>
         {Array.from({ length: SUGGESTIONS_COUNT }, (_, i) => (
           <li key={i} className={styles.card}>
-            <AvatarSkeleton
-              size={SKELETON_AVATAR.suggested}
-              mobileSize={SKELETON_AVATAR.suggestedMobile}
-            />
+            <AvatarSkeleton size={SKELETON_AVATAR.suggested} />
             <div className={styles.info}>
               <div className={styles.name}>
                 <SkeletonText width={NAME_WIDTHS[i]} />

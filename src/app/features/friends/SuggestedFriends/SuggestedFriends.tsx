@@ -13,7 +13,6 @@ import { getRelationshipStatus } from "@/utils/friends";
 import styles from "./SuggestedFriends.module.scss";
 
 const AVATAR_SIZE = 44;
-const MOBILE_AVATAR_SIZE = 72;
 
 export const SuggestedFriends = () => {
   const t = useTranslations();
@@ -33,11 +32,7 @@ export const SuggestedFriends = () => {
           return (
             <li key={friend.username} className={styles.card}>
               <Link href={ROUTES.profile(friend.username)}>
-                <Avatar
-                  src={friend.avatar}
-                  size={AVATAR_SIZE}
-                  mobileSize={MOBILE_AVATAR_SIZE}
-                />
+                <Avatar src={friend.avatar} size={AVATAR_SIZE} />
               </Link>
               <div className={styles.info}>
                 <div className={styles.name}>

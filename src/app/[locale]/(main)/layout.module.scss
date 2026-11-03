@@ -48,4 +48,8 @@ $layout-max-width: 1400px;
   .sidebar {
     display: contents;
   }
+
+  .content {
+    padding: var(--padding-s);
+  }
 }

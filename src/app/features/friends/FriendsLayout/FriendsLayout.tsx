@@ -9,6 +9,8 @@ import { useLoadSuggestedFriends } from "@/app/hooks/friends/useSuggestedFriends
 import { FollowUser, Friend } from "@/types";
 import { SuggestedFriends } from "@/app/features/friends/SuggestedFriends/SuggestedFriends";
 import { SuggestedFriendsSkeleton } from "@/app/features/friends/SuggestedFriends/SuggestedFriendsSkeleton";
+import { SuggestionsStrip } from "@/app/features/friends/SuggestionsStrip/SuggestionsStrip";
+import { SuggestionsStripSkeleton } from "@/app/features/friends/SuggestionsStrip/SuggestionsStripSkeleton";
 import { Friends } from "../Friends/Friends";
 import { FriendsSkeleton } from "../Friends/FriendsSkeleton";
 import styles from "./FriendsLayout.module.scss";
@@ -44,6 +46,11 @@ export const FriendsLayout = ({
     return (
       <div className={styles.layout}>
         <div className={styles.content}>
+          {isMyProfile && (
+            <div className={styles.strip}>
+              <SuggestionsStripSkeleton />
+            </div>
+          )}
           <FriendsSkeleton />
         </div>
         <div className={styles.rightColumn}>
@@ -60,6 +67,11 @@ export const FriendsLayout = ({
   return (
     <div className={styles.layout}>
       <div className={styles.content}>
+        {isMyProfile && (
+          <div className={styles.strip}>
+            <SuggestionsStrip tipText={t("friendTip.text")} />
+          </div>
+        )}
         <Friends
           username={username}
           name={name}
