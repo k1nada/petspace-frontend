@@ -109,12 +109,12 @@ export const Header = () => {
                 className={cn(styles.icon, styles.mobileSearchToggle)}
                 onClick={() => setIsSearchOpen(true)}
               >
-                <FaSearch size={18} />
+                <FaSearch size={20} />
               </Button>
             )}
             {currentUser && <NotificationsDropdown />}
             <span className={styles.mobileMenu}>
-              <Dropdown items={moreMenuItems} />
+              <Dropdown items={moreMenuItems} triggerClassName={styles.icon} />
             </span>
             {currentUser && (
               <Link

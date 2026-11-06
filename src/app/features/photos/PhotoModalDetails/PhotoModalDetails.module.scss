@@ -156,7 +156,7 @@
       position: absolute;
       left: var(--padding-m);
       right: var(--padding-m);
-      bottom: max(var(--padding-m), env(safe-area-inset-bottom));
+      bottom: env(safe-area-inset-bottom);
       z-index: var(--z-photo-overlay);
       gap: var(--gap-xl);
       margin: 0;

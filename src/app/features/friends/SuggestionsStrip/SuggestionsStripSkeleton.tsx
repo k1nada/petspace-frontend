@@ -1,3 +1,4 @@
+import cn from "classnames";
 import { useTranslations } from "next-intl";
 import { SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
 import { SKELETON_AVATAR } from "@/app/uikit/feedback/Skeleton/skeletonSizes";
@@ -6,7 +7,7 @@ import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
 import { AvatarSkeleton } from "@/app/uikit/user/Avatar/AvatarSkeleton";
 import styles from "./SuggestionsStrip.module.scss";
 
-const SUGGESTIONS_COUNT = 3;
+const SUGGESTIONS_COUNT = 9;
 
 export const SuggestionsStripSkeleton = () => {
   const t = useTranslations();
@@ -18,7 +19,7 @@ export const SuggestionsStripSkeleton = () => {
           <SkeletonText>{t("suggestedFriends.title")}</SkeletonText>
         </CardTitle>
       </div>
-      <ul className={styles.list}>
+      <ul className={cn(styles.list, styles.skeletonList)}>
         {Array.from({ length: SUGGESTIONS_COUNT }, (_, i) => (
           <li key={i} className={styles.item}>
             <AvatarSkeleton size={SKELETON_AVATAR.suggestionsStrip} />

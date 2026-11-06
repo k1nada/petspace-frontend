@@ -5,7 +5,7 @@
   justify-content: space-between;
   gap: var(--gap-m);
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .tabs {
@@ -26,6 +26,7 @@
 .list {
   display: flex;
   flex-direction: column;
+  margin-top: var(--gap-s);
 }
 
 @media (max-width: $phone) {
@@ -50,9 +51,5 @@
   .tabs button {
     flex: none;
     white-space: nowrap;
-  }
-
-  .menu {
-    height: auto;
   }
 }

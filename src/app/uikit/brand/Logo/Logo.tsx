@@ -6,8 +6,8 @@ export const Logo = () => {
   return (
     <Image
       src={logoImage}
-      width={40}
-      height={40}
+      width={32}
+      height={32}
       alt=""
       className={styles.logo}
       draggable={false}

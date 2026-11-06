@@ -1,4 +1,5 @@
 @use "@/app/styles/breakpoints" as *;
+@use "@/app/styles/mixins" as *;
 
 .wrapper {
   position: relative;
@@ -104,8 +105,9 @@
 
 @media (max-width: $tablet) {
   .trigger {
-    width: 44px;
-    height: 44px;
+    position: relative;
+
+    @include touch-target;
   }
 
   .menu button {

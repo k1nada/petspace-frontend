@@ -39,7 +39,9 @@ export const Dropdown = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const isButton = triggerAppearance === "button";
-  const buttonClassName = isButton ? triggerClassName : styles.trigger;
+  const buttonClassName = isButton
+    ? triggerClassName
+    : (triggerClassName ?? styles.trigger);
   const isPopover = content !== undefined;
 
   return (
