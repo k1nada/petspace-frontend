@@ -40,11 +40,6 @@ export const SignIn = () => {
     try {
       const { token, user } = await signIn(data);
 
-      if (!user?.username) {
-        toast.error(t("toasts.error"));
-        return;
-      }
-
       localStorage.setItem("token", token);
       reconnectSocket();
       useAuthStore.getState().fetchCurrentUser();

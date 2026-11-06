@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { MdCheck, MdClose } from "react-icons/md";
+import { FaCheck, FaTimes } from "react-icons/fa";
+import { Button } from "@/app/uikit/form/Button/Button";
 import { IconButton } from "@/app/uikit/form/IconButton/IconButton";
 import { FriendRequest as FriendRequestType } from "@/types";
 import { UserRow } from "../UserRow/UserRow";
+import styles from "./FriendRequestCard.module.scss";
 
 interface FriendRequestCardProps {
   request: FriendRequestType;
@@ -51,15 +53,25 @@ export const FriendRequestCard = ({
       fallbackStatus={t("friendRequest.wantsToBeFriends")}
       actions={
         <>
-          <IconButton
-            accent
-            icon={<MdCheck size={18} />}
-            label={t("friendRequest.accept")}
+          <Button
+            appearance="primary"
+            className={styles.acceptButton}
             onClick={handleAccept}
             disabled={isProcessing}
-          />
+          >
+            {t("friendRequest.accept")}
+          </Button>
+          <div className={styles.acceptIcon}>
+            <IconButton
+              accent
+              icon={<FaCheck size={16} />}
+              label={t("friendRequest.accept")}
+              onClick={handleAccept}
+              disabled={isProcessing}
+            />
+          </div>
           <IconButton
-            icon={<MdClose size={18} />}
+            icon={<FaTimes size={16} />}
             label={t("friendRequest.decline")}
             onClick={handleReject}
             disabled={isProcessing}

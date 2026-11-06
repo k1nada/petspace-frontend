@@ -26,28 +26,21 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-s);
 }
 
 @media (max-width: $phone) {
-  .list {
-    gap: 0;
-  }
-
-  .header {
-    flex-wrap: wrap;
-    row-gap: 0;
-  }
-
   .tabs {
-    flex: 1 1 100%;
-    justify-content: space-between;
-    gap: var(--gap-s);
+    flex: 1 1 auto;
     min-width: 0;
     margin: calc(var(--gap-s) * -1) calc(var(--padding-l) * -1);
     padding: var(--gap-s) var(--padding-l);
     overflow-x: auto;
     scrollbar-width: none;
+  }
+
+  .tabsWithMenu {
+    margin-right: 0;
+    padding-right: 0;
   }
 
   .tabs::-webkit-scrollbar {
@@ -61,6 +54,5 @@
 
   .menu {
     height: auto;
-    margin-left: auto;
   }
 }

@@ -14,7 +14,6 @@ export const FriendsSkeleton = () => {
   const t = useTranslations();
   const tabLabels = [
     t("common.friends"),
-    t("friends.requestsTitle"),
     t("friends.followersTitle"),
     t("friends.followingTitle"),
   ];

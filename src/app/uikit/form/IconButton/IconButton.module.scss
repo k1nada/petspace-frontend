@@ -1,5 +1,3 @@
-@use "@/app/styles/breakpoints" as *;
-
 .iconButton {
   display: inline-flex;
   align-items: center;
@@ -9,29 +7,4 @@
   height: var(--control-height);
   padding: 0;
   border-radius: 12px;
-}
-
-.skeletonBox {
-  display: none;
-}
-
-@media (max-width: $phone) {
-  .iconButton.quiet {
-    border-radius: var(--radius-full);
-    background: transparent;
-    color: var(--text-secondary);
-
-    svg {
-      width: 22px;
-      height: 22px;
-    }
-  }
-
-  .skeletonBox {
-    display: inline-flex;
-  }
-
-  .skeletonSquare {
-    display: none;
-  }
 }

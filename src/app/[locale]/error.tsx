@@ -12,7 +12,7 @@ interface ErrorPageProps {
   reset: () => void;
 }
 
-export default function ErrorPage({ reset }: ErrorPageProps) {
+const ErrorPage = ({ reset }: ErrorPageProps) => {
   const t = useTranslations();
   const router = useRouter();
 
@@ -39,4 +39,6 @@ export default function ErrorPage({ reset }: ErrorPageProps) {
       </main>
     </div>
   );
-}
+};
+
+export default ErrorPage;

@@ -1,0 +1,15 @@
+@use "@/app/styles/breakpoints" as *;
+
+.acceptIcon {
+  display: none;
+}
+
+@media (max-width: $phone) {
+  .acceptButton {
+    display: none;
+  }
+
+  .acceptIcon {
+    display: flex;
+  }
+}

@@ -4,9 +4,9 @@ import styles from "./SearchBar.module.scss";
 import cn from "classnames";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useTranslations } from "next-intl";
-import { Input } from "../../form/Input/Input";
+import { Input } from "@/app/uikit/form/Input/Input";
 import { useState } from "react";
-import { Button } from "../../form/Button/Button";
+import { Button } from "@/app/uikit/form/Button/Button";
 
 interface SearchBarProps {
   placeholder?: string;

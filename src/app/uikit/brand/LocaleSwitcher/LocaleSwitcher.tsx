@@ -1,7 +1,7 @@
 "use client";
 
 import { FaGlobe } from "react-icons/fa";
-import { Button } from "../../form/Button/Button";
+import { Button } from "@/app/uikit/form/Button/Button";
 import { useToggleLocale } from "@/app/hooks/shared/useToggleLocale";
 
 interface LocaleSwitcherProps {

@@ -84,6 +84,7 @@ export const UserRow = ({
               </Button>
               <div className={styles.messageIcon}>
                 <IconButton
+                  accent
                   icon={<BiSolidMessage size={18} />}
                   label={t("friends.message")}
                   onClick={onMessage}

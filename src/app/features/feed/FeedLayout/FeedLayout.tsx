@@ -19,8 +19,6 @@ import { useSuggestedFriendsStore } from "@/app/hooks/friends/useSuggestedFriend
 import { loadSuggestions } from "@/app/hooks/friends/useSuggestedFriends";
 import styles from "./FeedLayout.module.scss";
 
-const FEED_SKELETON_POSTS = 10;
-
 export const FeedLayout = () => {
   const t = useTranslations();
   const posts = useFeedStore((state) => state.posts);
@@ -80,7 +78,7 @@ export const FeedLayout = () => {
           <div className={styles.strip}>
             <SuggestionsStripSkeleton />
           </div>
-          <PostwallSkeleton count={FEED_SKELETON_POSTS} />
+          <PostwallSkeleton count={10} />
         </div>
         <div className={styles.rightColumn}>
           <SuggestedFriendsSkeleton />

@@ -4,7 +4,7 @@ import { API_URL } from "@/config/env";
 const getToken = () =>
   typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-const socket = io(API_URL!, {
+const socket = io(API_URL, {
   auth: (cb) => cb({ token: getToken() }),
   autoConnect: !!getToken(),
 });

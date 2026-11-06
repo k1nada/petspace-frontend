@@ -29,7 +29,7 @@ export const SuggestionsStrip = ({ tipText }: SuggestionsStripProps) => {
   if (!suggestions.length) return null;
 
   return (
-    <Card as="section">
+    <Card as="section" dataCy="suggestions-strip">
       <div className={styles.header}>
         <CardTitle>{t("suggestedFriends.title")}</CardTitle>
         <Dropdown

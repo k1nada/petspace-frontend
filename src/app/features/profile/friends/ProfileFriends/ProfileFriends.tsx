@@ -17,6 +17,8 @@ interface ProfileFriendsProps {
 }
 
 const MAX_VISIBLE_FRIENDS = 8;
+const AVATAR_SIZE = 70;
+const MOBILE_AVATAR_SIZE = 56;
 
 export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
   const t = useTranslations();
@@ -51,7 +53,8 @@ export const ProfileFriends = ({ username, friends }: ProfileFriendsProps) => {
               >
                 <Avatar
                   src={friend.avatar}
-                  size={70}
+                  size={AVATAR_SIZE}
+                  mobileSize={MOBILE_AVATAR_SIZE}
                   isOnline={
                     presenceByUserId[friend.id]?.isOnline ?? friend.isOnline
                   }

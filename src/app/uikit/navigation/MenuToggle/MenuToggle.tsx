@@ -1,7 +1,7 @@
 "use client";
 
 import { FaBars } from "react-icons/fa";
-import { Button } from "../../form/Button/Button";
+import { Button } from "@/app/uikit/form/Button/Button";
 import { useMobileMenuStore } from "@/app/hooks/shared/useMobileMenuStore";
 
 interface MenuToggleProps {

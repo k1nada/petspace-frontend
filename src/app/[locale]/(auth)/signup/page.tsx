@@ -19,7 +19,7 @@ export const generateMetadata = async ({
   };
 };
 
-export default function SignUpPage() {
+const SignUpPage = () => {
   return (
     <main className={styles.page}>
       <div className={styles.content}>
@@ -28,4 +28,6 @@ export default function SignUpPage() {
       <Footer />
     </main>
   );
-}
+};
+
+export default SignUpPage;
