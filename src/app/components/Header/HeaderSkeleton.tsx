@@ -4,7 +4,6 @@ import { Skeleton } from "@/app/uikit/feedback/Skeleton/Skeleton";
 import { SKELETON_ICON } from "@/app/uikit/feedback/Skeleton/skeletonSizes";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { NotificationsTriggerSkeleton } from "@/app/uikit/overlays/NotificationsDropdown/NotificationsTriggerSkeleton";
-import { DropdownSkeleton } from "@/app/uikit/overlays/Dropdown/DropdownSkeleton";
 import styles from "./Header.module.scss";
 
 export const HeaderSkeleton = () => (
@@ -46,14 +45,18 @@ export const HeaderSkeleton = () => (
         <div className={cn(styles.icon, styles.mobileSearchToggle)}>
           <Skeleton
             shape="circle"
-            width={SKELETON_ICON.mobileSearch}
-            height={SKELETON_ICON.mobileSearch}
+            width={SKELETON_ICON.navigation}
+            height={SKELETON_ICON.navigation}
           />
         </div>
         <NotificationsTriggerSkeleton />
-        <span className={styles.mobileMenu}>
-          <DropdownSkeleton iconSize={SKELETON_ICON.navigation} />
-        </span>
+        <div className={cn(styles.icon, styles.mobileMenu)}>
+          <Skeleton
+            shape="circle"
+            width={SKELETON_ICON.navigation}
+            height={SKELETON_ICON.navigation}
+          />
+        </div>
         <div className={cn(styles.icon, styles.desktopIcon)}>
           <Skeleton
             shape="circle"

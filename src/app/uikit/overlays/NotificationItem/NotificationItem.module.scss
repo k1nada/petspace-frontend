@@ -62,13 +62,13 @@
 
 .message {
   color: var(--text-primary);
-  font-size: var(--font-m);
+  font-size: var(--font-base);
   overflow-wrap: anywhere;
 }
 
 .time {
   color: var(--text-secondary);
-  font-size: var(--font-s);
+  font-size: var(--font-m);
 }
 
 .unreadNotifications {

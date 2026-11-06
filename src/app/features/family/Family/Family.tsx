@@ -33,56 +33,58 @@ export const Family = ({ user, breeds, familyMembers }: FamilyProps) => {
 
   return (
     <>
-      <Card as="section" className={styles.desktopTree}>
-        <CardTitle as="h1">
-          {isOwner
-            ? t("common.familyTree")
-            : t("familyTree.titleOther", { name: name || username })}
-        </CardTitle>
+      <div className={styles.desktopTree}>
+        <Card as="section">
+          <CardTitle as="h1">
+            {isOwner
+              ? t("common.familyTree")
+              : t("familyTree.titleOther", { name: name || username })}
+          </CardTitle>
 
-        <div className={styles.content}>
-          <div className={styles.parentsColumn}>
-            <FamilyColumn
-              title={t("familyTree.parents")}
-              emptyText={t("familyTree.emptyParents")}
-              addLabel={t("familyTree.addParent")}
-              relation="parent"
-              members={parents}
-              maxMembers={MAX_PARENTS}
-              isOwner={isOwner}
-              breeds={breeds}
-              onAdd={(member) => addMember("parent", member)}
-              onRemove={removeMember}
-            />
+          <div className={styles.content}>
+            <div className={styles.parentsColumn}>
+              <FamilyColumn
+                title={t("familyTree.parents")}
+                emptyText={t("familyTree.emptyParents")}
+                addLabel={t("familyTree.addParent")}
+                relation="parent"
+                members={parents}
+                maxMembers={MAX_PARENTS}
+                isOwner={isOwner}
+                breeds={breeds}
+                onAdd={(member) => addMember("parent", member)}
+                onRemove={removeMember}
+              />
+            </div>
+
+            <div className={styles.divider} />
+
+            <Link href={ROUTES.profile(username)} className={styles.user}>
+              <Avatar src={avatar} size={96} />
+              <span className={styles.name}>{name || username}</span>
+              {breed && <span className={styles.breed}>{breed}</span>}
+            </Link>
+
+            <div className={styles.divider} />
+
+            <div className={styles.childrenColumn}>
+              <FamilyColumn
+                title={t("familyTree.children")}
+                emptyText={t("familyTree.emptyChildren")}
+                addLabel={t("familyTree.addPuppy")}
+                relation="child"
+                members={children}
+                maxMembers={MAX_PUPPIES}
+                limitText={t("familyTree.puppiesLimit", { count: MAX_PUPPIES })}
+                isOwner={isOwner}
+                breeds={breeds}
+                onAdd={(member) => addMember("child", member)}
+                onRemove={removeMember}
+              />
+            </div>
           </div>
-
-          <div className={styles.divider} />
-
-          <Link href={ROUTES.profile(username)} className={styles.user}>
-            <Avatar src={avatar} size={96} />
-            <span className={styles.name}>{name || username}</span>
-            {breed && <span className={styles.breed}>{breed}</span>}
-          </Link>
-
-          <div className={styles.divider} />
-
-          <div className={styles.childrenColumn}>
-            <FamilyColumn
-              title={t("familyTree.children")}
-              emptyText={t("familyTree.emptyChildren")}
-              addLabel={t("familyTree.addPuppy")}
-              relation="child"
-              members={children}
-              maxMembers={MAX_PUPPIES}
-              limitText={t("familyTree.puppiesLimit", { count: MAX_PUPPIES })}
-              isOwner={isOwner}
-              breeds={breeds}
-              onAdd={(member) => addMember("child", member)}
-              onRemove={removeMember}
-            />
-          </div>
-        </div>
-      </Card>
+        </Card>
+      </div>
 
       <div className={styles.mobileTree}>
         <Card as="section" className={styles.dogCard}>

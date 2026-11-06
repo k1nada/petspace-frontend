@@ -336,7 +336,7 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
             className={cn(styles.iconAction, styles.familyTreeButton)}
             onClick={goToFamilyTree}
           >
-            <FaTree size={16} />
+            <FaTree size={18} />
           </Button>
           {renderActions()}
         </div>

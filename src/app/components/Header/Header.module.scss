@@ -40,8 +40,8 @@
   text-decoration: none;
 
   img {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
 }
 
@@ -104,6 +104,11 @@
   align-items: center;
 }
 
+.mobileMenu .icon svg {
+  width: 24px;
+  height: 24px;
+}
+
 .desktopIcon {
   display: flex;
 }
@@ -120,20 +125,19 @@
   .container {
     grid-template-columns: auto 1fr auto;
   }
+
+  .logoTitle {
+    display: none;
+  }
 }
 
 @media (max-width: $tablet) {
   .container {
-    gap: var(--gap-s);
     padding: 0 var(--padding-s);
   }
 
   .logo {
     padding-left: 0;
-  }
-
-  .logoTitle {
-    display: none;
   }
 
   .actions {
@@ -148,11 +152,23 @@
   .menuToggle {
     display: flex;
   }
+
+  .search {
+    justify-self: start;
+    max-width: 240px;
+  }
+
+  .mobileMenu {
+    display: flex;
+  }
+
+  .desktopIcon {
+    display: none;
+  }
 }
 
 @media (max-width: $phone) {
   .container {
-    gap: var(--gap-xs);
     padding: 0 var(--padding-m) 0 var(--padding-m);
   }
 
@@ -166,21 +182,8 @@
     justify-content: center;
   }
 
-  .logo img {
-    width: 32px;
-    height: 32px;
-  }
-
   .actions {
     gap: var(--gap-2xs);
-  }
-
-  .mobileMenu {
-    display: flex;
-  }
-
-  .desktopIcon {
-    display: none;
   }
 
   .desktopSearch {
@@ -190,12 +193,5 @@
   .mobileSearchToggle {
     display: flex;
     align-items: center;
-  }
-
-  .menuToggle {
-    svg {
-      width: 18px;
-      height: 18px;
-    }
   }
 }

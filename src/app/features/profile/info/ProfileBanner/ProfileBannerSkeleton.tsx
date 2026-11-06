@@ -60,7 +60,7 @@ export const ProfileBannerSkeleton = () => {
           </Skeleton>
           <Skeleton shape="rounded" className={styles.familyTreeButton}>
             <Button appearance="secondary" className={styles.iconAction}>
-              <FaTree size={16} />
+              <FaTree size={18} />
             </Button>
           </Skeleton>
           <Skeleton shape="rounded">

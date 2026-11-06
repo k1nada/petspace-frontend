@@ -133,4 +133,16 @@
   .item {
     border: 1px solid var(--border-divider);
   }
+
+  .contentTitle {
+    font-size: var(--font-base);
+  }
+
+  .text {
+    font-size: var(--font-m);
+  }
+
+  .footer {
+    font-size: var(--font-base);
+  }
 }

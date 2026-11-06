@@ -20,5 +20,4 @@ export const SKELETON_AVATAR = {
 export const SKELETON_ICON = {
   navigation: 20,
   close: 22,
-  mobileSearch: 18,
 };

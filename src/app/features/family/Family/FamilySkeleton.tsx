@@ -12,43 +12,50 @@ export const FamilySkeleton = () => {
 
   return (
     <>
-      <Card as="section" className={styles.desktopTree}>
-        <CardTitle as="h1">
-          <SkeletonText>{t("common.familyTree")}</SkeletonText>
-        </CardTitle>
-        <div className={styles.content}>
-          <div className={styles.parentsColumn}>
-            <FamilyColumnSkeleton
-              title={t("familyTree.parents")}
-              addLabel={t("familyTree.addParent")}
-            />
+      <div className={styles.desktopTree}>
+        <Card as="section">
+          <CardTitle as="h1">
+            <SkeletonText>{t("common.familyTree")}</SkeletonText>
+          </CardTitle>
+          <div className={styles.content}>
+            <div className={styles.parentsColumn}>
+              <FamilyColumnSkeleton
+                title={t("familyTree.parents")}
+                addLabel={t("familyTree.addParent")}
+              />
+            </div>
+            <div className={styles.divider} />
+            <div className={styles.user}>
+              <Skeleton
+                shape="circle"
+                width={SKELETON_AVATAR.familyUser}
+                height={SKELETON_AVATAR.familyUser}
+              />
+              <span className={styles.name}>
+                <SkeletonText width={120} />
+              </span>
+              <span className={styles.breed}>
+                <SkeletonText width={80} />
+              </span>
+            </div>
+            <div className={styles.divider} />
+            <div className={styles.childrenColumn}>
+              <FamilyColumnSkeleton
+                title={t("familyTree.children")}
+                addLabel={t("familyTree.addPuppy")}
+              />
+            </div>
           </div>
-          <div className={styles.divider} />
-          <div className={styles.user}>
-            <Skeleton
-              shape="circle"
-              width={SKELETON_AVATAR.familyUser}
-              height={SKELETON_AVATAR.familyUser}
-            />
-            <span className={styles.name}>
-              <SkeletonText width={120} />
-            </span>
-            <span className={styles.breed}>
-              <SkeletonText width={80} />
-            </span>
-          </div>
-          <div className={styles.divider} />
-          <div className={styles.childrenColumn}>
-            <FamilyColumnSkeleton
-              title={t("familyTree.children")}
-              addLabel={t("familyTree.addPuppy")}
-            />
-          </div>
-        </div>
-      </Card>
+        </Card>
+      </div>
 
       <div className={styles.mobileTree}>
         <Card as="section" className={styles.dogCard}>
+          <div className={styles.dogHeader}>
+            <CardTitle as="h1">
+              <SkeletonText>{t("common.familyTree")}</SkeletonText>
+            </CardTitle>
+          </div>
           <div className={styles.dog}>
             <span className={styles.dogAvatar}>
               <Skeleton
@@ -61,7 +68,6 @@ export const FamilySkeleton = () => {
               <SkeletonText width={110} />
             </span>
           </div>
-          <span className={styles.dogCaption}>{t("common.familyTree")}</span>
         </Card>
 
         <Card as="section">

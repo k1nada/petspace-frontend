@@ -118,7 +118,7 @@
 .name {
   max-width: 100%;
   overflow: hidden;
-  font-size: var(--font-s);
+  font-size: var(--font-m);
   color: var(--text-primary);
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -127,5 +127,19 @@
 @media (max-width: $tablet) {
   .badge {
     @include touch-target;
+  }
+}
+
+@media (max-width: $phone) {
+  .list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  }
+
+  .skeletonList {
+    grid-template-rows: auto;
+    grid-auto-rows: 0;
+    row-gap: 0;
+    overflow: hidden;
   }
 }
