@@ -20,4 +20,5 @@ export const SKELETON_ICON = {
   navigation: 20,
   close: 22,
   mobileSearch: 18,
+  quietButton: 22,
 };

@@ -5,23 +5,33 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: var(--control-height);
+  height: var(--control-height);
   padding: 0;
   border-radius: 12px;
 }
 
-@media (max-width: $tablet) {
-  .iconButton {
-    width: 44px;
-    height: 44px;
-  }
+.skeletonBox {
+  display: none;
 }
 
 @media (max-width: $phone) {
   .iconButton.quiet {
     border-radius: var(--radius-full);
     background: transparent;
-    color: var(--icon-secondary);
+    color: var(--text-secondary);
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  .skeletonBox {
+    display: inline-flex;
+  }
+
+  .skeletonSquare {
+    display: none;
   }
 }

@@ -36,7 +36,7 @@
 
 @media (max-width: $tablet) {
   .chat {
-    height: calc(100dvh - var(--header-offset) - 2 * var(--padding-s));
+    height: calc(100dvh - var(--header-offset) - 2 * var(--page-padding));
   }
 
   .contactListWrapper,
@@ -52,7 +52,7 @@
   .chat:has(.contactListWrapper.hiddenMobile) {
     box-sizing: border-box;
     height: 100dvh;
-    margin: calc(var(--padding-s) * -1);
+    margin: calc(var(--page-padding) * -1);
     padding-top: env(safe-area-inset-top);
     border-radius: 0;
     box-shadow: none;

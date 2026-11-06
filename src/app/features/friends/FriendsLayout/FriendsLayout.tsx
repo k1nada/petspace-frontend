@@ -41,12 +41,13 @@ export const FriendsLayout = ({
   useLoadSuggestedFriends(isMyProfile ? username : undefined);
 
   const pageReady = isAuthChecked && (!isMyProfile || suggestionsLoaded);
+  const showStripSkeleton = !isAuthChecked || isMyProfile;
 
   if (!pageReady) {
     return (
       <div className={styles.layout}>
         <div className={styles.content}>
-          {isMyProfile && (
+          {showStripSkeleton && (
             <div className={styles.strip}>
               <SuggestionsStripSkeleton />
             </div>

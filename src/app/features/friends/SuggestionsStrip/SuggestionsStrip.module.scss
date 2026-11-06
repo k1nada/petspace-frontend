@@ -9,8 +9,19 @@
 
 .info {
   display: inline-flex;
-  margin: calc(var(--padding-m) * -1) 0;
+  margin: calc(var(--gap-xs) * -1) 0 calc(var(--gap-xs) * -1)
+    calc(var(--gap-xs) * -1);
   color: var(--text-secondary);
+}
+
+.info button {
+  width: 28px;
+  height: 28px;
+}
+
+.info button,
+.info button:hover {
+  background: transparent;
 }
 
 .popover {
