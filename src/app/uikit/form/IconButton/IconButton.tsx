@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import cn from "classnames";
 import { Button } from "../Button/Button";
 import styles from "./IconButton.module.scss";
 
@@ -20,7 +19,7 @@ export const IconButton = ({
 }: IconButtonProps) => (
   <Button
     appearance={accent ? "primary" : "secondary"}
-    className={cn(styles.iconButton, { [styles.quiet]: !accent })}
+    className={styles.iconButton}
     title={label}
     onClick={onClick}
     disabled={disabled}

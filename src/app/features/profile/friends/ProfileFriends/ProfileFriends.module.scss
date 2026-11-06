@@ -50,9 +50,28 @@
 
 @media (max-width: $tablet-landscape) {
   .friends {
-    grid-template-columns: repeat(auto-fill, 78px);
-    justify-content: space-between;
-    column-gap: var(--gap-s);
+    display: flex;
+    gap: var(--gap-m);
+    margin: 0 calc(var(--padding-l) * -1);
+    padding: 0 var(--padding-l);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .friends::-webkit-scrollbar {
+    display: none;
+  }
+
+  .friends > li {
+    flex: 0 0 78px;
+    min-width: 0;
+  }
+
+  .name {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -65,23 +84,11 @@
 }
 
 @media (max-width: $phone) {
-  .friends {
-    grid-template-columns: repeat(auto-fill, 60px);
-    column-gap: var(--gap-m);
+  .friends > li {
+    flex-basis: 64px;
   }
 
   .friend {
     padding: var(--gap-xs) 0;
-  }
-
-  .friend > :first-child {
-    zoom: 0.8;
-  }
-
-  .name {
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 }

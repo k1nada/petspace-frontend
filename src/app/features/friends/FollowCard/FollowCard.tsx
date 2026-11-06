@@ -15,7 +15,6 @@ import { ROUTES } from "@/routes/routes";
 import { useRouter } from "@/i18n/navigation";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
-import { useFriendRequestActions } from "@/app/hooks/friends/useFriendRequestActions";
 import { addFriend } from "@/services/api/friends";
 import { revalidateFollows } from "@/services/actions/revalidateFollows";
 import { getRelationshipStatus } from "@/utils/friends";
@@ -49,7 +48,6 @@ export const FollowCard = ({
   const currentUserData = useAuthStore((state) => state.currentUser);
   const fetchCurrentUser = useAuthStore((state) => state.fetchCurrentUser);
   const requests = useFriendRequestsStore((state) => state.requests);
-  const { acceptRequest } = useFriendRequestActions();
   const [isRequestSent, setIsRequestSent] = useState(false);
   const [isFriendLoading, setIsFriendLoading] = useState(false);
 
@@ -100,31 +98,9 @@ export const FollowCard = ({
     }
   };
 
-  const acceptIncomingRequest = async () => {
-    if (!incomingRequest || isFriendLoading) return;
-    setIsFriendLoading(true);
-    try {
-      await acceptRequest(incomingRequest);
-    } catch {
-      toast.error(t("toasts.error"));
-    } finally {
-      setIsFriendLoading(false);
-    }
-  };
-
   let friendButton = null;
-  if (type === "followers" && !isSelf && !isFriend) {
-    if (incomingRequest) {
-      friendButton = (
-        <IconButton
-          accent
-          icon={<MdCheck size={18} />}
-          label={t("friendRequest.accept")}
-          onClick={acceptIncomingRequest}
-          disabled={isFriendLoading}
-        />
-      );
-    } else if (isPending || isRequestSent) {
+  if (type === "followers" && !isSelf && !isFriend && !incomingRequest) {
+    if (isPending || isRequestSent) {
       friendButton = (
         <IconButton
           icon={<MdCheck size={18} className={styles.sentIcon} />}

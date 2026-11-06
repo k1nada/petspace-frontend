@@ -4,9 +4,7 @@
   display: flex;
   align-items: center;
   gap: var(--gap-l);
-  padding: 14px 16px;
-  border-radius: var(--radius-l);
-  border: 1px solid var(--border-divider);
+  padding: var(--padding-s) 0;
 }
 
 .avatarLink {
@@ -66,13 +64,6 @@
 @media (max-width: $phone) {
   .row {
     gap: var(--gap-m);
-    padding: var(--padding-s) 0;
-    border: none;
-    border-radius: 0;
-  }
-
-  .row + .row {
-    border-top: 1px solid var(--border-divider);
   }
 
   .actions .messageButton {

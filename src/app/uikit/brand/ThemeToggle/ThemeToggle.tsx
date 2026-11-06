@@ -1,7 +1,7 @@
 "use client";
 
 import { useThemeStore } from "@/app/hooks/shared/useThemeStore";
-import { Button } from "../../form/Button/Button";
+import { Button } from "@/app/uikit/form/Button/Button";
 import { FaMoon } from "react-icons/fa";
 import { FaSun } from "react-icons/fa6";
 
@@ -9,7 +9,7 @@ interface ThemeToggleProps {
   className?: string;
 }
 
-export function ThemeToggle({ className }: ThemeToggleProps) {
+export const ThemeToggle = ({ className }: ThemeToggleProps) => {
   const theme = useThemeStore((state) => state.theme);
   const toggle = useThemeStore((state) => state.toggle);
 
@@ -18,4 +18,4 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
     </Button>
   );
-}
+};

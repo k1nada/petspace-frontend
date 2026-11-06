@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { BsBellFill } from "react-icons/bs";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
-import { Button } from "../../form/Button/Button";
+import { Button } from "@/app/uikit/form/Button/Button";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { useNotifications } from "@/app/hooks/shared/useNotifications";
 import { NotificationItem } from "@/app/uikit/overlays/NotificationItem/NotificationItem";

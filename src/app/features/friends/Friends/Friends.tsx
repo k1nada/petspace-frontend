@@ -1,6 +1,7 @@
 "use client";
 
 import styles from "./Friends.module.scss";
+import cn from "classnames";
 import { useTranslations } from "next-intl";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { Tab } from "@/app/uikit/navigation/Tab/Tab";
@@ -10,7 +11,6 @@ import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { EmptyState } from "@/app/uikit/feedback/EmptyState/EmptyState";
 import { FriendCard } from "../FriendCard/FriendCard";
 import { Friend, FollowUser } from "@/types";
-import { FriendRequest } from "../FriendRequest/FriendRequest";
 import { FollowList } from "../FollowList/FollowList";
 import { useFriendsTab } from "@/app/hooks/friends/useFriendsTab";
 import { useFriendsList } from "@/app/hooks/friends/useFriendsList";
@@ -69,7 +69,12 @@ export const Friends = ({
   return (
     <Card as="section" dataCy="friends-card">
       <div className={styles.header}>
-        <div className={styles.tabs} data-cy="friends-tabs">
+        <div
+          className={cn(styles.tabs, {
+            [styles.tabsWithMenu]: canUnfollowAll,
+          })}
+          data-cy="friends-tabs"
+        >
           {tabs
             .filter((tab) => !tab.hidden)
             .map(({ key, label, count }) => (
@@ -126,8 +131,6 @@ export const Friends = ({
             text={t("friends.emptyFriendsText")}
           />
         ))}
-
-      {activeTab === "requests" && isMyProfile && <FriendRequest />}
 
       {activeTab === "followers" && isMyProfile && (
         <FollowList

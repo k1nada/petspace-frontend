@@ -83,7 +83,7 @@
   },
   "registrationStepsAvatar": {
     "title": "Upload a photo",
-    "subtitle": "Join the pack — show who you are"
+    "subtitle": "Join the pack - show who you are"
   },
   "sidebar": {
     "feed": "Feed"
@@ -185,7 +185,6 @@
   },
   "postCreator": {
     "photo": "Photo",
-    "removePhoto": "Remove photo",
     "publish": "Add post",
     "placeholder": "What's new, {name}?",
     "placeholderOtherWall": "Share your thoughts, {name}"
@@ -245,7 +244,6 @@
   },
   "friends": {
     "friendsTitleOther": "{name}'s friends",
-    "requestsTitle": "Requests",
     "followersTitle": "Followers",
     "followingTitle": "Following",
     "manageFollowing": "Manage following",
@@ -261,11 +259,11 @@
     "message": "Message"
   },
   "friendRequest": {
-    "title": "No requests yet",
+    "blockTitle": "Friend requests",
+    "seeAll": "See all {count}",
     "accept": "Accept",
     "decline": "Decline",
     "wantsToBeFriends": "Wants to be friends",
-    "empty": "No friend requests right now. Check back later!",
     "acceptedSuccess": "Request accepted",
     "rejectedSuccess": "Request declined"
   },
@@ -293,7 +291,6 @@
     "text": "Building out your family tree helps other dogs spot relatives and see shared traits across generations!"
   },
   "familyTree": {
-    "title": "Family tree",
     "titleOther": "{name}'s family tree",
     "parents": "Parents",
     "children": "Puppies",
@@ -345,7 +342,7 @@
     "retry": "Retry",
     "userNotFound": "This chat is not available",
     "firstMessage": "No messages yet. Say hi!",
-    "noConnection": "No connection. Reconnecting…",
+    "noConnection": "No connection. Reconnecting...",
     "loadFailed": "Couldn't load messages",
     "listLoadFailed": "Couldn't load chats"
   },

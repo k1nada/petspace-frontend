@@ -1,19 +1,16 @@
-@use "@/app/styles/breakpoints" as *;
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-m);
-}
-
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-s);
 }
 
-@media (max-width: $phone) {
-  .list {
-    gap: 0;
+.seeAll {
+  align-self: flex-start;
+  font-size: var(--font-m);
+  color: var(--link);
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--link-hover);
+    }
   }
 }

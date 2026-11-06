@@ -64,6 +64,17 @@ describe("Friends tabs on phone", () => {
           },
         });
 
+        cy.get('[data-cy="friends-tabs"] button').should("have.length", 3);
+        cy.get('[data-cy="friends-tab-requests"]').should("not.exist");
+
+        cy.get('[data-cy="friends-card"]').should(($card) => {
+          const tabs = $card[0].querySelector('[data-cy="friends-tabs"]')!;
+          const cardRect = $card[0].getBoundingClientRect();
+          const tabsRect = tabs.getBoundingClientRect();
+          expect(tabsRect.right).to.be.at.most(cardRect.right);
+          expect(tabsRect.width).to.be.closeTo(cardRect.width, 1);
+        });
+
         cy.get('[data-cy="friends-tab-following"]').click();
         cy.location("search").should("eq", "?tab=following");
 
@@ -76,7 +87,6 @@ describe("Friends tabs on phone", () => {
           const cardRect = $card[0].getBoundingClientRect();
           const tabsRect = tabs.getBoundingClientRect();
           expect(tabsRect.right).to.be.at.most(cardRect.right);
-          expect(tabsRect.width).to.be.closeTo(cardRect.width, 1);
         });
 
         cy.get('[data-cy="friends-tabs"]').should(($tabs) => {
@@ -90,5 +100,110 @@ describe("Friends tabs on phone", () => {
         });
       });
     });
+  });
+});
+
+describe("Friend requests block", () => {
+  let apiUrl = "";
+  let token = "";
+  let username = "";
+  let requesterToken = "";
+  let requesterUsername = "";
+
+  const rejectRequestsFromRequester = () => {
+    cy.request({
+      url: `${apiUrl}/friends/requests/${username}/pending`,
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((response) => {
+      response.body
+        .filter(
+          (request: { from: { username: string } }) =>
+            request.from.username === requesterUsername,
+        )
+        .forEach((request: { id: string }) => {
+          cy.request({
+            method: "PATCH",
+            url: `${apiUrl}/friends/request/${request.id}`,
+            headers: { Authorization: `Bearer ${token}` },
+            body: { status: "rejected" },
+          });
+        });
+    });
+  };
+
+  const visitFriends = () => {
+    cy.viewport(390, PHONE_HEIGHT);
+    cy.visit(`/en/${username}/friends`, {
+      onBeforeLoad(window) {
+        window.localStorage.setItem("token", token);
+      },
+    });
+    cy.get('[data-cy="friends-card"]').should("be.visible");
+  };
+
+  before(() => {
+    cy.env([
+      "apiUrl",
+      "email",
+      "password",
+      "username",
+      "requesterEmail",
+      "requesterPassword",
+      "requesterUsername",
+    ]).then((env) => {
+      apiUrl = env.apiUrl;
+      username = env.username;
+      requesterUsername = env.requesterUsername;
+
+      cy.request("POST", `${apiUrl}/signin`, {
+        email: env.email,
+        password: env.password,
+      }).then((response) => {
+        token = response.body.token;
+      });
+
+      cy.request("POST", `${apiUrl}/signin`, {
+        email: env.requesterEmail,
+        password: env.requesterPassword,
+      }).then((response) => {
+        requesterToken = response.body.token;
+      });
+    });
+
+    cy.then(() => {
+      rejectRequestsFromRequester();
+
+      cy.request({
+        method: "POST",
+        url: `${apiUrl}/friends/${requesterUsername}/${username}`,
+        headers: { Authorization: `Bearer ${requesterToken}` },
+      });
+    });
+  });
+
+  after(() => {
+    rejectRequestsFromRequester();
+  });
+
+  it("shows friend requests above dogs you may know", () => {
+    visitFriends();
+
+    cy.get('[data-cy="friend-requests"]').should("contain", requesterUsername);
+    cy.get('[data-cy="suggestions-strip"]').should("be.visible");
+
+    cy.get('[data-cy="friend-requests"]').then(($requests) => {
+      cy.get('[data-cy="suggestions-strip"]').should(($strip) => {
+        const requestsRect = $requests[0].getBoundingClientRect();
+        const stripRect = $strip[0].getBoundingClientRect();
+        expect(requestsRect.bottom).to.be.at.most(stripRect.top);
+      });
+    });
+  });
+
+  it("hides friend requests when there are none", () => {
+    rejectRequestsFromRequester();
+    visitFriends();
+
+    cy.get('[data-cy="friend-requests"]').should("not.exist");
   });
 });

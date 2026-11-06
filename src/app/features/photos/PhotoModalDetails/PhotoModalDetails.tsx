@@ -11,15 +11,15 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { usePhotoComments } from "@/app/hooks/photos/usePhotoComments";
 import { useResolvedLike, LikeState } from "@/app/hooks/photos/useResolvedLike";
 import { useResolvedRepost } from "@/app/hooks/photos/useResolvedRepost";
-import { Comment } from "../../profile/feed/Comment/Comment";
-import { CommentCreator } from "../../profile/feed/CommentCreator/CommentCreator";
+import { Comment } from "@/app/features/profile/feed/Comment/Comment";
+import { CommentCreator } from "@/app/features/profile/feed/CommentCreator/CommentCreator";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { MdClose, MdDelete } from "react-icons/md";
 import { formatDate } from "@/utils/dateFormatters";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
-import statsStyles from "../../profile/feed/PostStats/PostStats.module.scss";
+import statsStyles from "@/app/features/profile/feed/PostStats/PostStats.module.scss";
 import styles from "./PhotoModalDetails.module.scss";
 
 const MOBILE_AVATAR_SIZE = 32;

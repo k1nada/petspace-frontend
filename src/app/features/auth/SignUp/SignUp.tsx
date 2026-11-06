@@ -54,12 +54,7 @@ export const SignUp = () => {
 
   const onSubmit = async (data: SignUpData) => {
     try {
-      const { token, user } = await signUp(data);
-
-      if (!user?.username) {
-        toast.error(t("toasts.error"));
-        return;
-      }
+      const { token } = await signUp(data);
 
       localStorage.setItem("token", token);
       reconnectSocket();

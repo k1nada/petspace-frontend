@@ -5,7 +5,7 @@
 .tabActive {
   display: flex;
   align-items: baseline;
-  gap: var(--gap-2xs);
+  gap: var(--gap-xs);
   padding-bottom: var(--gap-xs);
 
   @media (hover: hover) {
@@ -59,15 +59,5 @@
     position: relative;
 
     @include touch-target;
-  }
-}
-
-@media (max-width: $phone) {
-  .title {
-    font-size: var(--font-base);
-  }
-
-  .count {
-    font-size: var(--font-m);
   }
 }

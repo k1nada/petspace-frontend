@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Message } from "@/types";
 
-export interface RoomMessages {
+interface RoomMessages {
   messages: Message[];
   hasMore: boolean;
   isLoadingOlder: boolean;

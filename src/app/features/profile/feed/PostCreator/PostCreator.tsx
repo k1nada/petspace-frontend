@@ -109,7 +109,6 @@ export const PostCreator = ({
             className={styles.removeImage}
             onClick={removeImage}
             disabled={isPublishing}
-            aria-label={t("postCreator.removePhoto")}
           >
             <FaTimes size={14} />
           </Button>

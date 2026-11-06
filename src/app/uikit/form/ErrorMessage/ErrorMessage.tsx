@@ -5,9 +5,5 @@ interface ErrorMessageProps {
 }
 
 export const ErrorMessage = ({ message }: ErrorMessageProps) => {
-  return (
-    <span className={styles.errorMessage} role="alert">
-      {message}
-    </span>
-  );
+  return <span className={styles.errorMessage}>{message}</span>;
 };

@@ -1,8 +1,9 @@
 import { useTranslations } from "next-intl";
-import { Skeleton, SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
+import { SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
 import { SKELETON_AVATAR } from "@/app/uikit/feedback/Skeleton/skeletonSizes";
 import { Card } from "@/app/uikit/layout/Card/Card";
 import { CardTitle } from "@/app/uikit/layout/CardTitle/CardTitle";
+import { AvatarSkeleton } from "@/app/uikit/user/Avatar/AvatarSkeleton";
 import styles from "./ProfileFriends.module.scss";
 
 const NAME_WIDTHS = [60, 45, 55, 50, 65, 40, 55, 50];
@@ -21,10 +22,9 @@ export const ProfileFriendsSkeleton = () => {
         {NAME_WIDTHS.map((width, i) => (
           <li key={i}>
             <div className={styles.friend}>
-              <Skeleton
-                shape="circle"
-                width={SKELETON_AVATAR.friend}
-                height={SKELETON_AVATAR.friend}
+              <AvatarSkeleton
+                size={SKELETON_AVATAR.friend}
+                mobileSize={SKELETON_AVATAR.friendMobile}
               />
               <div className={styles.name}>
                 <SkeletonText width={width} />

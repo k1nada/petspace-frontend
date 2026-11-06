@@ -83,7 +83,7 @@
   },
   "registrationStepsAvatar": {
     "title": "Dodaj zdjęcie",
-    "subtitle": "Dołącz do sfory — pokaż kim jesteś"
+    "subtitle": "Dołącz do sfory - pokaż kim jesteś"
   },
   "sidebar": {
     "feed": "Aktualności"
@@ -185,7 +185,6 @@
   },
   "postCreator": {
     "photo": "Zdjęcie",
-    "removePhoto": "Usuń zdjęcie",
     "publish": "Opublikuj post",
     "placeholder": "Co nowego, {name}?",
     "placeholderOtherWall": "Podziel się swoją opinią, {name}"
@@ -245,7 +244,6 @@
   },
   "friends": {
     "friendsTitleOther": "Znajomi użytkownika {name}",
-    "requestsTitle": "Zaproszenia",
     "followersTitle": "Obserwujący",
     "followingTitle": "Obserwowani",
     "manageFollowing": "Zarządzaj obserwowanymi",
@@ -261,11 +259,11 @@
     "message": "Napisz"
   },
   "friendRequest": {
-    "title": "Brak zaproszeń",
+    "blockTitle": "Zaproszenia do znajomych",
+    "seeAll": "Pokaż wszystkie {count}",
     "accept": "Akceptuj",
     "decline": "Odrzuć",
     "wantsToBeFriends": "Chce zostać znajomym",
-    "empty": "Brak zaproszeń w tej chwili. Zajrzyj tu później!",
     "acceptedSuccess": "Zaproszenie zaakceptowane",
     "rejectedSuccess": "Zaproszenie odrzucone"
   },
@@ -293,7 +291,6 @@
     "text": "Uzupełnianie drzewa rodzinnego pomaga innym psom odnaleźć krewnych i dostrzec wspólne cechy między pokoleniami!"
   },
   "familyTree": {
-    "title": "Drzewo rodzinne",
     "titleOther": "Drzewo rodzinne użytkownika {name}",
     "parents": "Rodzice",
     "children": "Szczeniaki",
@@ -345,7 +342,7 @@
     "retry": "Ponów",
     "userNotFound": "Ten czat jest niedostępny",
     "firstMessage": "Brak wiadomości. Przywitaj się!",
-    "noConnection": "Brak połączenia. Łączenie…",
+    "noConnection": "Brak połączenia. Łączenie...",
     "loadFailed": "Nie udało się wczytać wiadomości",
     "listLoadFailed": "Nie udało się wczytać czatów"
   },

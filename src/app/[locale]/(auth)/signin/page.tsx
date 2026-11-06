@@ -19,7 +19,7 @@ export const generateMetadata = async ({
   };
 };
 
-export default function SignInPage() {
+const SignInPage = () => {
   return (
     <main className={styles.page}>
       <div className={styles.content}>
@@ -28,4 +28,6 @@ export default function SignInPage() {
       <Footer />
     </main>
   );
-}
+};
+
+export default SignInPage;

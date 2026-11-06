@@ -7,7 +7,7 @@ import { Header } from "@/app/components/Header/Header";
 import { ROUTES } from "@/routes/routes";
 import { useTranslations } from "next-intl";
 
-export default function NotFound() {
+const NotFound = () => {
   const t = useTranslations();
   const router = useRouter();
 
@@ -26,4 +26,6 @@ export default function NotFound() {
       </main>
     </div>
   );
-}
+};
+
+export default NotFound;

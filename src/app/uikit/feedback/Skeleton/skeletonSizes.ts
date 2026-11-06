@@ -8,6 +8,7 @@ export const SKELETON_AVATAR = {
   familyMember: 56,
   familyMini: 48,
   friend: 70,
+  friendMobile: 56,
   friendRow: 56,
   friendRowMobile: 48,
   familyUser: 96,
@@ -20,5 +21,4 @@ export const SKELETON_ICON = {
   navigation: 20,
   close: 22,
   mobileSearch: 18,
-  quietButton: 22,
 };

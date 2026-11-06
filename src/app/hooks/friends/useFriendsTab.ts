@@ -1,15 +1,9 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useFriendRequestsStore } from "@/app/hooks/friends/useFriendRequestsStore";
 
-type FriendsTab = "friends" | "requests" | "followers" | "following";
+type FriendsTab = "friends" | "followers" | "following";
 
-const FRIENDS_TABS: FriendsTab[] = [
-  "friends",
-  "requests",
-  "followers",
-  "following",
-];
+const FRIENDS_TABS: FriendsTab[] = ["friends", "followers", "following"];
 
 interface FriendsTabItem {
   key: FriendsTab;
@@ -39,10 +33,6 @@ export const useFriendsTab = ({
   const tabParam = searchParams.get("tab");
   const activeTab = FRIENDS_TABS.find((tab) => tab === tabParam) ?? "friends";
 
-  const requestsCount = useFriendRequestsStore(
-    (state) => state.requests.length,
-  );
-
   const goToTab = (tab: FriendsTab) => router.push(`?tab=${tab}`);
 
   const friendsLabel = isMyProfile
@@ -51,12 +41,6 @@ export const useFriendsTab = ({
 
   const tabs: FriendsTabItem[] = [
     { key: "friends", label: friendsLabel, count: friendsCount },
-    {
-      key: "requests",
-      label: t("friends.requestsTitle"),
-      count: requestsCount,
-      hidden: !isMyProfile,
-    },
     {
       key: "followers",
       label: t("friends.followersTitle"),

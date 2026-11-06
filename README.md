@@ -1,6 +1,6 @@
 # Petspace - Frontend
 
-Petspace is a social network idea I've been building where you make a profile for your pet instead of yourself. Breed, weird little "interests" (favorite treats, guilty habits, crimes), a family tree of parent/child pets, friends, a post feed, real-time chat.
+Petspace is a social network idea I've been building where you make a profile for your dog instead of yourself. Breed, weird little "interests" (favorite treats, guilty habits, crimes), a family tree of parent/child dogs, friends, a post feed, real-time chat.
 
 Backend lives here: [petspace-backend](https://github.com/k1nada/petspace-backend)
 

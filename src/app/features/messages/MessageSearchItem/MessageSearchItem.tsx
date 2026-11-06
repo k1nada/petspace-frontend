@@ -25,7 +25,8 @@ export const MessageSearchItem = ({
   const matchIndex = message.text.toLowerCase().indexOf(query.toLowerCase());
   const isMatchFound = matchIndex !== -1;
   const start = Math.max(0, matchIndex - SNIPPET_CONTEXT_LENGTH);
-  const before = (start > 0 ? "…" : "") + message.text.slice(start, matchIndex);
+  const before =
+    (start > 0 ? "..." : "") + message.text.slice(start, matchIndex);
   const match = message.text.slice(matchIndex, matchIndex + query.length);
   const after = message.text.slice(matchIndex + query.length);
 

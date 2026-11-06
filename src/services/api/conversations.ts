@@ -13,7 +13,7 @@ export const getConversations = async (
   const { data } = await api.get<ChatContact[]>(
     `/chat/conversations/${username}`,
   );
-  return data ?? [];
+  return data;
 };
 
 export const searchMessages = async (
@@ -22,7 +22,7 @@ export const searchMessages = async (
   const { data } = await api.get<MessageSearchResult[]>("/chat/search", {
     params: { q: query },
   });
-  return data ?? [];
+  return data;
 };
 
 export const getMessages = async (
