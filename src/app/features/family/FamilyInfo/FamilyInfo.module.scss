@@ -5,10 +5,21 @@
   color: var(--text-secondary);
 }
 
+.info button {
+  width: 28px;
+  height: 28px;
+}
+
+.info button,
+.info button:hover {
+  background: transparent;
+}
+
 @media (max-width: $laptop) {
   .info {
     display: inline-flex;
-    margin: -12px -12px -12px -6px;
+    margin: calc(var(--gap-xs) * -1) 0 calc(var(--gap-xs) * -1)
+      calc(var(--gap-xs) * -1);
   }
 }
 

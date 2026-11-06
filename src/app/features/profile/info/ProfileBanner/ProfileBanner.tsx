@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "react-toastify";
+import cn from "classnames";
 import { FaMapMarkerAlt, FaPaw, FaTree, FaTrophy } from "react-icons/fa";
 import { FaMessage } from "react-icons/fa6";
 import { Button } from "@/app/uikit/form/Button/Button";
@@ -92,6 +93,10 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
     router.push(ROUTES.editProfile(bannerInfo.username));
   };
 
+  const goToFamilyTree = () => {
+    router.push(ROUTES.familyTree(bannerInfo.username));
+  };
+
   const goToMessages = () => {
     if (!currentUser) return;
     router.push(ROUTES.messages(currentUser.username, bannerInfo.username));
@@ -166,7 +171,11 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
   ];
 
   const messageButton = (
-    <Button appearance="secondary" onClick={goToMessages}>
+    <Button
+      appearance="secondary"
+      className={styles.iconAction}
+      onClick={goToMessages}
+    >
       <FaMessage size={16} />
     </Button>
   );
@@ -317,9 +326,17 @@ export const ProfileBanner = ({ bannerInfo }: ProfileBannerProps) => {
         <div className={styles.actions}>
           <Button
             appearance="secondary"
+            className={styles.iconAction}
             onClick={() => setIsAchievementsOpen(true)}
           >
-            <FaTrophy size={16} />
+            <FaTrophy size={18} />
+          </Button>
+          <Button
+            appearance="secondary"
+            className={cn(styles.iconAction, styles.familyTreeButton)}
+            onClick={goToFamilyTree}
+          >
+            <FaTree size={16} />
           </Button>
           {renderActions()}
         </div>

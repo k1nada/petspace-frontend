@@ -1,4 +1,4 @@
-import { FaTrophy } from "react-icons/fa";
+import { FaTree, FaTrophy } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 import { Skeleton, SkeletonText } from "@/app/uikit/feedback/Skeleton/Skeleton";
 import { SKELETON_AVATAR } from "@/app/uikit/feedback/Skeleton/skeletonSizes";
@@ -54,8 +54,13 @@ export const ProfileBannerSkeleton = () => {
         </div>
         <div className={styles.actions}>
           <Skeleton shape="rounded">
-            <Button appearance="secondary">
-              <FaTrophy size={16} />
+            <Button appearance="secondary" className={styles.iconAction}>
+              <FaTrophy size={18} />
+            </Button>
+          </Skeleton>
+          <Skeleton shape="rounded" className={styles.familyTreeButton}>
+            <Button appearance="secondary" className={styles.iconAction}>
+              <FaTree size={16} />
             </Button>
           </Skeleton>
           <Skeleton shape="rounded">

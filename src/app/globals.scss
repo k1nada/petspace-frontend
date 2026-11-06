@@ -69,6 +69,8 @@
 
   --header-height: 50px;
   --header-offset: 60px;
+  --page-padding: var(--padding-s);
+  --control-height: 40px;
 
   --radius-s: 8px;
   --radius-m: 12px;
@@ -127,6 +129,7 @@
 @media (max-width: $tablet) {
   :root {
     --header-offset: var(--header-height);
+    --control-height: 44px;
 
     --gap-2xs: 2px;
     --gap-xs: 4px;

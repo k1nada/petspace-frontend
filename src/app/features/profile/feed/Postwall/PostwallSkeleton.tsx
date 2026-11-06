@@ -2,12 +2,14 @@ import styles from "./Postwall.module.scss";
 import { PostSkeleton } from "@/app/features/profile/feed/Post/PostSkeleton";
 import { Card } from "@/app/uikit/layout/Card/Card";
 
-const SKELETON_COUNT = 3;
+interface PostwallSkeletonProps {
+  count?: number;
+}
 
-export const PostwallSkeleton = () => (
+export const PostwallSkeleton = ({ count = 3 }: PostwallSkeletonProps) => (
   <Card>
     <ul className={styles.list}>
-      {Array.from({ length: SKELETON_COUNT }, (_, i) => (
+      {Array.from({ length: count }, (_, i) => (
         <li key={i}>
           <PostSkeleton />
         </li>

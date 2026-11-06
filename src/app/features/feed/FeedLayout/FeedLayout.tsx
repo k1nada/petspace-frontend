@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import cn from "classnames";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { Tip } from "@/app/uikit/feedback/Tip/Tip";
@@ -17,6 +18,8 @@ import { useFeedStore } from "@/app/hooks/feed/useFeedStore";
 import { useSuggestedFriendsStore } from "@/app/hooks/friends/useSuggestedFriendsStore";
 import { loadSuggestions } from "@/app/hooks/friends/useSuggestedFriends";
 import styles from "./FeedLayout.module.scss";
+
+const FEED_SKELETON_POSTS = 10;
 
 export const FeedLayout = () => {
   const t = useTranslations();
@@ -72,12 +75,12 @@ export const FeedLayout = () => {
 
   if (!pageReady) {
     return (
-      <div className={styles.layout}>
+      <div className={cn(styles.layout, styles.skeletonLayout)}>
         <div className={styles.content}>
           <div className={styles.strip}>
             <SuggestionsStripSkeleton />
           </div>
-          <PostwallSkeleton />
+          <PostwallSkeleton count={FEED_SKELETON_POSTS} />
         </div>
         <div className={styles.rightColumn}>
           <SuggestedFriendsSkeleton />
