@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
+import { ModalActions } from "@/app/uikit/overlays/ModalActions/ModalActions";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
 import styles from "./ConfirmModal.module.scss";
@@ -42,7 +43,7 @@ export const ConfirmModal = ({
     <Modal isOpen={isOpen} onClose={onClose} className={styles.modal}>
       <h2 className={styles.title}>{title}</h2>
       <p className={styles.description}>{description}</p>
-      <div className={styles.actions}>
+      <ModalActions>
         <Button
           appearance="secondary"
           onClick={onClose}
@@ -57,7 +58,7 @@ export const ConfirmModal = ({
         >
           {confirmLabel ?? t("common.delete")}
         </Button>
-      </div>
+      </ModalActions>
     </Modal>
   );
 };

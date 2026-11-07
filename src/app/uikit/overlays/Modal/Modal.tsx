@@ -1,6 +1,9 @@
-import styles from "./Modal.module.scss";
+"use client";
+
 import { ReactNode } from "react";
+import { createPortal } from "react-dom";
 import cn from "classnames";
+import styles from "./Modal.module.scss";
 
 interface ModalProps {
   className?: string;
@@ -17,9 +20,9 @@ export const Modal = ({
   onClose,
   children,
 }: ModalProps) => {
-  if (!isOpen) return null;
+  if (!isOpen || typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <div className={cn(styles.container, overlayClassName)} onClick={onClose}>
       <div
         className={cn(styles.modal, className)}
@@ -27,6 +30,7 @@ export const Modal = ({
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };

@@ -9,6 +9,7 @@ import { revalidateUser } from "@/services/actions/revalidateUser";
 import { useRouter } from "@/i18n/navigation";
 import { useAuthStore } from "@/app/hooks/auth/useAuthStore";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
+import { ModalActions } from "@/app/uikit/overlays/ModalActions/ModalActions";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { AvatarUploadModal } from "@/app/uikit/user/AvatarUploadModal/AvatarUploadModal";
 import styles from "./AvatarChangeModal.module.scss";
@@ -63,7 +64,7 @@ export const AvatarChangeModal = ({
         />
       </div>
       <p className={styles.hint}>{t("avatarEdit.choosePhoto")}</p>
-      <div className={styles.actions}>
+      <ModalActions>
         <Button
           appearance="primary"
           onClick={savePhoto}
@@ -71,7 +72,7 @@ export const AvatarChangeModal = ({
         >
           {t("common.saveAndContinue")}
         </Button>
-      </div>
+      </ModalActions>
     </Modal>
   );
 };
