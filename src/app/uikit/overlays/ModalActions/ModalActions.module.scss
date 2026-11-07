@@ -1,0 +1,24 @@
+@use "@/app/styles/breakpoints" as *;
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--gap-s);
+  margin-top: var(--gap-l);
+}
+
+.actions > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-s);
+  min-height: var(--control-height);
+}
+
+@media (max-width: $tablet) {
+  .actions {
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+  }
+}

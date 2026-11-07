@@ -7,6 +7,7 @@ import cn from "classnames";
 import { PhotoIcon } from "@/app/uikit/brand/PhotoIcon/PhotoIcon";
 import styles from "./PhotoUploadModal.module.scss";
 import { Modal } from "@/app/uikit/overlays/Modal/Modal";
+import { ModalActions } from "@/app/uikit/overlays/ModalActions/ModalActions";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { useTranslations } from "next-intl";
 import { MdAdd, MdClose } from "react-icons/md";
@@ -101,26 +102,26 @@ export const PhotoUploadModal = ({
                 unoptimized
                 className={styles.preview}
               />
-              <button
-                type="button"
+              <Button
+                appearance="minimal"
                 className={styles.removePicked}
                 title={t("common.remove")}
                 onClick={() => removeFile(i)}
                 disabled={isUploading}
               >
                 <MdClose size={14} />
-              </button>
+              </Button>
             </div>
           ))}
-          <button
-            type="button"
+          <Button
+            appearance="minimal"
             className={styles.addMore}
             onClick={open}
             disabled={isUploading}
           >
             <MdAdd size={26} />
             {t("photoUploadModal.addMore")}
-          </button>
+          </Button>
         </div>
       ) : (
         <div
@@ -158,7 +159,7 @@ export const PhotoUploadModal = ({
         </div>
       )}
 
-      <div className={styles.actions}>
+      <ModalActions>
         <Button
           appearance="secondary"
           onClick={handleClose}
@@ -173,7 +174,7 @@ export const PhotoUploadModal = ({
         >
           {t("common.upload")} {files.length > 1 && `(${files.length})`}
         </Button>
-      </div>
+      </ModalActions>
     </>
   );
 
