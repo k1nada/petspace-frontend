@@ -33,9 +33,11 @@ export const FriendRequestCardSkeleton = ({
       </div>
 
       <div className={styles.actions}>
-        <Skeleton shape="rounded" className={cardStyles.acceptButton}>
-          <Button appearance="primary">{t("friendRequest.accept")}</Button>
-        </Skeleton>
+        <div className={cardStyles.acceptButton}>
+          <Skeleton shape="rounded">
+            <Button appearance="primary">{t("friendRequest.accept")}</Button>
+          </Skeleton>
+        </div>
         <div className={cardStyles.acceptIcon}>
           <IconButtonSkeleton />
         </div>

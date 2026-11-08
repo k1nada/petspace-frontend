@@ -50,18 +50,24 @@ export const Sidebar = () => {
             <div className={styles.list}>
               <NavLink
                 href={ROUTES.profile(currentUser.username)}
+                className={styles.link}
                 onClick={closeMobileMenu}
               >
                 <FaDog size={20} />
                 {t("common.profile")}
               </NavLink>
-              <NavLink href={ROUTES.feed} onClick={closeMobileMenu}>
+              <NavLink
+                href={ROUTES.feed}
+                className={styles.link}
+                onClick={closeMobileMenu}
+              >
                 <FaBone size={20} />
                 {t("sidebar.feed")}
               </NavLink>
               <NavLink
                 href={ROUTES.messages(currentUser.username)}
                 count={unreadMessagesCount}
+                className={styles.link}
                 onClick={closeMobileMenu}
               >
                 <BiSolidMessage size={20} />
@@ -70,6 +76,7 @@ export const Sidebar = () => {
               <NavLink
                 href={ROUTES.friends(currentUser.username)}
                 count={requestCount}
+                className={styles.link}
                 onClick={closeMobileMenu}
               >
                 <FaPaw size={20} />
@@ -77,6 +84,7 @@ export const Sidebar = () => {
               </NavLink>
               <NavLink
                 href={ROUTES.photos(currentUser.username)}
+                className={styles.link}
                 onClick={closeMobileMenu}
               >
                 <PhotoIcon size={20} />
@@ -84,6 +92,7 @@ export const Sidebar = () => {
               </NavLink>
               <NavLink
                 href={ROUTES.familyTree(currentUser.username)}
+                className={styles.link}
                 onClick={closeMobileMenu}
               >
                 <FaTree size={20} />
@@ -91,7 +100,7 @@ export const Sidebar = () => {
               </NavLink>
             </div>
             <div className={styles.tip}>
-              <Tip title={t("dailyTip.title")} text={tip} />
+              <Tip title={t("dailyTip.title")} text={tip} withIcon />
             </div>
           </nav>
         </>

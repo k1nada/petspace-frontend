@@ -44,7 +44,7 @@
     top: 50px;
     left: 0;
     bottom: 0;
-    width: 280px;
+    width: 300px;
     max-width: 80%;
     height: auto;
     padding-left: max(var(--padding-l), env(safe-area-inset-left));
@@ -52,6 +52,12 @@
     background: var(--bg-page);
     transform: translateX(-100%);
     z-index: var(--z-modal);
+  }
+
+  .list .link {
+    gap: var(--gap-l);
+    padding: var(--padding-l);
+    font-size: var(--font-base);
   }
 
   .tip {

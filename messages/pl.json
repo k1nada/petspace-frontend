@@ -211,7 +211,8 @@
   "header": {
     "language": "Język",
     "theme": "Wygląd",
-    "signOut": "Wyloguj się"
+    "signOut": "Wyloguj się",
+    "searchPlaceholder": "Szukaj psów"
   },
   "comment": {
     "reply": "Odpowiedz",

@@ -89,7 +89,11 @@ export const Header = () => {
           </div>
           {currentUser && (
             <div className={cn(styles.search, styles.desktopSearch)}>
-              <SearchBar value={query} onChange={search} />
+              <SearchBar
+                value={query}
+                onChange={search}
+                placeholder={t("header.searchPlaceholder")}
+              />
               {isDropdownOpen && (
                 <UserSearchDropdown
                   results={results}

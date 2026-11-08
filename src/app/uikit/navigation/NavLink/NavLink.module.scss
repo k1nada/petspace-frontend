@@ -26,7 +26,7 @@
   justify-content: center;
   min-width: 20px;
   height: 20px;
-  padding: 0 5px;
+  padding: 0 var(--gap-xs);
   margin-left: auto;
   background-color: var(--primary);
   color: var(--text-on-color);
