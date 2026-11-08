@@ -15,7 +15,7 @@ export const SidebarSkeleton = () => {
     <nav className={styles.container}>
       <div className={styles.list}>
         {LABEL_WIDTHS.map((width, i) => (
-          <NavLinkSkeleton key={i}>
+          <NavLinkSkeleton key={i} className={styles.link}>
             <Skeleton
               shape="circle"
               width={SKELETON_ICON.navigation}
@@ -28,6 +28,7 @@ export const SidebarSkeleton = () => {
         ))}
       </div>
       <TipSkeleton
+        withIcon
         title={t("dailyTip.title")}
         text={tips[new Date().getDay()]}
       />

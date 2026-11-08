@@ -1,11 +1,12 @@
 "use client";
 
-import styles from "./HeaderMobileSearch.module.scss";
+import { useTranslations } from "next-intl";
 import { FaArrowLeft } from "react-icons/fa";
 import { Button } from "@/app/uikit/form/Button/Button";
 import { SearchBar } from "@/app/uikit/navigation/SearchBar/SearchBar";
 import { UserSearchDropdown } from "@/app/uikit/navigation/UserSearchDropdown/UserSearchDropdown";
 import { User as UserType } from "@/types/index";
+import styles from "./HeaderMobileSearch.module.scss";
 
 interface HeaderMobileSearchProps {
   isOpen: boolean;
@@ -30,6 +31,8 @@ export const HeaderMobileSearch = ({
   isDropdownOpen,
   onSelect,
 }: HeaderMobileSearchProps) => {
+  const t = useTranslations();
+
   if (!isOpen) return null;
 
   return (
@@ -38,7 +41,13 @@ export const HeaderMobileSearch = ({
         <FaArrowLeft size={18} />
       </Button>
       <div className={styles.input}>
-        <SearchBar value={query} onChange={onSearch} fullWidth autoFocus />
+        <SearchBar
+          value={query}
+          onChange={onSearch}
+          placeholder={t("header.searchPlaceholder")}
+          fullWidth
+          autoFocus
+        />
         {isDropdownOpen && (
           <UserSearchDropdown
             results={results}

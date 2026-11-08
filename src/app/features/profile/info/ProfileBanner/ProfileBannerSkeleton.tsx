@@ -58,11 +58,13 @@ export const ProfileBannerSkeleton = () => {
               <FaTrophy size={18} />
             </Button>
           </Skeleton>
-          <Skeleton shape="rounded" className={styles.familyTreeButton}>
-            <Button appearance="secondary" className={styles.iconAction}>
-              <FaTree size={18} />
-            </Button>
-          </Skeleton>
+          <div className={styles.familyTreeButton}>
+            <Skeleton shape="rounded">
+              <Button appearance="secondary" className={styles.iconAction}>
+                <FaTree size={18} />
+              </Button>
+            </Skeleton>
+          </div>
           <Skeleton shape="rounded">
             <Button appearance="primary">{t("common.editProfile")}</Button>
           </Skeleton>

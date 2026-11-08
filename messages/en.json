@@ -211,7 +211,8 @@
   "header": {
     "language": "Language",
     "theme": "Theme",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "searchPlaceholder": "Search dogs"
   },
   "comment": {
     "reply": "Reply",
