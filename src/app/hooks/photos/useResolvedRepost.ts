@@ -27,19 +27,22 @@ export const useResolvedRepost = ({
     setRepostsCount(photo?.repostsCount ?? 0);
   }
 
-  const toggleRepost = async () => {
-    if (!photoId || repostLoading) return;
+  const repostToWall = async () => {
+    if (!photoId || repostLoading) return false;
     setRepostLoading(true);
+    let isDone = false;
 
     try {
       const result = await repostPhoto(photoId);
       setReposted(result.reposted);
       setRepostsCount(result.count);
+      isDone = true;
     } catch {
       toast.error(t("toasts.error"));
     } finally {
       setRepostLoading(false);
     }
+    return isDone;
   };
 
   if (repostState) {
@@ -48,6 +51,7 @@ export const useResolvedRepost = ({
       displayCount: repostState.count,
       repostLoading: repostState.loading,
       toggleRepost: repostState.onToggle,
+      repostToWall,
     };
   }
 
@@ -55,6 +59,7 @@ export const useResolvedRepost = ({
     reposted,
     displayCount: repostsCount,
     repostLoading,
-    toggleRepost,
+    toggleRepost: repostToWall,
+    repostToWall,
   };
 };

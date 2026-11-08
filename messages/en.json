@@ -185,8 +185,8 @@
   },
   "postCreator": {
     "photo": "Photo",
-    "publish": "Add post",
-    "placeholder": "What's new, {name}?",
+    "publish": "Post",
+    "placeholder": "Woof! What's new?",
     "placeholderOtherWall": "Share your thoughts, {name}"
   },
   "post": {
@@ -199,8 +199,18 @@
   "sharePostModal": {
     "title": "Share post",
     "sent": "Post sent",
-    "shareToWall": "Share to your wall",
-    "sharedToWall": "Shared to your wall"
+    "photoTitle": "Share photo",
+    "photoSent": "Photo sent",
+    "sharedToWall": "Shared to your wall",
+    "wallTitle": "Your wall",
+    "shareToWall": "Share",
+    "sendToFriend": "Send to a friend",
+    "searchPlaceholder": "Search dogs",
+    "wallHint": "The whole pack will see it",
+    "alreadyOnWall": "Already on your wall",
+    "send": "Send",
+    "sentButton": "Sent",
+    "close": "Close"
   },
   "signOut": {
     "modalTitle": "Sign out",

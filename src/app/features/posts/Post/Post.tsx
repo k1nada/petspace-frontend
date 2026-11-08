@@ -4,7 +4,7 @@ import styles from "./Post.module.scss";
 import Image from "next/image";
 import cn from "classnames";
 import { Photo, Post as PostType, PostChanges, RepostState } from "@/types";
-import { Comment } from "@/app/features/profile/feed/Comment/Comment";
+import { Comment } from "../Comment/Comment";
 import { CommentCreator } from "../CommentCreator/CommentCreator";
 import { SharePostModal } from "../SharePostModal/SharePostModal";
 import { PhotoModal } from "@/app/features/photos/PhotoModal/PhotoModal";
@@ -293,6 +293,7 @@ export const Post = ({ post, onRefresh }: PostProps) => {
         isOpen={isShareOpen}
         postId={post.id}
         isOwner={isOwner}
+        isReposted={reposted}
         onClose={() => setIsShareOpen(false)}
         onShareToWall={handleToggleRepost}
       />

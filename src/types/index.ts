@@ -109,6 +109,7 @@ export interface Post {
     avatar?: string;
   };
   repostedAt?: string;
+  photo?: SharedPhoto;
   createdAt: string;
 }
 

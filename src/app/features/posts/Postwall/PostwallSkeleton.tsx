@@ -1,5 +1,5 @@
 import styles from "./Postwall.module.scss";
-import { PostSkeleton } from "@/app/features/profile/feed/Post/PostSkeleton";
+import { PostSkeleton } from "../Post/PostSkeleton";
 import { Card } from "@/app/uikit/layout/Card/Card";
 
 interface PostwallSkeletonProps {
