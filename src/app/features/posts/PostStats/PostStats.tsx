@@ -1,7 +1,7 @@
 import { LikeButton } from "@/app/uikit/feedback/LikeButton/LikeButton";
 import { CommentButton } from "@/app/uikit/feedback/CommentButton/CommentButton";
 import { RepostButton } from "@/app/uikit/feedback/RepostButton/RepostButton";
-import styles from "./PostStats.module.scss";
+import styles from "@/app/uikit/feedback/Stats/Stats.module.scss";
 
 interface PostStatsProps {
   liked: boolean;

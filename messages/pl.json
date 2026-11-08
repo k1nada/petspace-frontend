@@ -185,8 +185,8 @@
   },
   "postCreator": {
     "photo": "Zdjęcie",
-    "publish": "Opublikuj post",
-    "placeholder": "Co nowego, {name}?",
+    "publish": "Opublikuj",
+    "placeholder": "Hau! Co nowego?",
     "placeholderOtherWall": "Podziel się swoją opinią, {name}"
   },
   "post": {
@@ -199,8 +199,18 @@
   "sharePostModal": {
     "title": "Udostępnij post",
     "sent": "Post wysłany",
-    "shareToWall": "Udostępnij na swojej tablicy",
-    "sharedToWall": "Udostępniono na Twojej tablicy"
+    "photoTitle": "Udostępnij zdjęcie",
+    "photoSent": "Zdjęcie wysłane",
+    "sharedToWall": "Udostępniono na Twojej tablicy",
+    "wallTitle": "Twoja tablica",
+    "shareToWall": "Udostępnij",
+    "sendToFriend": "Wyślij znajomemu",
+    "searchPlaceholder": "Szukaj psów",
+    "wallHint": "Cała wataha to zobaczy",
+    "alreadyOnWall": "Już jest na Twojej tablicy",
+    "send": "Wyślij",
+    "sentButton": "Wysłano",
+    "close": "Zamknij"
   },
   "signOut": {
     "modalTitle": "Wyloguj się",

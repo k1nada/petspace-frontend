@@ -1,6 +1,6 @@
 import { ProfileBannerSkeleton } from "../info/ProfileBanner/ProfileBannerSkeleton";
-import { PostCreatorSkeleton } from "../feed/PostCreator/PostCreatorSkeleton";
-import { PostwallSkeleton } from "../feed/Postwall/PostwallSkeleton";
+import { PostCreatorSkeleton } from "@/app/features/posts/PostCreator/PostCreatorSkeleton";
+import { PostwallSkeleton } from "@/app/features/posts/Postwall/PostwallSkeleton";
 import { ProfilePhotosSkeleton } from "../photos/ProfilePhotos/ProfilePhotosSkeleton";
 import { ProfileFriendsSkeleton } from "../friends/ProfileFriends/ProfileFriendsSkeleton";
 import styles from "./ProfileLayout.module.scss";

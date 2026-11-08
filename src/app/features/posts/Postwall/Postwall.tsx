@@ -1,6 +1,7 @@
 "use client";
 
-import { Post } from "@/app/features/profile/feed/Post/Post";
+import { Post } from "../Post/Post";
+import { PhotoRepost } from "../PhotoRepost/PhotoRepost";
 import styles from "./Postwall.module.scss";
 import { useTranslations } from "next-intl";
 import { Post as PostType } from "@/types";
@@ -34,7 +35,15 @@ export const Postwall = ({
                   : post.id
               }
             >
-              <Post post={post} onRefresh={onRefresh} />
+              {post.photo ? (
+                <PhotoRepost
+                  post={post}
+                  photo={post.photo}
+                  onRefresh={onRefresh}
+                />
+              ) : (
+                <Post post={post} onRefresh={onRefresh} />
+              )}
             </li>
           ))}
         </ul>

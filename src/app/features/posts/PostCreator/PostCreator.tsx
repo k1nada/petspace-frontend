@@ -93,7 +93,31 @@ export const PostCreator = ({
             maxLength={MAX_POST_LENGTH}
             readOnly={isPublishing}
           />
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={handleFileChange}
+          />
+          <Button
+            appearance="minimal"
+            className={styles.photoButton}
+            title={t("postCreator.photo")}
+            onClick={() => fileInputRef.current?.click()}
+            disabled={isPublishing}
+          >
+            <PhotoIcon size={16} />
+          </Button>
         </div>
+        <Button
+          appearance="primary"
+          className={styles.publishButton}
+          onClick={publishPost}
+          disabled={isPublishing}
+        >
+          {t("postCreator.publish")}
+        </Button>
       </div>
       {imagePreview && (
         <div className={styles.imagePreviewWrapper}>
@@ -114,33 +138,6 @@ export const PostCreator = ({
           </Button>
         </div>
       )}
-      <div className={styles.actions}>
-        <div className={styles.attachments}>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            hidden
-            onChange={handleFileChange}
-          />
-          <Button
-            appearance="ghost"
-            className={styles.attachmentItem}
-            onClick={() => fileInputRef.current?.click()}
-            disabled={isPublishing}
-          >
-            <PhotoIcon size={16} />
-            {t("postCreator.photo")}
-          </Button>
-        </div>
-        <Button
-          appearance="primary"
-          onClick={publishPost}
-          disabled={isPublishing}
-        >
-          {t("postCreator.publish")}
-        </Button>
-      </div>
     </Card>
   );
 };

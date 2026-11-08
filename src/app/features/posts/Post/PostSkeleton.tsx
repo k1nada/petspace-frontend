@@ -4,7 +4,7 @@ import { LikeButton } from "@/app/uikit/feedback/LikeButton/LikeButton";
 import { CommentButton } from "@/app/uikit/feedback/CommentButton/CommentButton";
 import { RepostButton } from "@/app/uikit/feedback/RepostButton/RepostButton";
 import headerStyles from "../PostHeader/PostHeader.module.scss";
-import statsStyles from "../PostStats/PostStats.module.scss";
+import statsStyles from "@/app/uikit/feedback/Stats/Stats.module.scss";
 import styles from "./Post.module.scss";
 
 const noop = () => {};

@@ -22,17 +22,20 @@ export const usePostRepost = ({
   const [repostLoading, setRepostLoading] = useState(false);
 
   const handleToggleRepost = async () => {
-    if (repostLoading) return;
+    if (repostLoading) return false;
     setRepostLoading(true);
+    let isDone = false;
     try {
       const { reposted: newReposted, count } = await repostPost(postId);
       setReposted(newReposted);
       setRepostCount(count);
       onChange?.(newReposted, count);
+      isDone = true;
     } catch {
       toast.error(t("toasts.error"));
     }
     setRepostLoading(false);
+    return isDone;
   };
 
   return { reposted, repostCount, repostLoading, handleToggleRepost };

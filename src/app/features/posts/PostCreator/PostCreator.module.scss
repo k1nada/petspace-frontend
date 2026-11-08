@@ -8,6 +8,7 @@
 }
 
 .textareaWrapper {
+  position: relative;
   flex: 1;
   display: flex;
   align-items: center;
@@ -15,47 +16,30 @@
   textarea {
     width: 100%;
     box-sizing: border-box;
+    padding-right: calc(var(--control-height) + var(--gap-xs));
   }
 }
 
-.actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.attachments {
-  display: flex;
-  gap: var(--gap-xs);
-}
-
-button.attachmentItem {
+.photoButton {
+  position: absolute;
+  right: var(--gap-xs);
   display: flex;
   align-items: center;
-  gap: var(--gap-xs);
+  justify-content: center;
+  width: 32px;
+  height: 32px;
   color: var(--text-secondary);
-  font-size: var(--font-m);
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-
-  transition:
-    color var(--transition-hover),
-    background-color var(--transition-hover);
 
   @media (hover: hover) {
     &:hover {
       color: var(--text-primary);
-      background: none;
     }
   }
 }
 
-.attachmentSkeleton {
-  display: flex;
-  align-items: center;
-  font-size: var(--font-m);
+.publishButton {
+  flex-shrink: 0;
+  height: var(--control-height);
 }
 
 .imagePreviewWrapper {
@@ -97,11 +81,6 @@ button.attachmentItem {
     font-size: var(--font-m);
   }
 
-  button.attachmentItem,
-  .attachmentSkeleton {
-    min-height: 44px;
-  }
-
   .removeImage {
     @include touch-target;
   }
@@ -112,14 +91,14 @@ button.attachmentItem {
     gap: var(--gap-s);
 
     > :first-child {
-      zoom: 0.8;
+      display: none;
     }
   }
 
   .textareaWrapper textarea {
-    height: 34px;
-    padding-top: var(--padding-xs);
-    padding-bottom: var(--padding-xs);
+    height: var(--control-height);
+    padding-top: var(--padding-s);
+    padding-bottom: var(--padding-s);
     line-height: 22px;
   }
 }

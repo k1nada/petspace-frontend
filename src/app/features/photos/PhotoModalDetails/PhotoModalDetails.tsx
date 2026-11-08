@@ -11,15 +11,16 @@ import { Button } from "@/app/uikit/form/Button/Button";
 import { usePhotoComments } from "@/app/hooks/photos/usePhotoComments";
 import { useResolvedLike, LikeState } from "@/app/hooks/photos/useResolvedLike";
 import { useResolvedRepost } from "@/app/hooks/photos/useResolvedRepost";
-import { Comment } from "@/app/features/profile/feed/Comment/Comment";
-import { CommentCreator } from "@/app/features/profile/feed/CommentCreator/CommentCreator";
+import { Comment } from "@/app/features/posts/Comment/Comment";
+import { CommentCreator } from "@/app/features/posts/CommentCreator/CommentCreator";
+import { SharePostModal } from "@/app/features/posts/SharePostModal/SharePostModal";
 import { Avatar } from "@/app/uikit/user/Avatar/Avatar";
 import { Dropdown } from "@/app/uikit/overlays/Dropdown/Dropdown";
 import { MdClose, MdDelete } from "react-icons/md";
 import { formatDate } from "@/utils/dateFormatters";
 import { Link } from "@/app/uikit/navigation/Link/Link";
 import { ROUTES } from "@/routes/routes";
-import statsStyles from "@/app/features/profile/feed/PostStats/PostStats.module.scss";
+import statsStyles from "@/app/uikit/feedback/Stats/Stats.module.scss";
 import styles from "./PhotoModalDetails.module.scss";
 
 const MOBILE_AVATAR_SIZE = 32;
@@ -61,6 +62,7 @@ export const PhotoModalDetails = ({
     name: string;
   } | null>(null);
   const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
 
   const {
     comments,
@@ -82,6 +84,7 @@ export const PhotoModalDetails = ({
     displayCount: repostDisplayCount,
     repostLoading,
     toggleRepost: onToggleRepost,
+    repostToWall,
   } = useResolvedRepost({ photo, repostState });
 
   const showRepost = Boolean(repostState) || enableRepost;
@@ -127,7 +130,13 @@ export const PhotoModalDetails = ({
             </div>
           )}
           <div className={styles.info}>
-            <div className={styles.name}>{name}</div>
+            {username ? (
+              <Link href={ROUTES.profile(username)} className={styles.name}>
+                {name}
+              </Link>
+            ) : (
+              <div className={styles.name}>{name}</div>
+            )}
             <time className={styles.time}>
               {formatDate(photo.createdAt, locale)}
             </time>
@@ -164,7 +173,9 @@ export const PhotoModalDetails = ({
               reposted={reposted}
               count={repostDisplayCount}
               loading={repostLoading}
-              onToggle={onToggleRepost}
+              onToggle={
+                enableRepost ? () => setIsShareOpen(true) : onToggleRepost
+              }
               className={statsStyles.stat}
             />
           )}
@@ -206,6 +217,16 @@ export const PhotoModalDetails = ({
           }}
         />
       </div>
+      {enableRepost && (
+        <SharePostModal
+          isOpen={isShareOpen}
+          photoId={photo.id}
+          isOwner={isOwner}
+          isReposted={reposted}
+          onClose={() => setIsShareOpen(false)}
+          onShareToWall={repostToWall}
+        />
+      )}
     </div>
   );
 };
